@@ -10,5 +10,5 @@ The team consists in:
   mailto:Claude.Marche@inria.fr https://www.lri.fr/~marche/
 - Yannick Moy (AdaCore)
 
-We're using Why3 (https://why3.lri.fr/) and SPARK
+We're using Why3 (https://why3.lri.fr/) and SPARK 2014
 (http://www.spark-2014.org/) programming languages.
