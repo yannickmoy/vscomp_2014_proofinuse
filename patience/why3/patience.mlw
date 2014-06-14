@@ -72,35 +72,97 @@ module Patience
     | Cons _ rem -> wf_append_stacks rem s2
     end
 
-  (** {2 Programs} *)
+  (** {2 Ghost state} *)
+
+  (** To specify the expected behavior of the code, we attach a ghost
+      state to each step of the algorithm. This state provides extra
+      information needed for the final property to establish: (1) the
+      number of elements [n] in the input sequence (2) a map [m]
+      associating to each i from 0 to n-1 the value of th ith card (3)
+      the indexes of each top element of all stacks (4) a map
+      [p] associating to each i from 0 to n-1 a "predecessor": the
+      index j of a smaller element in the sequence that appears in the
+      stack immediately on the left (-1 if already on the leftmost
+      stack). Here is what happens on the example sequence [[9, 7, 10,
+      9, 5, 4, 10]] :
+
+{h <pre>}
+n=0
+n=1, m(0) = 9, p(0) = -1
+n=2, m(1) = 7, p(1) = -1
+n=3, m(2) = 10, p(2) = 1 (because predecessor is 7 = m(1))
+n=4, m(3) = 9, p(3) = 1 (predecessor is also 7)
+n=5, m(4) = 5, p(4) = -1
+n=6, m(5) = 4, p(5) = -1
+n=7, m(6) = 10, p(6) = 3 (predecessor is m(3) = 9)
+{h </pre>}
+
+as we see, the predessor of a new added card is always the top of the
+stack on the left.
+
+At the end, an increasing subsequence of length n is found by taking,
+in reverse order, the top of the rightmost stack, then its predecessor
+and so on.
+
+*)
 
   use import map.Map
-  use import ref.Ref
+
+  type state = {
+    mutable num_elts : int;
+    mutable elts : map int int;
+    mutable top_stacks : map int int;
+    mutable preds : map int int;
+  }
+
+(*
+
+invariants:
+
+{h <pre>}
+* predecessor j of the ith element is smaller: m(j) < m(i)
+* predecessor of an element in stack i+1 is in stack i
+{h </pre>}
+
+*)
+
+  predicate inv (s:state) (stacks:list (list int)) = 
+    s.num_elts >= 0
+  /\
+    (forall i. 0 <= i < length stacks -> 0 <= s.top_stacks[i] < s.num_elts)
+(*
+  /\
+    (forall i. 0 <= i < s.num_elts ->
+      let j = s.preds[i] in 0 <= j (* < s.num_elts /\ s.elts[j] < s.elts[i] *))
+*)
+
+  (** {2 Programs} *)
 
   (** [push_card c stacks acc] pushes card [c] on stacks [stacks],
       assuming [acc] is an accumulator (in reverse order) of stacks
       where [c] could not be pushed.
-
-      [witness] is an "out" and ghost parameter, providing a witness
-      of an increasing subsequence of the input of the same length as
-      the result
   *)
 
   let rec push_card (c:int) (stacks : list (list int))
-     (acc : list (list int)) (ghost witness: ref (int,map int int)) 
+     (acc : list (list int)) (ghost s: state) 
      : list (list int)
     requires { wf_stacks stacks }
     requires { wf_stacks (reverse acc) }
-    requires { let (n,_m) = !witness in n = length stacks + length acc }
+    requires { inv s (reverse acc ++ stacks) }
     variant  { stacks }
-    writes   { witness }
+    writes   { s }
     ensures  { wf_stacks result }
-    ensures  { let (n,_m) = !witness in n = length result }
+    ensures  { inv s result }
   =
     match stacks with
     | Nil ->
       (* we put card [c] in a new stack *)
-      let (n,m) = !witness in witness := (n+1,Map.set m n c);
+      let l = s.num_elts in
+      let lacc = length acc in
+      s.num_elts <- l + 1;
+      s.elts <- s.elts[l<-c];
+      s.preds <- s.preds[l <- s.top_stacks[lacc-1]];
+      s.top_stacks <- s.top_stacks[lacc <- l];
       reverse (Cons (Cons c Nil) acc)
     | Cons stack stacks ->
         match stack with
@@ -110,34 +172,46 @@ module Patience
              (* card is placed on the leftmost stack where its card
                 value is no greater than the topmost card on that
                 stack *)
+             let l = s.num_elts in
+             let lacc = length acc in
+             s.num_elts <- l + 1;
+             s.elts <- s.elts[l<-c];
+             s.preds <- s.preds[l <- s.top_stacks[lacc-1]];
+             s.top_stacks <- s.top_stacks[lacc <- l];
              (reverse (Cons (Cons c stack) acc)) ++ stacks
            else
              (* try next stack *)
-             push_card c stacks (Cons stack acc) witness
+             push_card c stacks (Cons stack acc) s 
         end
      end
 
   let rec play_cards (input: list int) (stacks: list (list int))
-    (ghost witness: ref (int,map int int)) : list (list int)
+    (ghost s: state) : list (list int)
     requires { wf_stacks stacks }
-    requires { let (n,_m) = !witness in n = length stacks }
+    requires { inv s stacks }
     variant  { input }
-    writes   { witness }
-    ensures  { let (n,_m) = !witness in n = length result }
+    writes   { s }
+    requires { inv s stacks }
   =
     match input with
     | Nil -> stacks
-    | Cons c rem -> 
-        let stacks' = push_card c stacks Nil witness in
-        play_cards rem stacks' witness
+    | Cons c rem ->
+        let stacks' = push_card c stacks Nil s in
+        play_cards rem stacks' s
     end
 
 
   let play_game (input: list int) : list (list int)
     requires { true }
     ensures { true }
-  = let ghost witness = ref (0,Map.const 0) in
-    play_cards input Nil witness
+  = let ghost s = {
+      num_elts = 0;
+      elts = Map.const (-1) ;
+      top_stacks = Map.const (-1);
+      preds = Map.const (-1);
+    }
+    in
+    play_cards input Nil s
 
 
   let test () =
