@@ -1,0 +1,6 @@
+project Partition_Refinement is
+   for Main use ("test_partition_refinement");
+   package Compiler is
+      for Default_Switches ("Ada") use ("-gnata", "-gnato");
+   end Compiler;
+end Partition_Refinement;
