@@ -12,3 +12,21 @@ The team consists in:
 
 We're using Why3 (https://why3.lri.fr/) and SPARK 2014
 (http://www.spark-2014.org/) programming languages.
+
+
+
+
+
+
+
+
+== Lessons learnt when using Why3 ==
+
+
+= problem 1 =
+
+* There should be a notation with brackets for lists
+
+* It would be nice to have a List.forall higher-order predicate
+
+

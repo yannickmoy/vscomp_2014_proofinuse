@@ -43,20 +43,27 @@ module Patience
 
   (** {2 Specifications} *)
 
-  predicate wf_stack (stack: list int) =
+  (** a sequence of stacks of well-formed iff each stack is non-empty
+      and increasing *)
+
+  predicate increasing_stack (stack: list int) =
     match stack with
     | Nil -> false
     | Cons _ Nil -> true
-    | Cons c1 (Cons c2 _ as rem) -> c1 <= c2 /\ wf_stack rem
+    | Cons c1 (Cons c2 _ as rem) -> c1 <= c2 /\ increasing_stack rem
     end
 
   predicate wf_stacks (stacks: list (list int)) =
     match stacks with
     | Nil -> true
-    | Cons s rem -> wf_stack s /\ wf_stacks rem
+    | Cons s rem -> increasing_stack s /\ wf_stacks rem
     end
 
-  let rec lemma wf_append_stacks (s1 s2: list (list int)) 
+  (** lemma: concatenation of well-formed sequences of stacks results in
+      a well-formed sequence of stacks.
+      Structural induction done vie a lemma function
+  *)
+  let rec lemma wf_append_stacks (s1 s2: list (list int))
     requires { wf_stacks s1 }
     requires { wf_stacks s2 }
     variant { s1 }
