@@ -7,7 +7,7 @@ prove:
 	why3ide patience.mlw
 
 replay:
-	why3replay patience.mlw
+	why3replayer patience.mlw
 
 doc:
 	why3doc patience.mlw
