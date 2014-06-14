@@ -3,6 +3,9 @@
 
 (** {1 The Patience Solitaire Game}
 
+Problem 1 from the {h <a href="http://vscomp.org/">Verified Software
+Competition 2014</a>}
+
 Patience Solitaire is played by taking cards one-by-one from a deck of
 cards and arranging them face up in a sequence of stacks arranged from
 left to right as follows. The very first card from the deck is kept
@@ -14,13 +17,13 @@ numbers instead of cards. If the input sequence is 9, 7, 10, 9, 5, 4,
 and 10, then the stacks develop as
 
 {h <pre>}
-<[9]>
-<[7, 9]>
-<[7, 9], [10]>
-<[7, 9], [9, 10]>
-<[5, 7, 9], [9, 10]>
-<[4, 5, 7, 9], [9, 10]>
-<[4, 5, 7, 9], [9, 10], [10]>
+<[[9]]>
+<[[7, 9]]>
+<[[7, 9]], [[10]]>
+<[[7, 9]], [[9, 10]]>
+<[[5, 7, 9]], [[9, 10]]>
+<[[4, 5, 7, 9]], [[9, 10]]>
+<[[4, 5, 7, 9]], [[9, 10]], [[10]]>
 {h </pre>}
 
 Verify the claim is that the number of stacks at the end of the game
@@ -38,7 +41,7 @@ module Patience
   use import list.Append
   use import list.Reverse
 
-  (** Specifications *)
+  (** {2 Specifications} *)
 
   predicate wf_stack (stack: list int) =
     match stack with
@@ -60,8 +63,10 @@ module Patience
     ensures { wf_stacks (s1 ++ s2) }
   = match s1 with
     | Nil -> ()
-    | Cons s rem -> wf_append_stacks rem s2
+    | Cons _ rem -> wf_append_stacks rem s2
     end
+
+  (** {2 Programs} *)
 
   (** [push_card c stacks acc] pushes card [c] on stacks [stacks], assuming
       [acc] is an accumulator (in reverse order) of stacks where [c] could not be pushed *)
@@ -80,8 +85,9 @@ module Patience
         | Nil -> absurd
         | Cons c' _ ->
            if c <= c' then
-             (* card is placed on the leftmost stack where its card value is no
-greater than the topmost card on that stack *)
+             (* card is placed on the leftmost stack where its card
+                value is no greater than the topmost card on that
+                stack *)
              (reverse (Cons (Cons c stack) acc)) ++ stacks
            else
              (* try next stack *)
@@ -99,8 +105,6 @@ greater than the topmost card on that stack *)
     | Nil -> stacks
     | Cons c rem -> play_cards rem (push_card c stacks Nil)
     end
-
-
 
 
   let play_game (input: list int) : list (list int)
