@@ -119,17 +119,16 @@ and so on.
 
 invariants:
 
-{h <pre>}
-* predecessor j of the ith element is smaller: m(j) < m(i)
-* predecessor of an element in stack i+1 is in stack i
-{h </pre>}
-
 *)
+
+  use import list.HdTlNoOpt
+  use import list.NthNoOpt
 
   predicate inv (s:state) (stacks:list (list int)) = 
     s.num_elts >= 0
   /\
-    (forall i. 0 <= i < length stacks -> 0 <= s.top_stacks[i] < s.num_elts)
+    (forall i. 0 <= i < length stacks -> let idx = s.top_stacks[i] in
+      0 <= idx < s.num_elts /\ s.elts[idx] = hd (nth i stacks))
   /\
     (forall i. 0 <= i < s.num_elts ->
       let j = s.preds[i] in 
@@ -163,7 +162,10 @@ invariants:
       let p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
       s.preds <- s.preds[l <- p];
       s.top_stacks <- s.top_stacks[lacc <- l];
-      reverse (Cons (Cons c Nil) acc)
+      let res = reverse (Cons (Cons c Nil) acc) in
+      assert { forall i. 0 <= i < length (reverse acc ++ stacks) ->
+        nth i res = nth i (reverse acc ++ stacks) };
+      res
     | Cons stack stacks ->
         match stack with
         | Nil -> absurd
@@ -179,7 +181,11 @@ invariants:
              let p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
              s.preds <- s.preds[l <- p];
              s.top_stacks <- s.top_stacks[lacc <- l];
-             (reverse (Cons (Cons c stack) acc)) ++ stacks
+             let res = (reverse (Cons (Cons c stack) acc)) ++ stacks in
+             assert { forall i. 0 <= i < length (reverse acc ++ stacks) ->
+               i <> lacc ->
+               nth i res = nth i (reverse acc ++ stacks) };
+             res 
            else
              (* try next stack *)
              push_card c stacks (Cons stack acc) s 
