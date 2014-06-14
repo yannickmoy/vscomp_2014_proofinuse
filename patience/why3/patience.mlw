@@ -1,5 +1,36 @@
 
 
+
+(** {1 The Patience Solitaire Game}
+
+Patience Solitaire is played by taking cards one-by-one from a deck of
+cards and arranging them face up in a sequence of stacks arranged from
+left to right as follows. The very first card from the deck is kept
+face up to form a singleton stack. Each subsequent card is placed on
+the leftmost stack where its card value is no greater than the topmost
+card on that stack. If there is no such stack, then a new stack is
+started to right of the other stacks. We can do this with positive
+numbers instead of cards. If the input sequence is 9, 7, 10, 9, 5, 4,
+and 10, then the stacks develop as
+
+{h <pre>}
+<[9]>
+<[7, 9]>
+<[7, 9], [10]>
+<[7, 9], [9, 10]>
+<[5, 7, 9], [9, 10]>
+<[4, 5, 7, 9], [9, 10]>
+<[4, 5, 7, 9], [9, 10], [10]>
+{h </pre>}
+
+Verify the claim is that the number of stacks at the end of the game
+is the length of the longest (strictly) increasing subsequence in the
+input sequence.
+
+
+*)
+
+
 module Patience
 
   use import int.Int
@@ -7,13 +38,38 @@ module Patience
   use import list.Append
   use import list.Reverse
 
+  (** Specifications *)
+
+  predicate wf_stack (stack: list int) =
+    match stack with
+    | Nil -> false
+    | Cons _ Nil -> true
+    | Cons c1 (Cons c2 _ as rem) -> c1 <= c2 /\ wf_stack rem
+    end
+
+  predicate wf_stacks (stacks: list (list int)) =
+    match stacks with
+    | Nil -> true
+    | Cons s rem -> wf_stack s /\ wf_stacks rem
+    end
+
+  let rec lemma wf_append_stacks (s1 s2: list (list int)) 
+    requires { wf_stacks s1 }
+    requires { wf_stacks s2 }
+    variant { s1 }
+    ensures { wf_stacks (s1 ++ s2) }
+  = match s1 with
+    | Nil -> ()
+    | Cons s rem -> wf_append_stacks rem s2
+    end
 
   (** [push_card c stacks acc] pushes card [c] on stacks [stacks], assuming
       [acc] is an accumulator (in reverse order) of stacks where [c] could not be pushed *)
   let rec push_card c stacks acc
-    requires { true }
+    requires { wf_stacks stacks }
+    requires { wf_stacks (reverse acc) }
     variant  { stacks }
-    ensures  { true }
+    ensures  { wf_stacks result }
   =
     match stacks with
     | Nil ->
@@ -35,7 +91,7 @@ greater than the topmost card on that stack *)
 
   let rec play_cards (input: list int) (stacks: list (list int))
     : list (list int)
-    requires { true }
+    requires { wf_stacks stacks }
     variant  { input }
     ensures  { true }
   =

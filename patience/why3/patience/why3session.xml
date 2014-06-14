@@ -1,63 +1,335 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE why3session PUBLIC "-//Why3//proof session v2//EN" "http://why3.lri.fr/why3session.dtd">
 <why3session shape_version="4">
+ <prover
+  id="0"
+  name="Alt-Ergo"
+  version="0.95.2"/>
  <file
   name="../patience.mlw"
-  verified="false"
+  verified="true"
   expanded="true">
   <theory
    name="Patience"
    locfile="../patience.mlw"
-   loclnum="3" loccnumb="7" loccnume="15"
-   verified="false"
+   loclnum="34" loccnumb="7" loccnume="15"
+   verified="true"
    expanded="true">
+   <goal
+    name="WP_parameter wf_append_stacks"
+    locfile="../patience.mlw"
+    loclnum="56" loccnumb="16" loccnume="32"
+    expl="VC for wf_append_stacks"
+    sum="ad678a885ca82b81d99743ba37b3d947"
+    proved="true"
+    expanded="true"
+    shape="Cawf_stacksainfix ++V0V1aNilawf_stacksainfix ++V0V1Iawf_stacksainfix ++V3V1Aawf_stacksV1Aawf_stacksV3ACfaNilainfix =V4V3aConswVV0aConsVVV0Iawf_stacksV1Aawf_stacksV0F">
+    <label
+     name="why3:lemma"/>
+    <label
+     name="expl:VC for wf_append_stacks"/>
+    <proof
+     prover="0"
+     timelimit="5"
+     memlimit="1000"
+     obsolete="false"
+     archived="false">
+     <result status="valid" time="0.03"/>
+    </proof>
+   </goal>
    <goal
     name="WP_parameter push_card"
     locfile="../patience.mlw"
-    loclnum="13" loccnumb="10" loccnume="19"
+    loclnum="68" loccnumb="10" loccnume="19"
     expl="VC for push_card"
-    sum="11a01527f760d4a3bab4a11a4898148b"
-    proved="false"
+    sum="6393a3f55aebbabd8d17a1b48c3efcb3"
+    proved="true"
     expanded="true"
-    shape="CtaNilCfaNilCfaNilainfix =V5V3aConswVV1INainfix &lt;=V0V4aConsVwV2aConsVVV1F">
+    shape="Cawf_stacksareverseaConsaConsV0aNilV2aNilCfaNiliawf_stacksV6Iawf_stacksV6FAawf_stacksareverseaConsV3V2Aawf_stacksV4ACfaNilainfix =V7V4aConswVV1awf_stacksainfix ++areverseaConsaConsV0V3V2V4ainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksareverseV2Aawf_stacksV1F">
     <label
      name="expl:VC for push_card"/>
+    <transf
+     name="split_goal_wp"
+     proved="true"
+     expanded="true">
+     <goal
+      name="WP_parameter push_card.1"
+      locfile="../patience.mlw"
+      loclnum="68" loccnumb="10" loccnume="19"
+      expl="1. postcondition"
+      sum="d18783bffb10ac6a0e701e5aa61dc66d"
+      proved="true"
+      expanded="false"
+      shape="postconditionCawf_stacksareverseaConsaConsV0aNilV2aNiltaConsVVV1Iawf_stacksareverseV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.02"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.2"
+      locfile="../patience.mlw"
+      loclnum="68" loccnumb="10" loccnume="19"
+      expl="2. unreachable point"
+      sum="017309bb67ec2ba91456476f6a18dce6"
+      proved="true"
+      expanded="false"
+      shape="unreachable pointCtaNilCfaNiltaConsVwV3aConsVVV1Iawf_stacksareverseV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.02"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.3"
+      locfile="../patience.mlw"
+      loclnum="68" loccnumb="10" loccnume="19"
+      expl="3. postcondition"
+      sum="1ba6c526954842413c292996e0f445ab"
+      proved="true"
+      expanded="true"
+      shape="postconditionCtaNilCtaNilawf_stacksainfix ++areverseaConsaConsV0V3V2V4Iainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksareverseV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.04"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.4"
+      locfile="../patience.mlw"
+      loclnum="68" loccnumb="10" loccnume="19"
+      expl="4. variant decrease"
+      sum="3c8248e3538558f34896fd676b78d88a"
+      proved="true"
+      expanded="false"
+      shape="variant decreaseCtaNilCtaNilCfaNilainfix =V6V4aConswVV1INainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksareverseV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.02"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.5"
+      locfile="../patience.mlw"
+      loclnum="68" loccnumb="10" loccnume="19"
+      expl="5. precondition"
+      sum="134ddaa21ba758a4d37dd29bd9d52311"
+      proved="true"
+      expanded="false"
+      shape="preconditionCtaNilCtaNilawf_stacksV4INainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksareverseV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.6"
+      locfile="../patience.mlw"
+      loclnum="68" loccnumb="10" loccnume="19"
+      expl="6. precondition"
+      sum="43f7be5a2ef43ac439de80464b9b5195"
+      proved="true"
+      expanded="true"
+      shape="preconditionCtaNilCtaNilawf_stacksareverseaConsV3V2INainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksareverseV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.03"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.7"
+      locfile="../patience.mlw"
+      loclnum="68" loccnumb="10" loccnume="19"
+      expl="7. postcondition"
+      sum="1ce0edfece3b8c9449ae2e5e4c8bf2f8"
+      proved="true"
+      expanded="false"
+      shape="postconditionCtaNilCtaNilawf_stacksV6Iawf_stacksV6FIawf_stacksareverseaConsV3V2Aawf_stacksV4INainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksareverseV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+    </transf>
    </goal>
    <goal
     name="WP_parameter play_cards"
     locfile="../patience.mlw"
-    loclnum="36" loccnumb="10" loccnume="20"
+    loclnum="92" loccnumb="10" loccnume="20"
     expl="VC for play_cards"
-    sum="e5038fd939c911190063e8e126c94f7e"
-    proved="false"
-    expanded="true"
-    shape="CtaNilCfaNilainfix =V3V2aConswVV0aConsVVV0F">
+    sum="bce4ed6d4ee05e2a0c0f65b81be7766b"
+    proved="true"
+    expanded="false"
+    shape="CtaNilawf_stacksV4ACfaNilainfix =V5V3aConswVV0Iawf_stacksV4FAawf_stacksareverseaNilAawf_stacksV1aConsVVV0Iawf_stacksV1F">
     <label
      name="expl:VC for play_cards"/>
+    <transf
+     name="split_goal_wp"
+     proved="true"
+     expanded="false">
+     <goal
+      name="WP_parameter play_cards.1"
+      locfile="../patience.mlw"
+      loclnum="92" loccnumb="10" loccnume="20"
+      expl="1. precondition"
+      sum="9c26181b1b4764a05e686e21fefb3718"
+      proved="true"
+      expanded="false"
+      shape="preconditionCtaNilawf_stacksV1aConsVVV0Iawf_stacksV1F">
+      <label
+       name="expl:VC for play_cards"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_cards.2"
+      locfile="../patience.mlw"
+      loclnum="92" loccnumb="10" loccnume="20"
+      expl="2. precondition"
+      sum="adc93e98bfda4d82977674f39c98ddf1"
+      proved="true"
+      expanded="false"
+      shape="preconditionCtaNilawf_stacksareverseaNilaConsVVV0Iawf_stacksV1F">
+      <label
+       name="expl:VC for play_cards"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_cards.3"
+      locfile="../patience.mlw"
+      loclnum="92" loccnumb="10" loccnume="20"
+      expl="3. variant decrease"
+      sum="c8a4014df90c23e534340824aa259174"
+      proved="true"
+      expanded="false"
+      shape="variant decreaseCtaNilCfaNilainfix =V5V3aConswVV0Iawf_stacksV4FIawf_stacksareverseaNilAawf_stacksV1aConsVVV0Iawf_stacksV1F">
+      <label
+       name="expl:VC for play_cards"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.02"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_cards.4"
+      locfile="../patience.mlw"
+      loclnum="92" loccnumb="10" loccnume="20"
+      expl="4. precondition"
+      sum="8b7bb043fb427ff0b5790ce705665a68"
+      proved="true"
+      expanded="false"
+      shape="preconditionCtaNilawf_stacksV4Iawf_stacksV4FIawf_stacksareverseaNilAawf_stacksV1aConsVVV0Iawf_stacksV1F">
+      <label
+       name="expl:VC for play_cards"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.04"/>
+      </proof>
+     </goal>
+    </transf>
    </goal>
    <goal
     name="WP_parameter play_game"
     locfile="../patience.mlw"
-    loclnum="50" loccnumb="6" loccnume="15"
+    loclnum="106" loccnumb="6" loccnume="15"
     expl="VC for play_game"
-    sum="f9c38aeb2b64dc790fc66b40357bb013"
-    proved="false"
-    expanded="true"
-    shape="t">
+    sum="910dca76633829ff7914bba9a29c50be"
+    proved="true"
+    expanded="false"
+    shape="awf_stacksaNil">
     <label
      name="expl:VC for play_game"/>
+    <proof
+     prover="0"
+     timelimit="5"
+     memlimit="1000"
+     obsolete="false"
+     archived="false">
+     <result status="valid" time="0.01"/>
+    </proof>
    </goal>
    <goal
     name="WP_parameter test"
     locfile="../patience.mlw"
-    loclnum="56" loccnumb="6" loccnume="10"
+    loclnum="112" loccnumb="6" loccnume="10"
     expl="VC for test"
-    sum="f9c38aeb2b64dc790fc66b40357bb013"
-    proved="false"
-    expanded="true"
+    sum="2b5d239a7628bd5009443e39042b8c6e"
+    proved="true"
+    expanded="false"
     shape="t">
     <label
      name="expl:VC for test"/>
+    <proof
+     prover="0"
+     timelimit="5"
+     memlimit="1000"
+     obsolete="false"
+     archived="false">
+     <result status="valid" time="0.01"/>
+    </proof>
    </goal>
   </theory>
  </file>
