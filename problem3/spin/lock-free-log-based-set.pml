@@ -1,6 +1,6 @@
 
-#define SIZE 3
-#define THREAD_COUNT 3
+#define SIZE 2
+#define THREAD_COUNT 2
 
 /* Spin initializes everything to 0 by default */
 int log[SIZE];
@@ -60,6 +60,7 @@ inline update(val) {
 
   do
   :: h < SIZE;
+     assert(h >= gc); /* prove memory-safety */
      cmpXchg(log[h], 0, val);
      success = !cmpXchg_res;
      cmpXchg(hd, h, h+1);
@@ -70,7 +71,7 @@ inline update(val) {
      fi
    :: else ->
 end_size_reached:
-             0 == 1 /* we reached SIZE, stop process */
+             0 == 1 /* we reached end of log, stop process */
   od
 }
 
@@ -84,6 +85,7 @@ inline lookup(val) {
   i = hd;
   do
   :: i != t;
+     assert(i-1 >= gc); /* prove memory-safety */
      x = log[i-1];
      abs(x);
      if
@@ -127,11 +129,11 @@ init /* will have _pid = 0 */
              ht[i] = SIZE
          }
 
-         /*for (i : 0 .. THREAD_COUNT - 1) {
+         for (i : 0 .. THREAD_COUNT - 1) {
              run thread()
-         }*/
+         }
 
-         run sequential_test()
+         /*run sequential_test()*/
   }
 }
 
@@ -143,6 +145,7 @@ proctype thread() /* will have _pid \in 1 .. THREAD_COUNT */
   :: true -> update(1)
   :: true -> update(-1)
   :: true -> lookup(1)
+  /* :: true -> collect()*/
   od
 }
 
