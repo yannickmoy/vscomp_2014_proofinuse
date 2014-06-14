@@ -1,5 +1,5 @@
 
-#define SIZE 6
+#define SIZE 3
 #define THREAD_COUNT 3
 
 /* Spin initializes everything to 0 by default */
@@ -68,7 +68,9 @@ inline update(val) {
                    break
      :: else -> advance(h, hd)
      fi
-   :: else -> assert(false) /* we reached SIZE, abort */
+   :: else ->
+end_size_reached:
+             0 == 1 /* we reached SIZE, stop process */
   od
 }
 
