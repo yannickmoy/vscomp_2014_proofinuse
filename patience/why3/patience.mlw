@@ -1,0 +1,62 @@
+
+
+module Patience
+
+  use import int.Int
+  use import list.List
+  use import list.Append
+  use import list.Reverse
+
+
+  (** [push_card c stacks acc] pushes card [c] on stacks [stacks], assuming
+      [acc] is an accumulator (in reverse order) of stacks where [c] could not be pushed *)
+  let rec push_card c stacks acc
+    requires { true }
+    variant  { stacks }
+    ensures  { true }
+  =
+    match stacks with
+    | Nil ->
+      (* we put card [c] in a new stack *)
+      reverse (Cons (Cons c Nil) acc)
+    | Cons stack stacks ->
+        match stack with
+        | Nil -> absurd
+        | Cons c' _ ->
+           if c <= c' then
+             (* card is placed on the leftmost stack where its card value is no
+greater than the topmost card on that stack *)
+             (reverse (Cons (Cons c stack) acc)) ++ stacks
+           else
+             (* try next stack *)
+             push_card c stacks (Cons stack acc)
+        end
+     end
+
+  let rec play_cards (input: list int) (stacks: list (list int))
+    : list (list int)
+    requires { true }
+    variant  { input }
+    ensures  { true }
+  =
+    match input with
+    | Nil -> stacks
+    | Cons c rem -> play_cards rem (push_card c stacks Nil)
+    end
+
+
+
+
+  let play_game (input: list int) : list (list int)
+    requires { true }
+    ensures { true }
+  = play_cards input Nil
+
+
+  let test () =
+    (* the list given in the problem description
+       9, 7, 10, 9, 5, 4, and 10 *)
+    play_game
+      (Cons 9 (Cons 7 (Cons 10 (Cons 9 (Cons 5 (Cons 4 (Cons 10 Nil)))))))
+
+end

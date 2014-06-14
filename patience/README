@@ -1,0 +1,18 @@
+
+
+==== About the Why3 part ====
+
+
+= Makefile targets ==
+
+* test: runs the test given in the task description
+
+* doc: produces the nicely formatted input code in ./patience.html
+
+* dump: dumps the proof sessions in ./patience/why3session.html
+
+
+= current status of proof =
+
+nothing done
+
