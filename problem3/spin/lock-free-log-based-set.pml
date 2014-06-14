@@ -1,5 +1,5 @@
 
-#define SIZE 3
+#define SIZE 6
 #define THREAD_COUNT 3
 
 /* Spin initializes everything to 0 by default */
@@ -18,12 +18,20 @@ inline abs(x) {
   }
 }
 
+inline min(x, y) {
+  d_step {
+    if
+    :: x < y -> min_res = x
+    :: else -> min_res = y
+    fi
+  }
+}
+
 inline cmpXchg(loc, old, new) {
-  atomic {
-    cmpXchg_res = loc;
+  d_step {
     if
     :: loc == old -> loc = new; cmpXchg_res = old
-    :: else -> break
+    :: else -> cmpXchg_res = loc
     fi
   }
 }
@@ -56,10 +64,11 @@ inline update(val) {
      success = !cmpXchg_res;
      cmpXchg(hd, h, h+1);
      if
-     :: success -> do_return(0)
-     :: !success -> advance(h, hd)
+     :: success -> do_return(0);
+                   break
+     :: else -> advance(h, hd)
      fi
-   :: else -> break /* we reached SIZE, abort */
+   :: else -> assert(false) /* we reached SIZE, abort */
   od
 }
 
@@ -86,6 +95,27 @@ exit:
   do_return(i != t && 0 < x)
 }
 
+inline collect() {
+  int t = tl;
+  int i;
+  int min_res;
+  int cmpXchg_res;
+
+  for (i : 0 .. THREAD_COUNT - 1) {
+    min(t, ht[i]);
+    t = min_res
+  };
+
+  int g;
+
+  g = gc;
+
+  if
+  :: g < t -> cmpXchg(gc, g, t)
+  :: else -> skip
+  fi
+}
+
 init /* will have _pid = 0 */
 {
   int i;
@@ -99,7 +129,7 @@ init /* will have _pid = 0 */
              run thread()
          }*/
 
-         run test()
+         run sequential_test()
   }
 }
 
@@ -114,7 +144,7 @@ proctype thread() /* will have _pid \in 1 .. THREAD_COUNT */
   od
 }
 
-proctype test()
+proctype sequential_test()
 {
   int do_return_res;
 
@@ -122,10 +152,17 @@ proctype test()
   assert(do_return_res == false);
 
   update(1);
+  assert(do_return_res == false);
 
   lookup(1);
   assert(do_return_res == true);
 
   update(-1);
-  assert(do_return_res == false)
+  assert(do_return_res == false);
+
+  lookup(1);
+  assert(do_return_res == false);
+
+  collect()
+end:
 }
