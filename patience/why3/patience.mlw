@@ -130,11 +130,10 @@ invariants:
     s.num_elts >= 0
   /\
     (forall i. 0 <= i < length stacks -> 0 <= s.top_stacks[i] < s.num_elts)
-(*
   /\
     (forall i. 0 <= i < s.num_elts ->
-      let j = s.preds[i] in 0 <= j (* < s.num_elts /\ s.elts[j] < s.elts[i] *))
-*)
+      let j = s.preds[i] in 
+        -1 <= j < s.num_elts (* /\ (j >= 0 -> s.elts[j] < s.elts[i]) *))
 
   (** {2 Programs} *)
 
@@ -161,7 +160,8 @@ invariants:
       let lacc = length acc in
       s.num_elts <- l + 1;
       s.elts <- s.elts[l<-c];
-      s.preds <- s.preds[l <- s.top_stacks[lacc-1]];
+      let p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
+      s.preds <- s.preds[l <- p];
       s.top_stacks <- s.top_stacks[lacc <- l];
       reverse (Cons (Cons c Nil) acc)
     | Cons stack stacks ->
@@ -176,7 +176,8 @@ invariants:
              let lacc = length acc in
              s.num_elts <- l + 1;
              s.elts <- s.elts[l<-c];
-             s.preds <- s.preds[l <- s.top_stacks[lacc-1]];
+             let p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
+             s.preds <- s.preds[l <- p];
              s.top_stacks <- s.top_stacks[lacc <- l];
              (reverse (Cons (Cons c stack) acc)) ++ stacks
            else
