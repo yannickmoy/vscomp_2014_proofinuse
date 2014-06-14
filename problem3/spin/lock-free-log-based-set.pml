@@ -145,7 +145,7 @@ proctype thread() /* will have _pid \in 1 .. THREAD_COUNT */
   :: true -> update(1)
   :: true -> update(-1)
   :: true -> lookup(1)
-  /* :: true -> collect()*/
+  :: true -> collect()
   od
 }
 
