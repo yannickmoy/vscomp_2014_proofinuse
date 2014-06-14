@@ -38,14 +38,14 @@ module Patience
 
   use import int.Int
   use import list.List
+  use import list.Length
   use import list.Append
   use import list.Reverse
 
   (** {2 Specifications} *)
 
-  (** a sequence of stacks of well-formed iff each stack is non-empty
+  (** a sequence of stacks is well-formed iff each stack is non-empty
       and increasing *)
-
   predicate increasing_stack (stack: list int) =
     match stack with
     | Nil -> false
@@ -61,8 +61,7 @@ module Patience
 
   (** lemma: concatenation of well-formed sequences of stacks results in
       a well-formed sequence of stacks.
-      Structural induction done vie a lemma function
-  *)
+      Structural induction done via a lemma function *)
   let rec lemma wf_append_stacks (s1 s2: list (list int))
     requires { wf_stacks s1 }
     requires { wf_stacks s2 }
@@ -75,17 +74,33 @@ module Patience
 
   (** {2 Programs} *)
 
-  (** [push_card c stacks acc] pushes card [c] on stacks [stacks], assuming
-      [acc] is an accumulator (in reverse order) of stacks where [c] could not be pushed *)
-  let rec push_card c stacks acc
+  use import map.Map
+  use import ref.Ref
+
+  (** [push_card c stacks acc] pushes card [c] on stacks [stacks],
+      assuming [acc] is an accumulator (in reverse order) of stacks
+      where [c] could not be pushed.
+
+      [witness] is an "out" and ghost parameter, providing a witness
+      of an increasing subsequence of the input of the same length as
+      the result
+  *)
+
+  let rec push_card (c:int) (stacks : list (list int))
+     (acc : list (list int)) (ghost witness: ref (int,map int int)) 
+     : list (list int)
     requires { wf_stacks stacks }
     requires { wf_stacks (reverse acc) }
+    requires { let (n,_m) = !witness in n = length stacks + length acc }
     variant  { stacks }
+    writes   { witness }
     ensures  { wf_stacks result }
+    ensures  { let (n,_m) = !witness in n = length result }
   =
     match stacks with
     | Nil ->
       (* we put card [c] in a new stack *)
+      let (n,m) = !witness in witness := (n+1,Map.set m n c);
       reverse (Cons (Cons c Nil) acc)
     | Cons stack stacks ->
         match stack with
@@ -98,26 +113,31 @@ module Patience
              (reverse (Cons (Cons c stack) acc)) ++ stacks
            else
              (* try next stack *)
-             push_card c stacks (Cons stack acc)
+             push_card c stacks (Cons stack acc) witness
         end
      end
 
   let rec play_cards (input: list int) (stacks: list (list int))
-    : list (list int)
+    (ghost witness: ref (int,map int int)) : list (list int)
     requires { wf_stacks stacks }
+    requires { let (n,_m) = !witness in n = length stacks }
     variant  { input }
-    ensures  { true }
+    writes   { witness }
+    ensures  { let (n,_m) = !witness in n = length result }
   =
     match input with
     | Nil -> stacks
-    | Cons c rem -> play_cards rem (push_card c stacks Nil)
+    | Cons c rem -> 
+        let stacks' = push_card c stacks Nil witness in
+        play_cards rem stacks' witness
     end
 
 
   let play_game (input: list int) : list (list int)
     requires { true }
     ensures { true }
-  = play_cards input Nil
+  = let ghost witness = ref (0,Map.const 0) in
+    play_cards input Nil witness
 
 
   let test () =
