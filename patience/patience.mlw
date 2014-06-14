@@ -1,0 +1,47 @@
+
+
+module Patience
+
+  use import int.Int
+  use import list.List
+
+
+  (** [push_cards c stacks acc] pushes card [c] on stacks [stacks], assuming
+      [acc] is an accumulator (in reverse order) of stacks where [c] could not be pushed *)
+  let rec push_cards c stacks acc
+    requires { true }
+    variant  { stacks }
+    ensures  { true }
+  =
+    match stacks with
+    | Nil ->
+      (* we put card [c] in a new stack *)
+      Reverse.rev (Cons c acc)
+    | Cons stack stacks ->
+        match stack with
+        | Nil -> absurd
+        | Cons c' _ ->
+           if c <= c' then
+             (* card is placed on the leftmost stack where its card value is no
+greater than the topmost card on that stack *)
+             Append (Reverse.rev (Cons c stack) acc)) stacks
+           else
+             (* try next stack *)
+             push_cards c stacks (Cons stack acc)
+        end 
+
+
+  let rec play_cards (input: list int) (stacks: list (list int)) : list (list int)
+    requires { true }
+    variant  { input }
+    ensures  { true }
+  =
+    match input with
+    | Nil -> stacks
+    | Cons c rem -> push_card c stacks Nil
+    end
+
+
+
+
+end
