@@ -8,7 +8,7 @@ To simulate a run:
 Verification:
 ```
   spin -a  lock-free-log-based-set.pml
-  gcc -DMEMLIM=1024 -O2 -DXUSAFE -DSAFETY -DNOCLAIM -w -o pan pan.c
+  gcc -DMEMLIM=1024 -O2 -DXUSAFE -DSAFETY -DNOCLAIM -DCOLLAPSE -w -o pan pan.c
   ./pan -m10000
 ```
 

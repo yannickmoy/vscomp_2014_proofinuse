@@ -70,7 +70,7 @@ inline update(val) {
      :: else -> advance(h, hd)
      fi
    :: else ->
-end_size_reached:
+end_end_of_log_reached:
              0 == 1 /* we reached end of log, stop process */
   od
 }
@@ -127,11 +127,13 @@ init /* will have _pid = 0 */
   atomic {
          for (i : 0 .. THREAD_COUNT - 1) {
              ht[i] = SIZE
-         }
+         };
 
          for (i : 0 .. THREAD_COUNT - 1) {
              run thread()
-         }
+         };
+
+         run environment()
 
          /*run sequential_test()*/
   }
@@ -147,6 +149,33 @@ proctype thread() /* will have _pid \in 1 .. THREAD_COUNT */
   :: true -> lookup(1)
   :: true -> collect()
   od
+}
+
+proctype environment()
+{
+  do
+  :: true ->
+       atomic {
+         int i;
+         int abs_res;
+         int abs1, abs2;
+
+         i = tl + 1;
+         do
+         :: i < hd -> abs(log[tl]);
+                      abs1 = abs_res;
+                      abs(log[i]);
+                      abs2 = abs_res;
+                      if
+                      :: abs1 == abs2 -> tl++; break
+                      :: else -> break
+                      fi
+         :: i == SIZE -> goto exit
+         :: else -> break
+         od
+       }
+   od
+exit:
 }
 
 proctype sequential_test()
