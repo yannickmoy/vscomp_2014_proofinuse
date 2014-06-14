@@ -9,7 +9,7 @@ is
 
    N : constant := 6;
    type Index_Count is range 0 .. N;
-   subtype Index is Index_Count range 0 .. N - 1;
+   subtype Index is Index_Count range 0 .. Index_Count'Last - 1;
    type Set is array (Index) of Positive;
 
    function Eq_Positive (Left, Right : Positive) return Boolean is (Left = Right);

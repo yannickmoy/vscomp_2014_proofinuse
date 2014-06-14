@@ -24,6 +24,13 @@ is
               Element (P, F(Element (D, X_Elem))).First + Element (P, F(Element (D, X_Elem))).Count in Index and then
               (for all J in Index => Contains (D, A(J)));
 
+   procedure Make_New_Partitions
+     (P : in out Partition;
+      F : in out Inverse_Partition)
+   with
+      Pre  => 2 * Length (P) <= Capacity (P) and then
+              Length (P) <= Count_Type(Partition_Index'Last / 2);
+
    ----------
    -- Swap --
    ----------
@@ -79,7 +86,15 @@ is
                                  Count => 0);
             P_Elem.Last := P_Elem.First + P_Elem.Count - 1;
             P_Elem.Count := 0;
-            Replace_Element (P, J, P_Elem);
+
+            --  Replace_Element does not modify the capacity of the vector, but SPARK GPL 2014 does not prove it.
+            --  Use a local assumption to convey this information.
+            declare
+               Save_Capacity : constant Count_Type := Capacity (P);
+            begin
+               Replace_Element (P, J, P_Elem);
+               pragma Assume (Capacity (P) = Save_Capacity);
+            end;
 
             P_Prime_Index := Partition_Index (Length (P));
             Append (P, P_Prime);
@@ -88,6 +103,13 @@ is
                F(I) := P_Prime_Index;
             end loop;
          end if;
+
+         --  Intermediate assertion used to decrease time to prove loop invariant
+         pragma Assert (for all K in J + 1 .. Partition_Index'Base (Length (P)'Loop_Entry) - 1 => Element (P, K) = Element (P'Loop_Entry, K));
+
+         pragma Loop_Invariant (Capacity (P) = Capacity (P)'Loop_Entry);
+         pragma Loop_Invariant (Length (P) - Length (P)'Loop_Entry in 0 .. Count_Type(J) + 1);
+         pragma Loop_Invariant (for all K in J + 1 .. Partition_Index'Base (Length (P)'Loop_Entry) - 1 => Element (P, K) = Element (P'Loop_Entry, K));
       end loop;
    end Make_New_Partitions;
 
