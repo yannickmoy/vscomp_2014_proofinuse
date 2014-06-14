@@ -5,7 +5,7 @@ test:
 	diff expected.out test.out
 
 proof:
-	gnatprove -p -P partition_refinement
+	gnatprove -P partition_refinement --timeout=120
 
 clean:
 	gnat clean -P partition_refinement
