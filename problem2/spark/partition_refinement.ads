@@ -8,7 +8,8 @@ package Partition_Refinement with
 is
 
    N : constant := 6;
-   type Index is range 0 .. N - 1;
+   type Index_Count is range 0 .. N;
+   subtype Index is Index_Count range 0 .. N - 1;
    type Set is array (Index) of Positive;
 
    function Eq_Positive (Left, Right : Positive) return Boolean is (Left = Right);
@@ -31,7 +32,7 @@ is
    type Interval is record
       First : Index;
       Last  : Index;
-      Count : Natural;
+      Count : Index_Count;
    end record;
    type Partition_Index is range 0 .. 10_000;
    function Eq_Interval (Left, Right : Interval) return Boolean is (Left = Right);
