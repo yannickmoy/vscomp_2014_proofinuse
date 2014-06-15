@@ -5,13 +5,6 @@ To simulate a run:
   spin lock-free-log-based-set.pml
 ```
 
-Verification:
-```
-  spin -a  lock-free-log-based-set.pml
-  gcc -DMEMLIM=1024 -O2 -DXUSAFE -DSAFETY -DNOCLAIM -DCOLLAPSE -w -o pan pan.c
-  ./pan -m10000
-```
-
 
 ## What is SPIN?
 
@@ -22,13 +15,25 @@ language Promela), starting from the initial state.
 For more details see:
   http://spinroot.com/spin/whatispin.html
 
-## Verification of memory-safety property
+## (task 1) Verification of memory-safety property
+
+Verification:
+```
+  spin -a  lock-free-log-based-set.pml
+  gcc -DMEMLIM=1024 -O2 -DXUSAFE -DSAFETY -DNOCLAIM -DCOLLAPSE -w -o pan pan.c
+  ./pan -m10000
+```
 
 At all points where a thread access the `log`, we check with an
 assertion that the `log` index is above `gc`.
 
 No error are found after exhaustive (i.e. all possible states)
-verification with 2 threads on a log of 3 entries.
+verification with 2 threads on a log of 2 entries.
+
+## (task 2 & 3) Abstract memory model and verification of lookup linearizability
+
+We attempted both tasks but failed to prove the relevant property.
+
 
 ## Specificities of our model or specificities of SPIN influencing the model
 
@@ -36,8 +41,13 @@ verification with 2 threads on a log of 3 entries.
 one for the environment. They are all launched by the `init` process
 after initialization step.
 
-Each `thread()` process can do indeterministically (i.e. in any order)
-`update()` (to add or remote set element `1`), `lookup()` and
+Each `thread()` chose a `value` and then do:
+1. an `update()` to add the `value`
+2. a lookup, checking the result is OK
+3. an `update()` to remove the `value`
+4. a lookup, checking the result is OK
+
+In addition, each `thread()` can at each step of above sequence do a
 `collect()`.
 
 **All Promela statements can block a process.** At any point in a
@@ -62,4 +72,3 @@ inline, the variable `abs_res` is assigned to simulate value return.
 
 **Acceptable end state.** By default, end of a process is an acceptable
 end state. One can add new ones by putting a label starting with `end`.
-
