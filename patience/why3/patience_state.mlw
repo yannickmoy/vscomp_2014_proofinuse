@@ -175,9 +175,8 @@ and so on.
     s.positions <- s.positions[idx <- (i,0)];
     s.preds <- s.preds[idx <- !pred]
   with Return i ->
-      let stack_i = s.stacks[i] in
-      let stack_i_size = s.stack_sizes[i] in
-      let top_stack_i = stack_i[stack_i_size - 1] in
+         let stack_i = s.stacks[i] in
+         let stack_i_size = s.stack_sizes[i] in
          (* we put c on top of stack i *)
          let idx = s.num_elts in
          let new_stack_i = stack_i[stack_i_size <- idx] in
@@ -215,13 +214,13 @@ and so on.
     && (forall i,j. 0 <= i < j < s.seqlen -> 
           nth s.seqval[i] l < nth s.seqval[j] l)
 
-  let play_game (input: list int) : unit
-    requires { length input > 0 }
-    ensures { exists s: seq int.  s.seqlen = length input /\
+  let play_game (input: list int) : state
+    (* requires { length input > 0 } *)
+    ensures { exists s: seq int.  s.seqlen = result.num_stacks /\
         increasing_subsequence s input
       }
     ensures { forall s: seq int.
-        increasing_subsequence s input -> s.seqlen <= length input
+        increasing_subsequence s input -> s.seqlen <= result.num_stacks
       }
   = let s = {
       num_elts = 0;
@@ -235,17 +234,22 @@ and so on.
     in
     play_cards input s;
     (* ghost code to build an increasing subsequence of maximal length *)
-    let ns = s.num_elts in
-    assert { ns = length input };
+    let ns = s.num_stacks in
+    if ns = 0 then (assert { input = Nil }; s) else
     let last_stack = s.stacks[ns-1] in
-    let idx = ref (last_stack[s.stack_sizes[ns-1]]) in
+    let idx = ref (last_stack[s.stack_sizes[ns-1]-1]) in
     let seq = ref (Map.const (-1)) in
-    for i=ns-1 downto 0 do
+    for i = ns-1 downto 0 do
+       invariant { -1 <= !idx < s.num_elts }
+       invariant { i >= 0 -> !idx >= 0 &&
+         let (is,ip) = s.positions[!idx] in is = i }
+       invariant { forall j. i < j < ns -> 0 <= !seq[j] < s.num_elts } 
        seq := !seq[i <- !idx];
        idx := s.preds[!idx];
     done;
     let seq = { seqlen = ns ; seqval = !seq } in
-    assert { increasing_subsequence seq input }
+    assert { increasing_subsequence seq input };
+    s
 
   let test () =
     (* the list given in the problem description
