@@ -1,6 +1,5 @@
 
 
-
 (** {1 The Patience Solitaire Game}
 
 Problem 1 from the {h <a href="http://vscomp.org/">Verified Software
@@ -34,63 +33,215 @@ input sequence.
 *)
 
 
-module Patience
+
+(** {2 Preliminary: pigeon-hole lemma} *)
+
+
+module PigeonHole
+
+(** The Why standard library provides a lemma
+    [map.MapInjection.injective_surjective] stating that a map from
+    [(0..n-1)] to to [(0..n-1)] that is an injection is also a
+    surjection.
+
+    This is more or less equivalent to the pigeon-hole lemma. However, we need such a lemma more generally on functions instead of maps.
+
+    Thus we restate the pigeon-hole lemma here. Proof is left as an exercise.
+
+*)
+
+  use import int.Int
+  use HighOrd
+
+  predicate range (f: int -> int) (n: int) (m:int) =
+    forall i: int. 0 <= i < n -> 0 <= f(i) < m
+  (** [range f n m] is true when [f] maps the domain
+      [(0..n-1)] into [(0..m-1)] *)
+
+  predicate injective (f: int -> int) (n: int) (m:int) =
+    forall i j: int. 0 <= i < j < n -> f i <> f j
+  (** [injective f n m] is true when [f] is an injection
+      from [(0..n-1)] to [(0..m-1)] *)
+
+  lemma pigeon_hole :
+    forall n,m:int, f: int -> int.
+    range f n m /\ n > m -> not injective f n m
+
+end
+
+
+
+
+(** {2 Patience unproved code} *)
+
+
+module PatienceCode
 
   use import int.Int
   use import list.List
-  use import list.Length
-  use import list.Append
-  use import list.Reverse
+  use import list.RevAppend
 
-  (** {2 Ghost state} *)
+  (** this code was the one written initially, without any
+      specification or proofs, except for termination.
+      It can be tested, see below. *)
+
+  type card = int
+
+  (** [push_card c stacks acc] pushes card [c] on stacks [stacks],
+      assuming [acc] is an accumulator (in reverse order) of stacks
+      where [c] could not be pushed.
+  *)
+  let rec push_card (c:card) (stacks : list (list card))
+     (acc : list (list card)) : list (list card)
+    variant  { stacks }
+  =
+    match stacks with
+    | Nil ->
+      (* we put card [c] in a new stack *)
+      rev_append (Cons (Cons c Nil) acc) Nil
+    | Cons stack remaining_stacks ->
+        match stack with
+        | Nil -> absurd (* can not be proved unreachable yet *)
+        | Cons c' _ ->
+           if c <= c' then
+             (* card is placed on the leftmost stack where its card
+                value is no greater than the topmost card on that
+                stack *)
+             rev_append (Cons (Cons c stack) acc) remaining_stacks
+           else
+             (* try next stack *)
+             push_card c remaining_stacks (Cons stack acc)
+        end
+     end
+
+  let rec play_cards (input: list card) (stacks: list (list card))
+    : list (list card) 
+    variant { input }
+  =
+    match input with
+    | Nil -> stacks
+    | Cons c rem ->
+        let stacks' = push_card c stacks Nil in
+        play_cards rem stacks'
+    end
+
+
+  let play_game (input: list card) : list (list card) =
+    play_cards input Nil
+
+
+  let test () =
+    (* the list given in the problem description
+       9, 7, 10, 9, 5, 4, and 10 *)
+    play_game
+      (Cons 9 (Cons 7 (Cons 10 (Cons 9 (Cons 5 (Cons 4 (Cons 10 Nil)))))))
+
+end
+
+
+(** {2 Patience game with specifications and proofs} *)
+
+module Patience
+
+  use import int.Int
+
+  type card = int
+
+  (** {3 Ghost state} *)
 
   (** To specify the expected behavior of the code, we attach a ghost
       state to each step of the algorithm. This state provides extra
-      information needed for the final property to establish: (1) the
-      number of elements [len] in the input sequence (2) a map [elts]
-      associating to each i from 0 to [len-1] the value of th ith card and in which stack it is (3)
-      the indexes of each top element of all stacks (4) a map
-      [preds] associating to each i from 0 to [len-1] a "predecessor": the
-      index j of a smaller element in the sequence that appears in the
-      stack immediately on the left (-1 if already on the leftmost
-      stack). Here is what happens on the example sequence [[9, 7, 10,
-      9, 5, 4, 10]] :
+      information needed for the final properties to establish.
 
-{h <pre>}
-len=0
-len=1, elts(0) = (9,0),  top(0) = 0, preds(0) = -1
-len=2, elts(1) = (7,0),  top(0) = 1, preds(1) = -1
-len=3, elts(2) = (10,1), top(1) = 2, preds(2) = 1 
-  (top(0), works because predecessor is 7 = fst(elts(1)))
-len=4, elts(3) = (9,1),  top(1) = 3, preds(3) = 1 
-len=5, elts(4) = (5,0),  top(0) = 4, preds(4) = -1
-len=6, elts(5) = (4,0),  top(0) = 5, preds(5) = -1
-len=7, elts(6) = (10,2), top(2) = 6, preds(6) = 3 (top(1)), hence predecessor is fst(elts(3)) = 9)
-{h </pre>}
-
-as we see, the predessor of a new added card is always the top of the
-stack on the left.
-
-At the end, an increasing subsequence of length n is found by taking,
-in reverse order, the top of the rightmost stack, then its predecessor
-and so on.
-
-*)
+  *)
 
   use import map.Map
 
   type state = {
     mutable num_elts : int;
-    mutable elts : map int (int,int);
-    mutable top_stacks : map int int;
+    (** number of cards already seen *)
+    mutable values : map int card;
+    (** cards values seen, indexed in the order they have been seen, 
+        from [0] to [num_elts-1] *)
+    mutable num_stacks : int;
+    (** number of stacks built so far *)
+    mutable stack_sizes : map int int;
+    (** sizes of these stacks, numbered from [0] to [num_stacks - 1] *)
+    mutable stacks : map int (map int int);
+    (** indexes of the cards in respective stacks *)
+    mutable positions : map int (int,int);
+    (** table that given a card index, provides its position, i.e. in
+        which stack it is and at which height *)
     mutable preds : map int int;
+    (** predecessors of cards, i.e. for each card index [i], [preds[i]]
+        provides an index of a card in the stack on the immediate left, 
+        whose value is smaller. returns [-1] of the card is on the 
+        leftmost stack. *)
   }
+
+(** Invariants on the ghost state *)
+
+  predicate inv (s:state) =
+     0 <= s.num_stacks <= s.num_elts
+     (** the number of stacks is less or equal the number of cards *)
+  /\ (s.num_elts > 0 -> s.num_stacks > 0)
+     (** when there is at least one card, there is at least one stack *)
+  /\ (forall i. 0 <= i < s.num_stacks ->
+         s.stack_sizes[i] >= 1 
+         (** stacks are non-empty *)
+      /\ forall j. 0 <= j < s.stack_sizes[i] ->
+           0 <= s.stacks[i][j] < s.num_elts)
+         (** contents of stacks are valid card indexes *)
+  /\ (forall i. 0 <= i < s.num_elts ->
+       let (is,ip) = s.positions[i] in
+       0 <= is < s.num_stacks &&
+       let st = s.stacks[is] in
+         0 <= ip < s.stack_sizes[is] &&
+         st[ip] = i)
+     (** the position table of cards is correct, i.e. when 
+        [(is,ip) = s.positions[i]] then card [i] is indeed
+        stored in stack [is] at height [ip] *)
+  /\ (forall is. 0 <= is < s.num_stacks ->
+        forall ip. 0 <= ip < s.stack_sizes[is] ->
+        let idx = s.stacks[is][ip] in
+        (is,ip) = s.positions[idx])
+     (** positions is the right inverse of stacks *)
+  /\ (forall i. 0 <= i < s.num_stacks ->
+        let stack_i = s.stacks[i] in
+        forall j,k. 0 <= j < k < s.stack_sizes[i] ->
+           stack_i[j] < stack_i[k])
+     (** in a given stack, indexes are increasing *)
+  /\ (forall i. 0 <= i < s.num_stacks ->
+        let stack_i = s.stacks[i] in
+        forall j,k. 0 <= j <= k < s.stack_sizes[i] ->
+           s.values[stack_i[j]] >= s.values[stack_i[k]])
+     (** in a given stack, card values are decreasing *)
+  /\ (forall i. 0 <= i < s.num_elts ->
+       let pred = s.preds[i] in
+       -1 <= pred < s.num_elts &&
+       (** the predecessor is a valid index or [-1] *)
+       pred < i /\ 
+       (** predecessor is always a smaller index *)
+       let (is,_ip) = s.positions[i] in
+       if pred < 0 then is = 0 
+         (** if predecessor is [-1] then [i] is in leftmost stack *)
+       else
+         s.values[pred] < s.values[i] /\ 
+         (** if predecessor is not [-1], it denotes a card with smaller value... *)
+         is > 0 &&
+         (** ...the card is not on the leftmost stack... *)
+         let (ps,_pp) = s.positions[pred] in
+         ps = is - 1) 
+         (** and predecessor is in the stack on the immediate left *)
+
 
 (*
 
-invariants:
-
-*)
+  use import list.List
+  use import list.Length
+  use import list.Append
+  use import list.RevAppend
+  use import list.Reverse
 
   use import list.NthNoOpt (* for the [nth] operator on lists *)
 
@@ -129,7 +280,7 @@ invariants:
   /\
     (forall i. 0 <= i < s.num_elts ->
       let j = s.preds[i] in
-        -1 <= j < s.num_elts /\ (j >= 0 -> 
+        -1 <= j < s.num_elts /\ (j >= 0 ->
           let (ej,sj) = s.elts[j] in
           let (ei,si) = s.elts[i] in
           ej < ei /\ si > 0 /\ sj = si - 1))
@@ -146,7 +297,7 @@ invariants:
      : list (list int)
     requires { inv s (reverse acc ++ stacks) }
     requires { (* c is greater than the top of the previous stack *)
-               match acc with 
+               match acc with
                | Cons (Cons c' _) _ -> c > c'
                | _ -> true
                end }
@@ -244,5 +395,6 @@ invariants:
        9, 7, 10, 9, 5, 4, and 10 *)
     play_game
       (Cons 9 (Cons 7 (Cons 10 (Cons 9 (Cons 5 (Cons 4 (Cons 10 Nil)))))))
+*)
 
 end

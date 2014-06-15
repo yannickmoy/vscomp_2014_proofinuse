@@ -32,6 +32,14 @@ We're using Why3 (https://why3.lri.fr/) and SPARK 2014
 * color highlighting of goals: color of premises and conclusion are
   wrong in presence of match..with
 
-* missing lemmas on nth and append on lists
+* missing lemmas on nth and append on lists (i.e. propagate lemmas in list.NthAppendLength to list.NthNoOpt)
+
+* need for an abstract version of pigeon-hole lemma in Why3 stdlib,
+  on functions instead of map like in map.MapInjection
+
+* need for facilities to provide abstract specifications to Why3
+  programs, and then provide raffinements (there is an on-going PhD
+  thesis on that subject)
+
 
 
