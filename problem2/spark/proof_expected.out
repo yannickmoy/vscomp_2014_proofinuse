@@ -163,20 +163,22 @@ partition_refinement.adb:202:68: info: precondition proved
 partition_refinement.adb:202:81: info: precondition proved
 partition_refinement.adb:203:55: info: precondition proved
 partition_refinement.adb:209:7: info: precondition proved
-partition_refinement.ads:55:17: info: overflow check proved
-partition_refinement.ads:55:19: info: precondition proved
-partition_refinement.ads:55:33: info: precondition proved
-partition_refinement.ads:56:15: info: precondition proved
-partition_refinement.ads:57:38: info: precondition proved
-partition_refinement.ads:58:16: info: precondition proved
-partition_refinement.ads:58:37: info: precondition proved
-partition_refinement.ads:58:55: info: precondition proved
-partition_refinement.ads:59:16: info: precondition proved
-partition_refinement.ads:59:34: info: precondition proved
-partition_refinement.ads:59:47: info: precondition proved
-partition_refinement.ads:60:73: info: range check proved
-partition_refinement.ads:60:73: info: precondition proved
-partition_refinement.ads:61:50: info: range check proved
-partition_refinement.ads:61:50: info: precondition proved
-partition_refinement.ads:61:69: info: precondition proved
-partition_refinement.ads:61:81: info: range check proved
+partition_refinement.ads:56:17: info: overflow check proved
+partition_refinement.ads:56:19: info: precondition proved
+partition_refinement.ads:56:33: info: precondition proved
+partition_refinement.ads:57:15: info: precondition proved
+partition_refinement.ads:59:38: info: precondition proved
+partition_refinement.ads:60:16: info: precondition proved
+partition_refinement.ads:60:37: info: precondition proved
+partition_refinement.ads:60:55: info: precondition proved
+partition_refinement.ads:62:16: info: precondition proved
+partition_refinement.ads:62:34: info: precondition proved
+partition_refinement.ads:62:47: info: precondition proved
+partition_refinement.ads:64:73: info: range check proved
+partition_refinement.ads:64:73: info: precondition proved
+partition_refinement.ads:65:43: info: precondition proved
+partition_refinement.ads:65:70: info: precondition proved
+partition_refinement.ads:67:50: info: range check proved
+partition_refinement.ads:67:50: info: precondition proved
+partition_refinement.ads:67:69: info: precondition proved
+partition_refinement.ads:67:81: info: range check proved
