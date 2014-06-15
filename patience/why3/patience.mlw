@@ -44,6 +44,7 @@ module Patience
 
   (** {2 Specifications} *)
 
+(*
   (** a sequence of stacks is well-formed iff each stack is non-empty
       and increasing *)
   predicate increasing_stack (stack: list int) =
@@ -71,6 +72,7 @@ module Patience
     | Nil -> ()
     | Cons _ rem -> wf_append_stacks rem s2
     end
+*)
 
   (** {2 Ghost state} *)
 
@@ -128,7 +130,7 @@ invariants:
     requires { 0 <= i < length l1 }
     variant  { l1 }
     ensures  { nth i (l1 ++ l2) = nth i l1 }
-  = match l1 with 
+  = match l1 with
     | Nil -> ()
     | Cons _ l -> if i = 0 then () else nth_append_1 l l2 (i-1)
     end
@@ -137,27 +139,27 @@ invariants:
     requires { length l1 <= i < length l1 + length l2 }
     variant  { l1 }
     ensures  { nth i (l1 ++ l2) = nth (i - length l1) l2 }
-  = match l1 with 
+  = match l1 with
     | Nil -> ()
     | Cons _ l -> nth_append_2 l l2 (i-1)
     end
 
-  predicate inv (s:state) (stacks:list (list int)) = 
+  predicate inv (s:state) (stacks:list (list int)) =
     s.num_elts >= 0
   /\
     (** [s.top_stacks[i]] denotes the index
         of the top of the [i]-th stack of [stacks] *)
-    (forall i. 0 <= i < length stacks -> 
+    (forall i. 0 <= i < length stacks ->
       let stack_i = nth i stacks in
       match stack_i with
-      | Nil -> false
-      | Cons hd _ -> 
+      | Nil -> false (* stacks are non-empty *)
+      | Cons hd _ ->
         let idx = s.top_stacks[i] in
         0 <= idx < s.num_elts /\ s.elts[idx] = hd
       end)
   /\
     (forall i. 0 <= i < s.num_elts ->
-      let j = s.preds[i] in 
+      let j = s.preds[i] in
         -1 <= j < s.num_elts (* /\ (j >= 0 -> s.elts[j] < s.elts[i]) *))
 
   (** {2 Programs} *)
@@ -168,14 +170,11 @@ invariants:
   *)
 
   let rec push_card (c:int) (stacks : list (list int))
-     (acc : list (list int)) (ghost s: state) 
+     (acc : list (list int)) (ghost s: state)
      : list (list int)
-    requires { wf_stacks stacks }
-    requires { wf_stacks (reverse acc) }
     requires { inv s (reverse acc ++ stacks) }
     variant  { stacks }
     writes   { s }
-    ensures  { wf_stacks result }
     ensures  { inv s result }
   =
     match stacks with
@@ -201,18 +200,21 @@ invariants:
       new_stacks
     | Cons stack remaining_stacks ->
         match stack with
-        | Nil -> absurd
+        | Nil ->
+            let ghost lacc = length acc in
+            assert { stack = nth lacc (reverse acc ++ stacks) };
+            absurd
         | Cons c' _ ->
            if c <= c' then
              (* card is placed on the leftmost stack where its card
                 value is no greater than the topmost card on that
                 stack *)
-             let new_stacks = 
+             let new_stacks =
                (* TODO: use rev_append directly for efficiency of the code *)
                (reverse (Cons (Cons c stack) acc)) ++ remaining_stacks in
              (* update of the ghost state *)
              let ghost old_stacks = reverse acc ++ stacks in
-             assert { new_stacks = 
+             assert { new_stacks =
                reverse acc ++ (Cons (Cons c stack) Nil) ++ remaining_stacks };
              assert { length new_stacks = length old_stacks };
              let ghost lacc = length acc in
@@ -225,16 +227,15 @@ invariants:
              let ghost p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
              s.preds <- s.preds[l <- p];
              s.top_stacks <- s.top_stacks[lacc <- l];
-             new_stacks 
+             new_stacks
            else
              (* try next stack *)
-             push_card c remaining_stacks (Cons stack acc) s 
+             push_card c remaining_stacks (Cons stack acc) s
         end
      end
 
   let rec play_cards (input: list int) (stacks: list (list int))
     (ghost s: state) : list (list int)
-    requires { wf_stacks stacks }
     requires { inv s stacks }
     variant  { input }
     writes   { s }
