@@ -41,5 +41,6 @@ We're using Why3 (https://why3.lri.fr/) and SPARK 2014
   programs, and then provide raffinements (there is an on-going PhD
   thesis on that subject)
 
+* "split" should really split match..with
 
 

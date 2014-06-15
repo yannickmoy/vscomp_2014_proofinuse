@@ -247,8 +247,12 @@ module Patience
   *)
   let rec push_card (c:card) (stacks : list (list card))
      (acc : list (list card)) (ghost state:state) : list (list card)
+    requires { inv state }
     variant  { stacks }
     (* writes   { state } *)
+    ensures  { inv state }
+    ensures  { state.num_elts = (old state).num_elts + 1 }
+    ensures  { state.values = (old state).values[(old state).num_elts <- c] }
   =
     match stacks with
     | Nil ->
@@ -302,6 +306,7 @@ module Patience
     | Nil -> stacks
     | Cons c rem ->
         let stacks' = push_card c stacks Nil state in
+        
         play_cards rem stacks' state
     end
 
@@ -350,6 +355,7 @@ module Patience
     }
     in
     let final_stacks = play_cards input Nil state in
+    assert { forall i. 0 <= i < length input -> nth i input = state.values[i] };
     (**
 
       This is ghost code to build an increasing subsequence of maximal length
@@ -362,6 +368,7 @@ module Patience
         assert { input = Nil };
         absurd
 (*
+        TODO: if input is empty, we may be able to prove that:
         let sigma = { seqlen = 0 ; seqval = Map.const (-1) } in
         assert { increasing_subsequence sigma input };
         sigma
@@ -387,7 +394,6 @@ module Patience
        idx := state.preds[!idx];
     done;
     let ghost sigma = { seqlen = ns ; seqval = !seq } in
-    assert { forall i. 0 <= i < length input -> nth i input = state.values[i] };
     assert { increasing_subsequence sigma input };
     (**
 
