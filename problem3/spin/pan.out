@@ -2,7 +2,11 @@ verification result:
 spin -a  lock-free-log-based-set.pml
 gcc -DMEMLIM=1024 -O2 -DXUSAFE -DSAFETY -DNOCLAIM -DCOLLAPSE -w -o pan pan.c
 ./pan -m10000 
-Pid: 30339
+Pid: 30912
+Depth=     612 States=    1e+06 Transitions= 1.43e+06 Memory=   168.476	t=     2.12 R=   5e+05
+Depth=     612 States=    2e+06 Transitions= 2.92e+06 Memory=   207.147	t=     4.39 R=   5e+05
+Depth=     612 States=    3e+06 Transitions= 4.41e+06 Memory=   246.015	t=     6.71 R=   4e+05
+Depth=     612 States=    4e+06 Transitions= 5.93e+06 Memory=   284.198	t=     9.13 R=   4e+05
 
 (Spin Version 6.3.2 -- 17 May 2014)
 	+ Partial Order Reduction
@@ -14,31 +18,30 @@ Full statespace search for:
 	cycle checks       	- (disabled by -DSAFETY)
 	invalid end states	+
 
-State-vector 96 byte, depth reached 1315, errors: 0
-   311725 states, stored
-   188302 states, matched
-   500027 transitions (= stored+matched)
-   361062 atomic steps
-hash conflicts:      1898 (resolved)
+State-vector 128 byte, depth reached 612, errors: 0
+  4093945 states, stored
+  1983954 states, matched
+  6077899 transitions (= stored+matched)
+  3875037 atomic steps
+hash conflicts:    156633 (resolved)
 
 Stats on memory usage (in Megabytes):
-   36.863	equivalent memory usage for states (stored*(State-vector + overhead))
-   12.261	actual memory usage for states (compression: 33.26%)
+  609.069	equivalent memory usage for states (stored*(State-vector + overhead))
+  159.229	actual memory usage for states (compression: 26.14%)
          	state-vector as stored = 13 byte + 28 byte overhead
   128.000	memory used for hash table (-w24)
     0.534	memory used for DFS stack (-m10000)
-  140.741	total actual memory usage
+  287.714	total actual memory usage
 
 
 nr of templates: [ 0:globals 1:chans 2:procs ]
-collapse counts: [ 0:352 2:2 3:2620 4:14 ]
+collapse counts: [ 0:295 2:2 3:41753 4:14 ]
 unreached in init
 	(0 of 12 states)
 unreached in proctype thread
-	(0 of 223 states)
+	(0 of 408 states)
 unreached in proctype environment
 	(0 of 45 states)
 
-pan: elapsed time 0.66 seconds
+pan: elapsed time 9.38 seconds
 No errors found -- did you verify all claims?
-

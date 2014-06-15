@@ -61,8 +61,10 @@ inline update(val) {
 
   do
   :: h < SIZE;
-     assert(h >= gc); /* prove memory-safety */
-     cmpXchg(log[h], 0, val);
+     atomic {
+            assert(h >= gc); /* prove memory-safety */
+            cmpXchg(log[h], 0, val)
+     };
      success = !cmpXchg_res;
      cmpXchg(hd, h, h+1);
      if
@@ -86,8 +88,10 @@ inline lookup(val) {
   i = hd;
   do
   :: i != t;
-     assert(i-1 >= gc); /* prove memory-safety */
-     x = log[i-1];
+     atomic {
+            assert(i-1 >= gc); /* prove memory-safety */
+            x = log[i-1]
+     };
      abs(x);
      if
      :: abs_res != val -> i--
@@ -121,6 +125,13 @@ inline collect() {
   fi
 }
 
+inline possible_collect() {
+  if
+  :: true -> collect()
+  :: true -> skip
+  fi
+}
+
 init /* will have _pid = 0 */
 {
   pid i;
@@ -144,18 +155,28 @@ proctype thread() /* will have _pid \in 1 .. THREAD_COUNT */
   value = _pid + 1;
 
   do
-  :: true -> update(value);
+  :: true -> possible_collect();
+
+             update(value);
              assert(do_return_res == false);
+
+             possible_collect();
 
              lookup(value);
              assert(do_return_res == true);
 
+             possible_collect();
+
              update(-value);
              assert(do_return_res == false);
 
+             possible_collect();
+
              lookup(value);
              assert(do_return_res == false)
-  :: true -> collect()
+
+             possible_collect()
+
   :: true -> break
   od
 }
