@@ -50,6 +50,14 @@ is
       D : in out Inverse_Set;
       P : in out Partition;
       F : in out Inverse_Partition;
-      X : in     Partitioning_Set);
+      X : in     Partitioning_Set)
+   with
+      Pre  => 2 * Length (P) <= Capacity (P) and then
+              Length (P) <= Count_Type(Partition_Index'Last / 2) and then
+              (for all J in Index => Contains (D, A(J))) and then
+              (for all C in D => A (Element (D, C)) = Key (D, C)) and then
+              (for all C in X => Contains (D, Element (X, C))) and then
+              (for all J in Index => F(J) in 0 .. Partition_Index'Base (Length (P)) - 1) and then
+              (for all J in 0 .. Partition_Index(Length (P)) - 1 => Element (P, J).Count = 0);
 
 end Partition_Refinement;

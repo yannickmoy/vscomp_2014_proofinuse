@@ -8,4 +8,8 @@ project Partition_Refinement is
       for Default_Switches ("Ada") use ("-gnata", "-gnato");
    end Compiler;
 
+   package Prove is
+      for Switches use ("-j0");
+   end Prove;
+
 end Partition_Refinement;

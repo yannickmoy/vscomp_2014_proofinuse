@@ -22,7 +22,21 @@ is
       Pre  => Contains (D, X_Elem) and then
               F(Element (D, X_Elem)) in 0 .. Partition_Index'Base (Length (P)) - 1 and then
               Element (P, F(Element (D, X_Elem))).First + Element (P, F(Element (D, X_Elem))).Count in Index and then
-              (for all J in Index => Contains (D, A(J)));
+              (for all J in Index => Contains (D, A(J))),
+      Post => A = A'Old'Update
+                (Element (D, X_Elem)'Old =>
+                   A(Element (P, F(Element (D, X_Elem))).First + Element (P, F(Element (D, X_Elem))).Count)'Old,
+                 Index'(Element (P, F(Element (D, X_Elem))).First + Element (P, F(Element (D, X_Elem))).Count)'Old =>
+                   A(Element (D, X_Elem))'Old) and then
+              Capacity (P) = Capacity (P)'Old and then
+              Length (P) = Length (P)'Old and then
+              (for all J in 0 .. Partition_Index(Length (P)) - 1 =>
+                 Element (P, J).First = Element (P'Old, J).First) and then
+              (for all J in 0 .. Partition_Index(Length (P)) - 1 =>
+                 Element (P, J).Count = Element (P'Old, J).Count + (if J = F(Element (D, X_Elem)) then 1 else 0)) and then
+              (for all J in Index => Contains (D, A(J))) and then
+              (for all C in D => A (Element (D, C)) = Key (D, C)) and then
+              (for all C in D'Old => Has_Element (D, C));
 
    procedure Make_New_Partitions
      (P : in out Partition;
@@ -64,7 +78,15 @@ is
       Replace (D, A(I), I);
       Replace (D, A(J), J);
       P_Elem.Count := P_Elem.Count + 1;
-      Replace_Element (P, F(I), P_Elem);
+
+      --  Replace_Element does not modify the capacity of the vector, but SPARK GPL 2014 does not prove it.
+      --  Use a local assumption to convey this information.
+      declare
+         Save_Capacity : constant Count_Type := Capacity (P);
+      begin
+         Replace_Element (P, F(I), P_Elem);
+         pragma Assume (Capacity (P) = Save_Capacity);
+      end;
    end Refine_One;
 
    -------------------------
@@ -125,11 +147,31 @@ is
       X : in     Partitioning_Set)
    is
       C : Partitioning_Sets.Cursor := First (X);
+
+      pragma Warnings (Off, "statement has no effect", Reason => "ghost code");
+      D_Old : constant Inverse_Set := D;
+      pragma Warnings (On, "statement has no effect", Reason => "ghost code");
+
    begin
       while Has_Element (X, C) loop
+
+         --  Part of Refine_One precondition, should be provable
+         pragma Assert (Contains (D, Element (X, C)));
          Refine_One (A, D, P, F, Element (X, C));
          Next (X, C);
+
+         --  Part of the loop invariant, requires changes in Refine_One's postcondition for being provable
+         pragma Assert (for all J in 0 .. Partition_Index(Length (P)) - 1 => Element (P, J).First + Element (P, J).Count in Index);
+
+         pragma Loop_Invariant (Capacity (P) = Capacity (P)'Loop_Entry);
+         pragma Loop_Invariant (Length (P) = Length (P)'Loop_Entry);
+         pragma Loop_Invariant (for all C in D => A (Element (D, C)) = Key (D, C));
+         pragma Loop_Invariant (for all C in D_Old => Has_Element (D, C));
+         pragma Loop_Invariant (for all C in X => Has_Element (D, (Find (D_Old, Element (X, C)))));
+         pragma Loop_Invariant (for all J in 0 .. Partition_Index(Length (P)) - 1 => Element (P, J).First + Element (P, J).Count in Index);
+         pragma Loop_Invariant (for all J in Index => Contains (D, A(J)));
       end loop;
+
       Make_New_Partitions (P, F);
    end Refine;
 
