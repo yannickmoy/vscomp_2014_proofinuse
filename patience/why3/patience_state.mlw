@@ -273,14 +273,14 @@ and so on.
        'L:
        seq := !seq[i <- !idx];
        idx := s.preds[!idx];
-(**)
+(*
        assert { i+1 < ns ->
          s.values[!seq[i]] < s.values[!seq[i+1]]
        };
        assert { forall k. i < k < ns ->
          s.values[!seq[i]] < s.values[!seq[k]]
        }
-(**)
+*)
     done;
     let seq = { seqlen = ns ; seqval = !seq } in
     assert { forall i. 0 <= i < length input -> nth i input = s.values[i] };

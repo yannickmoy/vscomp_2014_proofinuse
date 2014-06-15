@@ -1543,16 +1543,16 @@
     locfile="../patience_state.mlw"
     loclnum="228" loccnumb="6" loccnume="15"
     expl="VC for play_game"
-    sum="97167d8b8598e80240603cc8ce480a72"
+    sum="50c9bc7e3823cf81de4ec0b960353fcb"
     proved="true"
-    expanded="true"
-    shape="iaincreasing_subsequenceamk seqV11V12V0Aainfix =V11V5EAaincreasing_subsequenceamk seqV5V9V0Aainfix =anthV13V0amixfix []V6V13Iainfix &lt;V13alengthV0Aainfix &lt;=c0V13FIainfix &lt;amixfix []V6amixfix []V9V14amixfix []V6amixfix []V9V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;ainfix -c0c1V14FAainfix &lt;amixfix []V9V16amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;ainfix -c0c1V16FAainfix &lt;amixfix []V9V18V7Aainfix &lt;=c0amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;ainfix -c0c1V18FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +ainfix -c0c1c1Iainfix &lt;ainfix -c0c1ainfix -V5c1Aainfix &lt;=c0ainfix -c0c1Aainfix &lt;V10amixfix []V9ainfix +ainfix -c0c1c1Iainfix &lt;ainfix +ainfix -c0c1c1V5ACainfix =V19ainfix -c0c1aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=ainfix -c0c1c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Aainfix &lt;amixfix []V6amixfix []V21V23amixfix []V6amixfix []V21V24Iainfix &lt;V24V5Aainfix &lt;V23V24Aainfix &lt;ainfix -V20c1V23FAainfix &lt;amixfix []V21V25amixfix []V21V26Iainfix &lt;V26V5Aainfix &lt;V25V26Aainfix &lt;ainfix -V20c1V25FAainfix &lt;amixfix []V21V27V7Aainfix &lt;=c0amixfix []V21V27Iainfix &lt;V27V5Aainfix &lt;ainfix -V20c1V27FAainfix &lt;amixfix []V6V22amixfix []V6amixfix []V21ainfix +ainfix -V20c1c1Iainfix &lt;ainfix -V20c1ainfix -V5c1Aainfix &lt;=c0ainfix -V20c1Aainfix &lt;V22amixfix []V21ainfix +ainfix -V20c1c1Iainfix &lt;ainfix +ainfix -V20c1c1V5ACainfix =V28ainfix -V20c1aTuple2VwagetV2V22Aainfix &gt;=V22c0Iainfix &gt;=ainfix -V20c1c0Aainfix &lt;V22V7Aainfix &lt;=aprefix -c1V22Aainfix &lt;amixfix []V6amixfix []V21V20amixfix []V6amixfix []V21V29Iainfix &lt;V29V5Aainfix &lt;V20V29FAainfix &lt;amixfix []V6amixfix []V21V20amixfix []V6amixfix []V21ainfix +V20c1Iainfix &lt;ainfix +V20c1V5Iainfix =V22amixfix []V1V10FIainfix =V21amixfix [&lt;-]V9V20V10FIainfix &lt;amixfix []V6amixfix []V9V30amixfix []V6amixfix []V9V31Iainfix &lt;V31V5Aainfix &lt;V30V31Aainfix &lt;V20V30FAainfix &lt;amixfix []V9V32amixfix []V9V33Iainfix &lt;V33V5Aainfix &lt;V32V33Aainfix &lt;V20V32FAainfix &lt;amixfix []V9V34V7Aainfix &lt;=c0amixfix []V9V34Iainfix &lt;V34V5Aainfix &lt;V20V34FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V20c1Iainfix &lt;V20ainfix -V5c1Aainfix &lt;=c0V20Aainfix &lt;V10amixfix []V9ainfix +V20c1Iainfix &lt;ainfix +V20c1V5ACainfix =V35V20aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V20c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V20c0Aainfix &gt;=V8V20FFAainfix &lt;amixfix []V6amixfix []aconstaprefix -c1V36amixfix []V6amixfix []aconstaprefix -c1V37Iainfix &lt;V37V5Aainfix &lt;V36V37Aainfix &lt;V8V36FAainfix &lt;amixfix []aconstaprefix -c1V38amixfix []aconstaprefix -c1V39Iainfix &lt;V39V5Aainfix &lt;V38V39Aainfix &lt;V8V38FAainfix &lt;amixfix []aconstaprefix -c1V40V7Aainfix &lt;=c0amixfix []aconstaprefix -c1V40Iainfix &lt;V40V5Aainfix &lt;V8V40FAainfix &lt;amixfix []V6amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1amixfix []V6amixfix []aconstaprefix -c1ainfix +V8c1Iainfix &lt;V8ainfix -V5c1Aainfix &lt;=c0V8Aainfix &lt;amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1amixfix []aconstaprefix -c1ainfix +V8c1Iainfix &lt;ainfix +V8c1V5ACainfix =V41V8aTuple2VwagetV2amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1Aainfix &gt;=amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1c0Iainfix &gt;=V8c0Aainfix &lt;amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1V7Aainfix &lt;=aprefix -c1amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1Iainfix &gt;=V8c0Aaincreasing_subsequenceamk seqV42V43V0Aainfix =V42V5EAaincreasing_subsequenceamk seqV5aconstaprefix -c1V0Aainfix =anthV44V0amixfix []V6V44Iainfix &lt;V44alengthV0Aainfix &lt;=c0V44FIainfix &lt;V8c0Lainfix -V5c1aincreasing_subsequenceamk seqV45V46V0Aainfix =V45V5EAaincreasing_subsequenceamk seqc0aconstaprefix -c1V0Aainfix =V0aNilainfix =V5c0Iainfix =amixfix []V6V47anthainfix -V47c0V0Iainfix &lt;V47V7Aainfix &lt;=c0V47FAainfix =amixfix []V6V48amixfix []aconstaprefix -c1V48Iainfix &lt;V48c0Aainfix &lt;=c0V48FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FAainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
+    expanded="false"
+    shape="iaincreasing_subsequenceamk seqV11V12V0Aainfix =V11V5EAaincreasing_subsequenceamk seqV5V9V0Aainfix =anthV13V0amixfix []V6V13Iainfix &lt;V13alengthV0Aainfix &lt;=c0V13FIainfix &lt;amixfix []V6amixfix []V9V14amixfix []V6amixfix []V9V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;ainfix -c0c1V14FAainfix &lt;amixfix []V9V16amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;ainfix -c0c1V16FAainfix &lt;amixfix []V9V18V7Aainfix &lt;=c0amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;ainfix -c0c1V18FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +ainfix -c0c1c1Iainfix &lt;ainfix -c0c1ainfix -V5c1Aainfix &lt;=c0ainfix -c0c1Aainfix &lt;V10amixfix []V9ainfix +ainfix -c0c1c1Iainfix &lt;ainfix +ainfix -c0c1c1V5ACainfix =V19ainfix -c0c1aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=ainfix -c0c1c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Aainfix &lt;amixfix []V6amixfix []V21V23amixfix []V6amixfix []V21V24Iainfix &lt;V24V5Aainfix &lt;V23V24Aainfix &lt;ainfix -V20c1V23FAainfix &lt;amixfix []V21V25amixfix []V21V26Iainfix &lt;V26V5Aainfix &lt;V25V26Aainfix &lt;ainfix -V20c1V25FAainfix &lt;amixfix []V21V27V7Aainfix &lt;=c0amixfix []V21V27Iainfix &lt;V27V5Aainfix &lt;ainfix -V20c1V27FAainfix &lt;amixfix []V6V22amixfix []V6amixfix []V21ainfix +ainfix -V20c1c1Iainfix &lt;ainfix -V20c1ainfix -V5c1Aainfix &lt;=c0ainfix -V20c1Aainfix &lt;V22amixfix []V21ainfix +ainfix -V20c1c1Iainfix &lt;ainfix +ainfix -V20c1c1V5ACainfix =V28ainfix -V20c1aTuple2VwagetV2V22Aainfix &gt;=V22c0Iainfix &gt;=ainfix -V20c1c0Aainfix &lt;V22V7Aainfix &lt;=aprefix -c1V22Iainfix =V22amixfix []V1V10FIainfix =V21amixfix [&lt;-]V9V20V10FIainfix &lt;amixfix []V6amixfix []V9V29amixfix []V6amixfix []V9V30Iainfix &lt;V30V5Aainfix &lt;V29V30Aainfix &lt;V20V29FAainfix &lt;amixfix []V9V31amixfix []V9V32Iainfix &lt;V32V5Aainfix &lt;V31V32Aainfix &lt;V20V31FAainfix &lt;amixfix []V9V33V7Aainfix &lt;=c0amixfix []V9V33Iainfix &lt;V33V5Aainfix &lt;V20V33FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V20c1Iainfix &lt;V20ainfix -V5c1Aainfix &lt;=c0V20Aainfix &lt;V10amixfix []V9ainfix +V20c1Iainfix &lt;ainfix +V20c1V5ACainfix =V34V20aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V20c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V20c0Aainfix &gt;=V8V20FFAainfix &lt;amixfix []V6amixfix []aconstaprefix -c1V35amixfix []V6amixfix []aconstaprefix -c1V36Iainfix &lt;V36V5Aainfix &lt;V35V36Aainfix &lt;V8V35FAainfix &lt;amixfix []aconstaprefix -c1V37amixfix []aconstaprefix -c1V38Iainfix &lt;V38V5Aainfix &lt;V37V38Aainfix &lt;V8V37FAainfix &lt;amixfix []aconstaprefix -c1V39V7Aainfix &lt;=c0amixfix []aconstaprefix -c1V39Iainfix &lt;V39V5Aainfix &lt;V8V39FAainfix &lt;amixfix []V6amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1amixfix []V6amixfix []aconstaprefix -c1ainfix +V8c1Iainfix &lt;V8ainfix -V5c1Aainfix &lt;=c0V8Aainfix &lt;amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1amixfix []aconstaprefix -c1ainfix +V8c1Iainfix &lt;ainfix +V8c1V5ACainfix =V40V8aTuple2VwagetV2amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1Aainfix &gt;=amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1c0Iainfix &gt;=V8c0Aainfix &lt;amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1V7Aainfix &lt;=aprefix -c1amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1Iainfix &gt;=V8c0Aaincreasing_subsequenceamk seqV41V42V0Aainfix =V41V5EAaincreasing_subsequenceamk seqV5aconstaprefix -c1V0Aainfix =anthV43V0amixfix []V6V43Iainfix &lt;V43alengthV0Aainfix &lt;=c0V43FIainfix &lt;V8c0Lainfix -V5c1aincreasing_subsequenceamk seqV44V45V0Aainfix =V44V5EAaincreasing_subsequenceamk seqc0aconstaprefix -c1V0Aainfix =V0aNilainfix =V5c0Iainfix =amixfix []V6V46anthainfix -V46c0V0Iainfix &lt;V46V7Aainfix &lt;=c0V46FAainfix =amixfix []V6V47amixfix []aconstaprefix -c1V47Iainfix &lt;V47c0Aainfix &lt;=c0V47FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FAainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
     <label
      name="expl:VC for play_game"/>
     <transf
      name="split_goal_wp"
      proved="true"
-     expanded="true">
+     expanded="false">
      <goal
       name="WP_parameter play_game.1"
       locfile="../patience_state.mlw"
@@ -1874,11 +1874,11 @@
       name="WP_parameter play_game.15"
       locfile="../patience_state.mlw"
       loclnum="228" loccnumb="6" loccnume="15"
-      expl="15. assertion"
-      sum="ce656984b676b22fb3a5b41029dd71cc"
+      expl="15. loop invariant preservation"
+      sum="3e964577b189f76e3791e2b74ba7741d"
       proved="true"
       expanded="false"
-      shape="assertionainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V14amixfix []V6amixfix []V9V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;V11V14FAainfix &lt;amixfix []V9V16amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;V11V16FAainfix &lt;amixfix []V9V18V7Aainfix &lt;=c0amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V11V18FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V19V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V20anthainfix -V20c0V0Iainfix &lt;V20V7Aainfix &lt;=c0V20FAainfix =amixfix []V6V21amixfix []aconstaprefix -c1V21Iainfix &lt;V21c0Aainfix &lt;=c0V21FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
+      shape="loop invariant preservationainfix &lt;V13V7Aainfix &lt;=aprefix -c1V13Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V14amixfix []V6amixfix []V9V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;V11V14FAainfix &lt;amixfix []V9V16amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;V11V16FAainfix &lt;amixfix []V9V18V7Aainfix &lt;=c0amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V11V18FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V19V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V20anthainfix -V20c0V0Iainfix &lt;V20V7Aainfix &lt;=c0V20FAainfix =amixfix []V6V21amixfix []aconstaprefix -c1V21Iainfix &lt;V21c0Aainfix &lt;=c0V21FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
       <label
        name="expl:VC for play_game"/>
       <proof
@@ -1887,18 +1887,18 @@
        memlimit="1000"
        obsolete="false"
        archived="false">
-       <result status="valid" time="0.02"/>
+       <result status="valid" time="0.03"/>
       </proof>
      </goal>
      <goal
       name="WP_parameter play_game.16"
       locfile="../patience_state.mlw"
       loclnum="228" loccnumb="6" loccnume="15"
-      expl="16. assertion"
-      sum="d015dc7e5961f6e99e7fae9e9a9e17fa"
+      expl="16. loop invariant preservation"
+      sum="9318d97c006b1779c8c2d5609627cf2f"
       proved="true"
       expanded="false"
-      shape="assertionainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12V14Iainfix &lt;V14V5Aainfix &lt;V11V14FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V15amixfix []V6amixfix []V9V16Iainfix &lt;V16V5Aainfix &lt;V15V16Aainfix &lt;V11V15FAainfix &lt;amixfix []V9V17amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V17V18Aainfix &lt;V11V17FAainfix &lt;amixfix []V9V19V7Aainfix &lt;=c0amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V11V19FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V20V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V21anthainfix -V21c0V0Iainfix &lt;V21V7Aainfix &lt;=c0V21FAainfix =amixfix []V6V22amixfix []aconstaprefix -c1V22Iainfix &lt;V22c0Aainfix &lt;=c0V22FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
+      shape="loop invariant preservationCainfix =V14ainfix -V11c1aTuple2VwagetV2V13Aainfix &gt;=V13c0Iainfix &gt;=ainfix -V11c1c0Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V15amixfix []V6amixfix []V9V16Iainfix &lt;V16V5Aainfix &lt;V15V16Aainfix &lt;V11V15FAainfix &lt;amixfix []V9V17amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V17V18Aainfix &lt;V11V17FAainfix &lt;amixfix []V9V19V7Aainfix &lt;=c0amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V11V19FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V20V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V21anthainfix -V21c0V0Iainfix &lt;V21V7Aainfix &lt;=c0V21FAainfix =amixfix []V6V22amixfix []aconstaprefix -c1V22Iainfix &lt;V22c0Aainfix &lt;=c0V22FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
       <label
        name="expl:VC for play_game"/>
       <proof
@@ -1915,50 +1915,10 @@
       locfile="../patience_state.mlw"
       loclnum="228" loccnumb="6" loccnume="15"
       expl="17. loop invariant preservation"
-      sum="aaa8160d2cd265fb40c71deca7565cd2"
+      sum="a0d02ca5b2876daa7037587dda9451b0"
       proved="true"
       expanded="false"
-      shape="loop invariant preservationainfix &lt;V13V7Aainfix &lt;=aprefix -c1V13Iainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12V14Iainfix &lt;V14V5Aainfix &lt;V11V14FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V15amixfix []V6amixfix []V9V16Iainfix &lt;V16V5Aainfix &lt;V15V16Aainfix &lt;V11V15FAainfix &lt;amixfix []V9V17amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V17V18Aainfix &lt;V11V17FAainfix &lt;amixfix []V9V19V7Aainfix &lt;=c0amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V11V19FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V20V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V21anthainfix -V21c0V0Iainfix &lt;V21V7Aainfix &lt;=c0V21FAainfix =amixfix []V6V22amixfix []aconstaprefix -c1V22Iainfix &lt;V22c0Aainfix &lt;=c0V22FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
-      <label
-       name="expl:VC for play_game"/>
-      <proof
-       prover="0"
-       timelimit="5"
-       memlimit="1000"
-       obsolete="false"
-       archived="false">
-       <result status="valid" time="0.03"/>
-      </proof>
-     </goal>
-     <goal
-      name="WP_parameter play_game.18"
-      locfile="../patience_state.mlw"
-      loclnum="228" loccnumb="6" loccnume="15"
-      expl="18. loop invariant preservation"
-      sum="cb3d71df88ae5be5027f9bc353906779"
-      proved="true"
-      expanded="false"
-      shape="loop invariant preservationCainfix =V14ainfix -V11c1aTuple2VwagetV2V13Aainfix &gt;=V13c0Iainfix &gt;=ainfix -V11c1c0Iainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12V15Iainfix &lt;V15V5Aainfix &lt;V11V15FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V16amixfix []V6amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;V11V16FAainfix &lt;amixfix []V9V18amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V18V19Aainfix &lt;V11V18FAainfix &lt;amixfix []V9V20V7Aainfix &lt;=c0amixfix []V9V20Iainfix &lt;V20V5Aainfix &lt;V11V20FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V21V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V22anthainfix -V22c0V0Iainfix &lt;V22V7Aainfix &lt;=c0V22FAainfix =amixfix []V6V23amixfix []aconstaprefix -c1V23Iainfix &lt;V23c0Aainfix &lt;=c0V23FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
-      <label
-       name="expl:VC for play_game"/>
-      <proof
-       prover="0"
-       timelimit="5"
-       memlimit="1000"
-       obsolete="false"
-       archived="false">
-       <result status="valid" time="0.08"/>
-      </proof>
-     </goal>
-     <goal
-      name="WP_parameter play_game.19"
-      locfile="../patience_state.mlw"
-      loclnum="228" loccnumb="6" loccnume="15"
-      expl="19. loop invariant preservation"
-      sum="f935b0a13762331c29b2d097034ec9dd"
-      proved="true"
-      expanded="false"
-      shape="loop invariant preservationainfix &lt;V13amixfix []V12ainfix +ainfix -V11c1c1Iainfix &lt;ainfix +ainfix -V11c1c1V5Iainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12V14Iainfix &lt;V14V5Aainfix &lt;V11V14FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V15amixfix []V6amixfix []V9V16Iainfix &lt;V16V5Aainfix &lt;V15V16Aainfix &lt;V11V15FAainfix &lt;amixfix []V9V17amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V17V18Aainfix &lt;V11V17FAainfix &lt;amixfix []V9V19V7Aainfix &lt;=c0amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V11V19FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V20V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V21anthainfix -V21c0V0Iainfix &lt;V21V7Aainfix &lt;=c0V21FAainfix =amixfix []V6V22amixfix []aconstaprefix -c1V22Iainfix &lt;V22c0Aainfix &lt;=c0V22FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
+      shape="loop invariant preservationainfix &lt;V13amixfix []V12ainfix +ainfix -V11c1c1Iainfix &lt;ainfix +ainfix -V11c1c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V14amixfix []V6amixfix []V9V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;V11V14FAainfix &lt;amixfix []V9V16amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;V11V16FAainfix &lt;amixfix []V9V18V7Aainfix &lt;=c0amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V11V18FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V19V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V20anthainfix -V20c0V0Iainfix &lt;V20V7Aainfix &lt;=c0V20FAainfix =amixfix []V6V21amixfix []aconstaprefix -c1V21Iainfix &lt;V21c0Aainfix &lt;=c0V21FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
       <label
        name="expl:VC for play_game"/>
       <proof
@@ -1971,14 +1931,14 @@
       </proof>
      </goal>
      <goal
-      name="WP_parameter play_game.20"
+      name="WP_parameter play_game.18"
       locfile="../patience_state.mlw"
       loclnum="228" loccnumb="6" loccnume="15"
-      expl="20. loop invariant preservation"
-      sum="12fd4150286acc803e652561a8c2913e"
+      expl="18. loop invariant preservation"
+      sum="4a67f955e292cdee055724ef11118a66"
       proved="true"
       expanded="false"
-      shape="loop invariant preservationainfix &lt;amixfix []V6V13amixfix []V6amixfix []V12ainfix +ainfix -V11c1c1Iainfix &lt;ainfix -V11c1ainfix -V5c1Aainfix &lt;=c0ainfix -V11c1Iainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12V14Iainfix &lt;V14V5Aainfix &lt;V11V14FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V15amixfix []V6amixfix []V9V16Iainfix &lt;V16V5Aainfix &lt;V15V16Aainfix &lt;V11V15FAainfix &lt;amixfix []V9V17amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V17V18Aainfix &lt;V11V17FAainfix &lt;amixfix []V9V19V7Aainfix &lt;=c0amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V11V19FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V20V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V21anthainfix -V21c0V0Iainfix &lt;V21V7Aainfix &lt;=c0V21FAainfix =amixfix []V6V22amixfix []aconstaprefix -c1V22Iainfix &lt;V22c0Aainfix &lt;=c0V22FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
+      shape="loop invariant preservationainfix &lt;amixfix []V6V13amixfix []V6amixfix []V12ainfix +ainfix -V11c1c1Iainfix &lt;ainfix -V11c1ainfix -V5c1Aainfix &lt;=c0ainfix -V11c1Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V14amixfix []V6amixfix []V9V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;V11V14FAainfix &lt;amixfix []V9V16amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;V11V16FAainfix &lt;amixfix []V9V18V7Aainfix &lt;=c0amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V11V18FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V19V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V20anthainfix -V20c0V0Iainfix &lt;V20V7Aainfix &lt;=c0V20FAainfix =amixfix []V6V21amixfix []aconstaprefix -c1V21Iainfix &lt;V21c0Aainfix &lt;=c0V21FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
       <label
        name="expl:VC for play_game"/>
       <proof
@@ -1987,7 +1947,47 @@
        memlimit="1000"
        obsolete="false"
        archived="false">
-       <result status="valid" time="0.29"/>
+       <result status="valid" time="0.15"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_game.19"
+      locfile="../patience_state.mlw"
+      loclnum="228" loccnumb="6" loccnume="15"
+      expl="19. loop invariant preservation"
+      sum="dd162a11bced5b362acfabb52afa31cb"
+      proved="true"
+      expanded="false"
+      shape="loop invariant preservationainfix &lt;amixfix []V12V14V7Aainfix &lt;=c0amixfix []V12V14Iainfix &lt;V14V5Aainfix &lt;ainfix -V11c1V14FIainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V15amixfix []V6amixfix []V9V16Iainfix &lt;V16V5Aainfix &lt;V15V16Aainfix &lt;V11V15FAainfix &lt;amixfix []V9V17amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V17V18Aainfix &lt;V11V17FAainfix &lt;amixfix []V9V19V7Aainfix &lt;=c0amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V11V19FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V20V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V21anthainfix -V21c0V0Iainfix &lt;V21V7Aainfix &lt;=c0V21FAainfix =amixfix []V6V22amixfix []aconstaprefix -c1V22Iainfix &lt;V22c0Aainfix &lt;=c0V22FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
+      <label
+       name="expl:VC for play_game"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.10"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_game.20"
+      locfile="../patience_state.mlw"
+      loclnum="228" loccnumb="6" loccnume="15"
+      expl="20. loop invariant preservation"
+      sum="1824f4c18f806c806695fd3e8da05cc1"
+      proved="true"
+      expanded="false"
+      shape="loop invariant preservationainfix &lt;amixfix []V12V14amixfix []V12V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;ainfix -V11c1V14FIainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V16amixfix []V6amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;V11V16FAainfix &lt;amixfix []V9V18amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V18V19Aainfix &lt;V11V18FAainfix &lt;amixfix []V9V20V7Aainfix &lt;=c0amixfix []V9V20Iainfix &lt;V20V5Aainfix &lt;V11V20FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V21V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V22anthainfix -V22c0V0Iainfix &lt;V22V7Aainfix &lt;=c0V22FAainfix =amixfix []V6V23amixfix []aconstaprefix -c1V23Iainfix &lt;V23c0Aainfix &lt;=c0V23FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
+      <label
+       name="expl:VC for play_game"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.12"/>
       </proof>
      </goal>
      <goal
@@ -1995,10 +1995,10 @@
       locfile="../patience_state.mlw"
       loclnum="228" loccnumb="6" loccnume="15"
       expl="21. loop invariant preservation"
-      sum="c4ff0bf3bfd121c16bd4396495d2b5cf"
+      sum="2ecec2c645fbc0c8abc2ff0c37d3c35d"
       proved="true"
       expanded="false"
-      shape="loop invariant preservationainfix &lt;amixfix []V12V14V7Aainfix &lt;=c0amixfix []V12V14Iainfix &lt;V14V5Aainfix &lt;ainfix -V11c1V14FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12V15Iainfix &lt;V15V5Aainfix &lt;V11V15FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V16amixfix []V6amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;V11V16FAainfix &lt;amixfix []V9V18amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V18V19Aainfix &lt;V11V18FAainfix &lt;amixfix []V9V20V7Aainfix &lt;=c0amixfix []V9V20Iainfix &lt;V20V5Aainfix &lt;V11V20FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V21V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V22anthainfix -V22c0V0Iainfix &lt;V22V7Aainfix &lt;=c0V22FAainfix =amixfix []V6V23amixfix []aconstaprefix -c1V23Iainfix &lt;V23c0Aainfix &lt;=c0V23FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
+      shape="loop invariant preservationainfix &lt;amixfix []V6amixfix []V12V14amixfix []V6amixfix []V12V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;ainfix -V11c1V14FIainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V16amixfix []V6amixfix []V9V17Iainfix &lt;V17V5Aainfix &lt;V16V17Aainfix &lt;V11V16FAainfix &lt;amixfix []V9V18amixfix []V9V19Iainfix &lt;V19V5Aainfix &lt;V18V19Aainfix &lt;V11V18FAainfix &lt;amixfix []V9V20V7Aainfix &lt;=c0amixfix []V9V20Iainfix &lt;V20V5Aainfix &lt;V11V20FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V21V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V22anthainfix -V22c0V0Iainfix &lt;V22V7Aainfix &lt;=c0V22FAainfix =amixfix []V6V23amixfix []aconstaprefix -c1V23Iainfix &lt;V23c0Aainfix &lt;=c0V23FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
       <label
        name="expl:VC for play_game"/>
       <proof
@@ -2007,54 +2007,14 @@
        memlimit="1000"
        obsolete="false"
        archived="false">
-       <result status="valid" time="0.34"/>
+       <result status="valid" time="0.24"/>
       </proof>
      </goal>
      <goal
       name="WP_parameter play_game.22"
       locfile="../patience_state.mlw"
       loclnum="228" loccnumb="6" loccnume="15"
-      expl="22. loop invariant preservation"
-      sum="ddd359192fcd64725fdf5ad7d82aa24a"
-      proved="true"
-      expanded="false"
-      shape="loop invariant preservationainfix &lt;amixfix []V12V14amixfix []V12V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;ainfix -V11c1V14FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12V16Iainfix &lt;V16V5Aainfix &lt;V11V16FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V17amixfix []V6amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V17V18Aainfix &lt;V11V17FAainfix &lt;amixfix []V9V19amixfix []V9V20Iainfix &lt;V20V5Aainfix &lt;V19V20Aainfix &lt;V11V19FAainfix &lt;amixfix []V9V21V7Aainfix &lt;=c0amixfix []V9V21Iainfix &lt;V21V5Aainfix &lt;V11V21FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V22V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V23anthainfix -V23c0V0Iainfix &lt;V23V7Aainfix &lt;=c0V23FAainfix =amixfix []V6V24amixfix []aconstaprefix -c1V24Iainfix &lt;V24c0Aainfix &lt;=c0V24FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
-      <label
-       name="expl:VC for play_game"/>
-      <proof
-       prover="0"
-       timelimit="5"
-       memlimit="1000"
-       obsolete="false"
-       archived="false">
-       <result status="valid" time="0.64"/>
-      </proof>
-     </goal>
-     <goal
-      name="WP_parameter play_game.23"
-      locfile="../patience_state.mlw"
-      loclnum="228" loccnumb="6" loccnume="15"
-      expl="23. loop invariant preservation"
-      sum="bc4ffd8c67ad54f81120c3dc2d552b28"
-      proved="true"
-      expanded="false"
-      shape="loop invariant preservationainfix &lt;amixfix []V6amixfix []V12V14amixfix []V6amixfix []V12V15Iainfix &lt;V15V5Aainfix &lt;V14V15Aainfix &lt;ainfix -V11c1V14FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12V16Iainfix &lt;V16V5Aainfix &lt;V11V16FIainfix &lt;amixfix []V6amixfix []V12V11amixfix []V6amixfix []V12ainfix +V11c1Iainfix &lt;ainfix +V11c1V5Iainfix =V13amixfix []V1V10FIainfix =V12amixfix [&lt;-]V9V11V10FIainfix &lt;amixfix []V6amixfix []V9V17amixfix []V6amixfix []V9V18Iainfix &lt;V18V5Aainfix &lt;V17V18Aainfix &lt;V11V17FAainfix &lt;amixfix []V9V19amixfix []V9V20Iainfix &lt;V20V5Aainfix &lt;V19V20Aainfix &lt;V11V19FAainfix &lt;amixfix []V9V21V7Aainfix &lt;=c0amixfix []V9V21Iainfix &lt;V21V5Aainfix &lt;V11V21FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V11c1Iainfix &lt;V11ainfix -V5c1Aainfix &lt;=c0V11Aainfix &lt;V10amixfix []V9ainfix +V11c1Iainfix &lt;ainfix +V11c1V5ACainfix =V22V11aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V11c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V11c0Aainfix &gt;=V8V11FFIainfix &gt;=V8c0Lainfix -V5c1INainfix =V5c0Iainfix =amixfix []V6V23anthainfix -V23c0V0Iainfix &lt;V23V7Aainfix &lt;=c0V23FAainfix =amixfix []V6V24amixfix []aconstaprefix -c1V24Iainfix &lt;V24c0Aainfix &lt;=c0V24FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
-      <label
-       name="expl:VC for play_game"/>
-      <proof
-       prover="0"
-       timelimit="5"
-       memlimit="1000"
-       obsolete="false"
-       archived="false">
-       <result status="valid" time="0.64"/>
-      </proof>
-     </goal>
-     <goal
-      name="WP_parameter play_game.24"
-      locfile="../patience_state.mlw"
-      loclnum="228" loccnumb="6" loccnume="15"
-      expl="24. assertion"
+      expl="22. assertion"
       sum="8f8ba3ce06baceca139c7432ac4e2180"
       proved="true"
       expanded="false"
@@ -2071,10 +2031,10 @@
       </proof>
      </goal>
      <goal
-      name="WP_parameter play_game.25"
+      name="WP_parameter play_game.23"
       locfile="../patience_state.mlw"
       loclnum="228" loccnumb="6" loccnume="15"
-      expl="25. assertion"
+      expl="23. assertion"
       sum="4c310b8b253d94c6895af083ecf9c593"
       proved="true"
       expanded="false"
@@ -2086,7 +2046,7 @@
        proved="true"
        expanded="false">
        <goal
-        name="WP_parameter play_game.25.1"
+        name="WP_parameter play_game.23.1"
         locfile="../patience_state.mlw"
         loclnum="228" loccnumb="6" loccnume="15"
         expl="1. assertion"
@@ -2101,7 +2061,7 @@
          proved="true"
          expanded="false">
          <goal
-          name="WP_parameter play_game.25.1.1"
+          name="WP_parameter play_game.23.1.1"
           locfile="../patience_state.mlw"
           loclnum="228" loccnumb="6" loccnume="15"
           expl="1."
@@ -2121,7 +2081,7 @@
           </proof>
          </goal>
          <goal
-          name="WP_parameter play_game.25.1.2"
+          name="WP_parameter play_game.23.1.2"
           locfile="../patience_state.mlw"
           loclnum="228" loccnumb="6" loccnume="15"
           expl="2."
@@ -2141,7 +2101,7 @@
           </proof>
          </goal>
          <goal
-          name="WP_parameter play_game.25.1.3"
+          name="WP_parameter play_game.23.1.3"
           locfile="../patience_state.mlw"
           loclnum="228" loccnumb="6" loccnume="15"
           expl="3."
@@ -2161,7 +2121,7 @@
           </proof>
          </goal>
          <goal
-          name="WP_parameter play_game.25.1.4"
+          name="WP_parameter play_game.23.1.4"
           locfile="../patience_state.mlw"
           loclnum="228" loccnumb="6" loccnume="15"
           expl="4."
@@ -2181,7 +2141,7 @@
           </proof>
          </goal>
          <goal
-          name="WP_parameter play_game.25.1.5"
+          name="WP_parameter play_game.23.1.5"
           locfile="../patience_state.mlw"
           loclnum="228" loccnumb="6" loccnume="15"
           expl="5."
@@ -2201,7 +2161,7 @@
           </proof>
          </goal>
          <goal
-          name="WP_parameter play_game.25.1.6"
+          name="WP_parameter play_game.23.1.6"
           locfile="../patience_state.mlw"
           loclnum="228" loccnumb="6" loccnume="15"
           expl="6."
@@ -2225,10 +2185,10 @@
       </transf>
      </goal>
      <goal
-      name="WP_parameter play_game.26"
+      name="WP_parameter play_game.24"
       locfile="../patience_state.mlw"
       loclnum="228" loccnumb="6" loccnume="15"
-      expl="26. postcondition"
+      expl="24. postcondition"
       sum="d8d6549964f2dd7a617fbba976ad6792"
       proved="true"
       expanded="false"
