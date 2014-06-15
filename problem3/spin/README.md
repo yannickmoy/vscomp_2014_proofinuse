@@ -1,10 +1,6 @@
 # SPIN version of problem 3: Lock-free Log-based Set Algorithm
 
-To simulate a run:
-```
-  spin lock-free-log-based-set.pml
-```
-
+Contact for this solution: dmentre@linux-france.org
 
 ## What is SPIN?
 
@@ -16,6 +12,11 @@ For more details see:
   http://spinroot.com/spin/whatispin.html
 
 ## (task 1) Verification of memory-safety property
+
+To simulate a run:
+```
+  spin lock-free-log-based-set.pml
+```
 
 Verification:
 ```
