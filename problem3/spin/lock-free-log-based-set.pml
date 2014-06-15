@@ -10,6 +10,10 @@ byte hd = 0;
 
 byte ht[THREAD_COUNT] = SIZE;
 
+mtype = { not_in_set, in_set, changed };
+
+mtype value_in_set[THREAD_COUNT] = not_in_set;
+
 inline abs(x) {
   d_step {
     if
@@ -138,7 +142,7 @@ init /* will have _pid = 0 */
 
   atomic {
          for (i : 0 .. THREAD_COUNT - 1) {
-             run thread()
+             run thread() /* will have _pid \in 1 .. THREAD_COUNT */
          };
 
          run environment()
@@ -147,37 +151,31 @@ init /* will have _pid = 0 */
   }
 }
 
-proctype thread() /* will have _pid \in 1 .. THREAD_COUNT */
+proctype thread()
 {
   bool do_return_res;
-  byte value;
-
-  value = _pid + 1;
+  byte thr_id = 0;
+  mtype was_in_set;
 
   do
-  :: true -> possible_collect();
-
-             update(value);
-             assert(do_return_res == false);
-
-             possible_collect();
-
-             lookup(value);
-             assert(do_return_res == true);
-
-             possible_collect();
-
-             update(-value);
-             assert(do_return_res == false);
-
-             possible_collect();
-
-             lookup(value);
-             assert(do_return_res == false)
-
-             possible_collect()
-
-  :: true -> break
+  :: atomic { (value_in_set[thr_id] == in_set
+               || value_in_set[thr_id] == not_in_set);
+               was_in_set = value_in_set[thr_id] } ->
+                lookup(thr_id+1);
+                assert(!(was_in_set == in_set) || do_return_res == true);
+                assert(!(was_in_set == not_in_set) || do_return_res == false)
+  :: atomic { value_in_set[thr_id] == not_in_set;
+              value_in_set[thr_id] = changed } ->
+               update(thr_id+1);
+               value_in_set[thr_id] = in_set
+  :: atomic { value_in_set[thr_id] == in_set;
+              value_in_set[thr_id] = changed } ->
+               update(-(thr_id+1));
+               value_in_set[thr_id] = not_in_set
+  :: thr_id < THREAD_COUNT - 1 -> thr_id++
+  :: thr_id == THREAD_COUNT - 1 -> thr_id = 0
+  :: true -> collect()
+  :: true -> skip
   od
 }
 
