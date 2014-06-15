@@ -196,12 +196,18 @@ and so on.
          s.preds <- s.preds[idx <- !pred];
   end
 
+  use import list.NthNoOpt
+
   let rec play_cards (input: list int) (s: state) : unit
     requires { inv s }
     variant  { input }
     writes   { s }
     ensures  { inv s }
     ensures  { s.num_elts = (old s).num_elts + length input }
+    ensures  { forall i. 0 <= i < (old s).num_elts ->
+                 s.values[i] = (old s).values[i] }
+    ensures  { forall i. (old s).num_elts <= i < s.num_elts ->
+                 s.values[i] = nth (i - (old s).num_elts) input }
   =
     match input with
     | Nil -> ()
@@ -209,8 +215,6 @@ and so on.
     end
 
   type seq 'a = { seqlen: int; seqval: map int 'a }
-
-  use import list.NthNoOpt
 
   predicate increasing_subsequence (s:seq int) (l:list int) =
     0 <= s.seqlen <= length l &&
@@ -226,9 +230,11 @@ and so on.
     ensures { exists s: seq int.  s.seqlen = result.num_stacks /\
         increasing_subsequence s input
       }
+(* TODO
     ensures { forall s: seq int.
         increasing_subsequence s input -> s.seqlen <= result.num_stacks
       }
+*)
   = let s = {
       num_elts = 0;
       values = Map.const (-1) ;
@@ -256,19 +262,28 @@ and so on.
     for i = ns-1 downto 0 do
        invariant { -1 <= !idx < s.num_elts }
        invariant { i >= 0 -> !idx >= 0 &&
-         let (is,ip) = s.positions[!idx] in is = i }
+         let (is,_) = s.positions[!idx] in is = i }
        invariant { i+1 < ns -> !idx < !seq[i+1] }
+       invariant { 0 <= i < ns-1 -> s.values[!idx] < s.values[!seq[i+1]] }
        invariant { forall j. i < j < ns -> 0 <= !seq[j] < s.num_elts }
        invariant { forall j,k. i < j < k < ns -> !seq[j] < !seq[k] }
        invariant { forall j,k. i < j < k < ns ->
-         nth !seq[j] input < nth !seq[k] input
+         s.values[!seq[j]] < s.values[!seq[k]]
        }
        'L:
        seq := !seq[i <- !idx];
        idx := s.preds[!idx];
-       (* assert { forall j. i < j < ns -> !seq[i] < !seq[j] }; *)
+(**)
+       assert { i+1 < ns ->
+         s.values[!seq[i]] < s.values[!seq[i+1]]
+       };
+       assert { forall k. i < k < ns ->
+         s.values[!seq[i]] < s.values[!seq[k]]
+       }
+(**)
     done;
     let seq = { seqlen = ns ; seqval = !seq } in
+    assert { forall i. 0 <= i < length input -> nth i input = s.values[i] };
     assert { increasing_subsequence seq input };
     s
 
