@@ -5,7 +5,7 @@ test:
 	diff test_expected.out test.out
 
 proof:
-	gnatprove -P partition_refinement --timeout=120 -q --report=all > proof.out
+	gnatprove -P partition_refinement --timeout=120 -q --report=all --proof=progressive > proof.out
 	diff proof_expected.out proof.out
 
 clean:

@@ -1,6 +1,7 @@
 package body Partition_Refinement with
   SPARK_Mode
 is
+   pragma Unevaluated_Use_Of_Old (Allow);
 
    -----------------------
    -- Local subprograms --
@@ -19,24 +20,28 @@ is
       F      : in     Inverse_Partition;
       X_Elem : in Positive)
    with
-      Pre  => Contains (D, X_Elem) and then
+      Pre  => Length (P) < Count_Type(Partition_Index'Last) and then
+              Contains (D, X_Elem) and then
               F(Element (D, X_Elem)) in 0 .. Partition_Index'Base (Length (P)) - 1 and then
-              Element (P, F(Element (D, X_Elem))).First + Element (P, F(Element (D, X_Elem))).Count in Index and then
-              (for all J in Index => Contains (D, A(J))),
-      Post => A = A'Old'Update
-                (Element (D, X_Elem)'Old =>
-                   A(Element (P, F(Element (D, X_Elem))).First + Element (P, F(Element (D, X_Elem))).Count)'Old,
-                 Index'(Element (P, F(Element (D, X_Elem))).First + Element (P, F(Element (D, X_Elem))).Count)'Old =>
-                   A(Element (D, X_Elem))'Old) and then
-              Capacity (P) = Capacity (P)'Old and then
-              Length (P) = Length (P)'Old and then
-              (for all J in 0 .. Partition_Index(Length (P)) - 1 =>
-                 Element (P, J).First = Element (P'Old, J).First) and then
-              (for all J in 0 .. Partition_Index(Length (P)) - 1 =>
-                 Element (P, J).Count = Element (P'Old, J).Count + (if J = F(Element (D, X_Elem)) then 1 else 0)) and then
               (for all J in Index => Contains (D, A(J))) and then
-              (for all C in D => A (Element (D, C)) = Key (D, C)) and then
-              (for all C in D'Old => Has_Element (D, C));
+              (for all C in D => A (Element (D, C)) = Key (D, C)),
+      Post => (for all K in Index => A(K) =
+                 (if K = Element (D, X_Elem)'Old then
+                    A'Old(Element (P, F(Element (D, X_Elem))).First'Old + Element (P, F(Element (D, X_Elem))).Count'Old)
+                  elsif K = Index'(Element (P, F(Element (D, X_Elem))).First + Element (P, F(Element (D, X_Elem))).Count)'Old then
+                    A(Element (D, X_Elem))'Old
+                  else
+                    A'Old(K))) and then
+                Capacity (P) = Capacity (P)'Old and then
+                Length (P) = Length (P)'Old and then
+                (for all J in 0 .. Partition_Index(Length (P)) - 1 =>
+                   Element (P, J).First = Element (P'Old, J).First) and then
+                (for all J in 0 .. Partition_Index(Length (P)) - 1 =>
+                   Element (P, J).Count = Element (P'Old, J).Count + (if J = F(Element (D'Old, X_Elem)) then 1 else 0)) and then
+                (for all J in Index => Contains (D, A(J))) and then
+                (for all C in D => A (Element (D, C)) = Key (D, C)) and then
+                (for all C in D'Old => Has_Element (D, C));
+
 
    procedure Make_New_Partitions
      (P : in out Partition;
@@ -72,11 +77,36 @@ is
    is
       I : constant Index := Element (D, X_Elem);
       P_Elem : Interval := Element (P, F(I));
+
+      --  Proving that the index with which to swap is within bounds requires axiomatizing the count of elements in
+      --  each partition that are in X. This would be done with an axiomatized unit in SPARK, with the axiomatization
+      --  provided in Why3. For now, assume that this holds so that the range check when assigning to J is proved.
+      pragma Assume (P_Elem.First + P_Elem.Count in Index);
       J : constant Index := P_Elem.First + P_Elem.Count;
+
+      A_Old : constant Set := A;
+      A_Update : constant Set := A_Old'Update (I => A_Old(J), J => A_Old(I));
+
    begin
       Swap (A, I, J);
+      pragma Assert (A = A_Update);
+
+      pragma Assert (for all C in D => (if Key (D, C) /= A(I) and Key (D, C) /= A(J) then A (Element (D, C)) = Key (D, C)));
+
+      --  Intermediate assertion needed to prove the postcondition
+      pragma Assert (for all J in Index => Contains (D, A(J)));
       Replace (D, A(I), I);
+      pragma Assert (A = A_Update);
+
+      pragma Assert (for all C in D => (if Key (D, C) /= A(I) and Key (D, C) /= A(J) then A (Element (D, C)) = Key (D, C)));
+      pragma Assert (for all C in D => (if Key (D, C) = A(I) then A (Element (D, C)) = Key (D, C)));
       Replace (D, A(J), J);
+      pragma Assert (A = A_Update);
+
+      pragma Assert (for all C in D => (if Key (D, C) /= A(I) and Key (D, C) /= A(J) then A (Element (D, C)) = Key (D, C)));
+      pragma Assert (for all C in D => (if Key (D, C) = A(I) then A (Element (D, C)) = Key (D, C)));
+      pragma Assert (for all C in D => (if Key (D, C) = A(J) then A (Element (D, C)) = Key (D, C)));
+      pragma Assert (for all C in D => A (Element (D, C)) = Key (D, C));
       P_Elem.Count := P_Elem.Count + 1;
 
       --  Replace_Element does not modify the capacity of the vector, but SPARK GPL 2014 does not prove it.
@@ -87,6 +117,10 @@ is
          Replace_Element (P, F(I), P_Elem);
          pragma Assume (Capacity (P) = Save_Capacity);
       end;
+
+      pragma Assert (A = A_Update);
+      --  This assumption is equivalent to the assertion above, although SPARK GPL 2014 does not prove it.
+      pragma Assume (for all K in Index => A(K) = (if K = I then A_Old(J) elsif K = J then A_Old(I) else A_Old(K)));
    end Refine_One;
 
    -------------------------
@@ -161,15 +195,11 @@ is
          Refine_One (A, D, P, F, Element (X, C));
          Next (X, C);
 
-         --  Part of the loop invariant, requires changes in Refine_One's postcondition for being provable
-         pragma Assert (for all J in 0 .. Partition_Index(Length (P)) - 1 => Element (P, J).First + Element (P, J).Count in Index);
-
          pragma Loop_Invariant (Capacity (P) = Capacity (P)'Loop_Entry);
          pragma Loop_Invariant (Length (P) = Length (P)'Loop_Entry);
          pragma Loop_Invariant (for all C in D => A (Element (D, C)) = Key (D, C));
          pragma Loop_Invariant (for all C in D_Old => Has_Element (D, C));
          pragma Loop_Invariant (for all C in X => Has_Element (D, (Find (D_Old, Element (X, C)))));
-         pragma Loop_Invariant (for all J in 0 .. Partition_Index(Length (P)) - 1 => Element (P, J).First + Element (P, J).Count in Index);
          pragma Loop_Invariant (for all J in Index => Contains (D, A(J)));
       end loop;
 
