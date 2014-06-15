@@ -2,7 +2,7 @@ verification result:
 spin -a  lock-free-log-based-set.pml
 gcc -DMEMLIM=1024 -O2 -DXUSAFE -DSAFETY -DNOCLAIM -DCOLLAPSE -w -o pan pan.c
 ./pan -m10000 
-Pid: 29763
+Pid: 30339
 
 (Spin Version 6.3.2 -- 17 May 2014)
 	+ Partial Order Reduction
@@ -14,32 +14,31 @@ Full statespace search for:
 	cycle checks       	- (disabled by -DSAFETY)
 	invalid end states	+
 
-State-vector 228 byte, depth reached 1319, errors: 0
+State-vector 96 byte, depth reached 1315, errors: 0
    311725 states, stored
    188302 states, matched
    500027 transitions (= stored+matched)
-   361066 atomic steps
-hash conflicts:      1896 (resolved)
+   361062 atomic steps
+hash conflicts:      1898 (resolved)
 
 Stats on memory usage (in Megabytes):
-   76.105	equivalent memory usage for states (stored*(State-vector + overhead))
-   12.337	actual memory usage for states (compression: 16.21%)
-         	state-vector as stored = 14 byte + 28 byte overhead
+   36.863	equivalent memory usage for states (stored*(State-vector + overhead))
+   12.261	actual memory usage for states (compression: 33.26%)
+         	state-vector as stored = 13 byte + 28 byte overhead
   128.000	memory used for hash table (-w24)
     0.534	memory used for DFS stack (-m10000)
-  140.839	total actual memory usage
+  140.741	total actual memory usage
 
 
 nr of templates: [ 0:globals 1:chans 2:procs ]
 collapse counts: [ 0:352 2:2 3:2620 4:14 ]
 unreached in init
-	(0 of 21 states)
+	(0 of 12 states)
 unreached in proctype thread
 	(0 of 223 states)
 unreached in proctype environment
 	(0 of 45 states)
 
-pan: elapsed time 1.02 seconds
+pan: elapsed time 0.66 seconds
 No errors found -- did you verify all claims?
-
 

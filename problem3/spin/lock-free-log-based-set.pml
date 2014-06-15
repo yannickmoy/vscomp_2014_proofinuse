@@ -2,13 +2,13 @@
 #define SIZE 2
 #define THREAD_COUNT 2
 
-int log[SIZE] = 0;
+short log[SIZE] = 0;
 
-int gc = 0
-int tl = 0;
-int hd = 0;
+byte gc = 0
+byte tl = 0;
+byte hd = 0;
 
-int ht[THREAD_COUNT] = SIZE;
+byte ht[THREAD_COUNT] = SIZE;
 
 inline abs(x) {
   d_step {
@@ -53,9 +53,9 @@ inline grab(local_var, var) {
 }
 
 inline update(val) {
-  int h;
+  byte h;
   bool success;
-  int cmpXchg_res;
+  short cmpXchg_res;
 
   grab(h, hd);
 
@@ -77,9 +77,9 @@ end_end_of_log_reached:
 }
 
 inline lookup(val) {
-  int t, i;
-  int x;
-  int abs_res;
+  byte t, i;
+  short x;
+  byte abs_res;
 
   grab(t, tl);
 
@@ -101,17 +101,17 @@ exit:
 }
 
 inline collect() {
-  int t = tl;
-  int i;
-  int min_res;
-  int cmpXchg_res;
+  byte t = tl;
+  byte i;
+  byte min_res;
+  byte cmpXchg_res;
 
   for (i : 0 .. THREAD_COUNT - 1) {
     min(t, ht[i]);
     t = min_res
   };
 
-  int g;
+  byte g;
 
   g = gc;
 
@@ -123,7 +123,7 @@ inline collect() {
 
 init /* will have _pid = 0 */
 {
-  int i;
+  pid i;
 
   atomic {
          for (i : 0 .. THREAD_COUNT - 1) {
@@ -138,8 +138,8 @@ init /* will have _pid = 0 */
 
 proctype thread() /* will have _pid \in 1 .. THREAD_COUNT */
 {
-  int do_return_res;
-  int value;
+  bool do_return_res;
+  byte value;
 
   value = _pid + 1;
 
@@ -165,9 +165,9 @@ proctype environment()
   do
   :: true ->
        atomic {
-         int i;
-         int abs_res;
-         int abs1, abs2;
+         byte i;
+         byte abs_res;
+         byte abs1, abs2;
 
          i = tl + 1;
          do
@@ -190,7 +190,7 @@ exit:
 /*
 proctype sequential_test()
 {
-  int do_return_res;
+  short do_return_res;
 
   lookup(1);
   assert(do_return_res == false);
