@@ -130,8 +130,9 @@ module PatienceCode
     play_cards input Nil
 
 
+  (** test, can be run using [why3 patience.mlw --exec PatienceCode.test] *)
   let test () =
-    (* the list given in the problem description
+    (** the list given in the problem description
        9, 7, 10, 9, 5, 4, and 10 *)
     play_game
       (Cons 9 (Cons 7 (Cons 10 (Cons 9 (Cons 5 (Cons 4 (Cons 10 Nil)))))))
@@ -175,11 +176,11 @@ module Patience
     mutable preds : map int int;
     (** predecessors of cards, i.e. for each card index [i], [preds[i]]
         provides an index of a card in the stack on the immediate left,
-        whose value is smaller. returns [-1] of the card is on the
+        whose value is smaller. Defaults to [-1] if the card is on the
         leftmost stack. *)
   }
 
-(** Invariants on the ghost state *)
+(** {3 Invariants on the ghost state} *)
 
   predicate inv (s:state) =
      0 <= s.num_stacks <= s.num_elts
@@ -199,23 +200,23 @@ module Patience
          0 <= ip < s.stack_sizes[is] &&
          st[ip] = i)
      (** the position table of cards is correct, i.e. when
-        [(is,ip) = s.positions[i]] then card [i] is indeed
-        stored in stack [is] at height [ip] *)
+        [(is,ip) = s.positions[i]] then card [i] indeed
+        occurs in stack [is] at height [ip] *)
   /\ (forall is. 0 <= is < s.num_stacks ->
         forall ip. 0 <= ip < s.stack_sizes[is] ->
         let idx = s.stacks[is][ip] in
         (is,ip) = s.positions[idx])
-     (** positions is the right inverse of stacks *)
+     (** positions is the proper inverse of stacks *)
   /\ (forall i. 0 <= i < s.num_stacks ->
         let stack_i = s.stacks[i] in
         forall j,k. 0 <= j < k < s.stack_sizes[i] ->
            stack_i[j] < stack_i[k])
-     (** in a given stack, indexes are increasing *)
+     (** in a given stack, indexes are increasing from bottom to top *)
   /\ (forall i. 0 <= i < s.num_stacks ->
         let stack_i = s.stacks[i] in
         forall j,k. 0 <= j <= k < s.stack_sizes[i] ->
            s.values[stack_i[j]] >= s.values[stack_i[k]])
-     (** in a given stack, card values are decreasing *)
+     (** in a given stack, card values are decreasing from bottom to top *)
   /\ (forall i. 0 <= i < s.num_elts ->
        let pred = s.preds[i] in
        -1 <= pred < s.num_elts &&
@@ -232,7 +233,11 @@ module Patience
          (** ...the card is not on the leftmost stack... *)
          let (ps,_pp) = s.positions[pred] in
          ps = is - 1)
-         (** and predecessor is in the stack on the immediate left *)
+         (** ...and predecessor is in the stack on the immediate left *)
+
+
+(** {2 The patience game with specifications} *)
+
 
 
   use import list.List
@@ -240,26 +245,39 @@ module Patience
   use import list.RevAppend
 
 
+(** {3 playing a card} *)
 
-  (** [push_card c stacks acc] pushes card [c] on stacks [stacks],
+
+  (** [push_card c st acc] pushes card [c] on card stacks [st],
       assuming [acc] is an accumulator (in reverse order) of stacks
       where [c] could not be pushed.
   *)
-  let rec push_card (c:card) (stacks : list (list card))
-     (acc : list (list card)) (ghost state:state) : list (list card)
+  let rec push_card (c:card) (st : list (list card))
+     (acc : list (list card)) (ghost state:state) (ghost i:int) 
+     (ghost pred:int) : list (list card)
     requires { inv state }
-    variant  { stacks }
-    (* writes   { state } *)
+    variant  { st }
+    writes   { state } 
     ensures  { inv state }
     ensures  { state.num_elts = (old state).num_elts + 1 }
     ensures  { state.values = (old state).values[(old state).num_elts <- c] }
   =
-    match stacks with
+    match st with
     | Nil ->
       (* we put card [c] in a new stack *)
       let new_stacks = rev_append (Cons (Cons c Nil) acc) Nil in
       (* update the ghost state *)
-      state.num_elts <- state.num_elts + 1;
+      let idx = state.num_elts in
+      let i = state.num_stacks in
+      let stack_i = state.stacks[i] in
+      let new_stack_i = stack_i[0 <- idx] in
+      state.num_elts <- idx + 1;
+      state.values <- state.values[idx <- c];
+      state.num_stacks <- state.num_stacks + 1;
+      state.stack_sizes <- state.stack_sizes[i <- 1];
+      state.stacks <- state.stacks[i <- new_stack_i];
+      state.positions <- state.positions[idx <- (i,0)];
+      state.preds <- state.preds[idx <- pred];
       new_stacks
     | Cons stack remaining_stacks ->
         match stack with
@@ -277,25 +295,27 @@ module Patience
              new_stacks
            else
              (* try next stack *)
-             push_card c remaining_stacks (Cons stack acc) state
+             let ghost stack_i = state.stacks[i] in
+             let ghost stack_i_size = state.stack_sizes[i] in
+             let ghost top_stack_i = stack_i[stack_i_size - 1] in
+             push_card c remaining_stacks (Cons stack acc) state top_stack_i (i+1)
         end
      end
 
 
+(** {3 playing cards} *)
 
 
-
-
+  use import ref.Ref
   use import list.NthNoOpt
-
 
 
   let rec play_cards (input: list card) (stacks: list (list card))
     (ghost state:state) : list (list card)
     requires { inv state }
-    variant { input }
-    (* writes  { state } *)
-    ensures { inv state }
+    variant  { input }
+    writes   { state }
+    ensures  { inv state }
     ensures  { state.num_elts = (old state).num_elts + length input }
     ensures  { forall i. 0 <= i < (old state).num_elts ->
                  state.values[i] = (old state).values[i] }
@@ -305,8 +325,7 @@ module Patience
     match input with
     | Nil -> stacks
     | Cons c rem ->
-        let stacks' = push_card c stacks Nil state in
-        
+        let stacks' = push_card c stacks Nil state (-1) 0 in
         play_cards rem stacks' state
     end
 
@@ -314,7 +333,7 @@ module Patience
 
 
 
-(** {2 playing a whole game} *)
+(** {3 playing a whole game} *)
 
   type seq 'a = { seqlen: int; seqval: map int 'a }
   (** a sequence is defined by a length and a mapping *)
@@ -332,18 +351,17 @@ module Patience
        (** the card values denoted by [sigma] are increasing *)
 
   use import PigeonHole
-  use import ref.Ref
 
-  let play_game (input: list card) (ghost state:state) : list (list card)
+  let play_game (input: list card) : list (list card)
     requires { length input > 0 }
-    (* writes  { state } *)
-    ensures { exists sigma: seq int.  sigma.seqlen = state.num_stacks /\
-                increasing_subsequence sigma input
-            }
-    ensures { forall sigma: seq int.
+    ensures  { exists sigma: seq int.
+                 sigma.seqlen = length result /\
+                 increasing_subsequence sigma input
+             }
+    ensures  { forall sigma: seq int.
                 increasing_subsequence sigma input ->
-                  sigma.seqlen <= state.num_stacks
-            }
+                  sigma.seqlen <= length result
+             }
   = let ghost state = {
       num_elts = 0;
       values = Map.const (-1) ;
@@ -437,167 +455,5 @@ module Patience
     sigma
   in
   final_stacks
-
-
-(*
-
-  use import list.Length
-  use import list.Append
-  use import list.RevAppend
-  use import list.Reverse
-
-  use import list.NthNoOpt (* for the [nth] operator on lists *)
-
-  (** these lemmas should have been in Why3 stdlib ! *)
-  let rec lemma nth_append_1 (l1 l2: list 'a) (i: int)
-    requires { 0 <= i < length l1 }
-    variant  { l1 }
-    ensures  { nth i (l1 ++ l2) = nth i l1 }
-  = match l1 with
-    | Nil -> ()
-    | Cons _ l -> if i = 0 then () else nth_append_1 l l2 (i-1)
-    end
-
-  let rec lemma nth_append_2 (l1 l2: list 'a) (i: int)
-    requires { length l1 <= i < length l1 + length l2 }
-    variant  { l1 }
-    ensures  { nth i (l1 ++ l2) = nth (i - length l1) l2 }
-  = match l1 with
-    | Nil -> ()
-    | Cons _ l -> nth_append_2 l l2 (i-1)
-    end
-
-  predicate inv (s:state) (stacks:list (list int)) =
-    s.num_elts >= 0
-  /\
-    (** [s.top_stacks[i]] denotes the index
-        of the top of the [i]-th stack of [stacks] *)
-    (forall i. 0 <= i < length stacks ->
-      let stack_i = nth i stacks in
-      match stack_i with
-      | Nil -> false (* stacks are non-empty *)
-      | Cons hd _ ->
-        let idx = s.top_stacks[i] in
-        0 <= idx < s.num_elts /\ let (e,_) = s.elts[idx] in e = hd
-      end)
-  /\
-    (forall i. 0 <= i < s.num_elts ->
-      let j = s.preds[i] in
-        -1 <= j < s.num_elts /\ (j >= 0 ->
-          let (ej,sj) = s.elts[j] in
-          let (ei,si) = s.elts[i] in
-          ej < ei /\ si > 0 /\ sj = si - 1))
-
-  (** {2 Programs} *)
-
-  (** [push_card c stacks acc] pushes card [c] on stacks [stacks],
-      assuming [acc] is an accumulator (in reverse order) of stacks
-      where [c] could not be pushed.
-  *)
-
-  let rec push_card (c:int) (stacks : list (list int))
-     (acc : list (list int)) (ghost s: state)
-     : list (list int)
-    requires { inv s (reverse acc ++ stacks) }
-    requires { (* c is greater than the top of the previous stack *)
-               match acc with
-               | Cons (Cons c' _) _ -> c > c'
-               | _ -> true
-               end }
-    variant  { stacks }
-    writes   { s }
-    ensures  { inv s result }
-  =
-    match stacks with
-    | Nil ->
-      (* we put card [c] in a new stack *)
-      let new_stacks = reverse (Cons (Cons c Nil) acc) in
-      (* update of the ghost state *)
-      let ghost old_stacks = reverse acc ++ stacks in
-      let ghost lacc = length acc in
-      assert { lacc = length old_stacks };
-      assert { old_stacks = reverse acc };
-      assert { new_stacks = old_stacks ++ (Cons (Cons c Nil) Nil) };
-      assert { length new_stacks = length old_stacks + 1 };
-      assert { forall i. 0 <= i < lacc ->
-                 nth i new_stacks = nth i old_stacks };
-      assert { nth lacc new_stacks = Cons c Nil };
-      let ghost l = s.num_elts in
-      s.num_elts <- l + 1;
-      s.elts <- s.elts[l <- (c,lacc)];
-      let ghost p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
-      s.preds <- s.preds[l <- p];
-      s.top_stacks <- s.top_stacks[lacc <- l];
-      new_stacks
-    | Cons stack remaining_stacks ->
-        match stack with
-        | Nil ->
-            let ghost lacc = length acc in
-            assert { stack = nth lacc (reverse acc ++ stacks) };
-            absurd
-        | Cons c' _ ->
-           if c <= c' then
-             (* card is placed on the leftmost stack where its card
-                value is no greater than the topmost card on that
-                stack *)
-             let new_stacks =
-               (* TODO: use rev_append directly for efficiency of the code *)
-               (reverse (Cons (Cons c stack) acc)) ++ remaining_stacks in
-             (* update of the ghost state *)
-             let ghost old_stacks = reverse acc ++ stacks in
-             assert { new_stacks =
-               reverse acc ++ (Cons (Cons c stack) Nil) ++ remaining_stacks };
-             assert { length new_stacks = length old_stacks };
-             let ghost lacc = length acc in
-             assert { forall i. 0 <= i < length old_stacks ->
-               i <> lacc -> nth i new_stacks = nth i old_stacks };
-             assert { nth lacc new_stacks = Cons c (nth lacc old_stacks) } ;
-             let ghost l = s.num_elts in
-             s.num_elts <- l + 1;
-             s.elts <- s.elts[l<-(c,lacc)];
-             let ghost p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
-             s.preds <- s.preds[l <- p];
-             s.top_stacks <- s.top_stacks[lacc <- l];
-             new_stacks
-           else
-             (* try next stack *)
-             push_card c remaining_stacks (Cons stack acc) s
-        end
-     end
-
-  let rec play_cards (input: list int) (stacks: list (list int))
-    (ghost s: state) : list (list int)
-    requires { inv s stacks }
-    variant  { input }
-    writes   { s }
-    requires { inv s stacks }
-  =
-    match input with
-    | Nil -> stacks
-    | Cons c rem ->
-        let stacks' = push_card c stacks Nil s in
-        play_cards rem stacks' s
-    end
-
-
-  let play_game (input: list int) : list (list int)
-    requires { true }
-    ensures { true }
-  = let ghost s = {
-      num_elts = 0;
-      elts = Map.const (-1,-1) ;
-      top_stacks = Map.const (-1);
-      preds = Map.const (-1);
-    }
-    in
-    play_cards input Nil s
-
-
-  let test () =
-    (* the list given in the problem description
-       9, 7, 10, 9, 5, 4, and 10 *)
-    play_game
-      (Cons 9 (Cons 7 (Cons 10 (Cons 9 (Cons 5 (Cons 4 (Cons 10 Nil)))))))
-*)
 
 end

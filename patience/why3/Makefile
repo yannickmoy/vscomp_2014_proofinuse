@@ -1,7 +1,7 @@
 
 
 test:
-	why3 patience.mlw --exec Patience.test
+	why3 patience.mlw --exec PatienceCode.test
 
 prove:
 	why3ide patience.mlw
