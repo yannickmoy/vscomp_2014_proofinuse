@@ -1,4 +1,27 @@
 
+module PigeonHole
+
+  use import int.Int
+  use HighOrd
+
+  predicate range (f: int -> int) (n: int) (m:int) =
+    forall i: int. 0 <= i < n -> 0 <= f(i) < m
+  (** [range f n m] is true when [f] maps the domain
+      [(0..n-1)] into [(0..m-1)] *)
+
+  predicate injective (f: int -> int) (n: int) (m:int) =
+    forall i j: int. 0 <= i < j < n -> f i <> f j
+  (** [injective f n m] is true when [f] is an injection
+      from [(0..n-1)] to [(0..m-1)] *)
+
+  lemma pigeon_hole :
+    forall n,m:int, f: int -> int.
+    range f n m /\ n > m -> not injective f n m
+
+end
+
+
+
 
 
 (** {1 The Patience Solitaire Game}
@@ -205,6 +228,7 @@ and so on.
   end
 
   use import list.NthNoOpt
+  use import PigeonHole
 
   let rec play_cards (input: list int) (s: state) : unit
     requires { inv s }
@@ -292,6 +316,17 @@ and so on.
       length larger than the number of stacks may exists
 
     *)
+    assert {  (* non-injectivity *)
+      forall sigma: seq int.
+        increasing_subsequence sigma input /\ sigma.seqlen > s.num_stacks ->
+        let f = \i:int. 
+          let si = sigma.seqval[i] in
+          let (stack_i,_) = s.positions[si] in
+          stack_i
+        in range f sigma.seqlen s.num_stacks &&
+           not (injective f sigma.seqlen s.num_stacks)
+           
+    };
     assert {  (* non-injectivity *)
       forall sigma: seq int.
         increasing_subsequence sigma input /\ sigma.seqlen > s.num_stacks ->
