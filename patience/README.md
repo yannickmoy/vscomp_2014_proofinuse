@@ -1,9 +1,9 @@
 
 
-==== About the Why3 part ====
+# About the Why3 part
 
 
-= Makefile targets ==
+## Makefile targets
 
 * test: runs the test given in the task description
 
