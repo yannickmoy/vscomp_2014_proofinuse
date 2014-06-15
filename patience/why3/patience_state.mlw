@@ -93,8 +93,8 @@ and so on.
   }
 
   predicate inv (s:state) =
-     s.num_elts >= 0
-  /\ s.num_stacks >= 0
+     0 <= s.num_stacks <= s.num_elts
+  /\ (s.num_elts > 0 -> s.num_stacks > 0)
   /\ (forall i. 0 <= i < s.num_stacks ->
          s.stack_sizes[i] >= 1 (* stacks are non-empty *)
       /\ forall j. 0 <= j < s.stack_sizes[i] -> 
@@ -117,11 +117,12 @@ and so on.
      (forall i. 0 <= i < s.num_elts ->
        let pred = s.preds[i] in
        -1 <= pred < s.num_elts &&
+       pred < i && (* predecessor is always of a smaller index *)
        let (is,_ip) = s.positions[i] in
        if pred < 0 then is = 0 else
          is > 0 &&
          let (ps,_pp) = s.positions[pred] in
-         ps = is - 1)
+         ps = is - 1) (* predecessor is in the stack on the immediate left *)
 
 
   (** {2 Programs} *)
@@ -235,7 +236,14 @@ and so on.
     play_cards input s;
     (* ghost code to build an increasing subsequence of maximal length *)
     let ns = s.num_stacks in
-    if ns = 0 then (assert { input = Nil }; s) else
+    if ns = 0 then 
+      begin
+        assert { input = Nil }; 
+        let seq = { seqlen = 0 ; seqval = Map.const (-1) } in
+        assert { increasing_subsequence seq input };
+        s 
+      end
+    else
     let last_stack = s.stacks[ns-1] in
     let idx = ref (last_stack[s.stack_sizes[ns-1]-1]) in
     let seq = ref (Map.const (-1)) in
@@ -243,9 +251,16 @@ and so on.
        invariant { -1 <= !idx < s.num_elts }
        invariant { i >= 0 -> !idx >= 0 &&
          let (is,ip) = s.positions[!idx] in is = i }
+       invariant { i+1 < ns -> !idx < !seq[i+1] }
        invariant { forall j. i < j < ns -> 0 <= !seq[j] < s.num_elts } 
+       invariant { forall j,k. i < j < k < ns -> !seq[j] < !seq[k] }
+       invariant { forall j,k. i < j < k < ns -> 
+         nth !seq[j] input < nth !seq[k] input 
+       }
+       'L:
        seq := !seq[i <- !idx];
        idx := s.preds[!idx];
+       (* assert { forall j. i < j < ns -> !seq[i] < !seq[j] }; *)
     done;
     let seq = { seqlen = ns ; seqval = !seq } in
     assert { increasing_subsequence seq input };
