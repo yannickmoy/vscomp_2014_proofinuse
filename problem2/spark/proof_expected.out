@@ -162,7 +162,7 @@ partition_refinement.adb:202:51: info: precondition proved
 partition_refinement.adb:202:68: info: precondition proved
 partition_refinement.adb:202:81: info: precondition proved
 partition_refinement.adb:203:55: info: precondition proved
-partition_refinement.adb:206:7: info: precondition proved
+partition_refinement.adb:209:7: info: precondition proved
 partition_refinement.ads:55:17: info: overflow check proved
 partition_refinement.ads:55:19: info: precondition proved
 partition_refinement.ads:55:33: info: precondition proved

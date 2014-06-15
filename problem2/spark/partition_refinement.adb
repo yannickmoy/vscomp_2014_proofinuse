@@ -201,6 +201,9 @@ is
          pragma Loop_Invariant (for all C in D_Old => Has_Element (D, C));
          pragma Loop_Invariant (for all C in X => Has_Element (D, (Find (D_Old, Element (X, C)))));
          pragma Loop_Invariant (for all J in Index => Contains (D, A(J)));
+
+-- Uncomment loop variant and comment loop variant to prove termination
+--         pragma Loop_Variant (Decreases => Length (Current_To_Last (X, C)));
       end loop;
 
       Make_New_Partitions (P, F);
