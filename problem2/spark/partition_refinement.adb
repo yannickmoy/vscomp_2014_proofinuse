@@ -202,8 +202,8 @@ is
          pragma Loop_Invariant (for all C in X => Has_Element (D, (Find (D_Old, Element (X, C)))));
          pragma Loop_Invariant (for all J in Index => Contains (D, A(J)));
 
--- Uncomment loop variant and comment loop variant to prove termination
---         pragma Loop_Variant (Decreases => Length (Current_To_Last (X, C)));
+         --  Uncomment loop variant to prove termination. It is commented because its presence causes GNATprove to fail to prove the loop invariant. But as the loop invariant is proved otherwise, we know it holds, thus the loop variant and invariant are both proved.
+--       pragma Loop_Variant (Decreases => Length (Current_To_Last (X, C)));
       end loop;
 
       Make_New_Partitions (P, F);
