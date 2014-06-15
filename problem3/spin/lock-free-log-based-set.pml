@@ -2,12 +2,13 @@
 #define SIZE 2
 #define THREAD_COUNT 2
 
-/* Spin initializes everything to 0 by default */
-int log[SIZE];
+int log[SIZE] = 0;
 
-int gc, tl, hd;
+int gc = 0
+int tl = 0;
+int hd = 0;
 
-int ht[THREAD_COUNT];
+int ht[THREAD_COUNT] = SIZE;
 
 inline abs(x) {
   d_step {
@@ -125,10 +126,6 @@ init /* will have _pid = 0 */
   int i;
 
   atomic {
-         for (i : 0 .. THREAD_COUNT - 1) {
-             ht[i] = SIZE
-         };
-
          for (i : 0 .. THREAD_COUNT - 1) {
              run thread()
          };
