@@ -111,8 +111,11 @@ and so on.
         forall ip. 0 <= ip < s.stack_sizes[is] ->
         let idx = s.stacks[is][ip] in
         (is,ip) = s.positions[idx])
-  /\ (* injectivity, surjectivity of stacks ? consequence of the above ? *)
-     true
+  /\ (* stacks are decreasing *)
+     (forall i. 0 <= i < s.num_stacks ->
+        let stack_i = s.stacks[i] in
+        forall j,k. 0 <= j <= k < s.stack_sizes[i] ->
+           s.values[stack_i[j]] >= s.values[stack_i[k]])
   /\ (* predecessors *)
      (forall i. 0 <= i < s.num_elts ->
        let pred = s.preds[i] in
@@ -226,15 +229,12 @@ and so on.
           nth s.seqval[i] l < nth s.seqval[j] l)
 
   let play_game (input: list int) : state
-    (* requires { length input > 0 } *)
     ensures { exists s: seq int.  s.seqlen = result.num_stacks /\
         increasing_subsequence s input
       }
-(* TODO
     ensures { forall s: seq int.
         increasing_subsequence s input -> s.seqlen <= result.num_stacks
       }
-*)
   = let s = {
       num_elts = 0;
       values = Map.const (-1) ;
@@ -246,7 +246,11 @@ and so on.
     }
     in
     play_cards input s;
-    (* ghost code to build an increasing subsequence of maximal length *)
+    (** 
+
+      This is ghost code to build an increasing subsequence of maximal length 
+
+    *)
     let ns = s.num_stacks in
     if ns = 0 then
       begin
@@ -273,18 +277,30 @@ and so on.
        'L:
        seq := !seq[i <- !idx];
        idx := s.preds[!idx];
-(*
-       assert { i+1 < ns ->
-         s.values[!seq[i]] < s.values[!seq[i+1]]
-       };
-       assert { forall k. i < k < ns ->
-         s.values[!seq[i]] < s.values[!seq[k]]
-       }
-*)
     done;
-    let seq = { seqlen = ns ; seqval = !seq } in
+    let sigma = { seqlen = ns ; seqval = !seq } in
     assert { forall i. 0 <= i < length input -> nth i input = s.values[i] };
-    assert { increasing_subsequence seq input };
+    assert { increasing_subsequence sigma input };
+    (** 
+
+      This is ghost code to prove that no increasing subsequence of
+      length larger than the number of stacks may exists
+
+    *)
+    assert {
+      forall sigma: seq int.
+        increasing_subsequence sigma input /\ sigma.seqlen > s.num_stacks ->
+        exists i,j. 
+          0 <= i < j < sigma.seqlen &&
+          let si = sigma.seqval[i] in
+          let sj = sigma.seqval[j] in
+          si < sj &&
+          let (stack_i,pi) = s.positions[si] in
+          let (stack_j,pj) = s.positions[sj] in
+          stack_i = stack_j &&
+          pi < pj &&
+          s.values[si] < s.values[sj]
+    };
     s
 
   let test () =
