@@ -115,7 +115,7 @@ module PatienceCode
      end
 
   let rec play_cards (input: list card) (stacks: list (list card))
-    : list (list card) 
+    : list (list card)
     variant { input }
   =
     match input with
@@ -161,7 +161,7 @@ module Patience
     mutable num_elts : int;
     (** number of cards already seen *)
     mutable values : map int card;
-    (** cards values seen, indexed in the order they have been seen, 
+    (** cards values seen, indexed in the order they have been seen,
         from [0] to [num_elts-1] *)
     mutable num_stacks : int;
     (** number of stacks built so far *)
@@ -174,8 +174,8 @@ module Patience
         which stack it is and at which height *)
     mutable preds : map int int;
     (** predecessors of cards, i.e. for each card index [i], [preds[i]]
-        provides an index of a card in the stack on the immediate left, 
-        whose value is smaller. returns [-1] of the card is on the 
+        provides an index of a card in the stack on the immediate left,
+        whose value is smaller. returns [-1] of the card is on the
         leftmost stack. *)
   }
 
@@ -187,7 +187,7 @@ module Patience
   /\ (s.num_elts > 0 -> s.num_stacks > 0)
      (** when there is at least one card, there is at least one stack *)
   /\ (forall i. 0 <= i < s.num_stacks ->
-         s.stack_sizes[i] >= 1 
+         s.stack_sizes[i] >= 1
          (** stacks are non-empty *)
       /\ forall j. 0 <= j < s.stack_sizes[i] ->
            0 <= s.stacks[i][j] < s.num_elts)
@@ -198,7 +198,7 @@ module Patience
        let st = s.stacks[is] in
          0 <= ip < s.stack_sizes[is] &&
          st[ip] = i)
-     (** the position table of cards is correct, i.e. when 
+     (** the position table of cards is correct, i.e. when
         [(is,ip) = s.positions[i]] then card [i] is indeed
         stored in stack [is] at height [ip] *)
   /\ (forall is. 0 <= is < s.num_stacks ->
@@ -220,24 +220,202 @@ module Patience
        let pred = s.preds[i] in
        -1 <= pred < s.num_elts &&
        (** the predecessor is a valid index or [-1] *)
-       pred < i /\ 
+       pred < i /\
        (** predecessor is always a smaller index *)
        let (is,_ip) = s.positions[i] in
-       if pred < 0 then is = 0 
+       if pred < 0 then is = 0
          (** if predecessor is [-1] then [i] is in leftmost stack *)
        else
-         s.values[pred] < s.values[i] /\ 
+         s.values[pred] < s.values[i] /\
          (** if predecessor is not [-1], it denotes a card with smaller value... *)
          is > 0 &&
          (** ...the card is not on the leftmost stack... *)
          let (ps,_pp) = s.positions[pred] in
-         ps = is - 1) 
+         ps = is - 1)
          (** and predecessor is in the stack on the immediate left *)
+
+
+  use import list.List
+  use import list.Length
+  use import list.RevAppend
+
+
+
+  (** [push_card c stacks acc] pushes card [c] on stacks [stacks],
+      assuming [acc] is an accumulator (in reverse order) of stacks
+      where [c] could not be pushed.
+  *)
+  let rec push_card (c:card) (stacks : list (list card))
+     (acc : list (list card)) (ghost state:state) : list (list card)
+    variant  { stacks }
+    (* writes   { state } *)
+  =
+    match stacks with
+    | Nil ->
+      (* we put card [c] in a new stack *)
+      let new_stacks = rev_append (Cons (Cons c Nil) acc) Nil in
+      (* update the ghost state *)
+      state.num_elts <- state.num_elts + 1;
+      new_stacks
+    | Cons stack remaining_stacks ->
+        match stack with
+        | Nil -> absurd (* can not be proved unreachable yet *)
+        | Cons c' _ ->
+           if c <= c' then
+             (* card is placed on the leftmost stack where its card
+                value is no greater than the topmost card on that
+                stack *)
+             let new_stacks =
+               rev_append (Cons (Cons c stack) acc) remaining_stacks
+             in
+             (* update the ghost state *)
+             state.num_elts <- state.num_elts + 1;
+             new_stacks
+           else
+             (* try next stack *)
+             push_card c remaining_stacks (Cons stack acc) state
+        end
+     end
+
+  let rec play_cards (input: list card) (stacks: list (list card))
+    (ghost state:state) : list (list card)
+    variant { input }
+    (* writes  { state } *)
+  =
+    match input with
+    | Nil -> stacks
+    | Cons c rem ->
+        let stacks' = push_card c stacks Nil state in
+        play_cards rem stacks' state
+    end
+
+
+
+
+
+(** {2 playing a whole game} *)
+
+  use import list.NthNoOpt
+
+  type seq 'a = { seqlen: int; seqval: map int 'a }
+  (** a sequence is defined by a length and a mapping *)
+
+  (** definition of an increasing sub-sequence of a list of card *)
+  predicate increasing_subsequence (sigma:seq int) (l:list card) =
+       0 <= sigma.seqlen <= length l
+       (** the length of [sigma] is at most the number of cards *)
+    && (forall i. 0 <= i < sigma.seqlen -> 0 <= sigma.seqval[i] < length l)
+       (** [sigma] maps indexes to valid indexes in the card list *)
+    && (forall i,j. 0 <= i < j < sigma.seqlen -> sigma.seqval[i] < sigma.seqval[j])
+       (** [sigma] is an increasing sequence of indexes *)
+    && (forall i,j. 0 <= i < j < sigma.seqlen ->
+          nth sigma.seqval[i] l < nth sigma.seqval[j] l)
+       (** the card values denoted by [sigma] are increasing *)
+
+  use import PigeonHole
+  use import ref.Ref
+
+  let play_game (input: list card) (ghost state:state) : list (list card)
+    (* writes  { state } *)
+    ensures { exists sigma: seq int.  sigma.seqlen = state.num_stacks /\
+                increasing_subsequence sigma input
+            }
+    ensures { forall sigma: seq int.
+                increasing_subsequence sigma input ->
+                  sigma.seqlen <= state.num_stacks
+            }
+  = let ghost state = {
+      num_elts = 0;
+      values = Map.const (-1) ;
+      num_stacks = 0;
+      stack_sizes = Map.const 0;
+      stacks = Map.const (Map.const (-1));
+      positions = Map.const (-1,-1);
+      preds = Map.const (-1);
+    }
+    in
+    let final_stacks = play_cards input Nil state in
+    (**
+
+      This is ghost code to build an increasing subsequence of maximal length
+
+    *)
+    let ghost ns = state.num_stacks in
+    let ghost sigma =
+      if ns = 0 then
+      begin
+        assert { input = Nil };
+        { seqlen = 0 ; seqval = Map.const (-1) }
+      end
+    else
+    let ghost last_stack = state.stacks[ns-1] in
+    let ghost idx = ref (last_stack[state.stack_sizes[ns-1]-1]) in
+    let ghost seq = ref (Map.const (-1)) in
+    for i = ns-1 downto 0 do
+       invariant { -1 <= !idx < state.num_elts }
+       invariant { i >= 0 -> !idx >= 0 &&
+         let (is,_) = state.positions[!idx] in is = i }
+       invariant { i+1 < ns -> !idx < !seq[i+1] }
+       invariant { 0 <= i < ns-1 -> state.values[!idx] < state.values[!seq[i+1]] }
+       invariant { forall j. i < j < ns -> 0 <= !seq[j] < state.num_elts }
+       invariant { forall j,k. i < j < k < ns -> !seq[j] < !seq[k] }
+       invariant { forall j,k. i < j < k < ns ->
+         state.values[!seq[j]] < state.values[!seq[k]]
+       }
+       'L:
+       seq := !seq[i <- !idx];
+       idx := state.preds[!idx];
+    done;
+    let ghost sigma = { seqlen = ns ; seqval = !seq } in
+    assert { forall i. 0 <= i < length input -> nth i input = state.values[i] };
+    assert { increasing_subsequence sigma input };
+    (**
+
+      These are assertions to prove that no increasing subsequence of
+      length larger than the number of stacks may exists
+
+    *)
+    assert {  (* non-injectivity *)
+      forall sigma: seq int.
+        increasing_subsequence sigma input /\ sigma.seqlen > state.num_stacks ->
+        let f = \i:int.
+          let si = sigma.seqval[i] in
+          let (stack_i,_) = state.positions[si] in
+          stack_i
+        in range f sigma.seqlen state.num_stacks &&
+           not (injective f sigma.seqlen state.num_stacks)
+    };
+    assert {  (* non-injectivity *)
+      forall sigma: seq int.
+        increasing_subsequence sigma input /\ sigma.seqlen > state.num_stacks ->
+        exists i,j.
+          0 <= i < j < sigma.seqlen &&
+          let si = sigma.seqval[i] in
+          let sj = sigma.seqval[j] in
+          let (stack_i,_pi) = state.positions[si] in
+          let (stack_j,_pj) = state.positions[sj] in
+          stack_i = stack_j
+    };
+    assert { (* contradiction from non-injectivity *)
+      forall sigma: seq int.
+        increasing_subsequence sigma input /\ sigma.seqlen > state.num_stacks ->
+        forall i,j.
+          0 <= i < j < sigma.seqlen ->
+          let si = sigma.seqval[i] in
+          let sj = sigma.seqval[j] in
+          let (stack_i,pi) = state.positions[si] in
+          let (stack_j,pj) = state.positions[sj] in
+          stack_i = stack_j ->
+          si < sj && pi < pj && state.values[si] < state.values[sj]
+    };
+    sigma
+  in
+  assert { increasing_subsequence sigma input };
+  final_stacks
 
 
 (*
 
-  use import list.List
   use import list.Length
   use import list.Append
   use import list.RevAppend

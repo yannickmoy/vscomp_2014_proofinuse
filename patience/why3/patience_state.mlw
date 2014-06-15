@@ -227,8 +227,12 @@ and so on.
          s.preds <- s.preds[idx <- !pred];
   end
 
+
+
+
   use import list.NthNoOpt
-  use import PigeonHole
+
+
 
   let rec play_cards (input: list int) (s: state) : unit
     requires { inv s }
@@ -246,6 +250,12 @@ and so on.
     | Cons c rem -> play_card c s; play_cards rem s
     end
 
+
+
+
+
+
+
   type seq 'a = { seqlen: int; seqval: map int 'a }
 
   predicate increasing_subsequence (s:seq int) (l:list int) =
@@ -256,6 +266,20 @@ and so on.
     (* increasing *)
     && (forall i,j. 0 <= i < j < s.seqlen ->
           nth s.seqval[i] l < nth s.seqval[j] l)
+
+
+
+
+
+
+  use import PigeonHole
+
+
+
+
+
+
+
 
   let play_game (input: list int) : state
     ensures { exists s: seq int.  s.seqlen = result.num_stacks /\
