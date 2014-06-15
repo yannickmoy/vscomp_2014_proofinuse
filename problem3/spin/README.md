@@ -24,6 +24,8 @@ Verification:
   ./pan -m10000
 ```
 
+No error is found (see `pan.out` file).
+
 At all points where a thread access the `log`, we check with an
 assertion that the `log` index is above `gc`.
 
