@@ -11,19 +11,13 @@ The team consists in:
 - Yannick Moy (AdaCore)
 
 We're using Why3 (https://why3.lri.fr/) and SPARK 2014
-(http://www.spark-2014.org/) programming languages.
+(http://www.spark-2014.org/) programming languages as well as SPIN (http://spinroot.com/spin/whatispin.html) model checker.
 
 
 
+## Lessons learnt when using Why3
 
-
-
-
-
-== Lessons learnt when using Why3 ==
-
-
-= problem 1 =
+### problem 1
 
 * There should be a notation with brackets for lists
 
@@ -44,3 +38,10 @@ We're using Why3 (https://why3.lri.fr/) and SPARK 2014
 * "split" should really split match..with
 
 
+## Lessons learnt when using SPIN
+
+### problem 3
+* Model checking is limited to very small models (log with 2 entries, 2 threads in my case).
+* Promela is lacking a way to define proper functions. But this might be a way to limit model size. :-)
+* iSpin graphical interface is very convenient.
+* Found a bug in SPIN (if `value` is replaced by `val`). Should do an example and submit the bug report.
