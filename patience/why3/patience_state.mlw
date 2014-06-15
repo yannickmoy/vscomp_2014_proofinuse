@@ -111,7 +111,12 @@ and so on.
         forall ip. 0 <= ip < s.stack_sizes[is] ->
         let idx = s.stacks[is][ip] in
         (is,ip) = s.positions[idx])
-  /\ (* stacks are decreasing *)
+  /\ (* stacks indexes are increasing *)
+     (forall i. 0 <= i < s.num_stacks ->
+        let stack_i = s.stacks[i] in
+        forall j,k. 0 <= j < k < s.stack_sizes[i] ->
+           stack_i[j] < stack_i[k])
+  /\ (* stacks values are decreasing *)
      (forall i. 0 <= i < s.num_stacks ->
         let stack_i = s.stacks[i] in
         forall j,k. 0 <= j <= k < s.stack_sizes[i] ->
@@ -283,23 +288,32 @@ and so on.
     assert { increasing_subsequence sigma input };
     (** 
 
-      This is ghost code to prove that no increasing subsequence of
+      These are assertions to prove that no increasing subsequence of
       length larger than the number of stacks may exists
 
     *)
-    assert {
+    assert {  (* non-injectivity *)
       forall sigma: seq int.
         increasing_subsequence sigma input /\ sigma.seqlen > s.num_stacks ->
-        exists i,j. 
+        exists i,j.
           0 <= i < j < sigma.seqlen &&
           let si = sigma.seqval[i] in
           let sj = sigma.seqval[j] in
-          si < sj &&
+          let (stack_i,_pi) = s.positions[si] in
+          let (stack_j,_pj) = s.positions[sj] in
+          stack_i = stack_j 
+    };
+    assert { (* contradiction from non-injectivity *)
+      forall sigma: seq int.
+        increasing_subsequence sigma input /\ sigma.seqlen > s.num_stacks ->
+        forall i,j. 
+          0 <= i < j < sigma.seqlen ->
+          let si = sigma.seqval[i] in
+          let sj = sigma.seqval[j] in
           let (stack_i,pi) = s.positions[si] in
           let (stack_j,pj) = s.positions[sj] in
-          stack_i = stack_j &&
-          pi < pj &&
-          s.values[si] < s.values[sj]
+          stack_i = stack_j ->
+          si < sj && pi < pj && s.values[si] < s.values[sj]
     };
     s
 
