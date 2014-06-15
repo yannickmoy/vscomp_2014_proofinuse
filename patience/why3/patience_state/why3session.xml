@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE why3session PUBLIC "-//Why3//proof session v2//EN" "http://why3.lri.fr/why3session.dtd">
+<why3session shape_version="4">
+ <prover
+  id="0"
+  name="Alt-Ergo"
+  version="0.95.2"/>
+ <prover
+  id="1"
+  name="CVC3"
+  version="2.4.1"/>
+ <prover
+  id="2"
+  name="CVC4"
+  version="1.3"/>
+ <prover
+  id="3"
+  name="Z3"
+  version="3.2"/>
+ <prover
+  id="4"
+  name="Z3"
+  version="4.3.1"/>
+ <file
+  name="../patience_state.mlw"
+  verified="true"
+  expanded="true">
+  <theory
+   name="Patience"
+   locfile="../patience_state.mlw"
+   loclnum="37" loccnumb="7" loccnume="15"
+   verified="true"
+   expanded="true">
+   <goal
+    name="WP_parameter play_card"
+    locfile="../patience_state.mlw"
+    loclnum="119" loccnumb="6" loccnume="15"
+    expl="VC for play_card"
+    sum="95c249836d807cd2d2f6ddaf19107abd"
+    proved="true"
+    expanded="false"
+    shape="ainvV25AainvV25Iainfix =V24amixfix [&lt;-]V11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22amixfix [&lt;-]V13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21amixfix [&lt;-]V14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19amixfix [&lt;-]V15V16V0FIainfix =V18ainfix +V16c1FIainvV17AiainvV17Iainfix =V30V29FainvV37AainvV37Iainfix =V36amixfix [&lt;-]V11V16V10Lamk stateV31V32V3V33V34V35V36FIainfix =V35asetV12V16aTuple2V26V28FIainfix =V34amixfix [&lt;-]V13V26amixfix [&lt;-]V27V28V16FIainfix =V33amixfix [&lt;-]V14V26ainfix +V28c1FIainfix =V32amixfix [&lt;-]V15V16V0FIainfix =V31ainfix +V16c1Fainfix &lt;=V0amixfix []V15V29Lamixfix []V27ainfix -V28c1Lamixfix []V14V26Lamixfix []V13V26IainvV17Iainfix &lt;=V26V9Aainfix &lt;=c0V26FLamk stateV16V15V3V14V13V12V11FAainvV8Iainfix &lt;=c0V9AainvV45AainvV45Iainfix =V44amixfix [&lt;-]V7V1aprefix -c1Lamk stateV38V39V40V41V42V43V44FIainfix =V43asetV6V1aTuple2V3c0FIainfix =V42amixfix [&lt;-]V5V3amixfix [&lt;-]amixfix []V5V3c0V1FIainfix =V41amixfix [&lt;-]V4V3c1FIainfix =V40ainfix +V3c1FIainfix =V39amixfix [&lt;-]V2V1V0FIainfix =V38ainfix +V1c1FIainfix &gt;c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+    <label
+     name="expl:VC for play_card"/>
+    <transf
+     name="split_goal_wp"
+     proved="true"
+     expanded="false">
+     <goal
+      name="WP_parameter play_card.1"
+      locfile="../patience_state.mlw"
+      loclnum="119" loccnumb="6" loccnume="15"
+      expl="1. assertion"
+      sum="c73ad809c7660504bcdd40d160becf56"
+      proved="true"
+      expanded="false"
+      shape="assertionainvV17Iainfix =V16amixfix [&lt;-]V7V1aprefix -c1Lamk stateV10V11V12V13V14V15V16FIainfix =V15asetV6V1aTuple2V3c0FIainfix =V14amixfix [&lt;-]V5V3amixfix [&lt;-]amixfix []V5V3c0V1FIainfix =V13amixfix [&lt;-]V4V3c1FIainfix =V12ainfix +V3c1FIainfix =V11amixfix [&lt;-]V2V1V0FIainfix =V10ainfix +V1c1FIainfix &gt;c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.12"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_card.2"
+      locfile="../patience_state.mlw"
+      loclnum="119" loccnumb="6" loccnume="15"
+      expl="2. postcondition"
+      sum="98d6213f250f416595c234bc9be15270"
+      proved="true"
+      expanded="false"
+      shape="postconditionainvV17IainvV17Iainfix =V16amixfix [&lt;-]V7V1aprefix -c1Lamk stateV10V11V12V13V14V15V16FIainfix =V15asetV6V1aTuple2V3c0FIainfix =V14amixfix [&lt;-]V5V3amixfix [&lt;-]amixfix []V5V3c0V1FIainfix =V13amixfix [&lt;-]V4V3c1FIainfix =V12ainfix +V3c1FIainfix =V11amixfix [&lt;-]V2V1V0FIainfix =V10ainfix +V1c1FIainfix &gt;c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.02"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_card.3"
+      locfile="../patience_state.mlw"
+      loclnum="119" loccnumb="6" loccnume="15"
+      expl="3. loop invariant init"
+      sum="c353d65a8c2fa3a114cf3e35beb52433"
+      proved="true"
+      expanded="false"
+      shape="loop invariant initainvV8Iainfix &lt;=c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_card.4"
+      locfile="../patience_state.mlw"
+      loclnum="119" loccnumb="6" loccnume="15"
+      expl="4. assertion"
+      sum="29436c4bd651f2c21d7dbd2faa9bd33a"
+      proved="true"
+      expanded="false"
+      shape="assertionainvV28Iainfix =V27amixfix [&lt;-]V11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25amixfix [&lt;-]V13V18amixfix [&lt;-]V19V20V16FIainfix =V24amixfix [&lt;-]V14V18ainfix +V20c1FIainfix =V23amixfix [&lt;-]V15V16V0FIainfix =V22ainfix +V16c1FIainfix &lt;=V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18IainvV17Iainfix &lt;=V18V9Aainfix &lt;=c0V18FLamk stateV16V15V3V14V13V12V11FIainfix &lt;=c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_card"/>
+      <transf
+       name="inline_goal"
+       proved="true"
+       expanded="false">
+       <goal
+        name="WP_parameter play_card.4.1"
+        locfile="../patience_state.mlw"
+        loclnum="119" loccnumb="6" loccnume="15"
+        expl="1. assertion"
+        sum="90adf402bb15aa3fe894bdbcba79c803"
+        proved="true"
+        expanded="false"
+        shape="assertionCainfix =amixfix []V32V31V29Aainfix &lt;V31amixfix []astack_sizesV28V30Aainfix &lt;=c0V31Lamixfix []astacksV28V30Aainfix &lt;V30anum_stacksV28Aainfix &lt;=c0V30aTuple2VVamixfix []apositionsV28V29Iainfix &lt;V29anum_eltsV28Aainfix &lt;=c0V29FAtAainfix &lt;amixfix []amixfix []astacksV28V33V34anum_eltsV28Aainfix &lt;=c0amixfix []amixfix []astacksV28V33V34Iainfix &lt;V34amixfix []astack_sizesV28V33Aainfix &lt;=c0V34FAainfix &gt;=amixfix []astack_sizesV28V33c0Iainfix &lt;V33anum_stacksV28Aainfix &lt;=c0V33FAainfix &gt;=anum_stacksV28c0Aainfix &gt;=anum_eltsV28c0Iainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V38V37V35Aainfix &lt;V37amixfix []astack_sizesV17V36Aainfix &lt;=c0V37Lamixfix []astacksV17V36Aainfix &lt;V36anum_stacksV17Aainfix &lt;=c0V36aTuple2VVamixfix []apositionsV17V35Iainfix &lt;V35anum_eltsV17Aainfix &lt;=c0V35FAtAainfix &lt;amixfix []amixfix []astacksV17V39V40anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V39V40Iainfix &lt;V40amixfix []astack_sizesV17V39Aainfix &lt;=c0V40FAainfix &gt;=amixfix []astack_sizesV17V39c0Iainfix &lt;V39anum_stacksV17Aainfix &lt;=c0V39FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V44V43V41Aainfix &lt;V43amixfix []astack_sizesV8V42Aainfix &lt;=c0V43Lamixfix []astacksV8V42Aainfix &lt;V42anum_stacksV8Aainfix &lt;=c0V42aTuple2VVamixfix []apositionsV8V41Iainfix &lt;V41anum_eltsV8Aainfix &lt;=c0V41FAtAainfix &lt;amixfix []amixfix []astacksV8V45V46anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V45V46Iainfix &lt;V46amixfix []astack_sizesV8V45Aainfix &lt;=c0V46FAainfix &gt;=amixfix []astack_sizesV8V45c0Iainfix &lt;V45anum_stacksV8Aainfix &lt;=c0V45FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+        <label
+         name="expl:VC for play_card"/>
+        <transf
+         name="split_goal_wp"
+         proved="true"
+         expanded="false">
+         <goal
+          name="WP_parameter play_card.4.1.1"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="1."
+          sum="0dfa0f8d3a0c7a15fc163b3ac173831b"
+          proved="true"
+          expanded="false"
+          shape="ainfix &gt;=anum_eltsV28c0Iainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V32V31V29Aainfix &lt;V31amixfix []astack_sizesV17V30Aainfix &lt;=c0V31Lamixfix []astacksV17V30Aainfix &lt;V30anum_stacksV17Aainfix &lt;=c0V30aTuple2VVamixfix []apositionsV17V29Iainfix &lt;V29anum_eltsV17Aainfix &lt;=c0V29FAtAainfix &lt;amixfix []amixfix []astacksV17V33V34anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V33V34Iainfix &lt;V34amixfix []astack_sizesV17V33Aainfix &lt;=c0V34FAainfix &gt;=amixfix []astack_sizesV17V33c0Iainfix &lt;V33anum_stacksV17Aainfix &lt;=c0V33FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V38V37V35Aainfix &lt;V37amixfix []astack_sizesV8V36Aainfix &lt;=c0V37Lamixfix []astacksV8V36Aainfix &lt;V36anum_stacksV8Aainfix &lt;=c0V36aTuple2VVamixfix []apositionsV8V35Iainfix &lt;V35anum_eltsV8Aainfix &lt;=c0V35FAtAainfix &lt;amixfix []amixfix []astacksV8V39V40anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V39V40Iainfix &lt;V40amixfix []astack_sizesV8V39Aainfix &lt;=c0V40FAainfix &gt;=amixfix []astack_sizesV8V39c0Iainfix &lt;V39anum_stacksV8Aainfix &lt;=c0V39FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.2"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="2."
+          sum="09e369b973a7967888b99f61b0dbd0b2"
+          proved="true"
+          expanded="false"
+          shape="ainfix &gt;=anum_stacksV28c0Iainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V32V31V29Aainfix &lt;V31amixfix []astack_sizesV17V30Aainfix &lt;=c0V31Lamixfix []astacksV17V30Aainfix &lt;V30anum_stacksV17Aainfix &lt;=c0V30aTuple2VVamixfix []apositionsV17V29Iainfix &lt;V29anum_eltsV17Aainfix &lt;=c0V29FAtAainfix &lt;amixfix []amixfix []astacksV17V33V34anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V33V34Iainfix &lt;V34amixfix []astack_sizesV17V33Aainfix &lt;=c0V34FAainfix &gt;=amixfix []astack_sizesV17V33c0Iainfix &lt;V33anum_stacksV17Aainfix &lt;=c0V33FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V38V37V35Aainfix &lt;V37amixfix []astack_sizesV8V36Aainfix &lt;=c0V37Lamixfix []astacksV8V36Aainfix &lt;V36anum_stacksV8Aainfix &lt;=c0V36aTuple2VVamixfix []apositionsV8V35Iainfix &lt;V35anum_eltsV8Aainfix &lt;=c0V35FAtAainfix &lt;amixfix []amixfix []astacksV8V39V40anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V39V40Iainfix &lt;V40amixfix []astack_sizesV8V39Aainfix &lt;=c0V40FAainfix &gt;=amixfix []astack_sizesV8V39c0Iainfix &lt;V39anum_stacksV8Aainfix &lt;=c0V39FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.3"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="3."
+          sum="b4d8fb42b3ea330f182b2c71e474ece3"
+          proved="true"
+          expanded="false"
+          shape="ainfix &gt;=amixfix []astack_sizesV28V29c0Iainfix &lt;V29anum_stacksV28Aainfix &lt;=c0V29FIainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V33V32V30Aainfix &lt;V32amixfix []astack_sizesV17V31Aainfix &lt;=c0V32Lamixfix []astacksV17V31Aainfix &lt;V31anum_stacksV17Aainfix &lt;=c0V31aTuple2VVamixfix []apositionsV17V30Iainfix &lt;V30anum_eltsV17Aainfix &lt;=c0V30FAtAainfix &lt;amixfix []amixfix []astacksV17V34V35anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V34V35Iainfix &lt;V35amixfix []astack_sizesV17V34Aainfix &lt;=c0V35FAainfix &gt;=amixfix []astack_sizesV17V34c0Iainfix &lt;V34anum_stacksV17Aainfix &lt;=c0V34FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V39V38V36Aainfix &lt;V38amixfix []astack_sizesV8V37Aainfix &lt;=c0V38Lamixfix []astacksV8V37Aainfix &lt;V37anum_stacksV8Aainfix &lt;=c0V37aTuple2VVamixfix []apositionsV8V36Iainfix &lt;V36anum_eltsV8Aainfix &lt;=c0V36FAtAainfix &lt;amixfix []amixfix []astacksV8V40V41anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V40V41Iainfix &lt;V41amixfix []astack_sizesV8V40Aainfix &lt;=c0V41FAainfix &gt;=amixfix []astack_sizesV8V40c0Iainfix &lt;V40anum_stacksV8Aainfix &lt;=c0V40FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.03"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.4"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="4."
+          sum="634cf663dd74bed54c868b0158549630"
+          proved="true"
+          expanded="false"
+          shape="ainfix &lt;=c0amixfix []amixfix []astacksV28V29V30Iainfix &lt;V30amixfix []astack_sizesV28V29Aainfix &lt;=c0V30FIainfix &lt;V29anum_stacksV28Aainfix &lt;=c0V29FIainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V34V33V31Aainfix &lt;V33amixfix []astack_sizesV17V32Aainfix &lt;=c0V33Lamixfix []astacksV17V32Aainfix &lt;V32anum_stacksV17Aainfix &lt;=c0V32aTuple2VVamixfix []apositionsV17V31Iainfix &lt;V31anum_eltsV17Aainfix &lt;=c0V31FAtAainfix &lt;amixfix []amixfix []astacksV17V35V36anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V35V36Iainfix &lt;V36amixfix []astack_sizesV17V35Aainfix &lt;=c0V36FAainfix &gt;=amixfix []astack_sizesV17V35c0Iainfix &lt;V35anum_stacksV17Aainfix &lt;=c0V35FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V40V39V37Aainfix &lt;V39amixfix []astack_sizesV8V38Aainfix &lt;=c0V39Lamixfix []astacksV8V38Aainfix &lt;V38anum_stacksV8Aainfix &lt;=c0V38aTuple2VVamixfix []apositionsV8V37Iainfix &lt;V37anum_eltsV8Aainfix &lt;=c0V37FAtAainfix &lt;amixfix []amixfix []astacksV8V41V42anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V41V42Iainfix &lt;V42amixfix []astack_sizesV8V41Aainfix &lt;=c0V42FAainfix &gt;=amixfix []astack_sizesV8V41c0Iainfix &lt;V41anum_stacksV8Aainfix &lt;=c0V41FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="unknown" time="0.05"/>
+          </proof>
+          <proof
+           prover="4"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.5"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="5."
+          sum="3e9d3031cc1372ab47dc71a1a721c08f"
+          proved="true"
+          expanded="false"
+          shape="ainfix &lt;amixfix []amixfix []astacksV28V29V30anum_eltsV28Iainfix &lt;V30amixfix []astack_sizesV28V29Aainfix &lt;=c0V30FIainfix &lt;V29anum_stacksV28Aainfix &lt;=c0V29FIainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V34V33V31Aainfix &lt;V33amixfix []astack_sizesV17V32Aainfix &lt;=c0V33Lamixfix []astacksV17V32Aainfix &lt;V32anum_stacksV17Aainfix &lt;=c0V32aTuple2VVamixfix []apositionsV17V31Iainfix &lt;V31anum_eltsV17Aainfix &lt;=c0V31FAtAainfix &lt;amixfix []amixfix []astacksV17V35V36anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V35V36Iainfix &lt;V36amixfix []astack_sizesV17V35Aainfix &lt;=c0V36FAainfix &gt;=amixfix []astack_sizesV17V35c0Iainfix &lt;V35anum_stacksV17Aainfix &lt;=c0V35FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V40V39V37Aainfix &lt;V39amixfix []astack_sizesV8V38Aainfix &lt;=c0V39Lamixfix []astacksV8V38Aainfix &lt;V38anum_stacksV8Aainfix &lt;=c0V38aTuple2VVamixfix []apositionsV8V37Iainfix &lt;V37anum_eltsV8Aainfix &lt;=c0V37FAtAainfix &lt;amixfix []amixfix []astacksV8V41V42anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V41V42Iainfix &lt;V42amixfix []astack_sizesV8V41Aainfix &lt;=c0V42FAainfix &gt;=amixfix []astack_sizesV8V41c0Iainfix &lt;V41anum_stacksV8Aainfix &lt;=c0V41FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="unknown" time="0.05"/>
+          </proof>
+          <proof
+           prover="1"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.03"/>
+          </proof>
+          <proof
+           prover="2"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.92"/>
+          </proof>
+          <proof
+           prover="3"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+          <proof
+           prover="4"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.01"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.6"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="6."
+          sum="36db2793460334743d05e4a9f75b6c34"
+          proved="true"
+          expanded="false"
+          shape="Cainfix &lt;=c0V30aTuple2VVamixfix []apositionsV28V29Iainfix &lt;V29anum_eltsV28Aainfix &lt;=c0V29FIainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V35V34V32Aainfix &lt;V34amixfix []astack_sizesV17V33Aainfix &lt;=c0V34Lamixfix []astacksV17V33Aainfix &lt;V33anum_stacksV17Aainfix &lt;=c0V33aTuple2VVamixfix []apositionsV17V32Iainfix &lt;V32anum_eltsV17Aainfix &lt;=c0V32FAtAainfix &lt;amixfix []amixfix []astacksV17V36V37anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V36V37Iainfix &lt;V37amixfix []astack_sizesV17V36Aainfix &lt;=c0V37FAainfix &gt;=amixfix []astack_sizesV17V36c0Iainfix &lt;V36anum_stacksV17Aainfix &lt;=c0V36FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V41V40V38Aainfix &lt;V40amixfix []astack_sizesV8V39Aainfix &lt;=c0V40Lamixfix []astacksV8V39Aainfix &lt;V39anum_stacksV8Aainfix &lt;=c0V39aTuple2VVamixfix []apositionsV8V38Iainfix &lt;V38anum_eltsV8Aainfix &lt;=c0V38FAtAainfix &lt;amixfix []amixfix []astacksV8V42V43anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V42V43Iainfix &lt;V43amixfix []astack_sizesV8V42Aainfix &lt;=c0V43FAainfix &gt;=amixfix []astack_sizesV8V42c0Iainfix &lt;V42anum_stacksV8Aainfix &lt;=c0V42FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.08"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.7"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="7."
+          sum="41eb35395f5075e943e1047adb912868"
+          proved="true"
+          expanded="false"
+          shape="Cainfix &lt;V30anum_stacksV28aTuple2VVamixfix []apositionsV28V29Iainfix &lt;V29anum_eltsV28Aainfix &lt;=c0V29FIainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V35V34V32Aainfix &lt;V34amixfix []astack_sizesV17V33Aainfix &lt;=c0V34Lamixfix []astacksV17V33Aainfix &lt;V33anum_stacksV17Aainfix &lt;=c0V33aTuple2VVamixfix []apositionsV17V32Iainfix &lt;V32anum_eltsV17Aainfix &lt;=c0V32FAtAainfix &lt;amixfix []amixfix []astacksV17V36V37anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V36V37Iainfix &lt;V37amixfix []astack_sizesV17V36Aainfix &lt;=c0V37FAainfix &gt;=amixfix []astack_sizesV17V36c0Iainfix &lt;V36anum_stacksV17Aainfix &lt;=c0V36FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V41V40V38Aainfix &lt;V40amixfix []astack_sizesV8V39Aainfix &lt;=c0V40Lamixfix []astacksV8V39Aainfix &lt;V39anum_stacksV8Aainfix &lt;=c0V39aTuple2VVamixfix []apositionsV8V38Iainfix &lt;V38anum_eltsV8Aainfix &lt;=c0V38FAtAainfix &lt;amixfix []amixfix []astacksV8V42V43anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V42V43Iainfix &lt;V43amixfix []astack_sizesV8V42Aainfix &lt;=c0V43FAainfix &gt;=amixfix []astack_sizesV8V42c0Iainfix &lt;V42anum_stacksV8Aainfix &lt;=c0V42FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.08"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.8"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="8."
+          sum="fff68df7f507f38cf408a086d2dbba28"
+          proved="true"
+          expanded="false"
+          shape="Cainfix &lt;=c0V31Lamixfix []astacksV28V30aTuple2VVamixfix []apositionsV28V29Iainfix &lt;V29anum_eltsV28Aainfix &lt;=c0V29FIainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V36V35V33Aainfix &lt;V35amixfix []astack_sizesV17V34Aainfix &lt;=c0V35Lamixfix []astacksV17V34Aainfix &lt;V34anum_stacksV17Aainfix &lt;=c0V34aTuple2VVamixfix []apositionsV17V33Iainfix &lt;V33anum_eltsV17Aainfix &lt;=c0V33FAtAainfix &lt;amixfix []amixfix []astacksV17V37V38anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V37V38Iainfix &lt;V38amixfix []astack_sizesV17V37Aainfix &lt;=c0V38FAainfix &gt;=amixfix []astack_sizesV17V37c0Iainfix &lt;V37anum_stacksV17Aainfix &lt;=c0V37FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V42V41V39Aainfix &lt;V41amixfix []astack_sizesV8V40Aainfix &lt;=c0V41Lamixfix []astacksV8V40Aainfix &lt;V40anum_stacksV8Aainfix &lt;=c0V40aTuple2VVamixfix []apositionsV8V39Iainfix &lt;V39anum_eltsV8Aainfix &lt;=c0V39FAtAainfix &lt;amixfix []amixfix []astacksV8V43V44anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V43V44Iainfix &lt;V44amixfix []astack_sizesV8V43Aainfix &lt;=c0V44FAainfix &gt;=amixfix []astack_sizesV8V43c0Iainfix &lt;V43anum_stacksV8Aainfix &lt;=c0V43FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.08"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.9"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="9."
+          sum="361894f7178b5493c6db697410195784"
+          proved="true"
+          expanded="false"
+          shape="Cainfix &lt;V31amixfix []astack_sizesV28V30Lamixfix []astacksV28V30aTuple2VVamixfix []apositionsV28V29Iainfix &lt;V29anum_eltsV28Aainfix &lt;=c0V29FIainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V36V35V33Aainfix &lt;V35amixfix []astack_sizesV17V34Aainfix &lt;=c0V35Lamixfix []astacksV17V34Aainfix &lt;V34anum_stacksV17Aainfix &lt;=c0V34aTuple2VVamixfix []apositionsV17V33Iainfix &lt;V33anum_eltsV17Aainfix &lt;=c0V33FAtAainfix &lt;amixfix []amixfix []astacksV17V37V38anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V37V38Iainfix &lt;V38amixfix []astack_sizesV17V37Aainfix &lt;=c0V38FAainfix &gt;=amixfix []astack_sizesV17V37c0Iainfix &lt;V37anum_stacksV17Aainfix &lt;=c0V37FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V42V41V39Aainfix &lt;V41amixfix []astack_sizesV8V40Aainfix &lt;=c0V41Lamixfix []astacksV8V40Aainfix &lt;V40anum_stacksV8Aainfix &lt;=c0V40aTuple2VVamixfix []apositionsV8V39Iainfix &lt;V39anum_eltsV8Aainfix &lt;=c0V39FAtAainfix &lt;amixfix []amixfix []astacksV8V43V44anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V43V44Iainfix &lt;V44amixfix []astack_sizesV8V43Aainfix &lt;=c0V44FAainfix &gt;=amixfix []astack_sizesV8V43c0Iainfix &lt;V43anum_stacksV8Aainfix &lt;=c0V43FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.22"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.4.1.10"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="10."
+          sum="74c14e23ed3cd905ff5d76916e70cfb6"
+          proved="true"
+          expanded="false"
+          shape="Cainfix =amixfix []V32V31V29Lamixfix []astacksV28V30aTuple2VVamixfix []apositionsV28V29Iainfix &lt;V29anum_eltsV28Aainfix &lt;=c0V29FIainfix =V27asetV11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25asetV13V18amixfix [&lt;-]V19V20V16FIainfix =V24asetV14V18ainfix +V20c1FIainfix =V23asetV15V16V0FIainfix =V22ainfix +V16c1FIainfix =V0amixfix []V15V21Oainfix &lt;V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18ICainfix =amixfix []V36V35V33Aainfix &lt;V35amixfix []astack_sizesV17V34Aainfix &lt;=c0V35Lamixfix []astacksV17V34Aainfix &lt;V34anum_stacksV17Aainfix &lt;=c0V34aTuple2VVamixfix []apositionsV17V33Iainfix &lt;V33anum_eltsV17Aainfix &lt;=c0V33FAtAainfix &lt;amixfix []amixfix []astacksV17V37V38anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V37V38Iainfix &lt;V38amixfix []astack_sizesV17V37Aainfix &lt;=c0V38FAainfix &gt;=amixfix []astack_sizesV17V37c0Iainfix &lt;V37anum_stacksV17Aainfix &lt;=c0V37FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Iainfix =V18V9Oainfix &lt;V18V9Aainfix =c0V18Oainfix &lt;c0V18FLamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V42V41V39Aainfix &lt;V41amixfix []astack_sizesV8V40Aainfix &lt;=c0V41Lamixfix []astacksV8V40Aainfix &lt;V40anum_stacksV8Aainfix &lt;=c0V40aTuple2VVamixfix []apositionsV8V39Iainfix &lt;V39anum_eltsV8Aainfix &lt;=c0V39FAtAainfix &lt;amixfix []amixfix []astacksV8V43V44anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V43V44Iainfix &lt;V44amixfix []astack_sizesV8V43Aainfix &lt;=c0V44FAainfix &gt;=amixfix []astack_sizesV8V43c0Iainfix &lt;V43anum_stacksV8Aainfix &lt;=c0V43FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.26"/>
+          </proof>
+         </goal>
+        </transf>
+       </goal>
+      </transf>
+     </goal>
+     <goal
+      name="WP_parameter play_card.5"
+      locfile="../patience_state.mlw"
+      loclnum="119" loccnumb="6" loccnume="15"
+      expl="5. postcondition"
+      sum="72fe8e078efcbcc63dbdabb258846333"
+      proved="true"
+      expanded="false"
+      shape="postconditionainvV28IainvV28Iainfix =V27amixfix [&lt;-]V11V16V10Lamk stateV22V23V3V24V25V26V27FIainfix =V26asetV12V16aTuple2V18V20FIainfix =V25amixfix [&lt;-]V13V18amixfix [&lt;-]V19V20V16FIainfix =V24amixfix [&lt;-]V14V18ainfix +V20c1FIainfix =V23amixfix [&lt;-]V15V16V0FIainfix =V22ainfix +V16c1FIainfix &lt;=V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18IainvV17Iainfix &lt;=V18V9Aainfix &lt;=c0V18FLamk stateV16V15V3V14V13V12V11FIainfix &lt;=c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_card.6"
+      locfile="../patience_state.mlw"
+      loclnum="119" loccnumb="6" loccnume="15"
+      expl="6. loop invariant preservation"
+      sum="773ee2106f0d8a66f72d2b226e211fc6"
+      proved="true"
+      expanded="false"
+      shape="loop invariant preservationainvV17Iainfix =V22V21FINainfix &lt;=V0amixfix []V15V21Lamixfix []V19ainfix -V20c1Lamixfix []V14V18Lamixfix []V13V18IainvV17Iainfix &lt;=V18V9Aainfix &lt;=c0V18FLamk stateV16V15V3V14V13V12V11FIainfix &lt;=c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_card.7"
+      locfile="../patience_state.mlw"
+      loclnum="119" loccnumb="6" loccnume="15"
+      expl="7. assertion"
+      sum="9a79132f25f73ca737a12ce9efa827ef"
+      proved="true"
+      expanded="false"
+      shape="assertionainvV25Iainfix =V24amixfix [&lt;-]V11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22amixfix [&lt;-]V13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21amixfix [&lt;-]V14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19amixfix [&lt;-]V15V16V0FIainfix =V18ainfix +V16c1FIainvV17Lamk stateV16V15V3V14V13V12V11FIainfix &lt;=c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_card"/>
+      <transf
+       name="inline_goal"
+       proved="true"
+       expanded="false">
+       <goal
+        name="WP_parameter play_card.7.1"
+        locfile="../patience_state.mlw"
+        loclnum="119" loccnumb="6" loccnume="15"
+        expl="1. assertion"
+        sum="22564fa23414fd8c5f1186b775ce68bd"
+        proved="true"
+        expanded="false"
+        shape="assertionCainfix =amixfix []V29V28V26Aainfix &lt;V28amixfix []astack_sizesV25V27Aainfix &lt;=c0V28Lamixfix []astacksV25V27Aainfix &lt;V27anum_stacksV25Aainfix &lt;=c0V27aTuple2VVamixfix []apositionsV25V26Iainfix &lt;V26anum_eltsV25Aainfix &lt;=c0V26FAtAainfix &lt;amixfix []amixfix []astacksV25V30V31anum_eltsV25Aainfix &lt;=c0amixfix []amixfix []astacksV25V30V31Iainfix &lt;V31amixfix []astack_sizesV25V30Aainfix &lt;=c0V31FAainfix &gt;=amixfix []astack_sizesV25V30c0Iainfix &lt;V30anum_stacksV25Aainfix &lt;=c0V30FAainfix &gt;=anum_stacksV25c0Aainfix &gt;=anum_eltsV25c0Iainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V35V34V32Aainfix &lt;V34amixfix []astack_sizesV17V33Aainfix &lt;=c0V34Lamixfix []astacksV17V33Aainfix &lt;V33anum_stacksV17Aainfix &lt;=c0V33aTuple2VVamixfix []apositionsV17V32Iainfix &lt;V32anum_eltsV17Aainfix &lt;=c0V32FAtAainfix &lt;amixfix []amixfix []astacksV17V36V37anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V36V37Iainfix &lt;V37amixfix []astack_sizesV17V36Aainfix &lt;=c0V37FAainfix &gt;=amixfix []astack_sizesV17V36c0Iainfix &lt;V36anum_stacksV17Aainfix &lt;=c0V36FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V41V40V38Aainfix &lt;V40amixfix []astack_sizesV8V39Aainfix &lt;=c0V40Lamixfix []astacksV8V39Aainfix &lt;V39anum_stacksV8Aainfix &lt;=c0V39aTuple2VVamixfix []apositionsV8V38Iainfix &lt;V38anum_eltsV8Aainfix &lt;=c0V38FAtAainfix &lt;amixfix []amixfix []astacksV8V42V43anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V42V43Iainfix &lt;V43amixfix []astack_sizesV8V42Aainfix &lt;=c0V43FAainfix &gt;=amixfix []astack_sizesV8V42c0Iainfix &lt;V42anum_stacksV8Aainfix &lt;=c0V42FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+        <label
+         name="expl:VC for play_card"/>
+        <transf
+         name="split_goal_wp"
+         proved="true"
+         expanded="false">
+         <goal
+          name="WP_parameter play_card.7.1.1"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="1."
+          sum="a48e2ee766e74659086d8200e7f434bc"
+          proved="true"
+          expanded="false"
+          shape="ainfix &gt;=anum_eltsV25c0Iainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V29V28V26Aainfix &lt;V28amixfix []astack_sizesV17V27Aainfix &lt;=c0V28Lamixfix []astacksV17V27Aainfix &lt;V27anum_stacksV17Aainfix &lt;=c0V27aTuple2VVamixfix []apositionsV17V26Iainfix &lt;V26anum_eltsV17Aainfix &lt;=c0V26FAtAainfix &lt;amixfix []amixfix []astacksV17V30V31anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V30V31Iainfix &lt;V31amixfix []astack_sizesV17V30Aainfix &lt;=c0V31FAainfix &gt;=amixfix []astack_sizesV17V30c0Iainfix &lt;V30anum_stacksV17Aainfix &lt;=c0V30FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V35V34V32Aainfix &lt;V34amixfix []astack_sizesV8V33Aainfix &lt;=c0V34Lamixfix []astacksV8V33Aainfix &lt;V33anum_stacksV8Aainfix &lt;=c0V33aTuple2VVamixfix []apositionsV8V32Iainfix &lt;V32anum_eltsV8Aainfix &lt;=c0V32FAtAainfix &lt;amixfix []amixfix []astacksV8V36V37anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V36V37Iainfix &lt;V37amixfix []astack_sizesV8V36Aainfix &lt;=c0V37FAainfix &gt;=amixfix []astack_sizesV8V36c0Iainfix &lt;V36anum_stacksV8Aainfix &lt;=c0V36FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.2"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="2."
+          sum="8ae6cba8b466e12500dd1acd9726e359"
+          proved="true"
+          expanded="false"
+          shape="ainfix &gt;=anum_stacksV25c0Iainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V29V28V26Aainfix &lt;V28amixfix []astack_sizesV17V27Aainfix &lt;=c0V28Lamixfix []astacksV17V27Aainfix &lt;V27anum_stacksV17Aainfix &lt;=c0V27aTuple2VVamixfix []apositionsV17V26Iainfix &lt;V26anum_eltsV17Aainfix &lt;=c0V26FAtAainfix &lt;amixfix []amixfix []astacksV17V30V31anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V30V31Iainfix &lt;V31amixfix []astack_sizesV17V30Aainfix &lt;=c0V31FAainfix &gt;=amixfix []astack_sizesV17V30c0Iainfix &lt;V30anum_stacksV17Aainfix &lt;=c0V30FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V35V34V32Aainfix &lt;V34amixfix []astack_sizesV8V33Aainfix &lt;=c0V34Lamixfix []astacksV8V33Aainfix &lt;V33anum_stacksV8Aainfix &lt;=c0V33aTuple2VVamixfix []apositionsV8V32Iainfix &lt;V32anum_eltsV8Aainfix &lt;=c0V32FAtAainfix &lt;amixfix []amixfix []astacksV8V36V37anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V36V37Iainfix &lt;V37amixfix []astack_sizesV8V36Aainfix &lt;=c0V37FAainfix &gt;=amixfix []astack_sizesV8V36c0Iainfix &lt;V36anum_stacksV8Aainfix &lt;=c0V36FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.3"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="3."
+          sum="07e89d4a988587831427796843956499"
+          proved="true"
+          expanded="false"
+          shape="ainfix &gt;=amixfix []astack_sizesV25V26c0Iainfix &lt;V26anum_stacksV25Aainfix &lt;=c0V26FIainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V30V29V27Aainfix &lt;V29amixfix []astack_sizesV17V28Aainfix &lt;=c0V29Lamixfix []astacksV17V28Aainfix &lt;V28anum_stacksV17Aainfix &lt;=c0V28aTuple2VVamixfix []apositionsV17V27Iainfix &lt;V27anum_eltsV17Aainfix &lt;=c0V27FAtAainfix &lt;amixfix []amixfix []astacksV17V31V32anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V31V32Iainfix &lt;V32amixfix []astack_sizesV17V31Aainfix &lt;=c0V32FAainfix &gt;=amixfix []astack_sizesV17V31c0Iainfix &lt;V31anum_stacksV17Aainfix &lt;=c0V31FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V36V35V33Aainfix &lt;V35amixfix []astack_sizesV8V34Aainfix &lt;=c0V35Lamixfix []astacksV8V34Aainfix &lt;V34anum_stacksV8Aainfix &lt;=c0V34aTuple2VVamixfix []apositionsV8V33Iainfix &lt;V33anum_eltsV8Aainfix &lt;=c0V33FAtAainfix &lt;amixfix []amixfix []astacksV8V37V38anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V37V38Iainfix &lt;V38amixfix []astack_sizesV8V37Aainfix &lt;=c0V38FAainfix &gt;=amixfix []astack_sizesV8V37c0Iainfix &lt;V37anum_stacksV8Aainfix &lt;=c0V37FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.03"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.4"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="4."
+          sum="bd2bddd3c2ef4832ce3245908a5899af"
+          proved="true"
+          expanded="false"
+          shape="ainfix &lt;=c0amixfix []amixfix []astacksV25V26V27Iainfix &lt;V27amixfix []astack_sizesV25V26Aainfix &lt;=c0V27FIainfix &lt;V26anum_stacksV25Aainfix &lt;=c0V26FIainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V31V30V28Aainfix &lt;V30amixfix []astack_sizesV17V29Aainfix &lt;=c0V30Lamixfix []astacksV17V29Aainfix &lt;V29anum_stacksV17Aainfix &lt;=c0V29aTuple2VVamixfix []apositionsV17V28Iainfix &lt;V28anum_eltsV17Aainfix &lt;=c0V28FAtAainfix &lt;amixfix []amixfix []astacksV17V32V33anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V32V33Iainfix &lt;V33amixfix []astack_sizesV17V32Aainfix &lt;=c0V33FAainfix &gt;=amixfix []astack_sizesV17V32c0Iainfix &lt;V32anum_stacksV17Aainfix &lt;=c0V32FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V37V36V34Aainfix &lt;V36amixfix []astack_sizesV8V35Aainfix &lt;=c0V36Lamixfix []astacksV8V35Aainfix &lt;V35anum_stacksV8Aainfix &lt;=c0V35aTuple2VVamixfix []apositionsV8V34Iainfix &lt;V34anum_eltsV8Aainfix &lt;=c0V34FAtAainfix &lt;amixfix []amixfix []astacksV8V38V39anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V38V39Iainfix &lt;V39amixfix []astack_sizesV8V38Aainfix &lt;=c0V39FAainfix &gt;=amixfix []astack_sizesV8V38c0Iainfix &lt;V38anum_stacksV8Aainfix &lt;=c0V38FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="unknown" time="0.03"/>
+          </proof>
+          <proof
+           prover="1"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.03"/>
+          </proof>
+          <proof
+           prover="3"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+          <proof
+           prover="4"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.5"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="5."
+          sum="16b6707981b53323a582f048553f03ab"
+          proved="true"
+          expanded="false"
+          shape="ainfix &lt;amixfix []amixfix []astacksV25V26V27anum_eltsV25Iainfix &lt;V27amixfix []astack_sizesV25V26Aainfix &lt;=c0V27FIainfix &lt;V26anum_stacksV25Aainfix &lt;=c0V26FIainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V31V30V28Aainfix &lt;V30amixfix []astack_sizesV17V29Aainfix &lt;=c0V30Lamixfix []astacksV17V29Aainfix &lt;V29anum_stacksV17Aainfix &lt;=c0V29aTuple2VVamixfix []apositionsV17V28Iainfix &lt;V28anum_eltsV17Aainfix &lt;=c0V28FAtAainfix &lt;amixfix []amixfix []astacksV17V32V33anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V32V33Iainfix &lt;V33amixfix []astack_sizesV17V32Aainfix &lt;=c0V33FAainfix &gt;=amixfix []astack_sizesV17V32c0Iainfix &lt;V32anum_stacksV17Aainfix &lt;=c0V32FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V37V36V34Aainfix &lt;V36amixfix []astack_sizesV8V35Aainfix &lt;=c0V36Lamixfix []astacksV8V35Aainfix &lt;V35anum_stacksV8Aainfix &lt;=c0V35aTuple2VVamixfix []apositionsV8V34Iainfix &lt;V34anum_eltsV8Aainfix &lt;=c0V34FAtAainfix &lt;amixfix []amixfix []astacksV8V38V39anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V38V39Iainfix &lt;V39amixfix []astack_sizesV8V38Aainfix &lt;=c0V39FAainfix &gt;=amixfix []astack_sizesV8V38c0Iainfix &lt;V38anum_stacksV8Aainfix &lt;=c0V38FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="unknown" time="0.03"/>
+          </proof>
+          <proof
+           prover="1"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+          <proof
+           prover="3"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+          <proof
+           prover="4"
+           timelimit="30"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.00"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.6"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="6."
+          sum="4789065ddb884f7939cbfbc94dd44e95"
+          proved="true"
+          expanded="false"
+          shape="Cainfix &lt;=c0V27aTuple2VVamixfix []apositionsV25V26Iainfix &lt;V26anum_eltsV25Aainfix &lt;=c0V26FIainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V32V31V29Aainfix &lt;V31amixfix []astack_sizesV17V30Aainfix &lt;=c0V31Lamixfix []astacksV17V30Aainfix &lt;V30anum_stacksV17Aainfix &lt;=c0V30aTuple2VVamixfix []apositionsV17V29Iainfix &lt;V29anum_eltsV17Aainfix &lt;=c0V29FAtAainfix &lt;amixfix []amixfix []astacksV17V33V34anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V33V34Iainfix &lt;V34amixfix []astack_sizesV17V33Aainfix &lt;=c0V34FAainfix &gt;=amixfix []astack_sizesV17V33c0Iainfix &lt;V33anum_stacksV17Aainfix &lt;=c0V33FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V38V37V35Aainfix &lt;V37amixfix []astack_sizesV8V36Aainfix &lt;=c0V37Lamixfix []astacksV8V36Aainfix &lt;V36anum_stacksV8Aainfix &lt;=c0V36aTuple2VVamixfix []apositionsV8V35Iainfix &lt;V35anum_eltsV8Aainfix &lt;=c0V35FAtAainfix &lt;amixfix []amixfix []astacksV8V39V40anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V39V40Iainfix &lt;V40amixfix []astack_sizesV8V39Aainfix &lt;=c0V40FAainfix &gt;=amixfix []astack_sizesV8V39c0Iainfix &lt;V39anum_stacksV8Aainfix &lt;=c0V39FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.03"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.7"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="7."
+          sum="fd4139932a2cc6e92836b10dcb2e7a1e"
+          proved="true"
+          expanded="false"
+          shape="Cainfix &lt;V27anum_stacksV25aTuple2VVamixfix []apositionsV25V26Iainfix &lt;V26anum_eltsV25Aainfix &lt;=c0V26FIainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V32V31V29Aainfix &lt;V31amixfix []astack_sizesV17V30Aainfix &lt;=c0V31Lamixfix []astacksV17V30Aainfix &lt;V30anum_stacksV17Aainfix &lt;=c0V30aTuple2VVamixfix []apositionsV17V29Iainfix &lt;V29anum_eltsV17Aainfix &lt;=c0V29FAtAainfix &lt;amixfix []amixfix []astacksV17V33V34anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V33V34Iainfix &lt;V34amixfix []astack_sizesV17V33Aainfix &lt;=c0V34FAainfix &gt;=amixfix []astack_sizesV17V33c0Iainfix &lt;V33anum_stacksV17Aainfix &lt;=c0V33FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V38V37V35Aainfix &lt;V37amixfix []astack_sizesV8V36Aainfix &lt;=c0V37Lamixfix []astacksV8V36Aainfix &lt;V36anum_stacksV8Aainfix &lt;=c0V36aTuple2VVamixfix []apositionsV8V35Iainfix &lt;V35anum_eltsV8Aainfix &lt;=c0V35FAtAainfix &lt;amixfix []amixfix []astacksV8V39V40anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V39V40Iainfix &lt;V40amixfix []astack_sizesV8V39Aainfix &lt;=c0V40FAainfix &gt;=amixfix []astack_sizesV8V39c0Iainfix &lt;V39anum_stacksV8Aainfix &lt;=c0V39FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.04"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.8"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="8."
+          sum="d0f450332df0cf17cf47131334c9ab69"
+          proved="true"
+          expanded="false"
+          shape="Cainfix &lt;=c0V28Lamixfix []astacksV25V27aTuple2VVamixfix []apositionsV25V26Iainfix &lt;V26anum_eltsV25Aainfix &lt;=c0V26FIainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V33V32V30Aainfix &lt;V32amixfix []astack_sizesV17V31Aainfix &lt;=c0V32Lamixfix []astacksV17V31Aainfix &lt;V31anum_stacksV17Aainfix &lt;=c0V31aTuple2VVamixfix []apositionsV17V30Iainfix &lt;V30anum_eltsV17Aainfix &lt;=c0V30FAtAainfix &lt;amixfix []amixfix []astacksV17V34V35anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V34V35Iainfix &lt;V35amixfix []astack_sizesV17V34Aainfix &lt;=c0V35FAainfix &gt;=amixfix []astack_sizesV17V34c0Iainfix &lt;V34anum_stacksV17Aainfix &lt;=c0V34FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V39V38V36Aainfix &lt;V38amixfix []astack_sizesV8V37Aainfix &lt;=c0V38Lamixfix []astacksV8V37Aainfix &lt;V37anum_stacksV8Aainfix &lt;=c0V37aTuple2VVamixfix []apositionsV8V36Iainfix &lt;V36anum_eltsV8Aainfix &lt;=c0V36FAtAainfix &lt;amixfix []amixfix []astacksV8V40V41anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V40V41Iainfix &lt;V41amixfix []astack_sizesV8V40Aainfix &lt;=c0V41FAainfix &gt;=amixfix []astack_sizesV8V40c0Iainfix &lt;V40anum_stacksV8Aainfix &lt;=c0V40FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.02"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.9"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="9."
+          sum="d5a09b3183bcd40cf27bd9393b843c99"
+          proved="true"
+          expanded="false"
+          shape="Cainfix &lt;V28amixfix []astack_sizesV25V27Lamixfix []astacksV25V27aTuple2VVamixfix []apositionsV25V26Iainfix &lt;V26anum_eltsV25Aainfix &lt;=c0V26FIainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V33V32V30Aainfix &lt;V32amixfix []astack_sizesV17V31Aainfix &lt;=c0V32Lamixfix []astacksV17V31Aainfix &lt;V31anum_stacksV17Aainfix &lt;=c0V31aTuple2VVamixfix []apositionsV17V30Iainfix &lt;V30anum_eltsV17Aainfix &lt;=c0V30FAtAainfix &lt;amixfix []amixfix []astacksV17V34V35anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V34V35Iainfix &lt;V35amixfix []astack_sizesV17V34Aainfix &lt;=c0V35FAainfix &gt;=amixfix []astack_sizesV17V34c0Iainfix &lt;V34anum_stacksV17Aainfix &lt;=c0V34FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V39V38V36Aainfix &lt;V38amixfix []astack_sizesV8V37Aainfix &lt;=c0V38Lamixfix []astacksV8V37Aainfix &lt;V37anum_stacksV8Aainfix &lt;=c0V37aTuple2VVamixfix []apositionsV8V36Iainfix &lt;V36anum_eltsV8Aainfix &lt;=c0V36FAtAainfix &lt;amixfix []amixfix []astacksV8V40V41anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V40V41Iainfix &lt;V41amixfix []astack_sizesV8V40Aainfix &lt;=c0V41FAainfix &gt;=amixfix []astack_sizesV8V40c0Iainfix &lt;V40anum_stacksV8Aainfix &lt;=c0V40FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.08"/>
+          </proof>
+         </goal>
+         <goal
+          name="WP_parameter play_card.7.1.10"
+          locfile="../patience_state.mlw"
+          loclnum="119" loccnumb="6" loccnume="15"
+          expl="10."
+          sum="295f5680b8571d0ef88497301deaef1f"
+          proved="true"
+          expanded="false"
+          shape="Cainfix =amixfix []V29V28V26Lamixfix []astacksV25V27aTuple2VVamixfix []apositionsV25V26Iainfix &lt;V26anum_eltsV25Aainfix &lt;=c0V26FIainfix =V24asetV11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22asetV13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21asetV14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19asetV15V16V0FIainfix =V18ainfix +V16c1FICainfix =amixfix []V33V32V30Aainfix &lt;V32amixfix []astack_sizesV17V31Aainfix &lt;=c0V32Lamixfix []astacksV17V31Aainfix &lt;V31anum_stacksV17Aainfix &lt;=c0V31aTuple2VVamixfix []apositionsV17V30Iainfix &lt;V30anum_eltsV17Aainfix &lt;=c0V30FAtAainfix &lt;amixfix []amixfix []astacksV17V34V35anum_eltsV17Aainfix &lt;=c0amixfix []amixfix []astacksV17V34V35Iainfix &lt;V35amixfix []astack_sizesV17V34Aainfix &lt;=c0V35FAainfix &gt;=amixfix []astack_sizesV17V34c0Iainfix &lt;V34anum_stacksV17Aainfix &lt;=c0V34FAainfix &gt;=anum_stacksV17c0Aainfix &gt;=anum_eltsV17c0Lamk stateV16V15V3V14V13V12V11FIainfix =c0V9Oainfix &lt;c0V9Lainfix -V3c1ICainfix =amixfix []V39V38V36Aainfix &lt;V38amixfix []astack_sizesV8V37Aainfix &lt;=c0V38Lamixfix []astacksV8V37Aainfix &lt;V37anum_stacksV8Aainfix &lt;=c0V37aTuple2VVamixfix []apositionsV8V36Iainfix &lt;V36anum_eltsV8Aainfix &lt;=c0V36FAtAainfix &lt;amixfix []amixfix []astacksV8V40V41anum_eltsV8Aainfix &lt;=c0amixfix []amixfix []astacksV8V40V41Iainfix &lt;V41amixfix []astack_sizesV8V40Aainfix &lt;=c0V41FAainfix &gt;=amixfix []astack_sizesV8V40c0Iainfix &lt;V40anum_stacksV8Aainfix &lt;=c0V40FAainfix &gt;=anum_stacksV8c0Aainfix &gt;=anum_eltsV8c0Lamk stateV1V2V3V4V5V6V7F">
+          <label
+           name="expl:VC for play_card"/>
+          <proof
+           prover="0"
+           timelimit="5"
+           memlimit="1000"
+           obsolete="false"
+           archived="false">
+           <result status="valid" time="0.05"/>
+          </proof>
+         </goal>
+        </transf>
+       </goal>
+      </transf>
+     </goal>
+     <goal
+      name="WP_parameter play_card.8"
+      locfile="../patience_state.mlw"
+      loclnum="119" loccnumb="6" loccnume="15"
+      expl="8. postcondition"
+      sum="423d3410b7f5b7d427a5cc7099ec5592"
+      proved="true"
+      expanded="false"
+      shape="postconditionainvV25IainvV25Iainfix =V24amixfix [&lt;-]V11V16V10Lamk stateV18V19V20V21V22V23V24FIainfix =V23asetV12V16aTuple2V3c0FIainfix =V22amixfix [&lt;-]V13V3amixfix [&lt;-]amixfix []V13V3c0V16FIainfix =V21amixfix [&lt;-]V14V3c1FIainfix =V20ainfix +V3c1FIainfix =V19amixfix [&lt;-]V15V16V0FIainfix =V18ainfix +V16c1FIainvV17Lamk stateV16V15V3V14V13V12V11FIainfix &lt;=c0V9Lainfix -V3c1IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+    </transf>
+   </goal>
+   <goal
+    name="WP_parameter play_cards"
+    locfile="../patience_state.mlw"
+    loclnum="164" loccnumb="10" loccnume="20"
+    expl="VC for play_cards"
+    sum="92f7b1bd64f781e5dfc7746f8b9f24ea"
+    proved="true"
+    expanded="false"
+    shape="CtaNilainvV18ACfaNilainfix =V19V10aConswVV0IainvV18Lamk stateV17V16V15V14V13V12V11FAainvV8aConsVVV0IainvV8Lamk stateV1V2V3V4V5V6V7F">
+    <label
+     name="expl:VC for play_cards"/>
+    <transf
+     name="split_goal_wp"
+     proved="true"
+     expanded="false">
+     <goal
+      name="WP_parameter play_cards.1"
+      locfile="../patience_state.mlw"
+      loclnum="164" loccnumb="10" loccnume="20"
+      expl="1. precondition"
+      sum="d829a6b757161e4d130a70533e76688e"
+      proved="true"
+      expanded="false"
+      shape="preconditionCtaNilainvV8aConsVVV0IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_cards"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.00"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_cards.2"
+      locfile="../patience_state.mlw"
+      loclnum="164" loccnumb="10" loccnume="20"
+      expl="2. variant decrease"
+      sum="e523e0c201f02c9f0c10fc0b20efd012"
+      proved="true"
+      expanded="false"
+      shape="variant decreaseCtaNilCfaNilainfix =V19V10aConswVV0IainvV18Lamk stateV17V16V15V14V13V12V11FIainvV8aConsVVV0IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_cards"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter play_cards.3"
+      locfile="../patience_state.mlw"
+      loclnum="164" loccnumb="10" loccnume="20"
+      expl="3. precondition"
+      sum="805cd8947951363ec1a812972b045b88"
+      proved="true"
+      expanded="false"
+      shape="preconditionCtaNilainvV18IainvV18Lamk stateV17V16V15V14V13V12V11FIainvV8aConsVVV0IainvV8Lamk stateV1V2V3V4V5V6V7F">
+      <label
+       name="expl:VC for play_cards"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.02"/>
+      </proof>
+     </goal>
+    </transf>
+   </goal>
+   <goal
+    name="WP_parameter play_game"
+    locfile="../patience_state.mlw"
+    loclnum="176" loccnumb="6" loccnume="15"
+    expl="VC for play_game"
+    sum="1677c6958dc3c24cb559fc06ec6586b1"
+    proved="true"
+    expanded="false"
+    shape="ainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1">
+    <label
+     name="expl:VC for play_game"/>
+    <transf
+     name="split_goal_wp"
+     proved="true"
+     expanded="false">
+     <goal
+      name="WP_parameter play_game.1"
+      locfile="../patience_state.mlw"
+      loclnum="176" loccnumb="6" loccnume="15"
+      expl="1. precondition"
+      sum="1677c6958dc3c24cb559fc06ec6586b1"
+      proved="true"
+      expanded="false"
+      shape="preconditionainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1">
+      <label
+       name="expl:VC for play_game"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+    </transf>
+   </goal>
+   <goal
+    name="WP_parameter test"
+    locfile="../patience_state.mlw"
+    loclnum="193" loccnumb="6" loccnume="10"
+    expl="VC for test"
+    sum="a83e461cfae2b1e1846708f834cdae92"
+    proved="true"
+    expanded="false"
+    shape="t">
+    <label
+     name="expl:VC for test"/>
+    <transf
+     name="split_goal_wp"
+     proved="true"
+     expanded="false">
+    </transf>
+   </goal>
+  </theory>
+ </file>
+</why3session>

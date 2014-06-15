@@ -42,61 +42,30 @@ module Patience
   use import list.Append
   use import list.Reverse
 
-  (** {2 Specifications} *)
-
-(*
-  (** a sequence of stacks is well-formed iff each stack is non-empty
-      and increasing *)
-  predicate increasing_stack (stack: list int) =
-    match stack with
-    | Nil -> false
-    | Cons _ Nil -> true
-    | Cons c1 (Cons c2 _ as rem) -> c1 <= c2 /\ increasing_stack rem
-    end
-
-  predicate wf_stacks (stacks: list (list int)) =
-    match stacks with
-    | Nil -> true
-    | Cons s rem -> increasing_stack s /\ wf_stacks rem
-    end
-
-  (** lemma: concatenation of well-formed sequences of stacks results in
-      a well-formed sequence of stacks.
-      Structural induction done via a lemma function *)
-  let rec lemma wf_append_stacks (s1 s2: list (list int))
-    requires { wf_stacks s1 }
-    requires { wf_stacks s2 }
-    variant { s1 }
-    ensures { wf_stacks (s1 ++ s2) }
-  = match s1 with
-    | Nil -> ()
-    | Cons _ rem -> wf_append_stacks rem s2
-    end
-*)
-
   (** {2 Ghost state} *)
 
   (** To specify the expected behavior of the code, we attach a ghost
       state to each step of the algorithm. This state provides extra
       information needed for the final property to establish: (1) the
-      number of elements [n] in the input sequence (2) a map [m]
-      associating to each i from 0 to n-1 the value of th ith card (3)
+      number of elements [len] in the input sequence (2) a map [elts]
+      associating to each i from 0 to [len-1] the value of th ith card and in which stack it is (3)
       the indexes of each top element of all stacks (4) a map
-      [p] associating to each i from 0 to n-1 a "predecessor": the
+      [preds] associating to each i from 0 to [len-1] a "predecessor": the
       index j of a smaller element in the sequence that appears in the
       stack immediately on the left (-1 if already on the leftmost
       stack). Here is what happens on the example sequence [[9, 7, 10,
       9, 5, 4, 10]] :
 
 {h <pre>}
-n=0
-n=1, m(0) = 9, p(0) = -1
-n=2, m(1) = 7, p(1) = -1
-n=3, m(2) = 10, p(2) = 1 (because predecessor is 7 = m(1))
-n=4, m(3) = 9, p(3) = 1 (predecessor is also 7)
-n=5, m(4) = 5, p(4) = -1
-n=6, m(5) = 4, p(5) = -1
-n=7, m(6) = 10, p(6) = 3 (predecessor is m(3) = 9)
+len=0
+len=1, elts(0) = (9,0),  top(0) = 0, preds(0) = -1
+len=2, elts(1) = (7,0),  top(0) = 1, preds(1) = -1
+len=3, elts(2) = (10,1), top(1) = 2, preds(2) = 1 
+  (top(0), works because predecessor is 7 = fst(elts(1)))
+len=4, elts(3) = (9,1),  top(1) = 3, preds(3) = 1 
+len=5, elts(4) = (5,0),  top(0) = 4, preds(4) = -1
+len=6, elts(5) = (4,0),  top(0) = 5, preds(5) = -1
+len=7, elts(6) = (10,2), top(2) = 6, preds(6) = 3 (top(1)), hence predecessor is fst(elts(3)) = 9)
 {h </pre>}
 
 as we see, the predessor of a new added card is always the top of the
@@ -112,7 +81,7 @@ and so on.
 
   type state = {
     mutable num_elts : int;
-    mutable elts : map int int;
+    mutable elts : map int (int,int);
     mutable top_stacks : map int int;
     mutable preds : map int int;
   }
@@ -155,12 +124,15 @@ invariants:
       | Nil -> false (* stacks are non-empty *)
       | Cons hd _ ->
         let idx = s.top_stacks[i] in
-        0 <= idx < s.num_elts /\ s.elts[idx] = hd
+        0 <= idx < s.num_elts /\ let (e,_) = s.elts[idx] in e = hd
       end)
   /\
     (forall i. 0 <= i < s.num_elts ->
       let j = s.preds[i] in
-        -1 <= j < s.num_elts /\ (j >= 0 -> s.elts[j] < s.elts[i]))
+        -1 <= j < s.num_elts /\ (j >= 0 -> 
+          let (ej,sj) = s.elts[j] in
+          let (ei,si) = s.elts[i] in
+          ej < ei /\ si > 0 /\ sj = si - 1))
 
   (** {2 Programs} *)
 
@@ -198,7 +170,7 @@ invariants:
       assert { nth lacc new_stacks = Cons c Nil };
       let ghost l = s.num_elts in
       s.num_elts <- l + 1;
-      s.elts <- s.elts[l<-c];
+      s.elts <- s.elts[l <- (c,lacc)];
       let ghost p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
       s.preds <- s.preds[l <- p];
       s.top_stacks <- s.top_stacks[lacc <- l];
@@ -228,7 +200,7 @@ invariants:
              assert { nth lacc new_stacks = Cons c (nth lacc old_stacks) } ;
              let ghost l = s.num_elts in
              s.num_elts <- l + 1;
-             s.elts <- s.elts[l<-c];
+             s.elts <- s.elts[l<-(c,lacc)];
              let ghost p = if lacc = 0 then -1 else s.top_stacks[lacc-1] in
              s.preds <- s.preds[l <- p];
              s.top_stacks <- s.top_stacks[lacc <- l];
@@ -259,7 +231,7 @@ invariants:
     ensures { true }
   = let ghost s = {
       num_elts = 0;
-      elts = Map.const (-1) ;
+      elts = Map.const (-1,-1) ;
       top_stacks = Map.const (-1);
       preds = Map.const (-1);
     }
