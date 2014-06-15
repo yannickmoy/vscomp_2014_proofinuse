@@ -155,15 +155,31 @@ proctype thread()
 {
   bool do_return_res;
   byte thr_id = 0;
-  mtype was_in_set;
 
   do
-  :: atomic { (value_in_set[thr_id] == in_set
-               || value_in_set[thr_id] == not_in_set);
-               was_in_set = value_in_set[thr_id] } ->
+  ::
+ value_in_set[thr_id] == in_set ->
+start_search_when_in_set:
                 lookup(thr_id+1);
-                assert(!(was_in_set == in_set) || do_return_res == true);
-                assert(!(was_in_set == not_in_set) || do_return_res == false)
+                if
+                :: do_return_res ->
+found_when_in_set:
+                                    skip
+                :: !do_return_res ->
+not_found_when_in_set:
+                                    skip
+                fi
+  :: value_in_set[thr_id] == not_in_set ->
+start_search_when_not_in_set:
+                lookup(thr_id+1);
+                if
+                :: do_return_res ->
+found_when_not_in_set:
+                                    skip
+                :: !do_return_res ->
+not_found_when_not_in_set:
+                                    skip
+                fi
   :: atomic { value_in_set[thr_id] == not_in_set;
               value_in_set[thr_id] = changed } ->
                update(thr_id+1);
@@ -172,7 +188,7 @@ proctype thread()
               value_in_set[thr_id] = changed } ->
                update(-(thr_id+1));
                value_in_set[thr_id] = not_in_set
-  :: thr_id < THREAD_COUNT - 1 -> thr_id++
+/*  :: thr_id < THREAD_COUNT - 1 -> thr_id++*/
   :: thr_id == THREAD_COUNT - 1 -> thr_id = 0
   :: true -> collect()
   :: true -> skip
@@ -230,3 +246,12 @@ proctype sequential_test()
 end:
 }
 */
+
+
+ltl lookup_linearizability_in_set
+  { [] ((thread@start_search_when_in_set)
+        -> <> (thread@found_when_in_set)) }
+
+ltl lookup_linearizability_not_in_set
+  { [] ((thread@start_search_when_not_in_set)
+        -> <> (thread@not_found_when_not_in_set)) }
