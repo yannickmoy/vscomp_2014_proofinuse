@@ -29,4 +29,9 @@ We're using Why3 (https://why3.lri.fr/) and SPARK 2014
 
 * It would be nice to have a List.forall higher-order predicate
 
+* color highlighting of goals: color of premises and conclusion are
+  wrong in presence of match..with
+
+* missing lemmas on nth and append on lists
+
 

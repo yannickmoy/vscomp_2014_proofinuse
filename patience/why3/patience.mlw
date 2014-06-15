@@ -160,7 +160,7 @@ invariants:
   /\
     (forall i. 0 <= i < s.num_elts ->
       let j = s.preds[i] in
-        -1 <= j < s.num_elts (* /\ (j >= 0 -> s.elts[j] < s.elts[i]) *))
+        -1 <= j < s.num_elts /\ (j >= 0 -> s.elts[j] < s.elts[i]))
 
   (** {2 Programs} *)
 
@@ -173,6 +173,11 @@ invariants:
      (acc : list (list int)) (ghost s: state)
      : list (list int)
     requires { inv s (reverse acc ++ stacks) }
+    requires { (* c is greater than the top of the previous stack *)
+               match acc with 
+               | Cons (Cons c' _) _ -> c > c'
+               | _ -> true
+               end }
     variant  { stacks }
     writes   { s }
     ensures  { inv s result }
