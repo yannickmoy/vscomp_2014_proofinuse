@@ -82,7 +82,7 @@ and so on.
   type card = int
 
   type state = {
-    mutable num_elts : int;
+    mutable num_elts : int;    
     mutable values : map int card;
     mutable num_stacks : int;
     mutable stack_sizes : map int int;
@@ -99,8 +99,6 @@ and so on.
          s.stack_sizes[i] >= 1 (* stacks are non-empty *)
       /\ forall j. 0 <= j < s.stack_sizes[i] -> 
            0 <= s.stacks[i][j] < s.num_elts)
-  /\ (* injectivity, surjectivity of stacks ?*)
-     true
   /\ (* positions *)   
      (forall i. 0 <= i < s.num_elts ->
        let (is,ip) = s.positions[i] in
@@ -113,6 +111,8 @@ and so on.
         forall ip. 0 <= ip < s.stack_sizes[is] ->
         let idx = s.stacks[is][ip] in
         (is,ip) = s.positions[idx])
+  /\ (* injectivity, surjectivity of stacks ? consequence of the above ? *)
+     true
   /\ (* predecessors *)
      (forall i. 0 <= i < s.num_elts ->
        let pred = s.preds[i] in
@@ -127,18 +127,19 @@ and so on.
   (** {2 Programs} *)
 
   use import ref.Ref
-  exception Return
+  exception Return int
 
   (** [play_card c i s] pushes the card [c] on state [s] *)
   let play_card (c:card) (s:state) : unit
     requires { inv s }
     writes   { s }
     ensures  { inv s }
+    ensures  { s.num_elts = (old s).num_elts + 1 }
+    ensures  { s.values = (old s).values[(old s).num_elts <- c] }
   =
     let pred = ref (-1) in
     try
     for i = 0 to s.num_stacks - 1 do
-      invariant { inv s }
       invariant { if i=0 then !pred = -1 else 
           0 <= !pred < s.num_elts /\ 
           let (ps,_pp) = s.positions[!pred] in
@@ -148,18 +149,7 @@ and so on.
       let stack_i_size = s.stack_sizes[i] in
       let top_stack_i = stack_i[stack_i_size - 1] in
       if c <= s.values[top_stack_i] then
-         (* we put c on top of stack i *)
-         let idx = s.num_elts in
-         let new_stack_i = stack_i[stack_i_size <- idx] in
-         s.num_elts <- idx + 1;
-         s.values <- s.values[idx <- c];
-         (* s.num_stacks unchanged *)
-         s.stack_sizes <- s.stack_sizes[i <- stack_i_size + 1];
-         s.stacks <- s.stacks[i <- new_stack_i];
-         s.positions <- s.positions[idx <- (i,stack_i_size)];
-         s.preds <- s.preds[idx <- !pred];
-         assert { inv s };
-         raise Return;
+         raise (Return i)
       else
          begin
            assert { 0 <= top_stack_i < s.num_elts };
@@ -183,27 +173,56 @@ and so on.
     s.stack_sizes <- s.stack_sizes[i <- 1];
     s.stacks <- s.stacks[i <- new_stack_i];
     s.positions <- s.positions[idx <- (i,0)];
-    s.preds <- s.preds[idx <- !pred];
-    assert { inv s };
-    ()
-  with Return -> ()
+    s.preds <- s.preds[idx <- !pred]
+  with Return i ->
+      let stack_i = s.stacks[i] in
+      let stack_i_size = s.stack_sizes[i] in
+      let top_stack_i = stack_i[stack_i_size - 1] in
+         (* we put c on top of stack i *)
+         let idx = s.num_elts in
+         let new_stack_i = stack_i[stack_i_size <- idx] in
+         s.num_elts <- idx + 1;
+         s.values <- s.values[idx <- c];
+         (* s.num_stacks unchanged *)
+         s.stack_sizes <- s.stack_sizes[i <- stack_i_size + 1];
+         s.stacks <- s.stacks[i <- new_stack_i];
+         s.positions <- s.positions[idx <- (i,stack_i_size)];
+         s.preds <- s.preds[idx <- !pred];
   end
 
   let rec play_cards (input: list int) (s: state) : unit
     requires { inv s }
     variant  { input }
     writes   { s }
-    requires { inv s }
+    ensures  { inv s }
+    ensures  { s.num_elts = (old s).num_elts + length input }
   =
     match input with
     | Nil -> ()
     | Cons c rem -> play_card c s; play_cards rem s
     end
 
+  type seq 'a = { seqlen: int; seqval: map int 'a }
 
-  let play_game (input: list int) : state
-    requires { true }
-    ensures { true }
+  use import list.NthNoOpt
+
+  predicate increasing_subsequence (s:seq int) (l:list int) =
+    0 <= s.seqlen <= length l &&
+    (* subsequence *)
+    ((forall i. 0 <= i < s.seqlen -> 0 <= s.seqval[i] < length l) 
+    /\ (forall i,j. 0 <= i < j < s.seqlen -> s.seqval[i] < s.seqval[j]))
+    (* increasing *)
+    && (forall i,j. 0 <= i < j < s.seqlen -> 
+          nth s.seqval[i] l < nth s.seqval[j] l)
+
+  let play_game (input: list int) : unit
+    requires { length input > 0 }
+    ensures { exists s: seq int.  s.seqlen = length input /\
+        increasing_subsequence s input
+      }
+    ensures { forall s: seq int.
+        increasing_subsequence s input -> s.seqlen <= length input
+      }
   = let s = {
       num_elts = 0;
       values = Map.const (-1) ;
@@ -215,8 +234,18 @@ and so on.
     }
     in
     play_cards input s;
-    s
-
+    (* ghost code to build an increasing subsequence of maximal length *)
+    let ns = s.num_elts in
+    assert { ns = length input };
+    let last_stack = s.stacks[ns-1] in
+    let idx = ref (last_stack[s.stack_sizes[ns-1]]) in
+    let seq = ref (Map.const (-1)) in
+    for i=ns-1 downto 0 do
+       seq := !seq[i <- !idx];
+       idx := s.preds[!idx];
+    done;
+    let seq = { seqlen = ns ; seqval = !seq } in
+    assert { increasing_subsequence seq input }
 
   let test () =
     (* the list given in the problem description
