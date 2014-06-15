@@ -142,12 +142,24 @@ init /* will have _pid = 0 */
 proctype thread() /* will have _pid \in 1 .. THREAD_COUNT */
 {
   int do_return_res;
+  int value;
+
+  value = _pid + 1;
 
   do
-  :: true -> update(1)
-  :: true -> update(-1)
-  :: true -> lookup(1)
+  :: true -> update(value);
+             assert(do_return_res == false);
+
+             lookup(value);
+             assert(do_return_res == true);
+
+             update(-value);
+             assert(do_return_res == false);
+
+             lookup(value);
+             assert(do_return_res == false)
   :: true -> collect()
+  :: true -> break
   od
 }
 
@@ -178,6 +190,7 @@ proctype environment()
 exit:
 }
 
+/*
 proctype sequential_test()
 {
   int do_return_res;
@@ -200,3 +213,4 @@ proctype sequential_test()
   collect()
 end:
 }
+*/
