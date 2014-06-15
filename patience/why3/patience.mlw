@@ -236,12 +236,29 @@ module Patience
          (** ...and predecessor is in the stack on the immediate left *)
 
 
+
+(** glue between the ghost state and the stacks of cards *)
+
+  use import list.List
+  use import list.Length
+  use import list.NthNoOpt
+
+  predicate glue (s:state) (st:list (list card)) =
+    length st = s.num_stacks /\
+    forall i. 0 <= i < length st ->
+      let st_i = nth i st in
+      length st_i = s.stack_sizes[i] /\
+      let stack_i = s.stacks[i] in
+      forall j. 0 <= i < length st_i ->
+        nth j st_i = s.values[stack_i[j]]
+
+
+
+
 (** {2 The patience game with specifications} *)
 
 
 
-  use import list.List
-  use import list.Length
   use import list.RevAppend
 
 
@@ -303,16 +320,27 @@ module Patience
      end
 
 
+
+  val play_card (c:card) (st : list (list card)) (ghost state:state) : list (list card)
+    requires { inv state }
+    requires { glue state st }
+    writes   { state } 
+    ensures  { inv state }
+    ensures  { state.num_elts = (old state).num_elts + 1 }
+    ensures  { state.values = (old state).values[(old state).num_elts <- c] }
+    ensures  { glue state result }
+  
+
 (** {3 playing cards} *)
 
 
   use import ref.Ref
-  use import list.NthNoOpt
 
 
   let rec play_cards (input: list card) (stacks: list (list card))
     (ghost state:state) : list (list card)
     requires { inv state }
+    requires { glue state stacks }
     variant  { input }
     writes   { state }
     ensures  { inv state }
@@ -321,13 +349,16 @@ module Patience
                  state.values[i] = (old state).values[i] }
     ensures  { forall i. (old state).num_elts <= i < state.num_elts ->
                  state.values[i] = nth (i - (old state).num_elts) input }
+    ensures  { glue state result }
   =
     match input with
     | Nil -> stacks
     | Cons c rem ->
-        let stacks' = push_card c stacks Nil state (-1) 0 in
+        let stacks' = play_card c stacks state in
         play_cards rem stacks' state
     end
+
+
 
 
 
