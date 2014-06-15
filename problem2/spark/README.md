@@ -2,7 +2,7 @@
 
 ## What is SPARK 2014
 
-SPARK 2014 is a subset of Ada 2012 language offering verification capabilities, mainly with pre and post-conditions.
+SPARK 2014 is a subset of Ada 2012 language offering verification capabilities, mainly with pre and postconditions.
 
 GPL 2014 Edition of SPARK 2014 has been used: http://libre.adacore.com/download/configurations
 
@@ -24,8 +24,7 @@ Task 1 has been completed.
 
 ### Current status of proof
 
-* complete absence of RTE (see `proof_expected.out`), which requires also proving part of
-  the functionality of `Refine_One` (see its postcondition)
+* complete absence of RTE (see `proof_expected.out` which lists the 184 proved checks), which requires also proving part of the functionality of `Refine_One` (see its postcondition)
 
 * 5 assumptions used in code (`pragma Assume`):
    - 2 assumptions to account for the fact that `Replace_Element` on a map does not change
@@ -42,4 +41,10 @@ Task 1 has been completed.
 
 ## (task 2) The output partition is a refinement of the input partition
 
-FIXME
+Task 2.a was started but not finished.
+
+### Current status of proof
+
+* contracts have been updated to adress task 2.a
+
+* the main difficulty is proving the loop invariant in Make_New_Partitions, still ongoing
