@@ -1,0 +1,154 @@
+partition_refinement.adb:13:14: info: postcondition proved
+partition_refinement.adb:22:15: info: precondition proved
+partition_refinement.adb:23:17: info: precondition proved
+partition_refinement.adb:23:68: info: range check proved
+partition_refinement.adb:23:68: info: precondition proved
+partition_refinement.adb:24:15: info: precondition proved
+partition_refinement.adb:24:29: info: precondition proved
+partition_refinement.adb:24:59: info: precondition proved
+partition_refinement.adb:24:73: info: precondition proved
+partition_refinement.adb:25:38: info: precondition proved
+partition_refinement.adb:26:15: warning: postcondition might fail
+partition_refinement.adb:27:18: info: precondition proved
+partition_refinement.adb:27:37: info: range check proved
+partition_refinement.adb:28:22: info: precondition proved
+partition_refinement.adb:28:36: info: precondition proved
+partition_refinement.adb:28:64: info: index check proved
+partition_refinement.adb:28:66: info: precondition proved
+partition_refinement.adb:28:80: info: precondition proved
+partition_refinement.adb:29:25: info: precondition proved
+partition_refinement.adb:29:39: info: precondition proved
+partition_refinement.adb:29:69: info: precondition proved
+partition_refinement.adb:29:83: info: precondition proved
+partition_refinement.adb:30:22: info: precondition proved
+partition_refinement.adb:31:15: info: precondition proved
+partition_refinement.adb:31:30: info: precondition proved
+partition_refinement.adb:32:15: info: precondition proved
+partition_refinement.adb:32:28: info: precondition proved
+partition_refinement.adb:33:50: warning: range check might fail
+partition_refinement.adb:33:50: info: precondition proved
+partition_refinement.adb:34:18: info: precondition proved
+partition_refinement.adb:34:30: info: range check proved
+partition_refinement.adb:34:41: info: precondition proved
+partition_refinement.adb:34:57: info: range check proved
+partition_refinement.adb:35:50: info: range check proved
+partition_refinement.adb:35:50: info: precondition proved
+partition_refinement.adb:36:18: info: precondition proved
+partition_refinement.adb:36:30: info: range check proved
+partition_refinement.adb:36:41: info: precondition proved
+partition_refinement.adb:36:57: info: range check proved
+partition_refinement.adb:36:66: info: overflow check proved
+partition_refinement.adb:36:78: info: precondition proved
+partition_refinement.adb:37:38: info: precondition proved
+partition_refinement.adb:38:16: info: precondition proved
+partition_refinement.adb:38:37: info: precondition proved
+partition_refinement.adb:38:55: info: precondition proved
+partition_refinement.adb:39:16: info: precondition proved
+partition_refinement.adb:39:38: info: precondition proved
+partition_refinement.adb:45:17: info: overflow check proved
+partition_refinement.adb:45:19: info: precondition proved
+partition_refinement.adb:45:33: info: precondition proved
+partition_refinement.adb:46:15: info: precondition proved
+partition_refinement.adb:73:29: info: precondition proved
+partition_refinement.adb:74:28: info: precondition proved
+partition_refinement.adb:75:42: info: range check proved
+partition_refinement.adb:78:7: info: precondition proved
+partition_refinement.adb:79:7: info: precondition proved
+partition_refinement.adb:80:36: info: range check proved
+partition_refinement.adb:85:49: info: precondition proved
+partition_refinement.adb:87:10: info: precondition proved
+partition_refinement.adb:88:25: info: precondition proved
+partition_refinement.adb:103:43: info: range check proved
+partition_refinement.adb:103:43: info: precondition proved
+partition_refinement.adb:104:20: info: precondition proved
+partition_refinement.adb:104:32: info: range check proved
+partition_refinement.adb:106:56: info: range check proved
+partition_refinement.adb:109:56: info: range check proved
+partition_refinement.adb:115:55: info: precondition proved
+partition_refinement.adb:117:16: info: precondition proved
+partition_refinement.adb:117:36: info: range check proved
+partition_refinement.adb:118:31: info: precondition proved
+partition_refinement.adb:121:47: info: range check proved
+partition_refinement.adb:121:47: info: precondition proved
+partition_refinement.adb:122:13: info: precondition proved
+partition_refinement.adb:130:10: info: assertion proved
+partition_refinement.adb:130:40: info: overflow check proved
+partition_refinement.adb:130:69: info: precondition proved
+partition_refinement.adb:130:79: info: range check proved
+partition_refinement.adb:130:99: info: precondition proved
+partition_refinement.adb:130:111: info: range check proved
+partition_refinement.adb:130:116: info: precondition proved
+partition_refinement.adb:130:139: info: range check proved
+partition_refinement.adb:132:10: info: loop invariant initialization proved
+partition_refinement.adb:132:10: info: loop invariant preservation proved
+partition_refinement.adb:132:33: info: precondition proved
+partition_refinement.adb:132:48: info: precondition proved
+partition_refinement.adb:133:33: info: precondition proved
+partition_refinement.adb:133:44: info: overflow check proved
+partition_refinement.adb:133:46: info: precondition proved
+partition_refinement.adb:134:48: info: overflow check proved
+partition_refinement.adb:134:77: info: precondition proved
+partition_refinement.adb:134:87: info: range check proved
+partition_refinement.adb:134:107: info: precondition proved
+partition_refinement.adb:134:119: info: range check proved
+partition_refinement.adb:134:124: info: precondition proved
+partition_refinement.adb:134:147: info: range check proved
+partition_refinement.adb:149:39: info: precondition proved
+partition_refinement.adb:156:13: info: precondition proved
+partition_refinement.adb:158:10: info: assertion proved
+partition_refinement.adb:158:25: info: precondition proved
+partition_refinement.adb:158:42: info: precondition proved
+partition_refinement.adb:158:55: info: precondition proved
+partition_refinement.adb:160:25: info: precondition proved
+partition_refinement.adb:160:38: info: precondition proved
+partition_refinement.adb:161:10: info: precondition proved
+partition_refinement.adb:161:34: info: precondition proved
+partition_refinement.adb:162:10: info: precondition proved
+partition_refinement.adb:165:78: warning: assertion might fail, requires Element (P, J).First + Element (P, J).Count in Index
+partition_refinement.adb:165:59: info: range check proved
+partition_refinement.adb:165:59: info: precondition proved
+partition_refinement.adb:165:78: info: precondition proved
+partition_refinement.adb:165:90: info: range check proved
+partition_refinement.adb:165:101: info: precondition proved
+partition_refinement.adb:165:113: info: range check proved
+partition_refinement.adb:167:10: info: loop invariant initialization proved
+partition_refinement.adb:167:10: info: loop invariant preservation proved
+partition_refinement.adb:167:33: info: precondition proved
+partition_refinement.adb:167:48: info: precondition proved
+partition_refinement.adb:168:33: info: precondition proved
+partition_refinement.adb:168:46: info: precondition proved
+partition_refinement.adb:169:33: info: precondition proved
+partition_refinement.adb:169:54: info: precondition proved
+partition_refinement.adb:169:72: info: precondition proved
+partition_refinement.adb:170:33: info: precondition proved
+partition_refinement.adb:170:55: info: precondition proved
+partition_refinement.adb:171:33: info: precondition proved
+partition_refinement.adb:171:51: info: precondition proved
+partition_refinement.adb:171:68: info: precondition proved
+partition_refinement.adb:171:81: info: precondition proved
+partition_refinement.adb:172:67: info: range check proved
+partition_refinement.adb:172:67: info: precondition proved
+partition_refinement.adb:172:86: info: precondition proved
+partition_refinement.adb:172:98: info: range check proved
+partition_refinement.adb:172:109: info: precondition proved
+partition_refinement.adb:172:121: info: range check proved
+partition_refinement.adb:173:55: info: precondition proved
+partition_refinement.adb:176:7: info: precondition proved
+partition_refinement.ads:55:17: info: overflow check proved
+partition_refinement.ads:55:19: info: precondition proved
+partition_refinement.ads:55:33: info: precondition proved
+partition_refinement.ads:56:15: info: precondition proved
+partition_refinement.ads:57:38: info: precondition proved
+partition_refinement.ads:58:16: info: precondition proved
+partition_refinement.ads:58:37: info: precondition proved
+partition_refinement.ads:58:55: info: precondition proved
+partition_refinement.ads:59:16: info: precondition proved
+partition_refinement.ads:59:34: info: precondition proved
+partition_refinement.ads:59:47: info: precondition proved
+partition_refinement.ads:60:73: info: range check proved
+partition_refinement.ads:60:73: info: precondition proved
+partition_refinement.ads:61:50: info: range check proved
+partition_refinement.ads:61:50: info: precondition proved
+partition_refinement.ads:61:69: info: precondition proved
+partition_refinement.ads:61:81: info: range check proved
+gprbuild: *** compilation phase failed

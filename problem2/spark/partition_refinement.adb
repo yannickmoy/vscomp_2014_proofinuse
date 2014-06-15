@@ -155,8 +155,9 @@ is
    begin
       while Has_Element (X, C) loop
 
-         --  Part of Refine_One precondition, should be provable
-         pragma Assert (Contains (D, Element (X, C)));
+         pragma Assert (Has_Element (D, (Find (D_Old, Element (X, C)))));
+         --  This assumption is a logical consequence of the assertion above, that SPARK GPL 2014 does not prove.
+         pragma Assume (Contains (D, Element (X, C)));
          Refine_One (A, D, P, F, Element (X, C));
          Next (X, C);
 
