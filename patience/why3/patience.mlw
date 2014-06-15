@@ -277,10 +277,26 @@ module Patience
         end
      end
 
+
+
+
+
+
+  use import list.NthNoOpt
+
+
+
   let rec play_cards (input: list card) (stacks: list (list card))
     (ghost state:state) : list (list card)
+    requires { inv state }
     variant { input }
     (* writes  { state } *)
+    ensures { inv state }
+    ensures  { state.num_elts = (old state).num_elts + length input }
+    ensures  { forall i. 0 <= i < (old state).num_elts ->
+                 state.values[i] = (old state).values[i] }
+    ensures  { forall i. (old state).num_elts <= i < state.num_elts ->
+                 state.values[i] = nth (i - (old state).num_elts) input }
   =
     match input with
     | Nil -> stacks
@@ -294,8 +310,6 @@ module Patience
 
 
 (** {2 playing a whole game} *)
-
-  use import list.NthNoOpt
 
   type seq 'a = { seqlen: int; seqval: map int 'a }
   (** a sequence is defined by a length and a mapping *)
@@ -316,6 +330,7 @@ module Patience
   use import ref.Ref
 
   let play_game (input: list card) (ghost state:state) : list (list card)
+    requires { length input > 0 }
     (* writes  { state } *)
     ensures { exists sigma: seq int.  sigma.seqlen = state.num_stacks /\
                 increasing_subsequence sigma input
@@ -341,11 +356,16 @@ module Patience
 
     *)
     let ghost ns = state.num_stacks in
-    let ghost sigma =
+    let ghost _sigma =
       if ns = 0 then
       begin
         assert { input = Nil };
-        { seqlen = 0 ; seqval = Map.const (-1) }
+        absurd
+(*
+        let sigma = { seqlen = 0 ; seqval = Map.const (-1) } in
+        assert { increasing_subsequence sigma input };
+        sigma
+*)
       end
     else
     let ghost last_stack = state.stacks[ns-1] in
@@ -410,7 +430,6 @@ module Patience
     };
     sigma
   in
-  assert { increasing_subsequence sigma input };
   final_stacks
 
 

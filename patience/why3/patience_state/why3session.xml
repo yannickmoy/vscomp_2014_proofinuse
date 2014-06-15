@@ -1681,14 +1681,14 @@
     expl="VC for play_game"
     sum="fbee27eefe4cd27b7dde50daae642506"
     proved="true"
-    expanded="false"
+    expanded="true"
     shape="iainfix &lt;=V11V5Iaincreasing_subsequenceamk seqV11V12V0FAaincreasing_subsequenceamk seqV13V14V0Aainfix =V13V5EACCainfix &lt;amixfix []V6V19amixfix []V6V20Aainfix &lt;V22V24Aainfix &lt;V19V20Iainfix =V21V23aTuple2VVagetV2V20aTuple2VVagetV2V19Lamixfix []V16V18Lamixfix []V16V17Iainfix &lt;V18V15Aainfix &lt;V17V18Aainfix &lt;=c0V17FIainfix &gt;V15V5Aaincreasing_subsequenceamk seqV15V16V0FACCainfix =V29V31aTuple2VVagetV2amixfix []V26V28aTuple2VVagetV2amixfix []V26V27Aainfix &lt;V28V25Aainfix &lt;V27V28Aainfix &lt;=c0V27EIainfix &gt;V25V5Aaincreasing_subsequenceamk seqV25V26V0FANainjectiveV35V33V5AarangeV35V33V5Leainfix =ainfix @V36V37CV38aTuple2VwagetV2amixfix []V34V37FIainfix &gt;V33V5Aaincreasing_subsequenceamk seqV33V34V0FAaincreasing_subsequenceamk seqV5V9V0Aainfix =anthV39V0amixfix []V6V39Iainfix &lt;V39alengthV0Aainfix &lt;=c0V39FIainfix &lt;amixfix []V6amixfix []V9V40amixfix []V6amixfix []V9V41Iainfix &lt;V41V5Aainfix &lt;V40V41Aainfix &lt;ainfix -c0c1V40FAainfix &lt;amixfix []V9V42amixfix []V9V43Iainfix &lt;V43V5Aainfix &lt;V42V43Aainfix &lt;ainfix -c0c1V42FAainfix &lt;amixfix []V9V44V7Aainfix &lt;=c0amixfix []V9V44Iainfix &lt;V44V5Aainfix &lt;ainfix -c0c1V44FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +ainfix -c0c1c1Iainfix &lt;ainfix -c0c1ainfix -V5c1Aainfix &lt;=c0ainfix -c0c1Aainfix &lt;V10amixfix []V9ainfix +ainfix -c0c1c1Iainfix &lt;ainfix +ainfix -c0c1c1V5ACainfix =V45ainfix -c0c1aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=ainfix -c0c1c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Aainfix &lt;amixfix []V6amixfix []V47V49amixfix []V6amixfix []V47V50Iainfix &lt;V50V5Aainfix &lt;V49V50Aainfix &lt;ainfix -V46c1V49FAainfix &lt;amixfix []V47V51amixfix []V47V52Iainfix &lt;V52V5Aainfix &lt;V51V52Aainfix &lt;ainfix -V46c1V51FAainfix &lt;amixfix []V47V53V7Aainfix &lt;=c0amixfix []V47V53Iainfix &lt;V53V5Aainfix &lt;ainfix -V46c1V53FAainfix &lt;amixfix []V6V48amixfix []V6amixfix []V47ainfix +ainfix -V46c1c1Iainfix &lt;ainfix -V46c1ainfix -V5c1Aainfix &lt;=c0ainfix -V46c1Aainfix &lt;V48amixfix []V47ainfix +ainfix -V46c1c1Iainfix &lt;ainfix +ainfix -V46c1c1V5ACainfix =V54ainfix -V46c1aTuple2VwagetV2V48Aainfix &gt;=V48c0Iainfix &gt;=ainfix -V46c1c0Aainfix &lt;V48V7Aainfix &lt;=aprefix -c1V48Iainfix =V48amixfix []V1V10FIainfix =V47amixfix [&lt;-]V9V46V10FIainfix &lt;amixfix []V6amixfix []V9V55amixfix []V6amixfix []V9V56Iainfix &lt;V56V5Aainfix &lt;V55V56Aainfix &lt;V46V55FAainfix &lt;amixfix []V9V57amixfix []V9V58Iainfix &lt;V58V5Aainfix &lt;V57V58Aainfix &lt;V46V57FAainfix &lt;amixfix []V9V59V7Aainfix &lt;=c0amixfix []V9V59Iainfix &lt;V59V5Aainfix &lt;V46V59FAainfix &lt;amixfix []V6V10amixfix []V6amixfix []V9ainfix +V46c1Iainfix &lt;V46ainfix -V5c1Aainfix &lt;=c0V46Aainfix &lt;V10amixfix []V9ainfix +V46c1Iainfix &lt;ainfix +V46c1V5ACainfix =V60V46aTuple2VwagetV2V10Aainfix &gt;=V10c0Iainfix &gt;=V46c0Aainfix &lt;V10V7Aainfix &lt;=aprefix -c1V10Iainfix &gt;=V46c0Aainfix &gt;=V8V46FFAainfix &lt;amixfix []V6amixfix []aconstaprefix -c1V61amixfix []V6amixfix []aconstaprefix -c1V62Iainfix &lt;V62V5Aainfix &lt;V61V62Aainfix &lt;V8V61FAainfix &lt;amixfix []aconstaprefix -c1V63amixfix []aconstaprefix -c1V64Iainfix &lt;V64V5Aainfix &lt;V63V64Aainfix &lt;V8V63FAainfix &lt;amixfix []aconstaprefix -c1V65V7Aainfix &lt;=c0amixfix []aconstaprefix -c1V65Iainfix &lt;V65V5Aainfix &lt;V8V65FAainfix &lt;amixfix []V6amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1amixfix []V6amixfix []aconstaprefix -c1ainfix +V8c1Iainfix &lt;V8ainfix -V5c1Aainfix &lt;=c0V8Aainfix &lt;amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1amixfix []aconstaprefix -c1ainfix +V8c1Iainfix &lt;ainfix +V8c1V5ACainfix =V66V8aTuple2VwagetV2amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1Aainfix &gt;=amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1c0Iainfix &gt;=V8c0Aainfix &lt;amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1V7Aainfix &lt;=aprefix -c1amixfix []amixfix []V3ainfix -V5c1ainfix -amixfix []V4ainfix -V5c1c1Iainfix &gt;=V8c0Aainfix &lt;=V67V5Iaincreasing_subsequenceamk seqV67V68V0FAaincreasing_subsequenceamk seqV69V70V0Aainfix =V69V5EACCainfix &lt;amixfix []V6V75amixfix []V6V76Aainfix &lt;V78V80Aainfix &lt;V75V76Iainfix =V77V79aTuple2VVagetV2V76aTuple2VVagetV2V75Lamixfix []V72V74Lamixfix []V72V73Iainfix &lt;V74V71Aainfix &lt;V73V74Aainfix &lt;=c0V73FIainfix &gt;V71V5Aaincreasing_subsequenceamk seqV71V72V0FACCainfix =V85V87aTuple2VVagetV2amixfix []V82V84aTuple2VVagetV2amixfix []V82V83Aainfix &lt;V84V81Aainfix &lt;V83V84Aainfix &lt;=c0V83EIainfix &gt;V81V5Aaincreasing_subsequenceamk seqV81V82V0FANainjectiveV91V89V5AarangeV91V89V5Leainfix =ainfix @V92V93CV94aTuple2VwagetV2amixfix []V90V93FIainfix &gt;V89V5Aaincreasing_subsequenceamk seqV89V90V0FAaincreasing_subsequenceamk seqV5aconstaprefix -c1V0Aainfix =anthV95V0amixfix []V6V95Iainfix &lt;V95alengthV0Aainfix &lt;=c0V95FIainfix &lt;V8c0Lainfix -V5c1ainfix &lt;=V96V5Iaincreasing_subsequenceamk seqV96V97V0FAaincreasing_subsequenceamk seqV98V99V0Aainfix =V98V5EAaincreasing_subsequenceamk seqc0aconstaprefix -c1V0Aainfix =V0aNilainfix =V5c0Iainfix =amixfix []V6V100anthainfix -V100c0V0Iainfix &lt;V100V7Aainfix &lt;=c0V100FAainfix =amixfix []V6V101amixfix []aconstaprefix -c1V101Iainfix &lt;V101c0Aainfix &lt;=c0V101FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FAainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
     <label
      name="expl:VC for play_game"/>
     <transf
      name="split_goal_wp"
      proved="true"
-     expanded="false">
+     expanded="true">
      <goal
       name="WP_parameter play_game.1"
       locfile="../patience_state.mlw"
@@ -1736,7 +1736,7 @@
       expl="3. assertion"
       sum="1122772593e99c1fa29f5dcf8512e3bc"
       proved="true"
-      expanded="false"
+      expanded="true"
       shape="assertionaincreasing_subsequenceamk seqc0aconstaprefix -c1V0Iainfix =V0aNilIainfix =V5c0Iainfix =amixfix []V6V8anthainfix -V8c0V0Iainfix &lt;V8V7Aainfix &lt;=c0V8FAainfix =amixfix []V6V9amixfix []aconstaprefix -c1V9Iainfix &lt;V9c0Aainfix &lt;=c0V9FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
       <label
        name="expl:VC for play_game"/>
@@ -1756,7 +1756,7 @@
       expl="4. postcondition"
       sum="9071e4b1757bc2a0637736c04b0c1db6"
       proved="true"
-      expanded="false"
+      expanded="true"
       shape="postconditionaincreasing_subsequenceamk seqV8V9V0Aainfix =V8V5EIaincreasing_subsequenceamk seqc0aconstaprefix -c1V0Iainfix =V0aNilIainfix =V5c0Iainfix =amixfix []V6V10anthainfix -V10c0V0Iainfix &lt;V10V7Aainfix &lt;=c0V10FAainfix =amixfix []V6V11amixfix []aconstaprefix -c1V11Iainfix &lt;V11c0Aainfix &lt;=c0V11FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
       <label
        name="expl:VC for play_game"/>
@@ -1776,7 +1776,7 @@
       expl="5. postcondition"
       sum="7d30621efd5035bb8f99957f3df0a4ae"
       proved="true"
-      expanded="false"
+      expanded="true"
       shape="postconditionainfix &lt;=V8V5Iaincreasing_subsequenceamk seqV8V9V0FIaincreasing_subsequenceamk seqc0aconstaprefix -c1V0Iainfix =V0aNilIainfix =V5c0Iainfix =amixfix []V6V10anthainfix -V10c0V0Iainfix &lt;V10V7Aainfix &lt;=c0V10FAainfix =amixfix []V6V11amixfix []aconstaprefix -c1V11Iainfix &lt;V11c0Aainfix &lt;=c0V11FAainfix =V7ainfix +c0alengthV0Aainvamk stateV7V6V5V4V3V2V1FIainvamk statec0aconstaprefix -c1c0aconstc0aconstaconstaprefix -c1aconstaTuple2aprefix -c1aprefix -c1aconstaprefix -c1F">
       <label
        name="expl:VC for play_game"/>
