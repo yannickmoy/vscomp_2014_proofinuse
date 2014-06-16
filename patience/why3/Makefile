@@ -6,17 +6,13 @@ test:
 prove:
 	why3ide patience.mlw
 
-prove_state:
-	why3ide patience_state.mlw
-
 replay:
 	why3replayer patience.mlw
 
-replay_state:
-	why3replayer patience_state.mlw
-
 doc:
 	why3doc patience.mlw
+	echo "HTML doc generated in file patience.html"
 
 dump:
 	why3session html patience.mlw
+	echo "HTML session dump generated in file patience/why3session.html"
