@@ -190,25 +190,29 @@ is
                   pragma Loop_Invariant (for all K in Index range P_Prime.First .. I => F(K) = P_Prime_Index);
                   pragma Loop_Invariant (for all K in Index range 0 .. P_Prime.First - 1 => F(K) = F_Loop_Entry(K));
                   pragma Loop_Invariant (for all K in Index range I + 1 .. Index'Last => F(K) = F_Loop_Entry(K));
-                  --               pragma Loop_Invariant (for all K in Index => F(K) = (if K in P_Prime.First .. I then P_Prime_Index else F'Loop_Entry(K)));
+--                  pragma Loop_Invariant (for all K in Index => F(K) = (if K in P_Prime.First .. I then P_Prime_Index else F'Loop_Entry(K)));
                end loop Inner;
 
+               --  Intermediate assertions to help with the proof of loop invariant F(K) in 0 .. Partition_Index'Base (Length (P)) - 1)
                pragma Assert (for all K in Index range P_Prime.First .. P_Prime.Last => F(K) = Partition_Index'Base (Length (P)) - 1);
                pragma Assert (for all K in Index range 0 .. P_Prime.First - 1 => F(K) in 0 .. Partition_Index'Base (Length (P)) - 1);
                pragma Assert (for all K in Index range P_Prime.Last + 1 .. Index'Last => F(K) in 0 .. Partition_Index'Base (Length (P)) - 1);
 
+               --  Intermediate assertions to help with the proof of loop invariant K in Element (P, F(K)).First .. Element (P, F(K)).Last)
                pragma Assert (for all K in Index range P_Elem.First .. P_Elem.Last => Element (P, F(K)) = P_Elem);
                pragma Assert (for all K in Index range P_Elem.First .. P_Elem.Last => K in Element (P, F(K)).First .. Element (P, F(K)).Last);
-
                pragma Assert (for all K in Index range P_Prime.First .. P_Prime.Last => Element (P, F(K)) = P_Prime);
                pragma Assert (for all K in Index range P_Prime.First .. P_Prime.Last => K in Element (P, F(K)).First .. Element (P, F(K)).Last);
+               pragma Assert (for all K in Index range 0 .. P_Elem.First - 1 => Element (P, F(K)) = Element (P_Save, F(K)));
+               pragma Assert (for all K in Index range 0 .. P_Elem.First - 1 => K in Element (P_Save, F_Loop_Entry(K)).First .. Element (P_Save, F_Loop_Entry(K)).Last);
+               pragma Assert (for all K in Index range 0 .. P_Elem.First - 1 => K in Element (P, F(K)).First .. Element (P, F(K)).Last);
+               pragma Assert (for all K in Index range P_Prime.Last + 1 .. Index'Last => Element (P, F(K)) = Element (P_Save, F(K)));
+               pragma Assert (for all K in Index range P_Prime.Last + 1 .. Index'Last => K in Element (P_Save, F_Loop_Entry(K)).First .. Element (P_Save, F_Loop_Entry(K)).Last);
+               pragma Assert (for all K in Index range P_Prime.Last + 1 .. Index'Last => K in Element (P, F(K)).First .. Element (P, F(K)).Last);
 
-               pragma Assert (for all K in Index range 0 .. P_Prime.First - 1 => (if F(K) /= J then Element (P, F(K)) = Element (P_Save, F(K))));
-               pragma Assert (for all K in Index range 0 .. P_Prime.First - 1 => (if F(K) /= J then K in Element (P_Save, F_Loop_Entry(K)).First .. Element (P_Save, F_Loop_Entry(K)).Last));
-               pragma Assert (for all K in Index range 0 .. P_Prime.First - 1 => (if F(K) /= J then K in Element (P, F(K)).First .. Element (P, F(K)).Last));
-               pragma Assert (for all K in Index range P_Prime.Last + 1 .. Index'Last => (if F(K) /= J then Element (P, F(K)) = Element (P_Save, F(K))));
-               pragma Assert (for all K in Index range P_Prime.Last + 1 .. Index'Last => (if F(K) /= J then K in Element (P_Save, F_Loop_Entry(K)).First .. Element (P_Save, F_Loop_Entry(K)).Last));
-               pragma Assert (for all K in Index range P_Prime.Last + 1 .. Index'Last => (if F(K) /= J then K in Element (P, F(K)).First .. Element (P, F(K)).Last));
+               pragma Assert (for all K in 0 .. J - 1 => (for all L in Index range Element (P, K).First .. Element (P, K).Last => F(L) = K));
+               pragma Assert (for all L in Index range Element (P, J).First .. Element (P, J).Last => F(L) = J);
+               pragma Assert (for all K in J + 1 .. Partition_Index'Base (Length (P)) - 1 => (for all L in Index range Element (P, K).First .. Element (P, K).Last => F(L) = K));
             end;
          end if;
 
@@ -220,7 +224,7 @@ is
          pragma Assert (for all K in J + 1 .. Partition_Index'Base (Length (P)'Loop_Entry) - 1 => Element (P, K) = Element (P'Loop_Entry, K));
          pragma Assert (for all K in Index => F(K) in 0 .. Partition_Index'Base (Length (P)) - 1);
          pragma Assert (for all K in Index => K in Element (P, F(K)).First .. Element (P, F(K)).Last);
-         pragma Assert (for all J in 0 .. Partition_Index'Base (Length (P)) - 1 => (for all K in Element (P, J).First .. Element (P, J).Last => F(K) = J));
+         pragma Assert (for all K in 0 .. Partition_Index'Base (Length (P)) - 1 => (for all L in Index range Element (P, K).First .. Element (P, K).Last => F(L) = K));
 
          pragma Loop_Invariant (Capacity (P) = Capacity (P)'Loop_Entry);
          pragma Loop_Invariant (Length (P) - Length (P)'Loop_Entry in 0 .. Count_Type(J) + 1);

@@ -63,7 +63,7 @@ is
               --  F maps indexes to their partition
               (for all J in Index => F(J) in 0 .. Partition_Index'Base (Length (P)) - 1) and then
               (for all J in Index => J in Element (P, F(J)).First .. Element (P, F(J)).Last) and then
-              (for all J in 0 .. Partition_Index'Base (Length (P)) - 1 => (for all K in Element (P, J).First .. Element (P, J).Last => F(K) = J)) and then
+              (for all J in 0 .. Partition_Index'Base (Length (P)) - 1 => (for all K in Index range Element (P, J).First .. Element (P, J).Last => F(K) = J)) and then
               --  component Count is initialized to zero
               (for all J in 0 .. Partition_Index(Length (P)) - 1 => Element (P, J).Count = 0),
       Post => --  F still maps indexes to their partition
