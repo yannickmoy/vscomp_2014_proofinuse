@@ -1,0 +1,197 @@
+<h1>Why3 Proof Results for Project "patience"</h1>
+<h2><font color="#FF0000">Theory "PigeonHole": not fully verified</font></h2>
+<table border="1"><tr><td colspan="1">Obligations</td><td text-rotation="90">Alt-Ergo (0.95.2)</td></td></tr>
+<td bgcolor="#FF0000" colspan="1">pigeon_hole</td><td bgcolor="#FF8000">0.01</td></tr>
+</table>
+
+<h2><font color="#008000">Theory "PatienceCode": fully verified</font></h2>
+<table border="1"><tr><td colspan="2">Obligations</td><td text-rotation="90">Alt-Ergo (0.95.2)</td></td></tr>
+<td bgcolor="#C0FFC0" colspan="2">VC for wf_rev_append_stacks</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<td bgcolor="#C0FFC0" colspan="2">VC for push_card</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="2">split_goal_wp</td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="7">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="1">1. postcondition</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">2. unreachable point</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">3. postcondition</td><td bgcolor="#C0FFC0">0.07</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">4. variant decrease</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">5. precondition</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">6. precondition</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">7. postcondition</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<td bgcolor="#C0FFC0" colspan="2">VC for play_cards</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<td bgcolor="#C0FFC0" colspan="2">VC for play_game</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<td bgcolor="#C0FFC0" colspan="2">VC for test</td><td bgcolor="#C0FFC0">0.02</td></tr>
+</table>
+
+<h2><font color="#008000">Theory "PatienceAbstract": fully verified</font></h2>
+<table border="1"><tr><td colspan="4">Obligations</td><td text-rotation="90">Alt-Ergo (0.95.2)</td><td text-rotation="90">CVC3 (2.4.1)</td><td text-rotation="90">Z3 (3.2)</td><td text-rotation="90">Z3 (4.3.1)</td></td></tr>
+<td bgcolor="#C0FFC0" colspan="4">VC for play_card</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="4">split_goal_wp</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="60">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="3">1. postcondition</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">2. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">3. postcondition</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">4. postcondition</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">inline_goal</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="23">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="2">1. postcondition</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="2">split_goal_wp</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="21">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="1">1.</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">2.</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">3.</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">4.</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">5.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">6.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">7.</td><td bgcolor="#C0FFC0">0.11</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">8.</td><td bgcolor="#C0FFC0">0.16</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">9.</td><td bgcolor="#C0FFC0">0.21</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">10.</td><td bgcolor="#C0FFC0">0.22</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">11.</td><td bgcolor="#C0FFC0">0.74</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">12.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.07</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">13.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">14.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">15.</td><td bgcolor="#C0FFC0">0.10</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">16.</td><td bgcolor="#C0FFC0">0.13</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">17.</td><td bgcolor="#C0FFC0">0.16</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">18.</td><td bgcolor="#C0FFC0">0.24</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">19.</td><td bgcolor="#C0FFC0">0.25</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">20.</td><td bgcolor="#C0FFC0">0.40</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">21.</td><td bgcolor="#C0FFC0">0.45</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">5. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">6. postcondition</td><td bgcolor="#C0FFC0">0.00</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">7. assertion</td><td bgcolor="#C0FFC0">0.12</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">8. assertion</td><td bgcolor="#C0FFC0">0.45</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">9. loop invariant preservation</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">10. postcondition</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">inline_goal</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="23">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="2">1. postcondition</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="2">split_goal_wp</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="21">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="1">1.</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">2.</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">3.</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">4.</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.13</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">5.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">6.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">7.</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.16</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">8.</td><td bgcolor="#C0FFC0">0.08</td><td bgcolor="#C0FFC0">0.15</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">9.</td><td bgcolor="#C0FFC0">0.06</td><td bgcolor="#C0FFC0">0.21</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">10.</td><td bgcolor="#C0FFC0">0.39</td><td bgcolor="#C0FFC0">0.22</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">11.</td><td bgcolor="#C0FFC0">0.14</td><td bgcolor="#C0FFC0">0.66</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">12.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">13.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">14.</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.09</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">15.</td><td bgcolor="#C0FFC0">0.08</td><td bgcolor="#C0FFC0">1.31</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">16.</td><td bgcolor="#C0FFC0">0.07</td><td bgcolor="#C0FFC0">1.00</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">17.</td><td bgcolor="#C0FFC0">0.22</td><td bgcolor="#C0FFC0">1.49</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">18.</td><td bgcolor="#C0FFC0">0.21</td><td bgcolor="#C0FFC0">0.12</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">19.</td><td bgcolor="#C0FFC0">0.27</td><td bgcolor="#C0FFC0">0.15</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">20.</td><td bgcolor="#C0FFC0">0.24</td><td bgcolor="#C0FFC0">0.17</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">21.</td><td bgcolor="#C0FFC0">0.38</td><td bgcolor="#C0FFC0">0.45</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">11. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">12. postcondition</td><td bgcolor="#C0FFC0">0.00</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<td bgcolor="#C0FFC0" colspan="4">VC for play_cards</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="4">split_goal_wp</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="10">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="3">1. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">2. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">3. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">4. precondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">5. variant decrease</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">6. precondition</td><td bgcolor="#C0FFC0">0.00</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">7. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">8. postcondition</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">9. postcondition</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">10. postcondition</td><td bgcolor="#C0FFC0">0.06</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<td bgcolor="#C0FFC0" colspan="4">VC for play_game</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="4">split_goal_wp</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="33">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="3">1. precondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">2. assertion</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">3. assertion</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">4. postcondition</td><td bgcolor="#C0FFC0">0.00</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">5. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">6. assertion</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">7. assertion</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">8. assertion</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">9. assertion</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">10. assertion</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">11. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">12. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">13. loop invariant init</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">14. loop invariant init</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">15. loop invariant init</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">16. loop invariant init</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">17. loop invariant init</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">18. loop invariant init</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">19. loop invariant init</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">20. loop invariant preservation</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">21. loop invariant preservation</td><td bgcolor="#C0FFC0">0.08</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">22. loop invariant preservation</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">23. loop invariant preservation</td><td bgcolor="#C0FFC0">0.16</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">24. loop invariant preservation</td><td bgcolor="#C0FFC0">0.11</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">25. loop invariant preservation</td><td bgcolor="#C0FFC0">0.12</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">26. loop invariant preservation</td><td bgcolor="#C0FFC0">0.27</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">27. assertion</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">28. assertion</td><td bgcolor="#C0FFC0">0.41</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">29. assertion</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.10</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">30. assertion</td><td bgcolor="#C0FFC0">0.12</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">31. assertion</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">32. postcondition</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="3">33. postcondition</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<td bgcolor="#C0FFC0" colspan="4">VC for test</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="4">split_goal_wp</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="0">&nbsp;&nbsp;</td></table>
+
+<h2><font color="#FF0000">Theory "PatienceFull": not fully verified</font></h2>
+<table border="1"><tr><td colspan="2">Obligations</td><td text-rotation="90">Alt-Ergo (0.95.2)</td><td text-rotation="90">CVC3 (2.4.1)</td><td text-rotation="90">CVC4 (1.3)</td><td text-rotation="90">Z3 (3.2)</td><td text-rotation="90">Z3 (4.3.1)</td></td></tr>
+<td bgcolor="#FF0000" colspan="2">VC for play_card</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="2">split_goal_wp</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="20">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="1">1. loop invariant init</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">2. loop invariant init</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">3. unreachable point</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">4. assertion</td><td bgcolor="#FF8000">3.90</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">5. unreachable point</td><td bgcolor="#FF8000">Timeout (5s)</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">6. assertion</td><td bgcolor="#FF8000">Timeout (5s)</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">7. postcondition</td><td bgcolor="#FF8000">Timeout (5s)</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">8. postcondition</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">9. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">10. postcondition</td><td bgcolor="#FF8000">Timeout (5s)</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">11. assertion</td><td bgcolor="#FF8000">Timeout (5s)</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">12. assertion</td><td bgcolor="#FF8000">Timeout (5s)</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">13. loop invariant preservation</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">14. loop invariant preservation</td><td bgcolor="#FF8000">Timeout (5s)</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">15. loop invariant preservation</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">16. loop variant decrease</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">17. postcondition</td><td bgcolor="#FF8000">1.37</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">18. postcondition</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">19. postcondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#FF0000" colspan="1">20. postcondition</td><td bgcolor="#FF8000">0.60</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<td bgcolor="#C0FFC0" colspan="2">VC for play_cards</td><td bgcolor="#C0FFC0">0.43</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<td bgcolor="#C0FFC0" colspan="2">VC for play_game</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="2">split_goal_wp</td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td><td bgcolor="#E0E0E0"></td></tr>
+<td rowspan="31">&nbsp;&nbsp;</td><td bgcolor="#C0FFC0" colspan="1">1. precondition</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">2. precondition</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">3. assertion</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">4. assertion</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">5. unreachable point</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">6. assertion</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">7. assertion</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">8. assertion</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">9. assertion</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">10. postcondition</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">11. postcondition</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.08</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">12. loop invariant init</td><td bgcolor="#C0FFC0">0.06</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">13. loop invariant init</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.07</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">14. loop invariant init</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.00</td><td bgcolor="#C0FFC0">0.01</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">15. loop invariant init</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.00</td><td bgcolor="#C0FFC0">0.00</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">16. loop invariant init</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.06</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">17. loop invariant init</td><td bgcolor="#C0FFC0">0.01</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">18. loop invariant init</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">19. loop invariant preservation</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.02</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">20. loop invariant preservation</td><td bgcolor="#C0FFC0">0.15</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">21. loop invariant preservation</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">22. loop invariant preservation</td><td bgcolor="#C0FFC0">0.35</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">23. loop invariant preservation</td><td bgcolor="#C0FFC0">0.12</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.07</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">24. loop invariant preservation</td><td bgcolor="#C0FFC0">0.14</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.03</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">25. loop invariant preservation</td><td bgcolor="#C0FFC0">0.30</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">26. assertion</td><td bgcolor="#C0FFC0">0.59</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#C0FFC0">0.04</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">27. assertion</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.53</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">28. assertion</td><td bgcolor="#C0FFC0">0.11</td><td bgcolor="#C0FFC0">0.46</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">29. assertion</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.06</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">30. postcondition</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.04</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.03</td><td bgcolor="#C0FFC0">0.02</td></tr>
+<tr><td bgcolor="#C0FFC0" colspan="1">31. postcondition</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#E0E0E0">---</td><td bgcolor="#C0FFC0">0.05</td><td bgcolor="#C0FFC0">0.06</td></tr>
+</table>
