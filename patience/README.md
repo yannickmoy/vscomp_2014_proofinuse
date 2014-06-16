@@ -41,11 +41,10 @@ as the proof of map.MapInjection.injective_surjective (made in Coq)
 *  module PatienceCode
 
 includes a idiomatic code of the Patience game, operating on
-lists. there is no specifications, except variants given to show
-termination. There is also an unreachable branch in the code marked as
-'absurd', but is not proved to be unreachable (this would requires to
-specify that stacks are never empty, which could have been done
-easily).
+lists. It is only annotated to prove its termination (using variants)
+and also it is specified that stacks are non-empty, so as to prove
+that the unreachable branch in the code (marked as
+'absurd') is indeed unreachable.
 
 * module PatienceAbstract
 

@@ -72,7 +72,7 @@ end
 
 
 
-(** {2 Patience unproved code} *)
+(** {2 Patience idiomatic code} *)
 
 
 module PatienceCode
@@ -82,10 +82,32 @@ module PatienceCode
   use import list.RevAppend
 
   (** this code was the one written initially, without any
-      specification or proofs, except for termination.
+      specification, except for termination, ans unreachability
+      of the 'absurd' branch'.
+
       It can be tested, see below. *)
 
   type card = int
+
+  (** stacks are well-formed if they are non-empty *)
+  predicate wf_stacks (stacks: list (list card)) =
+    match stacks with
+    | Nil -> true
+    | Cons Nil _ -> false
+    | Cons (Cons _ _) rem -> wf_stacks rem
+    end
+
+  (** concatenation of well-formed stacks is well-formed *)
+  let rec lemma wf_rev_append_stacks (s1 s2: list (list int)) 
+    requires { wf_stacks s1 }
+    requires { wf_stacks s2 }
+    variant { s1 }
+    ensures { wf_stacks (rev_append s1 s2) }
+  = match s1 with
+    | Nil -> ()
+    | Cons Nil _ -> absurd
+    | Cons s rem -> wf_rev_append_stacks rem (Cons s s2)
+    end
 
   (** [push_card c stacks acc] pushes card [c] on stacks [stacks],
       assuming [acc] is an accumulator (in reverse order) of stacks
@@ -93,7 +115,10 @@ module PatienceCode
   *)
   let rec push_card (c:card) (stacks : list (list card))
      (acc : list (list card)) : list (list card)
+    requires { wf_stacks stacks }
+    requires { wf_stacks acc }
     variant  { stacks }
+    ensures  { wf_stacks result }
   =
     match stacks with
     | Nil ->
@@ -101,7 +126,7 @@ module PatienceCode
       rev_append (Cons (Cons c Nil) acc) Nil
     | Cons stack remaining_stacks ->
         match stack with
-        | Nil -> absurd (* can not be proved unreachable yet *)
+        | Nil -> absurd (* because [wf_stacks stacks] *)
         | Cons c' _ ->
            if c <= c' then
              (* card is placed on the leftmost stack where its card
@@ -116,7 +141,9 @@ module PatienceCode
 
   let rec play_cards (input: list card) (stacks: list (list card))
     : list (list card)
+    requires { wf_stacks stacks }
     variant { input }
+    ensures  { wf_stacks result }
   =
     match input with
     | Nil -> stacks

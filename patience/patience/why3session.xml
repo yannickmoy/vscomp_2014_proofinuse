@@ -53,40 +53,54 @@
    name="PatienceCode"
    locfile="../patience.mlw"
    loclnum="78" loccnumb="7" loccnume="19"
-   verified="false"
-   expanded="false">
+   verified="true"
+   expanded="true">
    <goal
-    name="WP_parameter push_card"
+    name="WP_parameter wf_rev_append_stacks"
     locfile="../patience.mlw"
-    loclnum="94" loccnumb="10" loccnume="19"
-    expl="VC for push_card"
-    sum="fda58a2db171e747cc22a0a08defe854"
-    proved="false"
+    loclnum="99" loccnumb="16" loccnume="36"
+    expl="VC for wf_rev_append_stacks"
+    sum="87e0558bdb162db1fa4f359f60023a8b"
+    proved="true"
     expanded="false"
-    shape="CtaNilCfaNilCfaNilainfix =V5V3aConswVV1INainfix &lt;=V0V4aConsVwV2aConsVVV1F">
+    shape="Cawf_stacksarev_appendV0V1aNilfaConsaNilwawf_stacksarev_appendV0V1Iawf_stacksarev_appendV3V4Aawf_stacksV4Aawf_stacksV3ACfaNilainfix =V5V3aConswVV0LaConsV2V1aConsVVV0Iawf_stacksV1Aawf_stacksV0F">
     <label
-     name="expl:VC for push_card"/>
+     name="why3:lemma"/>
+    <label
+     name="expl:VC for wf_rev_append_stacks"/>
     <proof
      prover="0"
      timelimit="5"
      memlimit="1000"
      obsolete="false"
      archived="false">
-     <result status="unknown" time="0.02"/>
+     <result status="valid" time="0.03"/>
     </proof>
+   </goal>
+   <goal
+    name="WP_parameter push_card"
+    locfile="../patience.mlw"
+    loclnum="114" loccnumb="10" loccnume="19"
+    expl="VC for push_card"
+    sum="a643113acfde8fd6cec9085c94108ba8"
+    proved="true"
+    expanded="false"
+    shape="Cawf_stacksarev_appendaConsaConsV0aNilV2aNilaNilCfaNiliawf_stacksV6Iawf_stacksV6FAawf_stacksaConsV3V2Aawf_stacksV4ACfaNilainfix =V7V4aConswVV1awf_stacksarev_appendaConsaConsV0V3V2V4ainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksV2Aawf_stacksV1F">
+    <label
+     name="expl:VC for push_card"/>
     <transf
      name="split_goal_wp"
-     proved="false"
+     proved="true"
      expanded="false">
      <goal
       name="WP_parameter push_card.1"
       locfile="../patience.mlw"
-      loclnum="94" loccnumb="10" loccnume="19"
-      expl="1. unreachable point"
-      sum="33308b3730c839d767d6102f1457eb26"
-      proved="false"
+      loclnum="114" loccnumb="10" loccnume="19"
+      expl="1. postcondition"
+      sum="5336b92b70d32da1e58727dcdc0e11ba"
+      proved="true"
       expanded="false"
-      shape="unreachable pointCtaNilCfaNiltaConsVwV2aConsVVV1F">
+      shape="postconditionCawf_stacksarev_appendaConsaConsV0aNilV2aNilaNiltaConsVVV1Iawf_stacksV2Aawf_stacksV1F">
       <label
        name="expl:VC for push_card"/>
       <proof
@@ -95,18 +109,58 @@
        memlimit="1000"
        obsolete="false"
        archived="false">
-       <result status="unknown" time="0.01"/>
+       <result status="valid" time="0.04"/>
       </proof>
      </goal>
      <goal
       name="WP_parameter push_card.2"
       locfile="../patience.mlw"
-      loclnum="94" loccnumb="10" loccnume="19"
-      expl="2. variant decrease"
-      sum="a3845009b5b8343213da8414394c668c"
+      loclnum="114" loccnumb="10" loccnume="19"
+      expl="2. unreachable point"
+      sum="39f4ba763d6c8a2a014b80efe80dc79a"
       proved="true"
       expanded="false"
-      shape="variant decreaseCtaNilCtaNilCfaNilainfix =V5V3aConswVV1INainfix &lt;=V0V4aConsVwV2aConsVVV1F">
+      shape="unreachable pointCtaNilCfaNiltaConsVwV3aConsVVV1Iawf_stacksV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.3"
+      locfile="../patience.mlw"
+      loclnum="114" loccnumb="10" loccnume="19"
+      expl="3. postcondition"
+      sum="9b24624c8c3474d48a5b3030e2751b75"
+      proved="true"
+      expanded="false"
+      shape="postconditionCtaNilCtaNilawf_stacksarev_appendaConsaConsV0V3V2V4Iainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.07"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.4"
+      locfile="../patience.mlw"
+      loclnum="114" loccnumb="10" loccnume="19"
+      expl="4. variant decrease"
+      sum="367c87e5422888ffc18494231b7cb5d4"
+      proved="true"
+      expanded="false"
+      shape="variant decreaseCtaNilCtaNilCfaNilainfix =V6V4aConswVV1INainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksV2Aawf_stacksV1F">
       <label
        name="expl:VC for push_card"/>
       <proof
@@ -118,17 +172,77 @@
        <result status="valid" time="0.02"/>
       </proof>
      </goal>
+     <goal
+      name="WP_parameter push_card.5"
+      locfile="../patience.mlw"
+      loclnum="114" loccnumb="10" loccnume="19"
+      expl="5. precondition"
+      sum="854b80270e13f54a4dfbc02cc37236f7"
+      proved="true"
+      expanded="false"
+      shape="preconditionCtaNilCtaNilawf_stacksV4INainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.6"
+      locfile="../patience.mlw"
+      loclnum="114" loccnumb="10" loccnume="19"
+      expl="6. precondition"
+      sum="ee7bf83eb33c0a51d7a3d7aec45c5d6d"
+      proved="true"
+      expanded="false"
+      shape="preconditionCtaNilCtaNilawf_stacksaConsV3V2INainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.04"/>
+      </proof>
+     </goal>
+     <goal
+      name="WP_parameter push_card.7"
+      locfile="../patience.mlw"
+      loclnum="114" loccnumb="10" loccnume="19"
+      expl="7. postcondition"
+      sum="7daf254cf9fbbc52fc634c5b40f9caf1"
+      proved="true"
+      expanded="false"
+      shape="postconditionCtaNilCtaNilawf_stacksV6Iawf_stacksV6FIawf_stacksaConsV3V2Aawf_stacksV4INainfix &lt;=V0V5aConsVwV3aConsVVV1Iawf_stacksV2Aawf_stacksV1F">
+      <label
+       name="expl:VC for push_card"/>
+      <proof
+       prover="0"
+       timelimit="5"
+       memlimit="1000"
+       obsolete="false"
+       archived="false">
+       <result status="valid" time="0.01"/>
+      </proof>
+     </goal>
     </transf>
    </goal>
    <goal
     name="WP_parameter play_cards"
     locfile="../patience.mlw"
-    loclnum="117" loccnumb="10" loccnume="20"
+    loclnum="140" loccnumb="10" loccnume="20"
     expl="VC for play_cards"
-    sum="9a8acda29e2acc022499a6b8007cb617"
+    sum="a9a197734e9b742cf0fd7f4b72d64f6c"
     proved="true"
     expanded="false"
-    shape="CtaNilCfaNilainfix =V3V2aConswVV0aConsVVV0F">
+    shape="Cawf_stacksV1aNilawf_stacksV5Iawf_stacksV5FAawf_stacksV4ACfaNilainfix =V6V3aConswVV0Iawf_stacksV4FAawf_stacksaNilAawf_stacksV1aConsVVV0Iawf_stacksV1F">
     <label
      name="expl:VC for play_cards"/>
     <proof
@@ -143,12 +257,12 @@
    <goal
     name="WP_parameter play_game"
     locfile="../patience.mlw"
-    loclnum="129" loccnumb="6" loccnume="15"
+    loclnum="154" loccnumb="6" loccnume="15"
     expl="VC for play_game"
-    sum="9ab2a5192d46a86b4931997467e6f136"
+    sum="4347f1a263d66170eaf86568cd6c1364"
     proved="true"
     expanded="false"
-    shape="t">
+    shape="awf_stacksaNil">
     <label
      name="expl:VC for play_game"/>
     <proof
@@ -163,9 +277,9 @@
    <goal
     name="WP_parameter test"
     locfile="../patience.mlw"
-    loclnum="134" loccnumb="6" loccnume="10"
+    loclnum="159" loccnumb="6" loccnume="10"
     expl="VC for test"
-    sum="9ab2a5192d46a86b4931997467e6f136"
+    sum="4cd44e562c5f17e51ccfc24d0b772bef"
     proved="true"
     expanded="false"
     shape="t">
@@ -184,13 +298,13 @@
   <theory
    name="PatienceAbstract"
    locfile="../patience.mlw"
-   loclnum="145" loccnumb="7" loccnume="23"
+   loclnum="170" loccnumb="7" loccnume="23"
    verified="true"
-   expanded="true">
+   expanded="false">
    <goal
     name="WP_parameter play_card"
     locfile="../patience.mlw"
-    loclnum="252" loccnumb="6" loccnume="15"
+    loclnum="277" loccnumb="6" loccnume="15"
     expl="VC for play_card"
     sum="8f8cf5e8064c58c963c459ee800db847"
     proved="true"
@@ -205,7 +319,7 @@
      <goal
       name="WP_parameter play_card.1"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="1. postcondition"
       sum="b8c48d457154381d056f2357b765766e"
       proved="true"
@@ -225,7 +339,7 @@
      <goal
       name="WP_parameter play_card.2"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="2. postcondition"
       sum="3886630ffa3de75258bf27ed537ffe93"
       proved="true"
@@ -245,7 +359,7 @@
      <goal
       name="WP_parameter play_card.3"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="3. postcondition"
       sum="d0b979fe05dfddafe560b8898bcc8e62"
       proved="true"
@@ -265,7 +379,7 @@
      <goal
       name="WP_parameter play_card.4"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="4. postcondition"
       sum="42fedc282c129a1f83153c64bd432ae4"
       proved="true"
@@ -280,7 +394,7 @@
        <goal
         name="WP_parameter play_card.4.1"
         locfile="../patience.mlw"
-        loclnum="252" loccnumb="6" loccnume="15"
+        loclnum="277" loccnumb="6" loccnume="15"
         expl="1. postcondition"
         sum="75b42d7a0cd85a7b6dc9d4d5e442a668"
         proved="true"
@@ -295,7 +409,7 @@
          <goal
           name="WP_parameter play_card.4.1.1"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="1."
           sum="e2bf49b5def3e663c330f56c3fc5555f"
           proved="true"
@@ -315,7 +429,7 @@
          <goal
           name="WP_parameter play_card.4.1.2"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="2."
           sum="f2defcc5542619907666c81ac1c9d2a6"
           proved="true"
@@ -335,7 +449,7 @@
          <goal
           name="WP_parameter play_card.4.1.3"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="3."
           sum="1270a8b74b74dd503fc0e82229b2d9fc"
           proved="true"
@@ -355,7 +469,7 @@
          <goal
           name="WP_parameter play_card.4.1.4"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="4."
           sum="d6586b35c4e7bc188f8d2e9cf30e4245"
           proved="true"
@@ -375,7 +489,7 @@
          <goal
           name="WP_parameter play_card.4.1.5"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="5."
           sum="6384a401809d58258202feb0fb486b3e"
           proved="true"
@@ -395,7 +509,7 @@
          <goal
           name="WP_parameter play_card.4.1.6"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="6."
           sum="2cbdbe9c264bdb11ae372b0ae1e70271"
           proved="true"
@@ -415,7 +529,7 @@
          <goal
           name="WP_parameter play_card.4.1.7"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="7."
           sum="275f34cb6c22b3b2167a941e277c8275"
           proved="true"
@@ -435,7 +549,7 @@
          <goal
           name="WP_parameter play_card.4.1.8"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="8."
           sum="4d1f34e324ddb696fefe2abc6f68c6cd"
           proved="true"
@@ -455,7 +569,7 @@
          <goal
           name="WP_parameter play_card.4.1.9"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="9."
           sum="8363c6feb4c61b8843d41a37186ff03b"
           proved="true"
@@ -475,7 +589,7 @@
          <goal
           name="WP_parameter play_card.4.1.10"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="10."
           sum="23160d4db292e976d8d816073661a0fa"
           proved="true"
@@ -495,7 +609,7 @@
          <goal
           name="WP_parameter play_card.4.1.11"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="11."
           sum="9929bcdbedae8aab5c5cfcbcedbca7a1"
           proved="true"
@@ -515,7 +629,7 @@
          <goal
           name="WP_parameter play_card.4.1.12"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="12."
           sum="d0e953fc8c1e447eca673718557ebc5c"
           proved="true"
@@ -535,7 +649,7 @@
          <goal
           name="WP_parameter play_card.4.1.13"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="13."
           sum="4e5e3ae2affe891bfbe91e8a7760ea8e"
           proved="true"
@@ -555,7 +669,7 @@
          <goal
           name="WP_parameter play_card.4.1.14"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="14."
           sum="6bf9d6875f73effe28376fd54b0b3152"
           proved="true"
@@ -575,7 +689,7 @@
          <goal
           name="WP_parameter play_card.4.1.15"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="15."
           sum="60b21ac09ef27d8b9fdfa1a842029f75"
           proved="true"
@@ -595,7 +709,7 @@
          <goal
           name="WP_parameter play_card.4.1.16"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="16."
           sum="2ddb2a13d753dff0a479645f737327a6"
           proved="true"
@@ -615,7 +729,7 @@
          <goal
           name="WP_parameter play_card.4.1.17"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="17."
           sum="53d5eda7c41c5203f13f620c7f5134f4"
           proved="true"
@@ -635,7 +749,7 @@
          <goal
           name="WP_parameter play_card.4.1.18"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="18."
           sum="e16746bce36fb27f32b262560731c15d"
           proved="true"
@@ -655,7 +769,7 @@
          <goal
           name="WP_parameter play_card.4.1.19"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="19."
           sum="274af6d0b4bfc43bf205a0adfa05febd"
           proved="true"
@@ -675,7 +789,7 @@
          <goal
           name="WP_parameter play_card.4.1.20"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="20."
           sum="34358e241ffc27085283b30def708d91"
           proved="true"
@@ -695,7 +809,7 @@
          <goal
           name="WP_parameter play_card.4.1.21"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="21."
           sum="cc93b2fe1961bbb11dd099070cbd2de8"
           proved="true"
@@ -719,7 +833,7 @@
      <goal
       name="WP_parameter play_card.5"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="5. postcondition"
       sum="847f3cbc34e8552721ac3935f807fb80"
       proved="true"
@@ -739,7 +853,7 @@
      <goal
       name="WP_parameter play_card.6"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="6. postcondition"
       sum="fb5e358110984096df950f9af49f5cb0"
       proved="true"
@@ -759,7 +873,7 @@
      <goal
       name="WP_parameter play_card.7"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="7. assertion"
       sum="86321959f994add479ce86cc15f8ee14"
       proved="true"
@@ -779,7 +893,7 @@
      <goal
       name="WP_parameter play_card.8"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="8. assertion"
       sum="16d07bf8a36f3ce5c0b3419b3f19789b"
       proved="true"
@@ -799,7 +913,7 @@
      <goal
       name="WP_parameter play_card.9"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="9. loop invariant preservation"
       sum="7356a99d1719125e759236aef7ab2512"
       proved="true"
@@ -819,7 +933,7 @@
      <goal
       name="WP_parameter play_card.10"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="10. postcondition"
       sum="e9fdda6e9aeccc161a39b63833ba5ecb"
       proved="true"
@@ -834,7 +948,7 @@
        <goal
         name="WP_parameter play_card.10.1"
         locfile="../patience.mlw"
-        loclnum="252" loccnumb="6" loccnume="15"
+        loclnum="277" loccnumb="6" loccnume="15"
         expl="1. postcondition"
         sum="0f5dad1f0a16d7b8286a1e35a707f3fb"
         proved="true"
@@ -849,7 +963,7 @@
          <goal
           name="WP_parameter play_card.10.1.1"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="1."
           sum="b9f30d66b41d02eb2713bf482eb78b4a"
           proved="true"
@@ -893,7 +1007,7 @@
          <goal
           name="WP_parameter play_card.10.1.2"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="2."
           sum="13c622fa8c5bae8cb2d7c0d31749f872"
           proved="true"
@@ -937,7 +1051,7 @@
          <goal
           name="WP_parameter play_card.10.1.3"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="3."
           sum="1beb341a5dec97e7e2696cab226831d5"
           proved="true"
@@ -981,7 +1095,7 @@
          <goal
           name="WP_parameter play_card.10.1.4"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="4."
           sum="735b4f06e464aad2519e159dd3107c93"
           proved="true"
@@ -1025,7 +1139,7 @@
          <goal
           name="WP_parameter play_card.10.1.5"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="5."
           sum="af55e213feb42d787b69b92ce18c6a9e"
           proved="true"
@@ -1061,7 +1175,7 @@
          <goal
           name="WP_parameter play_card.10.1.6"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="6."
           sum="d9a429b40b076134c7f773488241c6b4"
           proved="true"
@@ -1097,7 +1211,7 @@
          <goal
           name="WP_parameter play_card.10.1.7"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="7."
           sum="90dff67766d49468c5c16ab1d17a6073"
           proved="true"
@@ -1141,7 +1255,7 @@
          <goal
           name="WP_parameter play_card.10.1.8"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="8."
           sum="d15cd8081e66ca0c6917d50fad464bd7"
           proved="true"
@@ -1185,7 +1299,7 @@
          <goal
           name="WP_parameter play_card.10.1.9"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="9."
           sum="576d18a609f7aba57e084bf1e10cba6c"
           proved="true"
@@ -1229,7 +1343,7 @@
          <goal
           name="WP_parameter play_card.10.1.10"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="10."
           sum="792bfa042ea92be89c99d3c7be627031"
           proved="true"
@@ -1273,7 +1387,7 @@
          <goal
           name="WP_parameter play_card.10.1.11"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="11."
           sum="2bf493d89ad45c48feb700d6e8e6cadc"
           proved="true"
@@ -1317,7 +1431,7 @@
          <goal
           name="WP_parameter play_card.10.1.12"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="12."
           sum="ede75de1410ff7051fe3846fcb169289"
           proved="true"
@@ -1353,7 +1467,7 @@
          <goal
           name="WP_parameter play_card.10.1.13"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="13."
           sum="7c6805d8a34eadcd633c10dede148ac0"
           proved="true"
@@ -1381,7 +1495,7 @@
          <goal
           name="WP_parameter play_card.10.1.14"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="14."
           sum="cb7cf67a0232a0895938a044702af005"
           proved="true"
@@ -1417,7 +1531,7 @@
          <goal
           name="WP_parameter play_card.10.1.15"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="15."
           sum="a37cec72eea71b71ac8f5bf6d7c43909"
           proved="true"
@@ -1461,7 +1575,7 @@
          <goal
           name="WP_parameter play_card.10.1.16"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="16."
           sum="5c9798c9a0fa707ef6b394055240ab43"
           proved="true"
@@ -1505,7 +1619,7 @@
          <goal
           name="WP_parameter play_card.10.1.17"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="17."
           sum="780879dab6a286ba0baf317f91c1cedb"
           proved="true"
@@ -1549,7 +1663,7 @@
          <goal
           name="WP_parameter play_card.10.1.18"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="18."
           sum="f1d494050c5ec1e0d1961ae09cf19ee8"
           proved="true"
@@ -1593,7 +1707,7 @@
          <goal
           name="WP_parameter play_card.10.1.19"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="19."
           sum="ca58539d59ebc879d80a16f7c08445fb"
           proved="true"
@@ -1637,7 +1751,7 @@
          <goal
           name="WP_parameter play_card.10.1.20"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="20."
           sum="9f310b74ecb3e8d1b1c63340ef0ff060"
           proved="true"
@@ -1681,7 +1795,7 @@
          <goal
           name="WP_parameter play_card.10.1.21"
           locfile="../patience.mlw"
-          loclnum="252" loccnumb="6" loccnume="15"
+          loclnum="277" loccnumb="6" loccnume="15"
           expl="21."
           sum="3bb454e1fe881a2edca6edb14228c727"
           proved="true"
@@ -1729,7 +1843,7 @@
      <goal
       name="WP_parameter play_card.11"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="11. postcondition"
       sum="a3d4f336d3de2bd3aabf8f61d44f95bd"
       proved="true"
@@ -1749,7 +1863,7 @@
      <goal
       name="WP_parameter play_card.12"
       locfile="../patience.mlw"
-      loclnum="252" loccnumb="6" loccnume="15"
+      loclnum="277" loccnumb="6" loccnume="15"
       expl="12. postcondition"
       sum="3767d555b200cb32e324d89859924c57"
       proved="true"
@@ -1771,7 +1885,7 @@
    <goal
     name="WP_parameter play_cards"
     locfile="../patience.mlw"
-    loclnum="324" loccnumb="10" loccnume="20"
+    loclnum="349" loccnumb="10" loccnume="20"
     expl="VC for play_cards"
     sum="2661c357b8e86e0aa24d62024573d45f"
     proved="true"
@@ -1786,7 +1900,7 @@
      <goal
       name="WP_parameter play_cards.1"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="1. postcondition"
       sum="e2ee71a5c70e6fba5656390a81924ec4"
       proved="true"
@@ -1806,7 +1920,7 @@
      <goal
       name="WP_parameter play_cards.2"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="2. postcondition"
       sum="0d51cffe8614815d4d62d4a7b34e495e"
       proved="true"
@@ -1826,7 +1940,7 @@
      <goal
       name="WP_parameter play_cards.3"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="3. postcondition"
       sum="aac9f4630227c6966e6b9648ccb20b5c"
       proved="true"
@@ -1846,7 +1960,7 @@
      <goal
       name="WP_parameter play_cards.4"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="4. precondition"
       sum="180e2cda5f6465b7bcfaba45d620ce58"
       proved="true"
@@ -1866,7 +1980,7 @@
      <goal
       name="WP_parameter play_cards.5"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="5. variant decrease"
       sum="8e92fc0208d7493cdfa3c2dfdea9c6ea"
       proved="true"
@@ -1886,7 +2000,7 @@
      <goal
       name="WP_parameter play_cards.6"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="6. precondition"
       sum="3151ddf1c479c0e413ecf2b706fc2ead"
       proved="true"
@@ -1906,7 +2020,7 @@
      <goal
       name="WP_parameter play_cards.7"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="7. postcondition"
       sum="7d0df3b54592ae9c0e190cc3ee9fb3af"
       proved="true"
@@ -1926,7 +2040,7 @@
      <goal
       name="WP_parameter play_cards.8"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="8. postcondition"
       sum="30510a1e1f262f790bf55d84f051af1e"
       proved="true"
@@ -1946,7 +2060,7 @@
      <goal
       name="WP_parameter play_cards.9"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="9. postcondition"
       sum="b304147612fd2658d66b935fde2e8270"
       proved="true"
@@ -1966,7 +2080,7 @@
      <goal
       name="WP_parameter play_cards.10"
       locfile="../patience.mlw"
-      loclnum="324" loccnumb="10" loccnume="20"
+      loclnum="349" loccnumb="10" loccnume="20"
       expl="10. postcondition"
       sum="f8de3d0386f52c945bcf20f5fe9298d0"
       proved="true"
@@ -1988,7 +2102,7 @@
    <goal
     name="WP_parameter play_game"
     locfile="../patience.mlw"
-    loclnum="371" loccnumb="6" loccnume="15"
+    loclnum="396" loccnumb="6" loccnume="15"
     expl="VC for play_game"
     sum="0068a3d2683f6a86db0a80c70a2628a9"
     proved="true"
@@ -2003,7 +2117,7 @@
      <goal
       name="WP_parameter play_game.1"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="1. precondition"
       sum="4cbec07d471479d9dc26b88b3a16e2c6"
       proved="true"
@@ -2023,7 +2137,7 @@
      <goal
       name="WP_parameter play_game.2"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="2. assertion"
       sum="bbfdc8a133c790f6bf89e5e2fad36b82"
       proved="true"
@@ -2043,7 +2157,7 @@
      <goal
       name="WP_parameter play_game.3"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="3. assertion"
       sum="ac953e0a760bb1c1fcedc910fade8219"
       proved="true"
@@ -2063,7 +2177,7 @@
      <goal
       name="WP_parameter play_game.4"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="4. postcondition"
       sum="262b694fb382f8a572d3c30e409765b1"
       proved="true"
@@ -2083,7 +2197,7 @@
      <goal
       name="WP_parameter play_game.5"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="5. postcondition"
       sum="d62b871254e3241816ae3907d9fca146"
       proved="true"
@@ -2103,7 +2217,7 @@
      <goal
       name="WP_parameter play_game.6"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="6. assertion"
       sum="e83a2b44c17b4900a7a424cd5c489c44"
       proved="true"
@@ -2123,7 +2237,7 @@
      <goal
       name="WP_parameter play_game.7"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="7. assertion"
       sum="21a1414856869a474e4356abf9a961ba"
       proved="true"
@@ -2143,7 +2257,7 @@
      <goal
       name="WP_parameter play_game.8"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="8. assertion"
       sum="eb31b638cc3dde9f17985273af77a04d"
       proved="true"
@@ -2163,7 +2277,7 @@
      <goal
       name="WP_parameter play_game.9"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="9. assertion"
       sum="896795f0a98171089880fb026f6d3b99"
       proved="true"
@@ -2183,7 +2297,7 @@
      <goal
       name="WP_parameter play_game.10"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="10. assertion"
       sum="831c6e1e2c105d93f40304dfca55768a"
       proved="true"
@@ -2203,7 +2317,7 @@
      <goal
       name="WP_parameter play_game.11"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="11. postcondition"
       sum="acc226f35c68b5be27a8e0931883aa44"
       proved="true"
@@ -2223,7 +2337,7 @@
      <goal
       name="WP_parameter play_game.12"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="12. postcondition"
       sum="ce7db43fa1f7f1c1be6dd2d0a7bc15d2"
       proved="true"
@@ -2243,7 +2357,7 @@
      <goal
       name="WP_parameter play_game.13"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="13. loop invariant init"
       sum="34ad89b973ecb6e5d460875fe0ea5eb1"
       proved="true"
@@ -2263,7 +2377,7 @@
      <goal
       name="WP_parameter play_game.14"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="14. loop invariant init"
       sum="a4cfe4a7eb096e1dae73e520a27329aa"
       proved="true"
@@ -2283,7 +2397,7 @@
      <goal
       name="WP_parameter play_game.15"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="15. loop invariant init"
       sum="4ec8fff86e01231b4659faa399361e88"
       proved="true"
@@ -2303,7 +2417,7 @@
      <goal
       name="WP_parameter play_game.16"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="16. loop invariant init"
       sum="23b6c116d62d574f025fce0334711479"
       proved="true"
@@ -2323,7 +2437,7 @@
      <goal
       name="WP_parameter play_game.17"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="17. loop invariant init"
       sum="9b22fbdee920dec2ddffcc665fd2d155"
       proved="true"
@@ -2343,7 +2457,7 @@
      <goal
       name="WP_parameter play_game.18"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="18. loop invariant init"
       sum="da7cae1e16df13970e47a566d21605e2"
       proved="true"
@@ -2363,7 +2477,7 @@
      <goal
       name="WP_parameter play_game.19"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="19. loop invariant init"
       sum="8cc624cd87973c036138666544c46ab3"
       proved="true"
@@ -2383,7 +2497,7 @@
      <goal
       name="WP_parameter play_game.20"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="20. loop invariant preservation"
       sum="08040a4c70b1b5a19a761f7e889e2ed5"
       proved="true"
@@ -2403,7 +2517,7 @@
      <goal
       name="WP_parameter play_game.21"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="21. loop invariant preservation"
       sum="d12aedff3243a6d53fc5fe15c0db20de"
       proved="true"
@@ -2423,7 +2537,7 @@
      <goal
       name="WP_parameter play_game.22"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="22. loop invariant preservation"
       sum="d09a34b2fa72cdf4fca267e325e2ccd2"
       proved="true"
@@ -2443,7 +2557,7 @@
      <goal
       name="WP_parameter play_game.23"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="23. loop invariant preservation"
       sum="799dcd801446d047f548ec360eb4494d"
       proved="true"
@@ -2463,7 +2577,7 @@
      <goal
       name="WP_parameter play_game.24"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="24. loop invariant preservation"
       sum="75ea5e95f1a5adca22f9f878ac9d6228"
       proved="true"
@@ -2483,7 +2597,7 @@
      <goal
       name="WP_parameter play_game.25"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="25. loop invariant preservation"
       sum="eb2b7b4d9977df8615b7ded192ca3683"
       proved="true"
@@ -2503,7 +2617,7 @@
      <goal
       name="WP_parameter play_game.26"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="26. loop invariant preservation"
       sum="78b355dc923d8d78f58f68d7e1b8455e"
       proved="true"
@@ -2523,7 +2637,7 @@
      <goal
       name="WP_parameter play_game.27"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="27. assertion"
       sum="9143971ff07fd8efb3292c788f174bb2"
       proved="true"
@@ -2543,7 +2657,7 @@
      <goal
       name="WP_parameter play_game.28"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="28. assertion"
       sum="0fa5959994edb2c4e4fd7708b5a849df"
       proved="true"
@@ -2563,7 +2677,7 @@
      <goal
       name="WP_parameter play_game.29"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="29. assertion"
       sum="d5bfb8670e97f5001971d59246fdea6d"
       proved="true"
@@ -2583,7 +2697,7 @@
      <goal
       name="WP_parameter play_game.30"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="30. assertion"
       sum="c3def0a44bd2cdacec5cf8e2824668c1"
       proved="true"
@@ -2603,7 +2717,7 @@
      <goal
       name="WP_parameter play_game.31"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="31. assertion"
       sum="e2ed9c5f49255721218302155eb79d62"
       proved="true"
@@ -2631,7 +2745,7 @@
      <goal
       name="WP_parameter play_game.32"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="32. postcondition"
       sum="9ff4855e6d06aefb3953d97d39e750d3"
       proved="true"
@@ -2651,7 +2765,7 @@
      <goal
       name="WP_parameter play_game.33"
       locfile="../patience.mlw"
-      loclnum="371" loccnumb="6" loccnume="15"
+      loclnum="396" loccnumb="6" loccnume="15"
       expl="33. postcondition"
       sum="34dc2530156d191a04a0323c4ca81022"
       proved="true"
@@ -2681,7 +2795,7 @@
    <goal
     name="WP_parameter test"
     locfile="../patience.mlw"
-    loclnum="466" loccnumb="6" loccnume="10"
+    loclnum="491" loccnumb="6" loccnume="10"
     expl="VC for test"
     sum="d440f56d7afac6b8e840aeec011c0c9c"
     proved="true"
@@ -2699,36 +2813,28 @@
   <theory
    name="PatienceFull"
    locfile="../patience.mlw"
-   loclnum="476" loccnumb="7" loccnume="19"
+   loclnum="501" loccnumb="7" loccnume="19"
    verified="false"
-   expanded="true">
+   expanded="false">
    <goal
     name="WP_parameter play_card"
     locfile="../patience.mlw"
-    loclnum="511" loccnumb="6" loccnume="15"
+    loclnum="536" loccnumb="6" loccnume="15"
     expl="VC for play_card"
     sum="c71de03965106c0fa4e37a09f7877bb9"
     proved="false"
-    expanded="true"
+    expanded="false"
     shape="iaglueV21arev_appendaConsaConsV0aNilV13aNilAainfix =V15amixfix [&lt;-]V3V2V0Aainfix =V14ainfix +V2c1AainvV21Iainfix =V20amixfix [&lt;-]V8V2V11Lamk stateV14V15V16V17V18V19V20FIainfix =V19asetV7V2aTuple2V4c0FIainfix =V18amixfix [&lt;-]V6V4amixfix [&lt;-]amixfix []V6V4c0V2FIainfix =V17amixfix [&lt;-]V5V4c1FIainfix =V16ainfix +V4c1FIainfix =V15amixfix [&lt;-]V3V2V0FIainfix =V14ainfix +V2c1FCfaNilCfAaglue_stackV9V10V22aNiliCfaNilainfix =V31V24aConswVV12Aainfix =V1arev_appendV29V24AiCainfix =V32ainfix -V28c1aTuple2VVagetV7V30Aainfix &lt;V30V2Aainfix &lt;=c0V30Aainfix &gt;V0amixfix []V3V30Aainfix =V30amixfix []amixfix []V6ainfix -V28c1ainfix -amixfix []V5ainfix -V28c1c1ainfix =V30aprefix -c1ainfix =V28c0Aainfix &lt;=V28V4Aainfix &lt;=c0V28Iainfix =V30V27FIainfix =V29aConsV22V13FIainfix =V28ainfix +V10c1FACainfix =V35ainfix -V26c1Aainfix =V34V10Aainfix =amixfix []amixfix []V6V34V35V27Aainfix &lt;V35amixfix []V5V34Aainfix &lt;=c0V35Aainfix &lt;V34V4Aainfix &lt;=c0V34aTuple2VVagetV7V27Aainfix &lt;V27V2Aainfix &lt;=c0V27Lamixfix []amixfix []V6V10ainfix -V26c1Lamixfix []V5V10aglueV45arev_appendV36V24Aainfix =V40amixfix [&lt;-]V3V2V0Aainfix =V39ainfix +V2c1AainvV45Iainfix =V44amixfix [&lt;-]V8V2V11Lamk stateV39V40V4V41V42V43V44FIainfix =V43asetV7V2aTuple2V10V38FIainfix =V42amixfix [&lt;-]V6V10amixfix [&lt;-]V37V38V2FIainfix =V41amixfix [&lt;-]V5V10ainfix +V38c1FIainfix =V40amixfix [&lt;-]V3V2V0FIainfix =V39ainfix +V2c1FAainfix &lt;=V0amixfix []V3amixfix []V37ainfix -V38c1Lamixfix []V5V10Lamixfix []V6V10Iainfix =V36aConsaConsV0V22V13Fainfix &lt;=V0V25aConsVwV22Iainfix =V24V23FaConsVVV12Nainfix =V12aNilIainfix =V1arev_appendV13V12AiCainfix =V46ainfix -V10c1aTuple2VVagetV7V11Aainfix &lt;V11V2Aainfix &lt;=c0V11Aainfix &gt;V0amixfix []V3V11Aainfix =V11amixfix []amixfix []V6ainfix -V10c1ainfix -amixfix []V5ainfix -V10c1c1ainfix =V11aprefix -c1ainfix =V10c0Aainfix &lt;=V10V4Aainfix &lt;=c0V10FAainfix =V1arev_appendaNilV1Aainfix &lt;=c0V4Aainfix &lt;=c0c0IaglueV9V1AainvV9Lamk stateV2V3V4V5V6V7V8F">
     <label
      name="expl:VC for play_card"/>
-    <proof
-     prover="0"
-     timelimit="5"
-     memlimit="1000"
-     obsolete="true"
-     archived="false">
-     <result status="timeout" time="4.99"/>
-    </proof>
     <transf
      name="split_goal_wp"
      proved="false"
-     expanded="true">
+     expanded="false">
      <goal
       name="WP_parameter play_card.1"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="1. loop invariant init"
       sum="cf849cacff1b5111523c24493f6c2ffe"
       proved="true"
@@ -2748,7 +2854,7 @@
      <goal
       name="WP_parameter play_card.2"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="2. loop invariant init"
       sum="626987f787318f4c53428f0968a98295"
       proved="true"
@@ -2768,7 +2874,7 @@
      <goal
       name="WP_parameter play_card.3"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="3. unreachable point"
       sum="556afedfa3f34c0c02c4d8477eda2ad7"
       proved="true"
@@ -2788,7 +2894,7 @@
      <goal
       name="WP_parameter play_card.4"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="4. assertion"
       sum="1082b6c25c2ac60b30e12606f501f958"
       proved="false"
@@ -2800,7 +2906,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="unknown" time="3.90"/>
       </proof>
@@ -2808,7 +2914,7 @@
      <goal
       name="WP_parameter play_card.5"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="5. unreachable point"
       sum="c031b7ede4f4d1af734befa71121b91b"
       proved="false"
@@ -2820,7 +2926,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="timeout" time="4.98"/>
       </proof>
@@ -2828,7 +2934,7 @@
      <goal
       name="WP_parameter play_card.6"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="6. assertion"
       sum="b26bc5106e7e40a1cbcb739ec6fe39f3"
       proved="false"
@@ -2840,7 +2946,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="timeout" time="4.98"/>
       </proof>
@@ -2848,7 +2954,7 @@
      <goal
       name="WP_parameter play_card.7"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="7. postcondition"
       sum="d279f53aa9a7448e1c0b28be0ba1da3e"
       proved="false"
@@ -2860,7 +2966,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="timeout" time="4.99"/>
       </proof>
@@ -2868,7 +2974,7 @@
      <goal
       name="WP_parameter play_card.8"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="8. postcondition"
       sum="8d6c2c1c34469d07f586e54d92dd6939"
       proved="true"
@@ -2888,7 +2994,7 @@
      <goal
       name="WP_parameter play_card.9"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="9. postcondition"
       sum="00cb3244519519fc8b2c4836ebbf797f"
       proved="true"
@@ -2908,7 +3014,7 @@
      <goal
       name="WP_parameter play_card.10"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="10. postcondition"
       sum="bd4e9437cc90de8d8108ef3020414f7c"
       proved="false"
@@ -2920,7 +3026,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="timeout" time="5.00"/>
       </proof>
@@ -2928,7 +3034,7 @@
      <goal
       name="WP_parameter play_card.11"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="11. assertion"
       sum="24912b2ca2bbe55ada26017ab16be96a"
       proved="false"
@@ -2940,7 +3046,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="timeout" time="4.99"/>
       </proof>
@@ -2948,7 +3054,7 @@
      <goal
       name="WP_parameter play_card.12"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="12. assertion"
       sum="7473083c09f4eaf4accad9e6d365f515"
       proved="false"
@@ -2960,7 +3066,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="timeout" time="5.00"/>
       </proof>
@@ -2968,7 +3074,7 @@
      <goal
       name="WP_parameter play_card.13"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="13. loop invariant preservation"
       sum="8b4e2e2cae538081e6f7adde67def52f"
       proved="true"
@@ -2988,7 +3094,7 @@
      <goal
       name="WP_parameter play_card.14"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="14. loop invariant preservation"
       sum="73621f24a2a8b52d3ddb09a14a13199c"
       proved="false"
@@ -3000,7 +3106,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="timeout" time="4.99"/>
       </proof>
@@ -3008,7 +3114,7 @@
      <goal
       name="WP_parameter play_card.15"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="15. loop invariant preservation"
       sum="38fc6b7c72c54d6d6a310ba9263245f1"
       proved="true"
@@ -3028,7 +3134,7 @@
      <goal
       name="WP_parameter play_card.16"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="16. loop variant decrease"
       sum="31c4cd0eec9e7d13e794e81e8942257c"
       proved="true"
@@ -3048,7 +3154,7 @@
      <goal
       name="WP_parameter play_card.17"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="17. postcondition"
       sum="c033782fe2a8624ff4e99a7ab2746dcd"
       proved="false"
@@ -3060,7 +3166,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="unknown" time="1.37"/>
       </proof>
@@ -3068,7 +3174,7 @@
      <goal
       name="WP_parameter play_card.18"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="18. postcondition"
       sum="cb643f12fb796d86523aad03ad972855"
       proved="true"
@@ -3088,7 +3194,7 @@
      <goal
       name="WP_parameter play_card.19"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="19. postcondition"
       sum="939e8da7fd1774f174140fcdfb4d119e"
       proved="true"
@@ -3108,7 +3214,7 @@
      <goal
       name="WP_parameter play_card.20"
       locfile="../patience.mlw"
-      loclnum="511" loccnumb="6" loccnume="15"
+      loclnum="536" loccnumb="6" loccnume="15"
       expl="20. postcondition"
       sum="9b86688be5a0f15cf562b203257fdf13"
       proved="false"
@@ -3120,7 +3226,7 @@
        prover="0"
        timelimit="5"
        memlimit="1000"
-       obsolete="true"
+       obsolete="false"
        archived="false">
        <result status="unknown" time="0.60"/>
       </proof>
@@ -3130,7 +3236,7 @@
    <goal
     name="WP_parameter play_cards"
     locfile="../patience.mlw"
-    loclnum="656" loccnumb="10" loccnume="20"
+    loclnum="681" loccnumb="10" loccnume="20"
     expl="VC for play_cards"
     sum="659e5bacf0b3f558f6cffea41e063adb"
     proved="true"
@@ -3150,7 +3256,7 @@
    <goal
     name="WP_parameter play_game"
     locfile="../patience.mlw"
-    loclnum="702" loccnumb="6" loccnume="15"
+    loclnum="727" loccnumb="6" loccnume="15"
     expl="VC for play_game"
     sum="686eb7edb922e2177503fbae3ac5be1b"
     proved="true"
@@ -3165,7 +3271,7 @@
      <goal
       name="WP_parameter play_game.1"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="1. precondition"
       sum="7ccafa4ad1f110136ba31473d1218c1c"
       proved="true"
@@ -3217,7 +3323,7 @@
      <goal
       name="WP_parameter play_game.2"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="2. precondition"
       sum="819d617c37a079be82f980edfd47c5bd"
       proved="true"
@@ -3269,7 +3375,7 @@
      <goal
       name="WP_parameter play_game.3"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="3. assertion"
       sum="99fed2186bd3662eefbe63116ef4bf6e"
       proved="true"
@@ -3321,7 +3427,7 @@
      <goal
       name="WP_parameter play_game.4"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="4. assertion"
       sum="138af88cece3ad13506bbf7e0f6b13cc"
       proved="true"
@@ -3365,7 +3471,7 @@
      <goal
       name="WP_parameter play_game.5"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="5. unreachable point"
       sum="33eab69780468c6d52d5da498ae728c9"
       proved="true"
@@ -3417,7 +3523,7 @@
      <goal
       name="WP_parameter play_game.6"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="6. assertion"
       sum="5cb9fe817d559d638273a0f586b88446"
       proved="true"
@@ -3461,7 +3567,7 @@
      <goal
       name="WP_parameter play_game.7"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="7. assertion"
       sum="4d9bf80001033fab21ea26864dc9f7bc"
       proved="true"
@@ -3505,7 +3611,7 @@
      <goal
       name="WP_parameter play_game.8"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="8. assertion"
       sum="3209bc20888851e80371cb345bfc6a8b"
       proved="true"
@@ -3549,7 +3655,7 @@
      <goal
       name="WP_parameter play_game.9"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="9. assertion"
       sum="0d9404ada03269a1ce894d0ef8d803c5"
       proved="true"
@@ -3593,7 +3699,7 @@
      <goal
       name="WP_parameter play_game.10"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="10. postcondition"
       sum="7d795e9fe920de2422f980466f3b739a"
       proved="true"
@@ -3637,7 +3743,7 @@
      <goal
       name="WP_parameter play_game.11"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="11. postcondition"
       sum="ddcce45c4843602c5b2ac06944bbef49"
       proved="true"
@@ -3689,7 +3795,7 @@
      <goal
       name="WP_parameter play_game.12"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="12. loop invariant init"
       sum="ebd110e88616ca2af92d2eec586fe6ad"
       proved="true"
@@ -3733,7 +3839,7 @@
      <goal
       name="WP_parameter play_game.13"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="13. loop invariant init"
       sum="38aee9c5d6c68e75757a99fae55e0dda"
       proved="true"
@@ -3777,7 +3883,7 @@
      <goal
       name="WP_parameter play_game.14"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="14. loop invariant init"
       sum="cb09ed9f1e46252daa98b74c227778fb"
       proved="true"
@@ -3829,7 +3935,7 @@
      <goal
       name="WP_parameter play_game.15"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="15. loop invariant init"
       sum="a99332aca6311c828ad8c4437abaca3a"
       proved="true"
@@ -3881,7 +3987,7 @@
      <goal
       name="WP_parameter play_game.16"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="16. loop invariant init"
       sum="73cc16a02b9b8ae8a380b9c18d75bd90"
       proved="true"
@@ -3933,7 +4039,7 @@
      <goal
       name="WP_parameter play_game.17"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="17. loop invariant init"
       sum="282a8e3a3b29226ee5f7b7de532727e3"
       proved="true"
@@ -3985,7 +4091,7 @@
      <goal
       name="WP_parameter play_game.18"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="18. loop invariant init"
       sum="610f529e8f54509f97bc937c42fc7f13"
       proved="true"
@@ -4037,7 +4143,7 @@
      <goal
       name="WP_parameter play_game.19"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="19. loop invariant preservation"
       sum="32b8a3d22f6dfb0ee4d14958b3f32f1b"
       proved="true"
@@ -4081,7 +4187,7 @@
      <goal
       name="WP_parameter play_game.20"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="20. loop invariant preservation"
       sum="7796ba03a7a872684e8a22de6f6e79e7"
       proved="true"
@@ -4125,7 +4231,7 @@
      <goal
       name="WP_parameter play_game.21"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="21. loop invariant preservation"
       sum="f259a73b8944fd114efd10db5acaf8d0"
       proved="true"
@@ -4169,7 +4275,7 @@
      <goal
       name="WP_parameter play_game.22"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="22. loop invariant preservation"
       sum="78de39a3fc3d747b634b3b7ec84b1516"
       proved="true"
@@ -4213,7 +4319,7 @@
      <goal
       name="WP_parameter play_game.23"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="23. loop invariant preservation"
       sum="19f22f50fcb953f447110c4c8eb0bc1a"
       proved="true"
@@ -4265,7 +4371,7 @@
      <goal
       name="WP_parameter play_game.24"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="24. loop invariant preservation"
       sum="d272f50c257e22100c70f2df29ca50d4"
       proved="true"
@@ -4301,7 +4407,7 @@
      <goal
       name="WP_parameter play_game.25"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="25. loop invariant preservation"
       sum="8adc5e40c963cc53f1af87d60710817a"
       proved="true"
@@ -4337,7 +4443,7 @@
      <goal
       name="WP_parameter play_game.26"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="26. assertion"
       sum="2ba61e2c6d7da080a3dc69b222dcc05e"
       proved="true"
@@ -4373,7 +4479,7 @@
      <goal
       name="WP_parameter play_game.27"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="27. assertion"
       sum="a10ce112249989e372b9bf30d47db3f6"
       proved="true"
@@ -4393,7 +4499,7 @@
      <goal
       name="WP_parameter play_game.28"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="28. assertion"
       sum="a992762a043154fa108cff6a81d71b6d"
       proved="true"
@@ -4437,7 +4543,7 @@
      <goal
       name="WP_parameter play_game.29"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="29. assertion"
       sum="1398ad8b21734f273781511d3979ac19"
       proved="true"
@@ -4465,7 +4571,7 @@
      <goal
       name="WP_parameter play_game.30"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="30. postcondition"
       sum="3e39bfc0b160eb2bdbe51d00ed9e5e5d"
       proved="true"
@@ -4509,7 +4615,7 @@
      <goal
       name="WP_parameter play_game.31"
       locfile="../patience.mlw"
-      loclnum="702" loccnumb="6" loccnume="15"
+      loclnum="727" loccnumb="6" loccnume="15"
       expl="31. postcondition"
       sum="b3c089483450777872ab5f72b240898c"
       proved="true"
