@@ -62,15 +62,46 @@ input sequence.</p>
 <div class="info"><p><code>injective f n m</code> is true when <code>f</code> is an injection
       from <code>(0..n-1)</code> to <code>(0..m-1)</code></p>
 </div><pre>
-  <span class="keyword1">lemma</span> <a name="pigeon_hole_66">pigeon_hole</a> :
-    <span class="keyword1">forall</span> n,m:int, f: int -&gt; int.
-    <a href="#range_56">range</a> f n m /\ n <a href="int.html#infix.20.3E_17">&gt;</a> m -&gt; <span class="keyword1">not</span> <a href="#injective_61">injective</a> f n m
+  <span class="keyword1">exception</span> <a name="Found_66">Found</a>
+
+  <span class="keyword1">function</span> <a name="shift_68">shift</a> (f: int -&gt; int) (i:int) : int -&gt; int =
+    \k:int. <span class="keyword1">if</span> k <a href="int.html#infix.20.3C_16">&lt;</a> i <span class="keyword1">then</span> f k <span class="keyword1">else</span> f (k<a href="int.html#infix.20.2B_86">+</a>1)
+
+  <span class="keyword1">let</span> <span class="keyword1">rec</span> <span class="keyword1">lemma</span> <a name="pigeon_hole_71">pigeon_hole</a> (n m:int) (f: int -&gt; int)
+    <span class="keyword2">requires</span> { <a href="#range_56">range</a> f n m }
+    <span class="keyword2">requires</span> { n <a href="int.html#infix.20.3E_17">&gt;</a> m <a href="int.html#infix.20.3E.3D_131">&gt;=</a> 0 }
+    <span class="keyword2">variant</span>  { m }
+    <span class="keyword2">ensures</span>  { <span class="keyword1">not</span> (<a href="#injective_61">injective</a> f n m) }
+  = <span class="keyword1">try</span>
+      <span class="keyword1">for</span> i = 0 <span class="keyword1">to</span> n<a href="int.html#infix.20-_100">-</a>1 <span class="keyword1">do</span>
+        <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> k. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> k <a href="int.html#infix.20.3C_16">&lt;</a> i -&gt; f k &lt;&gt; m<a href="int.html#infix.20-_100">-</a>1 }
+        <span class="keyword1">if</span> f i = m<a href="int.html#infix.20-_100">-</a>1 <span class="keyword1">then</span>
+          <span class="keyword1">begin</span>
+          <span class="comment">(* we have found index i such that f i = m-1 *)</span>
+          <span class="keyword1">for</span> j = i<a href="int.html#infix.20.2B_86">+</a>1 <span class="keyword1">to</span> n<a href="int.html#infix.20-_100">-</a>1 <span class="keyword1">do</span>
+            <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> k. i <a href="int.html#infix.20.3C_16">&lt;</a> k <a href="int.html#infix.20.3C_16">&lt;</a> j -&gt; f k &lt;&gt; m<a href="int.html#infix.20-_100">-</a>1 }
+            <span class="keyword1">if</span> f j = m<a href="int.html#infix.20-_100">-</a>1 <span class="keyword1">then</span> <span class="keyword1">raise</span> <a href="#Found_66">Found</a>
+          <span class="keyword1">done</span>;
+          <span class="comment">(* we know that for all k &lt;&gt; i, f k &lt;&gt; m-1 *)</span>
+          <span class="keyword1">let</span> g = <a href="#shift_68">shift</a> f i <span class="keyword1">in</span>
+          <span class="keyword2">assert</span> { <a href="#range_56">range</a> g (n<a href="int.html#infix.20-_100">-</a>1) (m<a href="int.html#infix.20-_100">-</a>1) };
+          pigeon_hole (n<a href="int.html#infix.20-_100">-</a>1) (m<a href="int.html#infix.20-_100">-</a>1) g;
+          <span class="keyword1">raise</span> <a href="#Found_66">Found</a>;
+          <span class="keyword1">end</span>
+      <span class="keyword1">done</span>;
+      <span class="comment">(* we know that for all k, f k &lt;&gt; m-1 *)</span>
+      <span class="keyword2">assert</span> { <a href="#range_56">range</a> f n (m<a href="int.html#infix.20-_100">-</a>1) };
+      pigeon_hole n (m<a href="int.html#infix.20-_100">-</a>1) f
+   <span class="keyword1">with</span> <a href="#Found_66">Found</a> -&gt;
+     <span class="comment">(* we know that f i = f j = m-1 hence we are done *)</span>
+     ()
+   <span class="keyword1">end</span>
 
 <span class="keyword1">end</span>
 
 </pre>
 <h2>Patience idiomatic code</h2><pre>
-<span class="keyword1">module</span> <a name="PatienceCode_78">PatienceCode</a>
+<span class="keyword1">module</span> <a name="PatienceCode_109">PatienceCode</a>
 
   <span class="keyword1">use</span> <span class="keyword1">import</span> int.<a href="int.html#Int_11">Int</a>
   <span class="keyword1">use</span> <span class="keyword1">import</span> list.<a href="list.html#List_6">List</a>
@@ -82,26 +113,26 @@ input sequence.</p>
       of the 'absurd' branch'.</p>
 <p>It can be tested, see below.</p>
 <pre>
-  <span class="keyword1">type</span> <a name="card_90">card</a> = int
+  <span class="keyword1">type</span> <a name="card_121">card</a> = int
 
 </pre>
 <p>stacks are well-formed if they are non-empty</p>
 <pre>
-  <span class="keyword1">predicate</span> <a name="wf_stacks_93">wf_stacks</a> (stacks: <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_90">card</a>)) =
+  <span class="keyword1">predicate</span> <a name="wf_stacks_124">wf_stacks</a> (stacks: <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_121">card</a>)) =
     <span class="keyword1">match</span> stacks <span class="keyword1">with</span>
     | <a href="list.html#Nil_8">Nil</a> -&gt; <span class="keyword1">true</span>
     | <a href="list.html#Cons_8">Cons</a> <a href="list.html#Nil_8">Nil</a> _ -&gt; <span class="keyword1">false</span>
-    | <a href="list.html#Cons_8">Cons</a> (<a href="list.html#Cons_8">Cons</a> _ _) rem -&gt; <a href="#wf_stacks_93">wf_stacks</a> rem
+    | <a href="list.html#Cons_8">Cons</a> (<a href="list.html#Cons_8">Cons</a> _ _) rem -&gt; <a href="#wf_stacks_124">wf_stacks</a> rem
     <span class="keyword1">end</span>
 
 </pre>
 <p>concatenation of well-formed stacks is well-formed</p>
 <pre>
-  <span class="keyword1">let</span> <span class="keyword1">rec</span> <span class="keyword1">lemma</span> <a name="wf_rev_append_stacks_101">wf_rev_append_stacks</a> (s1 s2: <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> int))
-    <span class="keyword2">requires</span> { <a href="#wf_stacks_93">wf_stacks</a> s1 }
-    <span class="keyword2">requires</span> { <a href="#wf_stacks_93">wf_stacks</a> s2 }
+  <span class="keyword1">let</span> <span class="keyword1">rec</span> <span class="keyword1">lemma</span> <a name="wf_rev_append_stacks_132">wf_rev_append_stacks</a> (s1 s2: <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> int))
+    <span class="keyword2">requires</span> { <a href="#wf_stacks_124">wf_stacks</a> s1 }
+    <span class="keyword2">requires</span> { <a href="#wf_stacks_124">wf_stacks</a> s2 }
     <span class="keyword2">variant</span> { s1 }
-    <span class="keyword2">ensures</span> { <a href="#wf_stacks_93">wf_stacks</a> (<a href="list.html#rev_append_247">rev_append</a> s1 s2) }
+    <span class="keyword2">ensures</span> { <a href="#wf_stacks_124">wf_stacks</a> (<a href="list.html#rev_append_247">rev_append</a> s1 s2) }
   = <span class="keyword1">match</span> s1 <span class="keyword1">with</span>
     | <a href="list.html#Nil_8">Nil</a> -&gt; ()
     | <a href="list.html#Cons_8">Cons</a> <a href="list.html#Nil_8">Nil</a> _ -&gt; <span class="keyword2">absurd</span>
@@ -114,12 +145,12 @@ input sequence.</p>
       where <code>c</code> could not be pushed.
 </p>
 <pre>
-  <span class="keyword1">let</span> <span class="keyword1">rec</span> <a name="push_card_116">push_card</a> (c:<a href="#card_90">card</a>) (stacks : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_90">card</a>))
-     (acc : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_90">card</a>)) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_90">card</a>)
-    <span class="keyword2">requires</span> { <a href="#wf_stacks_93">wf_stacks</a> stacks }
-    <span class="keyword2">requires</span> { <a href="#wf_stacks_93">wf_stacks</a> acc }
+  <span class="keyword1">let</span> <span class="keyword1">rec</span> <a name="push_card_147">push_card</a> (c:<a href="#card_121">card</a>) (stacks : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_121">card</a>))
+     (acc : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_121">card</a>)) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_121">card</a>)
+    <span class="keyword2">requires</span> { <a href="#wf_stacks_124">wf_stacks</a> stacks }
+    <span class="keyword2">requires</span> { <a href="#wf_stacks_124">wf_stacks</a> acc }
     <span class="keyword2">variant</span>  { stacks }
-    <span class="keyword2">ensures</span>  { <a href="#wf_stacks_93">wf_stacks</a> result }
+    <span class="keyword2">ensures</span>  { <a href="#wf_stacks_124">wf_stacks</a> result }
   =
     <span class="keyword1">match</span> stacks <span class="keyword1">with</span>
     | <a href="list.html#Nil_8">Nil</a> -&gt;
@@ -140,38 +171,38 @@ input sequence.</p>
         <span class="keyword1">end</span>
      <span class="keyword1">end</span>
 
-  <span class="keyword1">let</span> <span class="keyword1">rec</span> <a name="play_cards_142">play_cards</a> (input: <a href="list.html#list_8">list</a> <a href="#card_90">card</a>) (stacks: <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_90">card</a>))
-    : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_90">card</a>)
-    <span class="keyword2">requires</span> { <a href="#wf_stacks_93">wf_stacks</a> stacks }
+  <span class="keyword1">let</span> <span class="keyword1">rec</span> <a name="play_cards_173">play_cards</a> (input: <a href="list.html#list_8">list</a> <a href="#card_121">card</a>) (stacks: <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_121">card</a>))
+    : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_121">card</a>)
+    <span class="keyword2">requires</span> { <a href="#wf_stacks_124">wf_stacks</a> stacks }
     <span class="keyword2">variant</span> { input }
-    <span class="keyword2">ensures</span>  { <a href="#wf_stacks_93">wf_stacks</a> result }
+    <span class="keyword2">ensures</span>  { <a href="#wf_stacks_124">wf_stacks</a> result }
   =
     <span class="keyword1">match</span> input <span class="keyword1">with</span>
     | <a href="list.html#Nil_8">Nil</a> -&gt; stacks
     | <a href="list.html#Cons_8">Cons</a> c rem -&gt;
-        <span class="keyword1">let</span> stacks' = <a href="#push_card_116">push_card</a> c stacks <a href="list.html#Nil_8">Nil</a> <span class="keyword1">in</span>
+        <span class="keyword1">let</span> stacks' = <a href="#push_card_147">push_card</a> c stacks <a href="list.html#Nil_8">Nil</a> <span class="keyword1">in</span>
         play_cards rem stacks'
     <span class="keyword1">end</span>
 
-  <span class="keyword1">let</span> <a name="play_game_156">play_game</a> (input: <a href="list.html#list_8">list</a> <a href="#card_90">card</a>) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_90">card</a>) =
-    <a href="#play_cards_142">play_cards</a> input <a href="list.html#Nil_8">Nil</a>
+  <span class="keyword1">let</span> <a name="play_game_187">play_game</a> (input: <a href="list.html#list_8">list</a> <a href="#card_121">card</a>) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_121">card</a>) =
+    <a href="#play_cards_173">play_cards</a> input <a href="list.html#Nil_8">Nil</a>
 
 </pre>
 <p>test, can be run using <code>why3 patience.mlw --exec PatienceCode.test</code></p>
 <pre>
-  <span class="keyword1">let</span> <a name="test_161">test</a> () =
+  <span class="keyword1">let</span> <a name="test_192">test</a> () =
 </pre>
 <div class="info"><p>the list given in the problem description
        9, 7, 10, 9, 5, 4, and 10</p>
 </div><pre>
-    <a href="#play_game_156">play_game</a>
+    <a href="#play_game_187">play_game</a>
       (<a href="list.html#Cons_8">Cons</a> 9 (<a href="list.html#Cons_8">Cons</a> 7 (<a href="list.html#Cons_8">Cons</a> 10 (<a href="list.html#Cons_8">Cons</a> 9 (<a href="list.html#Cons_8">Cons</a> 5 (<a href="list.html#Cons_8">Cons</a> 4 (<a href="list.html#Cons_8">Cons</a> 10 <a href="list.html#Nil_8">Nil</a>)))))))
 
 <span class="keyword1">end</span>
 
 </pre>
 <h2>Abstract version of Patience game</h2><pre>
-<span class="keyword1">module</span> <a name="PatienceAbstract_172">PatienceAbstract</a>
+<span class="keyword1">module</span> <a name="PatienceAbstract_203">PatienceAbstract</a>
 
   <span class="keyword1">use</span> <span class="keyword1">import</span> int.<a href="int.html#Int_11">Int</a>
 
@@ -184,40 +215,40 @@ input sequence.</p>
     ghost state, with a gluing invariant that matches the ghost state
     and the concrete stacks of cards.</p>
 <pre>
-  <span class="keyword1">type</span> <a name="card_188">card</a> = int
+  <span class="keyword1">type</span> <a name="card_219">card</a> = int
 
 </pre>
 <h3>Abstract state</h3><pre>
   <span class="keyword1">use</span> <span class="keyword1">import</span> map.<a href="map.html#Map_6">Map</a>
 
-  <span class="keyword1">type</span> <a name="state_194">state</a> = {
-    <span class="keyword1">mutable</span> <a name="num_elts_195">num_elts</a> : int;
+  <span class="keyword1">type</span> <a name="state_225">state</a> = {
+    <span class="keyword1">mutable</span> <a name="num_elts_226">num_elts</a> : int;
 </pre>
 <div class="info"><p>number of cards already seen</p>
 </div><pre>
-    <span class="keyword1">mutable</span> <a name="values_197">values</a> : <a href="map.html#map_8">map</a> int <a href="#card_188">card</a>;
+    <span class="keyword1">mutable</span> <a name="values_228">values</a> : <a href="map.html#map_8">map</a> int <a href="#card_219">card</a>;
 </pre>
 <div class="info"><p>cards values seen, indexed in the order they have been seen,
         from <code>0</code> to <code>num_elts-1</code></p>
 </div><pre>
-    <span class="keyword1">mutable</span> <a name="num_stacks_200">num_stacks</a> : int;
+    <span class="keyword1">mutable</span> <a name="num_stacks_231">num_stacks</a> : int;
 </pre>
 <div class="info"><p>number of stacks built so far</p>
 </div><pre>
-    <span class="keyword1">mutable</span> <a name="stack_sizes_202">stack_sizes</a> : <a href="map.html#map_8">map</a> int int;
+    <span class="keyword1">mutable</span> <a name="stack_sizes_233">stack_sizes</a> : <a href="map.html#map_8">map</a> int int;
 </pre>
 <div class="info"><p>sizes of these stacks, numbered from <code>0</code> to <code>num_stacks - 1</code></p>
 </div><pre>
-    <span class="keyword1">mutable</span> <a name="stacks_204">stacks</a> : <a href="map.html#map_8">map</a> int (<a href="map.html#map_8">map</a> int int);
+    <span class="keyword1">mutable</span> <a name="stacks_235">stacks</a> : <a href="map.html#map_8">map</a> int (<a href="map.html#map_8">map</a> int int);
 </pre>
 <div class="info"><p>indexes of the cards in respective stacks</p>
 </div><pre>
-    <span class="keyword1">mutable</span> <a name="positions_206">positions</a> : <a href="map.html#map_8">map</a> int (int,int);
+    <span class="keyword1">mutable</span> <a name="positions_237">positions</a> : <a href="map.html#map_8">map</a> int (int,int);
 </pre>
 <div class="info"><p>table that given a card index, provides its position, i.e. in
         which stack it is and at which height</p>
 </div><pre>
-    <span class="keyword1">mutable</span> <a name="preds_209">preds</a> : <a href="map.html#map_8">map</a> int int;
+    <span class="keyword1">mutable</span> <a name="preds_240">preds</a> : <a href="map.html#map_8">map</a> int int;
 </pre>
 <div class="info"><p>predecessors of cards, i.e. for each card index <code>i</code>, <code>preds[i]</code>
         provides an index of a card in the stack on the immediate left,
@@ -228,60 +259,60 @@ input sequence.</p>
 
 </pre>
 <h3>Invariants on the abstract state</h3><pre>
-  <span class="keyword1">predicate</span> <a name="inv_218">inv</a> (s:<a href="#state_194">state</a>) =
-     0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#num_stacks_200">num_stacks</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#num_elts_195">num_elts</a>
+  <span class="keyword1">predicate</span> <a name="inv_249">inv</a> (s:<a href="#state_225">state</a>) =
+     0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#num_stacks_231">num_stacks</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#num_elts_226">num_elts</a>
 </pre>
 <div class="info"><p>the number of stacks is less or equal the number of cards</p>
 </div><pre>
-  /\ (s.<a href="#num_elts_195">num_elts</a> <a href="int.html#infix.20.3E_17">&gt;</a> 0 -&gt; s.<a href="#num_stacks_200">num_stacks</a> <a href="int.html#infix.20.3E_17">&gt;</a> 0)
+  /\ (s.<a href="#num_elts_226">num_elts</a> <a href="int.html#infix.20.3E_17">&gt;</a> 0 -&gt; s.<a href="#num_stacks_231">num_stacks</a> <a href="int.html#infix.20.3E_17">&gt;</a> 0)
 </pre>
 <div class="info"><p>when there is at least one card, there is at least one stack</p>
 </div><pre>
-  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_200">num_stacks</a> -&gt;
-         s.<a href="#stack_sizes_202">stack_sizes</a>[i] <a href="int.html#infix.20.3E.3D_131">&gt;=</a> 1
+  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_231">num_stacks</a> -&gt;
+         s.<a href="#stack_sizes_233">stack_sizes</a>[i] <a href="int.html#infix.20.3E.3D_131">&gt;=</a> 1
 </pre>
 <div class="info"><p>stacks are non-empty</p>
 </div><pre>
-      /\ <span class="keyword1">forall</span> j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> j <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_202">stack_sizes</a>[i] -&gt;
-           0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#stacks_204">stacks</a>[i][j] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a>)
+      /\ <span class="keyword1">forall</span> j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> j <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_233">stack_sizes</a>[i] -&gt;
+           0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#stacks_235">stacks</a>[i][j] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a>)
 </pre>
 <div class="info"><p>contents of stacks are valid card indexes</p>
 </div><pre>
-  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a> -&gt;
-       <span class="keyword1">let</span> (is,ip) = s.<a href="#positions_206">positions</a>[i] <span class="keyword1">in</span>
-       0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> is <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_200">num_stacks</a> &amp;&amp;
-       <span class="keyword1">let</span> st = s.<a href="#stacks_204">stacks</a>[is] <span class="keyword1">in</span>
-         0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> ip <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_202">stack_sizes</a>[is] &amp;&amp;
+  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a> -&gt;
+       <span class="keyword1">let</span> (is,ip) = s.<a href="#positions_237">positions</a>[i] <span class="keyword1">in</span>
+       0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> is <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_231">num_stacks</a> &amp;&amp;
+       <span class="keyword1">let</span> st = s.<a href="#stacks_235">stacks</a>[is] <span class="keyword1">in</span>
+         0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> ip <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_233">stack_sizes</a>[is] &amp;&amp;
          st[ip] = i)
 </pre>
 <div class="info"><p>the position table of cards is correct, i.e. when
         <code>(is,ip) = s.positions[i]</code> then card <code>i</code> indeed
         occurs in stack <code>is</code> at height <code>ip</code></p>
 </div><pre>
-  /\ (<span class="keyword1">forall</span> is. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> is <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_200">num_stacks</a> -&gt;
-        <span class="keyword1">forall</span> ip. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> ip <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_202">stack_sizes</a>[is] -&gt;
-        <span class="keyword1">let</span> idx = s.<a href="#stacks_204">stacks</a>[is][ip] <span class="keyword1">in</span>
-        (is,ip) = s.<a href="#positions_206">positions</a>[idx])
+  /\ (<span class="keyword1">forall</span> is. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> is <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_231">num_stacks</a> -&gt;
+        <span class="keyword1">forall</span> ip. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> ip <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_233">stack_sizes</a>[is] -&gt;
+        <span class="keyword1">let</span> idx = s.<a href="#stacks_235">stacks</a>[is][ip] <span class="keyword1">in</span>
+        (is,ip) = s.<a href="#positions_237">positions</a>[idx])
 </pre>
 <div class="info"><p>positions is the proper inverse of stacks</p>
 </div><pre>
-  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_200">num_stacks</a> -&gt;
-        <span class="keyword1">let</span> stack_i = s.<a href="#stacks_204">stacks</a>[i] <span class="keyword1">in</span>
-        <span class="keyword1">forall</span> j,k. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> j <a href="int.html#infix.20.3C_16">&lt;</a> k <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_202">stack_sizes</a>[i] -&gt;
+  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_231">num_stacks</a> -&gt;
+        <span class="keyword1">let</span> stack_i = s.<a href="#stacks_235">stacks</a>[i] <span class="keyword1">in</span>
+        <span class="keyword1">forall</span> j,k. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> j <a href="int.html#infix.20.3C_16">&lt;</a> k <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_233">stack_sizes</a>[i] -&gt;
            stack_i[j] <a href="int.html#infix.20.3C_16">&lt;</a> stack_i[k])
 </pre>
 <div class="info"><p>in a given stack, indexes are increasing from bottom to top</p>
 </div><pre>
-  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_200">num_stacks</a> -&gt;
-        <span class="keyword1">let</span> stack_i = s.<a href="#stacks_204">stacks</a>[i] <span class="keyword1">in</span>
-        <span class="keyword1">forall</span> j,k. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> j <a href="int.html#infix.20.3C.3D_18">&lt;=</a> k <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_202">stack_sizes</a>[i] -&gt;
-           s.<a href="#values_197">values</a>[stack_i[j]] <a href="int.html#infix.20.3E.3D_131">&gt;=</a> s.<a href="#values_197">values</a>[stack_i[k]])
+  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_231">num_stacks</a> -&gt;
+        <span class="keyword1">let</span> stack_i = s.<a href="#stacks_235">stacks</a>[i] <span class="keyword1">in</span>
+        <span class="keyword1">forall</span> j,k. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> j <a href="int.html#infix.20.3C.3D_18">&lt;=</a> k <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_233">stack_sizes</a>[i] -&gt;
+           s.<a href="#values_228">values</a>[stack_i[j]] <a href="int.html#infix.20.3E.3D_131">&gt;=</a> s.<a href="#values_228">values</a>[stack_i[k]])
 </pre>
 <div class="info"><p>in a given stack, card values are decreasing from bottom to top</p>
 </div><pre>
-  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a> -&gt;
-       <span class="keyword1">let</span> pred = s.<a href="#preds_209">preds</a>[i] <span class="keyword1">in</span>
-       <a href="int.html#prefix.20-_87">-</a>1 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> pred <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a> &amp;&amp;
+  /\ (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a> -&gt;
+       <span class="keyword1">let</span> pred = s.<a href="#preds_240">preds</a>[i] <span class="keyword1">in</span>
+       <a href="int.html#prefix.20-_87">-</a>1 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> pred <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a> &amp;&amp;
 </pre>
 <div class="info"><p>the predecessor is a valid index or <code>-1</code></p>
 </div><pre>
@@ -289,13 +320,13 @@ input sequence.</p>
 </pre>
 <div class="info"><p>predecessor is always a smaller index</p>
 </div><pre>
-       <span class="keyword1">let</span> (is,_ip) = s.<a href="#positions_206">positions</a>[i] <span class="keyword1">in</span>
+       <span class="keyword1">let</span> (is,_ip) = s.<a href="#positions_237">positions</a>[i] <span class="keyword1">in</span>
        <span class="keyword1">if</span> pred <a href="int.html#infix.20.3C_16">&lt;</a> 0 <span class="keyword1">then</span> is = 0
 </pre>
 <div class="info"><p>if predecessor is <code>-1</code> then <code>i</code> is in leftmost stack</p>
 </div><pre>
        <span class="keyword1">else</span>
-         s.<a href="#values_197">values</a>[pred] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#values_197">values</a>[i] /\
+         s.<a href="#values_228">values</a>[pred] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#values_228">values</a>[i] /\
 </pre>
 <div class="info"><p>if predecessor is not <code>-1</code>, it denotes a card with smaller value...</p>
 </div><pre>
@@ -303,7 +334,7 @@ input sequence.</p>
 </pre>
 <div class="info"><p>...the card is not on the leftmost stack...</p>
 </div><pre>
-         <span class="keyword1">let</span> (ps,_pp) = s.<a href="#positions_206">positions</a>[pred] <span class="keyword1">in</span>
+         <span class="keyword1">let</span> (ps,_pp) = s.<a href="#positions_237">positions</a>[pred] <span class="keyword1">in</span>
          ps = is <a href="int.html#infix.20-_100">-</a> 1)
 </pre>
 <div class="info"><p>...and predecessor is in the stack on the immediate left</p>
@@ -311,214 +342,214 @@ input sequence.</p>
 </pre>
 <h2>Programs</h2><pre>
   <span class="keyword1">use</span> <span class="keyword1">import</span> ref.<a href="ref.html#Ref_14">Ref</a>
-  <span class="keyword1">exception</span> <a name="Return_276">Return</a> int
+  <span class="keyword1">exception</span> <a name="Return_307">Return</a> int
 
 </pre>
 <p><code>play_card c i s</code> pushes the card <code>c</code> on state <code>s</code></p>
 <pre>
-  <span class="keyword1">let</span> <a name="play_card_279">play_card</a> (c:<a href="#card_188">card</a>) (s:<a href="#state_194">state</a>) : unit
-    <span class="keyword2">requires</span> { <a href="#inv_218">inv</a> s }
+  <span class="keyword1">let</span> <a name="play_card_310">play_card</a> (c:<a href="#card_219">card</a>) (s:<a href="#state_225">state</a>) : unit
+    <span class="keyword2">requires</span> { <a href="#inv_249">inv</a> s }
     <span class="keyword2">writes</span>   { s }
-    <span class="keyword2">ensures</span>  { <a href="#inv_218">inv</a> s }
-    <span class="keyword2">ensures</span>  { s.<a href="#num_elts_195">num_elts</a> = (old s).<a href="#num_elts_195">num_elts</a> <a href="int.html#infix.20.2B_86">+</a> 1 }
-    <span class="keyword2">ensures</span>  { s.<a href="#values_197">values</a> = (old s).<a href="#values_197">values</a>[(old s).<a href="#num_elts_195">num_elts</a> &lt;- c] }
+    <span class="keyword2">ensures</span>  { <a href="#inv_249">inv</a> s }
+    <span class="keyword2">ensures</span>  { s.<a href="#num_elts_226">num_elts</a> = (old s).<a href="#num_elts_226">num_elts</a> <a href="int.html#infix.20.2B_86">+</a> 1 }
+    <span class="keyword2">ensures</span>  { s.<a href="#values_228">values</a> = (old s).<a href="#values_228">values</a>[(old s).<a href="#num_elts_226">num_elts</a> &lt;- c] }
   =
     <span class="keyword1">let</span> pred = <a href="ref.html#ref_20">ref</a> (<a href="int.html#prefix.20-_87">-</a>1) <span class="keyword1">in</span>
     <span class="keyword1">try</span>
-    <span class="keyword1">for</span> i = 0 <span class="keyword1">to</span> s.<a href="#num_stacks_200">num_stacks</a> <a href="int.html#infix.20-_100">-</a> 1 <span class="keyword1">do</span>
+    <span class="keyword1">for</span> i = 0 <span class="keyword1">to</span> s.<a href="#num_stacks_231">num_stacks</a> <a href="int.html#infix.20-_100">-</a> 1 <span class="keyword1">do</span>
       <span class="keyword2">invariant</span> { <span class="keyword1">if</span> i=0 <span class="keyword1">then</span> <a href="ref.html#prefix.20.21_18">!</a>pred = <a href="int.html#prefix.20-_87">-</a>1 <span class="keyword1">else</span>
-        <span class="keyword1">let</span> stack_im1 = s.<a href="#stacks_204">stacks</a>[i<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
-        <span class="keyword1">let</span> stack_im1_size = s.<a href="#stack_sizes_202">stack_sizes</a>[i<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
+        <span class="keyword1">let</span> stack_im1 = s.<a href="#stacks_235">stacks</a>[i<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
+        <span class="keyword1">let</span> stack_im1_size = s.<a href="#stack_sizes_233">stack_sizes</a>[i<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
         <span class="keyword1">let</span> top_stack_im1 = stack_im1[stack_im1_size <a href="int.html#infix.20-_100">-</a> 1] <span class="keyword1">in</span>
         <a href="ref.html#prefix.20.21_18">!</a>pred = top_stack_im1 /\
-        c <a href="int.html#infix.20.3E_17">&gt;</a> s.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>pred]  /\
-        0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>pred <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a> /\
-        <span class="keyword1">let</span> (ps,_pp) = s.<a href="#positions_206">positions</a>[<a href="ref.html#prefix.20.21_18">!</a>pred] <span class="keyword1">in</span>
+        c <a href="int.html#infix.20.3E_17">&gt;</a> s.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>pred]  /\
+        0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>pred <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a> /\
+        <span class="keyword1">let</span> (ps,_pp) = s.<a href="#positions_237">positions</a>[<a href="ref.html#prefix.20.21_18">!</a>pred] <span class="keyword1">in</span>
         ps = i <a href="int.html#infix.20-_100">-</a> 1
       }
-      <span class="keyword1">let</span> stack_i = s.<a href="#stacks_204">stacks</a>[i] <span class="keyword1">in</span>
-      <span class="keyword1">let</span> stack_i_size = s.<a href="#stack_sizes_202">stack_sizes</a>[i] <span class="keyword1">in</span>
+      <span class="keyword1">let</span> stack_i = s.<a href="#stacks_235">stacks</a>[i] <span class="keyword1">in</span>
+      <span class="keyword1">let</span> stack_i_size = s.<a href="#stack_sizes_233">stack_sizes</a>[i] <span class="keyword1">in</span>
       <span class="keyword1">let</span> top_stack_i = stack_i[stack_i_size <a href="int.html#infix.20-_100">-</a> 1] <span class="keyword1">in</span>
-      <span class="keyword1">if</span> c <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#values_197">values</a>[top_stack_i] <span class="keyword1">then</span>
-         <span class="keyword1">raise</span> (<a href="#Return_276">Return</a> i)
+      <span class="keyword1">if</span> c <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#values_228">values</a>[top_stack_i] <span class="keyword1">then</span>
+         <span class="keyword1">raise</span> (<a href="#Return_307">Return</a> i)
       <span class="keyword1">else</span>
          <span class="keyword1">begin</span>
-           <span class="keyword2">assert</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> top_stack_i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a> };
-           <span class="keyword2">assert</span> { <span class="keyword1">let</span> (is,ip) = s.<a href="#positions_206">positions</a>[top_stack_i] <span class="keyword1">in</span>
-             0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> is <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_200">num_stacks</a> &amp;&amp;
-             0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> ip <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_202">stack_sizes</a>[is] &amp;&amp;
-             s.<a href="#stacks_204">stacks</a>[is][ip] = top_stack_i &amp;&amp;
+           <span class="keyword2">assert</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> top_stack_i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a> };
+           <span class="keyword2">assert</span> { <span class="keyword1">let</span> (is,ip) = s.<a href="#positions_237">positions</a>[top_stack_i] <span class="keyword1">in</span>
+             0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> is <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_stacks_231">num_stacks</a> &amp;&amp;
+             0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> ip <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#stack_sizes_233">stack_sizes</a>[is] &amp;&amp;
+             s.<a href="#stacks_235">stacks</a>[is][ip] = top_stack_i &amp;&amp;
              is = i /\ ip = stack_i_size <a href="int.html#infix.20-_100">-</a> 1
            };
            pred <a href="ref.html#infix.20:.3D_24">:=</a> top_stack_i
          <span class="keyword1">end</span>
     <span class="keyword1">done</span>;
     <span class="comment">(* we add a new stack *)</span>
-    <span class="keyword1">let</span> idx = s.<a href="#num_elts_195">num_elts</a> <span class="keyword1">in</span>
-    <span class="keyword1">let</span> i = s.<a href="#num_stacks_200">num_stacks</a> <span class="keyword1">in</span>
-    <span class="keyword1">let</span> stack_i = s.<a href="#stacks_204">stacks</a>[i] <span class="keyword1">in</span>
+    <span class="keyword1">let</span> idx = s.<a href="#num_elts_226">num_elts</a> <span class="keyword1">in</span>
+    <span class="keyword1">let</span> i = s.<a href="#num_stacks_231">num_stacks</a> <span class="keyword1">in</span>
+    <span class="keyword1">let</span> stack_i = s.<a href="#stacks_235">stacks</a>[i] <span class="keyword1">in</span>
     <span class="keyword1">let</span> new_stack_i = stack_i[0 &lt;- idx] <span class="keyword1">in</span>
-    s.<a href="#num_elts_195">num_elts</a> &lt;- idx <a href="int.html#infix.20.2B_86">+</a> 1;
-    s.<a href="#values_197">values</a> &lt;- s.<a href="#values_197">values</a>[idx &lt;- c];
-    s.<a href="#num_stacks_200">num_stacks</a> &lt;- s.<a href="#num_stacks_200">num_stacks</a> <a href="int.html#infix.20.2B_86">+</a> 1;
-    s.<a href="#stack_sizes_202">stack_sizes</a> &lt;- s.<a href="#stack_sizes_202">stack_sizes</a>[i &lt;- 1];
-    s.<a href="#stacks_204">stacks</a> &lt;- s.<a href="#stacks_204">stacks</a>[i &lt;- new_stack_i];
-    s.<a href="#positions_206">positions</a> &lt;- s.<a href="#positions_206">positions</a>[idx &lt;- (i,0)];
-    s.<a href="#preds_209">preds</a> &lt;- s.<a href="#preds_209">preds</a>[idx &lt;- <a href="ref.html#prefix.20.21_22">!</a>pred]
-  <span class="keyword1">with</span> <a href="#Return_276">Return</a> i -&gt;
-         <span class="keyword1">let</span> stack_i = s.<a href="#stacks_204">stacks</a>[i] <span class="keyword1">in</span>
-         <span class="keyword1">let</span> stack_i_size = s.<a href="#stack_sizes_202">stack_sizes</a>[i] <span class="keyword1">in</span>
+    s.<a href="#num_elts_226">num_elts</a> &lt;- idx <a href="int.html#infix.20.2B_86">+</a> 1;
+    s.<a href="#values_228">values</a> &lt;- s.<a href="#values_228">values</a>[idx &lt;- c];
+    s.<a href="#num_stacks_231">num_stacks</a> &lt;- s.<a href="#num_stacks_231">num_stacks</a> <a href="int.html#infix.20.2B_86">+</a> 1;
+    s.<a href="#stack_sizes_233">stack_sizes</a> &lt;- s.<a href="#stack_sizes_233">stack_sizes</a>[i &lt;- 1];
+    s.<a href="#stacks_235">stacks</a> &lt;- s.<a href="#stacks_235">stacks</a>[i &lt;- new_stack_i];
+    s.<a href="#positions_237">positions</a> &lt;- s.<a href="#positions_237">positions</a>[idx &lt;- (i,0)];
+    s.<a href="#preds_240">preds</a> &lt;- s.<a href="#preds_240">preds</a>[idx &lt;- <a href="ref.html#prefix.20.21_22">!</a>pred]
+  <span class="keyword1">with</span> <a href="#Return_307">Return</a> i -&gt;
+         <span class="keyword1">let</span> stack_i = s.<a href="#stacks_235">stacks</a>[i] <span class="keyword1">in</span>
+         <span class="keyword1">let</span> stack_i_size = s.<a href="#stack_sizes_233">stack_sizes</a>[i] <span class="keyword1">in</span>
          <span class="comment">(* we put c on top of stack i *)</span>
-         <span class="keyword1">let</span> idx = s.<a href="#num_elts_195">num_elts</a> <span class="keyword1">in</span>
+         <span class="keyword1">let</span> idx = s.<a href="#num_elts_226">num_elts</a> <span class="keyword1">in</span>
          <span class="keyword1">let</span> new_stack_i = stack_i[stack_i_size &lt;- idx] <span class="keyword1">in</span>
-         s.<a href="#num_elts_195">num_elts</a> &lt;- idx <a href="int.html#infix.20.2B_86">+</a> 1;
-         s.<a href="#values_197">values</a> &lt;- s.<a href="#values_197">values</a>[idx &lt;- c];
+         s.<a href="#num_elts_226">num_elts</a> &lt;- idx <a href="int.html#infix.20.2B_86">+</a> 1;
+         s.<a href="#values_228">values</a> &lt;- s.<a href="#values_228">values</a>[idx &lt;- c];
          <span class="comment">(* s.num_stacks unchanged *)</span>
-         s.<a href="#stack_sizes_202">stack_sizes</a> &lt;- s.<a href="#stack_sizes_202">stack_sizes</a>[i &lt;- stack_i_size <a href="int.html#infix.20.2B_86">+</a> 1];
-         s.<a href="#stacks_204">stacks</a> &lt;- s.<a href="#stacks_204">stacks</a>[i &lt;- new_stack_i];
-         s.<a href="#positions_206">positions</a> &lt;- s.<a href="#positions_206">positions</a>[idx &lt;- (i,stack_i_size)];
-         s.<a href="#preds_209">preds</a> &lt;- s.<a href="#preds_209">preds</a>[idx &lt;- <a href="ref.html#prefix.20.21_22">!</a>pred];
+         s.<a href="#stack_sizes_233">stack_sizes</a> &lt;- s.<a href="#stack_sizes_233">stack_sizes</a>[i &lt;- stack_i_size <a href="int.html#infix.20.2B_86">+</a> 1];
+         s.<a href="#stacks_235">stacks</a> &lt;- s.<a href="#stacks_235">stacks</a>[i &lt;- new_stack_i];
+         s.<a href="#positions_237">positions</a> &lt;- s.<a href="#positions_237">positions</a>[idx &lt;- (i,stack_i_size)];
+         s.<a href="#preds_240">preds</a> &lt;- s.<a href="#preds_240">preds</a>[idx &lt;- <a href="ref.html#prefix.20.21_22">!</a>pred];
   <span class="keyword1">end</span>
 
   <span class="keyword1">use</span> <span class="keyword1">import</span> list.<a href="list.html#Length_14">Length</a>
   <span class="keyword1">use</span> <span class="keyword1">import</span> list.<a href="list.html#NthNoOpt_75">NthNoOpt</a>
 
-  <span class="keyword1">let</span> <span class="keyword1">rec</span> <a name="play_cards_351">play_cards</a> (input: <a href="list.html#list_8">list</a> int) (s: <a href="#state_194">state</a>) : unit
-    <span class="keyword2">requires</span> { <a href="#inv_218">inv</a> s }
+  <span class="keyword1">let</span> <span class="keyword1">rec</span> <a name="play_cards_382">play_cards</a> (input: <a href="list.html#list_8">list</a> int) (s: <a href="#state_225">state</a>) : unit
+    <span class="keyword2">requires</span> { <a href="#inv_249">inv</a> s }
     <span class="keyword2">variant</span>  { input }
     <span class="keyword2">writes</span>   { s }
-    <span class="keyword2">ensures</span>  { <a href="#inv_218">inv</a> s }
-    <span class="keyword2">ensures</span>  { s.<a href="#num_elts_195">num_elts</a> = (old s).<a href="#num_elts_195">num_elts</a> <a href="int.html#infix.20.2B_86">+</a> <a href="list.html#length_19">length</a> input }
-    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> (old s).<a href="#num_elts_195">num_elts</a> -&gt;
-                 s.<a href="#values_197">values</a>[i] = (old s).<a href="#values_197">values</a>[i] }
-    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> i. (old s).<a href="#num_elts_195">num_elts</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a> -&gt;
-                 s.<a href="#values_197">values</a>[i] = <a href="list.html#nth_80">nth</a> (i <a href="int.html#infix.20-_100">-</a> (old s).<a href="#num_elts_195">num_elts</a>) input }
+    <span class="keyword2">ensures</span>  { <a href="#inv_249">inv</a> s }
+    <span class="keyword2">ensures</span>  { s.<a href="#num_elts_226">num_elts</a> = (old s).<a href="#num_elts_226">num_elts</a> <a href="int.html#infix.20.2B_86">+</a> <a href="list.html#length_19">length</a> input }
+    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> (old s).<a href="#num_elts_226">num_elts</a> -&gt;
+                 s.<a href="#values_228">values</a>[i] = (old s).<a href="#values_228">values</a>[i] }
+    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> i. (old s).<a href="#num_elts_226">num_elts</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a> -&gt;
+                 s.<a href="#values_228">values</a>[i] = <a href="list.html#nth_80">nth</a> (i <a href="int.html#infix.20-_100">-</a> (old s).<a href="#num_elts_226">num_elts</a>) input }
   =
     <span class="keyword1">match</span> input <span class="keyword1">with</span>
     | <a href="list.html#Nil_8">Nil</a> -&gt; ()
-    | <a href="list.html#Cons_8">Cons</a> c rem -&gt; <a href="#play_card_279">play_card</a> c s; play_cards rem s
+    | <a href="list.html#Cons_8">Cons</a> c rem -&gt; <a href="#play_card_310">play_card</a> c s; play_cards rem s
     <span class="keyword1">end</span>
 
-  <span class="keyword1">type</span> <a name="seq_373">seq</a> 'a = { <a name="seqlen_373">seqlen</a>: int; <a name="seqval_373">seqval</a>: <a href="map.html#map_8">map</a> int 'a }
+  <span class="keyword1">type</span> <a name="seq_404">seq</a> 'a = { <a name="seqlen_404">seqlen</a>: int; <a name="seqval_404">seqval</a>: <a href="map.html#map_8">map</a> int 'a }
 
-  <span class="keyword1">predicate</span> <a name="increasing_subsequence_375">increasing_subsequence</a> (s:<a href="#seq_373">seq</a> int) (l:<a href="list.html#list_8">list</a> int) =
-    0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#seqlen_373">seqlen</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="list.html#length_19">length</a> l &amp;&amp;
+  <span class="keyword1">predicate</span> <a name="increasing_subsequence_406">increasing_subsequence</a> (s:<a href="#seq_404">seq</a> int) (l:<a href="list.html#list_8">list</a> int) =
+    0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#seqlen_404">seqlen</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="list.html#length_19">length</a> l &amp;&amp;
     <span class="comment">(* subsequence *)</span>
-    ((<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#seqlen_373">seqlen</a> -&gt; 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#seqval_373">seqval</a>[i] <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> l)
-    /\ (<span class="keyword1">forall</span> i,j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#seqlen_373">seqlen</a> -&gt; s.<a href="#seqval_373">seqval</a>[i] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#seqval_373">seqval</a>[j]))
+    ((<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#seqlen_404">seqlen</a> -&gt; 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> s.<a href="#seqval_404">seqval</a>[i] <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> l)
+    /\ (<span class="keyword1">forall</span> i,j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#seqlen_404">seqlen</a> -&gt; s.<a href="#seqval_404">seqval</a>[i] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#seqval_404">seqval</a>[j]))
     <span class="comment">(* increasing *)</span>
-    &amp;&amp; (<span class="keyword1">forall</span> i,j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#seqlen_373">seqlen</a> -&gt;
-          <a href="list.html#nth_80">nth</a> s.<a href="#seqval_373">seqval</a>[i] l <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#nth_80">nth</a> s.<a href="#seqval_373">seqval</a>[j] l)
+    &amp;&amp; (<span class="keyword1">forall</span> i,j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#seqlen_404">seqlen</a> -&gt;
+          <a href="list.html#nth_80">nth</a> s.<a href="#seqval_404">seqval</a>[i] l <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#nth_80">nth</a> s.<a href="#seqval_404">seqval</a>[j] l)
 
   <span class="keyword1">use</span> <span class="keyword1">import</span> <a href="#PigeonHole_40">PigeonHole</a>
 
-  <span class="keyword1">let</span> <a name="play_game_398">play_game</a> (input: <a href="list.html#list_8">list</a> int) : <a href="#state_194">state</a>
-    <span class="keyword2">ensures</span> { <span class="keyword1">exists</span> s: <a href="#seq_373">seq</a> int.  s.<a href="#seqlen_373">seqlen</a> = result.<a href="#num_stacks_200">num_stacks</a> /\
-        <a href="#increasing_subsequence_375">increasing_subsequence</a> s input
+  <span class="keyword1">let</span> <a name="play_game_429">play_game</a> (input: <a href="list.html#list_8">list</a> int) : <a href="#state_225">state</a>
+    <span class="keyword2">ensures</span> { <span class="keyword1">exists</span> s: <a href="#seq_404">seq</a> int.  s.<a href="#seqlen_404">seqlen</a> = result.<a href="#num_stacks_231">num_stacks</a> /\
+        <a href="#increasing_subsequence_406">increasing_subsequence</a> s input
       }
-    <span class="keyword2">ensures</span> { <span class="keyword1">forall</span> s: <a href="#seq_373">seq</a> int.
-        <a href="#increasing_subsequence_375">increasing_subsequence</a> s input -&gt; s.<a href="#seqlen_373">seqlen</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> result.<a href="#num_stacks_200">num_stacks</a>
+    <span class="keyword2">ensures</span> { <span class="keyword1">forall</span> s: <a href="#seq_404">seq</a> int.
+        <a href="#increasing_subsequence_406">increasing_subsequence</a> s input -&gt; s.<a href="#seqlen_404">seqlen</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> result.<a href="#num_stacks_231">num_stacks</a>
       }
   = <span class="keyword1">let</span> s = {
-      <a href="#num_elts_195">num_elts</a> = 0;
-      <a href="#values_197">values</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1) ;
-      <a href="#num_stacks_200">num_stacks</a> = 0;
-      <a href="#stack_sizes_202">stack_sizes</a> = Map.<a href="map.html#const_30">const</a> 0;
-      <a href="#stacks_204">stacks</a> = Map.<a href="map.html#const_30">const</a> (Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1));
-      <a href="#positions_206">positions</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1,<a href="int.html#prefix.20-_87">-</a>1);
-      <a href="#preds_209">preds</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1);
+      <a href="#num_elts_226">num_elts</a> = 0;
+      <a href="#values_228">values</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1) ;
+      <a href="#num_stacks_231">num_stacks</a> = 0;
+      <a href="#stack_sizes_233">stack_sizes</a> = Map.<a href="map.html#const_30">const</a> 0;
+      <a href="#stacks_235">stacks</a> = Map.<a href="map.html#const_30">const</a> (Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1));
+      <a href="#positions_237">positions</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1,<a href="int.html#prefix.20-_87">-</a>1);
+      <a href="#preds_240">preds</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1);
     }
     <span class="keyword1">in</span>
-    <a href="#play_cards_351">play_cards</a> input s;
+    <a href="#play_cards_382">play_cards</a> input s;
 </pre>
 <div class="info">
-<p>This is ghost code to build an increasing subsequence of maximal length </p>
+<p>This is ghost code to build an increasing subsequence of maximal length</p>
 </div><pre>
-    <span class="keyword1">let</span> ns = s.<a href="#num_stacks_200">num_stacks</a> <span class="keyword1">in</span>
+    <span class="keyword1">let</span> ns = s.<a href="#num_stacks_231">num_stacks</a> <span class="keyword1">in</span>
     <span class="keyword1">if</span> ns = 0 <span class="keyword1">then</span>
       <span class="keyword1">begin</span>
         <span class="keyword2">assert</span> { input = <a href="list.html#Nil_8">Nil</a> };
-        <span class="keyword1">let</span> seq = { <a href="#seqlen_373">seqlen</a> = 0 ; <a href="#seqval_373">seqval</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1) } <span class="keyword1">in</span>
-        <span class="keyword2">assert</span> { <a href="#increasing_subsequence_375">increasing_subsequence</a> seq input };
+        <span class="keyword1">let</span> seq = { <a href="#seqlen_404">seqlen</a> = 0 ; <a href="#seqval_404">seqval</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1) } <span class="keyword1">in</span>
+        <span class="keyword2">assert</span> { <a href="#increasing_subsequence_406">increasing_subsequence</a> seq input };
         s
       <span class="keyword1">end</span>
     <span class="keyword1">else</span>
-    <span class="keyword1">let</span> last_stack = s.<a href="#stacks_204">stacks</a>[ns<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
-    <span class="keyword1">let</span> idx = <a href="ref.html#ref_20">ref</a> (last_stack[s.<a href="#stack_sizes_202">stack_sizes</a>[ns<a href="int.html#infix.20-_100">-</a>1]<a href="int.html#infix.20-_100">-</a>1]) <span class="keyword1">in</span>
+    <span class="keyword1">let</span> last_stack = s.<a href="#stacks_235">stacks</a>[ns<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
+    <span class="keyword1">let</span> idx = <a href="ref.html#ref_20">ref</a> (last_stack[s.<a href="#stack_sizes_233">stack_sizes</a>[ns<a href="int.html#infix.20-_100">-</a>1]<a href="int.html#infix.20-_100">-</a>1]) <span class="keyword1">in</span>
     <span class="keyword1">let</span> seq = <a href="ref.html#ref_20">ref</a> (Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1)) <span class="keyword1">in</span>
     <span class="keyword1">for</span> i = ns<a href="int.html#infix.20-_100">-</a>1 <span class="keyword1">downto</span> 0 <span class="keyword1">do</span>
-       <span class="keyword2">invariant</span> { <a href="int.html#prefix.20-_87">-</a>1 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>idx <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a> }
+       <span class="keyword2">invariant</span> { <a href="int.html#prefix.20-_87">-</a>1 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>idx <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a> }
        <span class="keyword2">invariant</span> { i <a href="int.html#infix.20.3E.3D_131">&gt;=</a> 0 -&gt; <a href="ref.html#prefix.20.21_18">!</a>idx <a href="int.html#infix.20.3E.3D_131">&gt;=</a> 0 &amp;&amp;
-         <span class="keyword1">let</span> (is,_) = s.<a href="#positions_206">positions</a>[<a href="ref.html#prefix.20.21_18">!</a>idx] <span class="keyword1">in</span> is = i }
+         <span class="keyword1">let</span> (is,_) = s.<a href="#positions_237">positions</a>[<a href="ref.html#prefix.20.21_18">!</a>idx] <span class="keyword1">in</span> is = i }
        <span class="keyword2">invariant</span> { i<a href="int.html#infix.20.2B_86">+</a>1 <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt; <a href="ref.html#prefix.20.21_18">!</a>idx <a href="int.html#infix.20.3C_16">&lt;</a> <a href="ref.html#prefix.20.21_18">!</a>seq[i<a href="int.html#infix.20.2B_86">+</a>1] }
-       <span class="keyword2">invariant</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> ns<a href="int.html#infix.20-_100">-</a>1 -&gt; s.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>idx] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[i<a href="int.html#infix.20.2B_86">+</a>1]] }
-       <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> j. i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt; 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>seq[j] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_195">num_elts</a> }
+       <span class="keyword2">invariant</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> ns<a href="int.html#infix.20-_100">-</a>1 -&gt; s.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>idx] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[i<a href="int.html#infix.20.2B_86">+</a>1]] }
+       <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> j. i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt; 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>seq[j] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#num_elts_226">num_elts</a> }
        <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> j,k. i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> k <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt; <a href="ref.html#prefix.20.21_18">!</a>seq[j] <a href="int.html#infix.20.3C_16">&lt;</a> <a href="ref.html#prefix.20.21_18">!</a>seq[k] }
        <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> j,k. i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> k <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt;
-         s.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[j]] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[k]]
+         s.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[j]] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[k]]
        }
        'L:
        seq <a href="ref.html#infix.20:.3D_24">:=</a> <a href="ref.html#prefix.20.21_22">!</a>seq[i &lt;- <a href="ref.html#prefix.20.21_22">!</a>idx];
-       idx <a href="ref.html#infix.20:.3D_24">:=</a> s.<a href="#preds_209">preds</a>[<a href="ref.html#prefix.20.21_22">!</a>idx];
+       idx <a href="ref.html#infix.20:.3D_24">:=</a> s.<a href="#preds_240">preds</a>[<a href="ref.html#prefix.20.21_22">!</a>idx];
     <span class="keyword1">done</span>;
-    <span class="keyword1">let</span> sigma = { <a href="#seqlen_373">seqlen</a> = ns ; <a href="#seqval_373">seqval</a> = <a href="ref.html#prefix.20.21_22">!</a>seq } <span class="keyword1">in</span>
-    <span class="keyword2">assert</span> { <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> input -&gt; <a href="list.html#nth_80">nth</a> i input = s.<a href="#values_197">values</a>[i] };
-    <span class="keyword2">assert</span> { <a href="#increasing_subsequence_375">increasing_subsequence</a> sigma input };
+    <span class="keyword1">let</span> sigma = { <a href="#seqlen_404">seqlen</a> = ns ; <a href="#seqval_404">seqval</a> = <a href="ref.html#prefix.20.21_22">!</a>seq } <span class="keyword1">in</span>
+    <span class="keyword2">assert</span> { <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> input -&gt; <a href="list.html#nth_80">nth</a> i input = s.<a href="#values_228">values</a>[i] };
+    <span class="keyword2">assert</span> { <a href="#increasing_subsequence_406">increasing_subsequence</a> sigma input };
 </pre>
 <div class="info">
 <p>These are assertions to prove that no increasing subsequence of
       length larger than the number of stacks may exists</p>
 </div><pre>
     <span class="keyword2">assert</span> {  <span class="comment">(* non-injectivity *)</span>
-      <span class="keyword1">forall</span> sigma: <a href="#seq_373">seq</a> int.
-        <a href="#increasing_subsequence_375">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_373">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> s.<a href="#num_stacks_200">num_stacks</a> -&gt;
+      <span class="keyword1">forall</span> sigma: <a href="#seq_404">seq</a> int.
+        <a href="#increasing_subsequence_406">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_404">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> s.<a href="#num_stacks_231">num_stacks</a> -&gt;
         <span class="keyword1">let</span> f = \i:int.
-          <span class="keyword1">let</span> si = sigma.<a href="#seqval_373">seqval</a>[i] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_i,_) = s.<a href="#positions_206">positions</a>[si] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> si = sigma.<a href="#seqval_404">seqval</a>[i] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_i,_) = s.<a href="#positions_237">positions</a>[si] <span class="keyword1">in</span>
           stack_i
-        <span class="keyword1">in</span> <a href="#range_56">range</a> f sigma.<a href="#seqlen_373">seqlen</a> s.<a href="#num_stacks_200">num_stacks</a> &amp;&amp;
-           <span class="keyword1">not</span> (<a href="#injective_61">injective</a> f sigma.<a href="#seqlen_373">seqlen</a> s.<a href="#num_stacks_200">num_stacks</a>)
+        <span class="keyword1">in</span> <a href="#range_56">range</a> f sigma.<a href="#seqlen_404">seqlen</a> s.<a href="#num_stacks_231">num_stacks</a> &amp;&amp;
+           <span class="keyword1">not</span> (<a href="#injective_61">injective</a> f sigma.<a href="#seqlen_404">seqlen</a> s.<a href="#num_stacks_231">num_stacks</a>)
 
     };
     <span class="keyword2">assert</span> {  <span class="comment">(* non-injectivity *)</span>
-      <span class="keyword1">forall</span> sigma: <a href="#seq_373">seq</a> int.
-        <a href="#increasing_subsequence_375">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_373">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> s.<a href="#num_stacks_200">num_stacks</a> -&gt;
+      <span class="keyword1">forall</span> sigma: <a href="#seq_404">seq</a> int.
+        <a href="#increasing_subsequence_406">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_404">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> s.<a href="#num_stacks_231">num_stacks</a> -&gt;
         <span class="keyword1">exists</span> i,j.
-          0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_373">seqlen</a> &amp;&amp;
-          <span class="keyword1">let</span> si = sigma.<a href="#seqval_373">seqval</a>[i] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> sj = sigma.<a href="#seqval_373">seqval</a>[j] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_i,_pi) = s.<a href="#positions_206">positions</a>[si] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_j,_pj) = s.<a href="#positions_206">positions</a>[sj] <span class="keyword1">in</span>
+          0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_404">seqlen</a> &amp;&amp;
+          <span class="keyword1">let</span> si = sigma.<a href="#seqval_404">seqval</a>[i] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> sj = sigma.<a href="#seqval_404">seqval</a>[j] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_i,_pi) = s.<a href="#positions_237">positions</a>[si] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_j,_pj) = s.<a href="#positions_237">positions</a>[sj] <span class="keyword1">in</span>
           stack_i = stack_j
     };
     <span class="keyword2">assert</span> { <span class="comment">(* contradiction from non-injectivity *)</span>
-      <span class="keyword1">forall</span> sigma: <a href="#seq_373">seq</a> int.
-        <a href="#increasing_subsequence_375">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_373">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> s.<a href="#num_stacks_200">num_stacks</a> -&gt;
+      <span class="keyword1">forall</span> sigma: <a href="#seq_404">seq</a> int.
+        <a href="#increasing_subsequence_406">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_404">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> s.<a href="#num_stacks_231">num_stacks</a> -&gt;
         <span class="keyword1">forall</span> i,j.
-          0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_373">seqlen</a> -&gt;
-          <span class="keyword1">let</span> si = sigma.<a href="#seqval_373">seqval</a>[i] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> sj = sigma.<a href="#seqval_373">seqval</a>[j] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_i,pi) = s.<a href="#positions_206">positions</a>[si] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_j,pj) = s.<a href="#positions_206">positions</a>[sj] <span class="keyword1">in</span>
+          0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_404">seqlen</a> -&gt;
+          <span class="keyword1">let</span> si = sigma.<a href="#seqval_404">seqval</a>[i] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> sj = sigma.<a href="#seqval_404">seqval</a>[j] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_i,pi) = s.<a href="#positions_237">positions</a>[si] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_j,pj) = s.<a href="#positions_237">positions</a>[sj] <span class="keyword1">in</span>
           stack_i = stack_j -&gt;
-          si <a href="int.html#infix.20.3C_16">&lt;</a> sj &amp;&amp; pi <a href="int.html#infix.20.3C_16">&lt;</a> pj &amp;&amp; s.<a href="#values_197">values</a>[si] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#values_197">values</a>[sj]
+          si <a href="int.html#infix.20.3C_16">&lt;</a> sj &amp;&amp; pi <a href="int.html#infix.20.3C_16">&lt;</a> pj &amp;&amp; s.<a href="#values_228">values</a>[si] <a href="int.html#infix.20.3C_16">&lt;</a> s.<a href="#values_228">values</a>[sj]
     };
     s
 
-  <span class="keyword1">let</span> <a name="test_493">test</a> () =
+  <span class="keyword1">let</span> <a name="test_524">test</a> () =
     <span class="comment">(* the list given in the problem description
        9, 7, 10, 9, 5, 4, and 10 *)</span>
-    <a href="#play_game_398">play_game</a>
+    <a href="#play_game_429">play_game</a>
       (<a href="list.html#Cons_8">Cons</a> 9 (<a href="list.html#Cons_8">Cons</a> 7 (<a href="list.html#Cons_8">Cons</a> 10 (<a href="list.html#Cons_8">Cons</a> 9 (<a href="list.html#Cons_8">Cons</a> 5 (<a href="list.html#Cons_8">Cons</a> 4 (<a href="list.html#Cons_8">Cons</a> 10 <a href="list.html#Nil_8">Nil</a>)))))))
 
 <span class="keyword1">end</span>
 
 </pre>
 <h2>Gluing abstract version with the original idiomatic code</h2><pre>
-<span class="keyword1">module</span> <a name="PatienceFull_503">PatienceFull</a>
+<span class="keyword1">module</span> <a name="PatienceFull_534">PatienceFull</a>
 
   <span class="keyword1">use</span> <span class="keyword1">import</span> int.<a href="int.html#Int_11">Int</a>
-  <span class="keyword1">use</span> <span class="keyword1">import</span> <a href="#PatienceAbstract_172">PatienceAbstract</a>
+  <span class="keyword1">use</span> <span class="keyword1">import</span> <a href="#PatienceAbstract_203">PatienceAbstract</a>
 
 </pre>
 <p>glue between the ghost state and the stacks of cards</p>
@@ -528,31 +559,31 @@ input sequence.</p>
   <span class="keyword1">use</span> <span class="keyword1">import</span> list.<a href="list.html#NthNoOpt_75">NthNoOpt</a>
   <span class="keyword1">use</span> <span class="keyword1">import</span> map.<a href="map.html#Map_6">Map</a>
 
-  <span class="keyword1">predicate</span> <a name="glue_stack_516">glue_stack</a> (s:<a href="#state_194">state</a>) (i:int) (st:<a href="list.html#list_8">list</a> <a href="#card_188">card</a>) =
-      <a href="list.html#length_19">length</a> st = s.<a href="#stack_sizes_202">stack_sizes</a>[i] /\
-      <span class="keyword1">let</span> stack_i = s.<a href="#stacks_204">stacks</a>[i] <span class="keyword1">in</span>
+  <span class="keyword1">predicate</span> <a name="glue_stack_547">glue_stack</a> (s:<a href="#state_225">state</a>) (i:int) (st:<a href="list.html#list_8">list</a> <a href="#card_219">card</a>) =
+      <a href="list.html#length_19">length</a> st = s.<a href="#stack_sizes_233">stack_sizes</a>[i] /\
+      <span class="keyword1">let</span> stack_i = s.<a href="#stacks_235">stacks</a>[i] <span class="keyword1">in</span>
       <span class="keyword1">forall</span> j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> st -&gt;
-        <a href="list.html#nth_80">nth</a> j st = s.<a href="#values_197">values</a>[stack_i[j]]
+        <a href="list.html#nth_80">nth</a> j st = s.<a href="#values_228">values</a>[stack_i[j]]
 
-  <span class="keyword1">predicate</span> <a name="glue_522">glue</a> (s:<a href="#state_194">state</a>) (st:<a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_188">card</a>)) =
-    <a href="list.html#length_19">length</a> st = s.<a href="#num_stacks_200">num_stacks</a> /\
+  <span class="keyword1">predicate</span> <a name="glue_553">glue</a> (s:<a href="#state_225">state</a>) (st:<a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_219">card</a>)) =
+    <a href="list.html#length_19">length</a> st = s.<a href="#num_stacks_231">num_stacks</a> /\
     <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> st -&gt;
-      <a href="#glue_stack_516">glue_stack</a> s i (<a href="list.html#nth_80">nth</a> i st)
+      <a href="#glue_stack_547">glue_stack</a> s i (<a href="list.html#nth_80">nth</a> i st)
 
 </pre>
 <h3>playing a card</h3><pre>
   <span class="keyword1">use</span> <span class="keyword1">import</span> list.<a href="list.html#RevAppend_243">RevAppend</a>
   <span class="keyword1">use</span> <span class="keyword1">import</span> ref.<a href="ref.html#Ref_14">Ref</a>
-  <span class="keyword1">exception</span> <a name="Return_534">Return</a>
+  <span class="keyword1">exception</span> <a name="Return_565">Return</a>
 
-  <span class="keyword1">let</span> <a name="play_card_538">play_card</a> (c:<a href="#card_188">card</a>) (old_stacks : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_188">card</a>)) (<span class="keyword1">ghost</span> state:<a href="#state_194">state</a>) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_188">card</a>)
-    <span class="keyword2">requires</span> { <a href="#inv_218">inv</a> state }
-    <span class="keyword2">requires</span> { <a href="#glue_522">glue</a> state old_stacks }
+  <span class="keyword1">let</span> <a name="play_card_569">play_card</a> (c:<a href="#card_219">card</a>) (old_stacks : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_219">card</a>)) (<span class="keyword1">ghost</span> state:<a href="#state_225">state</a>) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_219">card</a>)
+    <span class="keyword2">requires</span> { <a href="#inv_249">inv</a> state }
+    <span class="keyword2">requires</span> { <a href="#glue_553">glue</a> state old_stacks }
     <span class="keyword2">writes</span>   { state }
-    <span class="keyword2">ensures</span>  { <a href="#inv_218">inv</a> state }
-    <span class="keyword2">ensures</span>  { state.<a href="#num_elts_195">num_elts</a> = (old state).<a href="#num_elts_195">num_elts</a> <a href="int.html#infix.20.2B_86">+</a> 1 }
-    <span class="keyword2">ensures</span>  { state.<a href="#values_197">values</a> = (old state).<a href="#values_197">values</a>[(old state).<a href="#num_elts_195">num_elts</a> &lt;- c] }
-    <span class="keyword2">ensures</span>  { <a href="#glue_522">glue</a> state result }
+    <span class="keyword2">ensures</span>  { <a href="#inv_249">inv</a> state }
+    <span class="keyword2">ensures</span>  { state.<a href="#num_elts_226">num_elts</a> = (old state).<a href="#num_elts_226">num_elts</a> <a href="int.html#infix.20.2B_86">+</a> 1 }
+    <span class="keyword2">ensures</span>  { state.<a href="#values_228">values</a> = (old state).<a href="#values_228">values</a>[(old state).<a href="#num_elts_226">num_elts</a> &lt;- c] }
+    <span class="keyword2">ensures</span>  { <a href="#glue_553">glue</a> state result }
   =
     <span class="keyword1">let</span> acc = <a href="ref.html#ref_20">ref</a> <a href="list.html#Nil_8">Nil</a> <span class="keyword1">in</span>
     <span class="keyword1">let</span> rem_stacks = <a href="ref.html#ref_20">ref</a> old_stacks <span class="keyword1">in</span>
@@ -560,15 +591,15 @@ input sequence.</p>
     <span class="keyword1">let</span> <span class="keyword1">ghost</span> i = <a href="ref.html#ref_20">ref</a> 0 <span class="keyword1">in</span>
     <span class="keyword1">try</span>
     <span class="keyword1">while</span> <a href="ref.html#prefix.20.21_22">!</a>rem_stacks &lt;&gt; <a href="list.html#Nil_8">Nil</a> <span class="keyword1">do</span>
-      <span class="keyword2">invariant</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>i <a href="int.html#infix.20.3C.3D_18">&lt;=</a> state.<a href="#num_stacks_200">num_stacks</a> }
+      <span class="keyword2">invariant</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>i <a href="int.html#infix.20.3C.3D_18">&lt;=</a> state.<a href="#num_stacks_231">num_stacks</a> }
       <span class="keyword2">invariant</span> { <span class="keyword1">if</span> <a href="ref.html#prefix.20.21_18">!</a>i = 0 <span class="keyword1">then</span> <a href="ref.html#prefix.20.21_18">!</a>pred = <a href="int.html#prefix.20-_87">-</a>1 <span class="keyword1">else</span>
-        <span class="keyword1">let</span> stack_im1 = state.<a href="#stacks_204">stacks</a>[<a href="ref.html#prefix.20.21_18">!</a>i<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
-        <span class="keyword1">let</span> stack_im1_size = state.<a href="#stack_sizes_202">stack_sizes</a>[<a href="ref.html#prefix.20.21_18">!</a>i<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
+        <span class="keyword1">let</span> stack_im1 = state.<a href="#stacks_235">stacks</a>[<a href="ref.html#prefix.20.21_18">!</a>i<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
+        <span class="keyword1">let</span> stack_im1_size = state.<a href="#stack_sizes_233">stack_sizes</a>[<a href="ref.html#prefix.20.21_18">!</a>i<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
         <span class="keyword1">let</span> top_stack_im1 = stack_im1[stack_im1_size <a href="int.html#infix.20-_100">-</a> 1] <span class="keyword1">in</span>
         <a href="ref.html#prefix.20.21_18">!</a>pred = top_stack_im1 /\
-        c <a href="int.html#infix.20.3E_17">&gt;</a> state.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>pred]  /\
-        0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>pred <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_195">num_elts</a> /\
-        <span class="keyword1">let</span> (ps,_pp) = state.<a href="#positions_206">positions</a>[<a href="ref.html#prefix.20.21_18">!</a>pred] <span class="keyword1">in</span>
+        c <a href="int.html#infix.20.3E_17">&gt;</a> state.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>pred]  /\
+        0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>pred <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_226">num_elts</a> /\
+        <span class="keyword1">let</span> (ps,_pp) = state.<a href="#positions_237">positions</a>[<a href="ref.html#prefix.20.21_18">!</a>pred] <span class="keyword1">in</span>
         ps = <a href="ref.html#prefix.20.21_18">!</a>i <a href="int.html#infix.20-_100">-</a> 1
       }
       <span class="keyword2">invariant</span> { old_stacks = <a href="list.html#rev_append_247">rev_append</a> <a href="ref.html#prefix.20.21_18">!</a>acc <a href="ref.html#prefix.20.21_18">!</a>rem_stacks }
@@ -579,22 +610,22 @@ input sequence.</p>
           rem_stacks <a href="ref.html#infix.20:.3D_24">:=</a> remaining_stacks;
           <span class="keyword1">match</span> stack <span class="keyword1">with</span>
           | <a href="list.html#Nil_8">Nil</a> -&gt;
-            <span class="keyword2">assert</span> { <a href="#glue_stack_516">glue_stack</a> state <a href="ref.html#prefix.20.21_18">!</a>i stack };
+            <span class="keyword2">assert</span> { <a href="#glue_stack_547">glue_stack</a> state <a href="ref.html#prefix.20.21_18">!</a>i stack };
             <span class="keyword2">absurd</span>
           | <a href="list.html#Cons_8">Cons</a> c' _ -&gt;
              <span class="keyword1">if</span> c <a href="int.html#infix.20.3C.3D_18">&lt;=</a> c' <span class="keyword1">then</span>
                <span class="keyword1">begin</span>
                  acc <a href="ref.html#infix.20:.3D_24">:=</a> <a href="list.html#Cons_8">Cons</a> (<a href="list.html#Cons_8">Cons</a> c stack) <a href="ref.html#prefix.20.21_22">!</a>acc;
-                 <span class="keyword1">raise</span> <a href="#Return_534">Return</a>;
+                 <span class="keyword1">raise</span> <a href="#Return_565">Return</a>;
                <span class="keyword1">end</span>;
-             <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i = state.<a href="#stacks_204">stacks</a>[<a href="ref.html#prefix.20.21_22">!</a>i] <span class="keyword1">in</span>
-             <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i_size = state.<a href="#stack_sizes_202">stack_sizes</a>[<a href="ref.html#prefix.20.21_22">!</a>i] <span class="keyword1">in</span>
+             <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i = state.<a href="#stacks_235">stacks</a>[<a href="ref.html#prefix.20.21_22">!</a>i] <span class="keyword1">in</span>
+             <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i_size = state.<a href="#stack_sizes_233">stack_sizes</a>[<a href="ref.html#prefix.20.21_22">!</a>i] <span class="keyword1">in</span>
              <span class="keyword1">let</span> <span class="keyword1">ghost</span> top_stack_i = stack_i[stack_i_size <a href="int.html#infix.20-_100">-</a> 1] <span class="keyword1">in</span>
-             <span class="keyword2">assert</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> top_stack_i <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_195">num_elts</a> };
-             <span class="keyword2">assert</span> { <span class="keyword1">let</span> (is,ip) = state.<a href="#positions_206">positions</a>[top_stack_i] <span class="keyword1">in</span>
-               0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> is <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_stacks_200">num_stacks</a> &amp;&amp;
-               0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> ip <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#stack_sizes_202">stack_sizes</a>[is] &amp;&amp;
-               state.<a href="#stacks_204">stacks</a>[is][ip] = top_stack_i &amp;&amp;
+             <span class="keyword2">assert</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> top_stack_i <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_226">num_elts</a> };
+             <span class="keyword2">assert</span> { <span class="keyword1">let</span> (is,ip) = state.<a href="#positions_237">positions</a>[top_stack_i] <span class="keyword1">in</span>
+               0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> is <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_stacks_231">num_stacks</a> &amp;&amp;
+               0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> ip <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#stack_sizes_233">stack_sizes</a>[is] &amp;&amp;
+               state.<a href="#stacks_235">stacks</a>[is][ip] = top_stack_i &amp;&amp;
                is = <a href="ref.html#prefix.20.21_18">!</a>i /\ ip = stack_i_size <a href="int.html#infix.20-_100">-</a> 1
              };
              i <a href="ref.html#infix.20:.3D_24">:=</a> <a href="ref.html#prefix.20.21_22">!</a>i <a href="int.html#infix.20.2B_86">+</a> 1;
@@ -604,34 +635,34 @@ input sequence.</p>
       <span class="keyword1">end</span>
     <span class="keyword1">done</span>;
     <span class="comment">(* we add a new stack *)</span>
-    <span class="keyword1">let</span> <span class="keyword1">ghost</span> idx = state.<a href="#num_elts_195">num_elts</a> <span class="keyword1">in</span>
-    <span class="keyword1">let</span> <span class="keyword1">ghost</span> i = state.<a href="#num_stacks_200">num_stacks</a> <span class="keyword1">in</span>
-    <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i = state.<a href="#stacks_204">stacks</a>[i] <span class="keyword1">in</span>
+    <span class="keyword1">let</span> <span class="keyword1">ghost</span> idx = state.<a href="#num_elts_226">num_elts</a> <span class="keyword1">in</span>
+    <span class="keyword1">let</span> <span class="keyword1">ghost</span> i = state.<a href="#num_stacks_231">num_stacks</a> <span class="keyword1">in</span>
+    <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i = state.<a href="#stacks_235">stacks</a>[i] <span class="keyword1">in</span>
     <span class="keyword1">let</span> <span class="keyword1">ghost</span> new_stack_i = stack_i[0 &lt;- idx] <span class="keyword1">in</span>
-    state.<a href="#num_elts_195">num_elts</a> &lt;- idx <a href="int.html#infix.20.2B_86">+</a> 1;
-    state.<a href="#values_197">values</a> &lt;- state.<a href="#values_197">values</a>[idx &lt;- c];
-    state.<a href="#num_stacks_200">num_stacks</a> &lt;- state.<a href="#num_stacks_200">num_stacks</a> <a href="int.html#infix.20.2B_86">+</a> 1;
-    state.<a href="#stack_sizes_202">stack_sizes</a> &lt;- state.<a href="#stack_sizes_202">stack_sizes</a>[i &lt;- 1];
-    state.<a href="#stacks_204">stacks</a> &lt;- state.<a href="#stacks_204">stacks</a>[i &lt;- new_stack_i];
-    state.<a href="#positions_206">positions</a> &lt;- state.<a href="#positions_206">positions</a>[idx &lt;- (i,0)];
-    state.<a href="#preds_209">preds</a> &lt;- state.<a href="#preds_209">preds</a>[idx &lt;- <a href="ref.html#prefix.20.21_22">!</a>pred];
+    state.<a href="#num_elts_226">num_elts</a> &lt;- idx <a href="int.html#infix.20.2B_86">+</a> 1;
+    state.<a href="#values_228">values</a> &lt;- state.<a href="#values_228">values</a>[idx &lt;- c];
+    state.<a href="#num_stacks_231">num_stacks</a> &lt;- state.<a href="#num_stacks_231">num_stacks</a> <a href="int.html#infix.20.2B_86">+</a> 1;
+    state.<a href="#stack_sizes_233">stack_sizes</a> &lt;- state.<a href="#stack_sizes_233">stack_sizes</a>[i &lt;- 1];
+    state.<a href="#stacks_235">stacks</a> &lt;- state.<a href="#stacks_235">stacks</a>[i &lt;- new_stack_i];
+    state.<a href="#positions_237">positions</a> &lt;- state.<a href="#positions_237">positions</a>[idx &lt;- (i,0)];
+    state.<a href="#preds_240">preds</a> &lt;- state.<a href="#preds_240">preds</a>[idx &lt;- <a href="ref.html#prefix.20.21_22">!</a>pred];
     <span class="comment">(* we put card [c] in a new stack *)</span>
     <a href="list.html#rev_append_247">rev_append</a> (<a href="list.html#Cons_8">Cons</a> (<a href="list.html#Cons_8">Cons</a> c <a href="list.html#Nil_8">Nil</a>) <a href="ref.html#prefix.20.21_22">!</a>acc) <a href="list.html#Nil_8">Nil</a>
-  <span class="keyword1">with</span> <a href="#Return_534">Return</a> -&gt;
-         <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i = state.<a href="#stacks_204">stacks</a>[<a href="ref.html#prefix.20.21_22">!</a>i] <span class="keyword1">in</span>
-         <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i_size = state.<a href="#stack_sizes_202">stack_sizes</a>[<a href="ref.html#prefix.20.21_22">!</a>i] <span class="keyword1">in</span>
+  <span class="keyword1">with</span> <a href="#Return_565">Return</a> -&gt;
+         <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i = state.<a href="#stacks_235">stacks</a>[<a href="ref.html#prefix.20.21_22">!</a>i] <span class="keyword1">in</span>
+         <span class="keyword1">let</span> <span class="keyword1">ghost</span> stack_i_size = state.<a href="#stack_sizes_233">stack_sizes</a>[<a href="ref.html#prefix.20.21_22">!</a>i] <span class="keyword1">in</span>
          <span class="keyword1">let</span> <span class="keyword1">ghost</span> top_stack_i = stack_i[stack_i_size <a href="int.html#infix.20-_100">-</a> 1] <span class="keyword1">in</span>
-         <span class="keyword2">assert</span> { c <a href="int.html#infix.20.3C.3D_18">&lt;=</a> state.<a href="#values_197">values</a>[top_stack_i] };
+         <span class="keyword2">assert</span> { c <a href="int.html#infix.20.3C.3D_18">&lt;=</a> state.<a href="#values_228">values</a>[top_stack_i] };
          <span class="comment">(* we put c on top of stack i *)</span>
-         <span class="keyword1">let</span> <span class="keyword1">ghost</span> idx = state.<a href="#num_elts_195">num_elts</a> <span class="keyword1">in</span>
+         <span class="keyword1">let</span> <span class="keyword1">ghost</span> idx = state.<a href="#num_elts_226">num_elts</a> <span class="keyword1">in</span>
          <span class="keyword1">let</span> <span class="keyword1">ghost</span> new_stack_i = stack_i[stack_i_size &lt;- idx] <span class="keyword1">in</span>
-         state.<a href="#num_elts_195">num_elts</a> &lt;- idx <a href="int.html#infix.20.2B_86">+</a> 1;
-         state.<a href="#values_197">values</a> &lt;- state.<a href="#values_197">values</a>[idx &lt;- c];
+         state.<a href="#num_elts_226">num_elts</a> &lt;- idx <a href="int.html#infix.20.2B_86">+</a> 1;
+         state.<a href="#values_228">values</a> &lt;- state.<a href="#values_228">values</a>[idx &lt;- c];
          <span class="comment">(* state.num_stacks unchanged *)</span>
-         state.<a href="#stack_sizes_202">stack_sizes</a> &lt;- state.<a href="#stack_sizes_202">stack_sizes</a>[<a href="ref.html#prefix.20.21_22">!</a>i &lt;- stack_i_size <a href="int.html#infix.20.2B_86">+</a> 1];
-         state.<a href="#stacks_204">stacks</a> &lt;- state.<a href="#stacks_204">stacks</a>[<a href="ref.html#prefix.20.21_22">!</a>i &lt;- new_stack_i];
-         state.<a href="#positions_206">positions</a> &lt;- state.<a href="#positions_206">positions</a>[idx &lt;- (<a href="ref.html#prefix.20.21_22">!</a>i,stack_i_size)];
-         state.<a href="#preds_209">preds</a> &lt;- state.<a href="#preds_209">preds</a>[idx &lt;- <a href="ref.html#prefix.20.21_22">!</a>pred];
+         state.<a href="#stack_sizes_233">stack_sizes</a> &lt;- state.<a href="#stack_sizes_233">stack_sizes</a>[<a href="ref.html#prefix.20.21_22">!</a>i &lt;- stack_i_size <a href="int.html#infix.20.2B_86">+</a> 1];
+         state.<a href="#stacks_235">stacks</a> &lt;- state.<a href="#stacks_235">stacks</a>[<a href="ref.html#prefix.20.21_22">!</a>i &lt;- new_stack_i];
+         state.<a href="#positions_237">positions</a> &lt;- state.<a href="#positions_237">positions</a>[idx &lt;- (<a href="ref.html#prefix.20.21_22">!</a>i,stack_i_size)];
+         state.<a href="#preds_240">preds</a> &lt;- state.<a href="#preds_240">preds</a>[idx &lt;- <a href="ref.html#prefix.20.21_22">!</a>pred];
          <span class="comment">(* card is placed on the leftmost stack where its card
             value is no greater than the topmost card on that
             stack *)</span>
@@ -642,7 +673,7 @@ input sequence.</p>
   let play_card (c:card) (old_stacks : list (list card)) (ghost state:state) : list (list card)
     requires { inv state }
     requires { glue state old_stacks }
-    writes   { state } 
+    writes   { state }
     ensures  { inv state }
     ensures  { state.num_elts = (old state).num_elts + 1 }
     ensures  { state.values = (old state).values[(old state).num_elts &lt;- c] }
@@ -653,16 +684,16 @@ input sequence.</p>
                       (acc : list (list card)) : list (list card)
       requires { old_stacks = rev_append acc st }
       variant { st }
-    = 
+    =
     match st with
     | Nil -&gt;
         (* we put card [c] in a new stack *)
         rev_append (Cons (Cons c Nil) acc) Nil
     | Cons stack remaining_stacks -&gt;
         match stack with
-        | Nil -&gt; 
+        | Nil -&gt;
           assert { glue_stack state !i stack };
-          absurd 
+          absurd
         | Cons c' _ -&gt;
            if c &lt;= c' then
              (* card is placed on the leftmost stack where its card
@@ -684,83 +715,83 @@ input sequence.</p>
 
 </pre>
 <h3>playing cards</h3><pre>
-  <span class="keyword1">let</span> <span class="keyword1">rec</span> <a name="play_cards_683">play_cards</a> (input: <a href="list.html#list_8">list</a> <a href="#card_188">card</a>) (stacks: <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_188">card</a>))
-    (<span class="keyword1">ghost</span> state:<a href="#state_194">state</a>) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_188">card</a>)
-    <span class="keyword2">requires</span> { <a href="#inv_218">inv</a> state }
-    <span class="keyword2">requires</span> { <a href="#glue_522">glue</a> state stacks }
+  <span class="keyword1">let</span> <span class="keyword1">rec</span> <a name="play_cards_714">play_cards</a> (input: <a href="list.html#list_8">list</a> <a href="#card_219">card</a>) (stacks: <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_219">card</a>))
+    (<span class="keyword1">ghost</span> state:<a href="#state_225">state</a>) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_219">card</a>)
+    <span class="keyword2">requires</span> { <a href="#inv_249">inv</a> state }
+    <span class="keyword2">requires</span> { <a href="#glue_553">glue</a> state stacks }
     <span class="keyword2">variant</span>  { input }
     <span class="comment">(* writes   { state } *)</span>
-    <span class="keyword2">ensures</span>  { <a href="#inv_218">inv</a> state }
-    <span class="keyword2">ensures</span>  { state.<a href="#num_elts_195">num_elts</a> = (old state).<a href="#num_elts_195">num_elts</a> <a href="int.html#infix.20.2B_86">+</a> <a href="list.html#length_19">length</a> input }
-    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> (old state).<a href="#num_elts_195">num_elts</a> -&gt;
-                 state.<a href="#values_197">values</a>[i] = (old state).<a href="#values_197">values</a>[i] }
-    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> i. (old state).<a href="#num_elts_195">num_elts</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_195">num_elts</a> -&gt;
-                 state.<a href="#values_197">values</a>[i] = <a href="list.html#nth_80">nth</a> (i <a href="int.html#infix.20-_100">-</a> (old state).<a href="#num_elts_195">num_elts</a>) input }
-    <span class="keyword2">ensures</span>  { <a href="#glue_522">glue</a> state result }
+    <span class="keyword2">ensures</span>  { <a href="#inv_249">inv</a> state }
+    <span class="keyword2">ensures</span>  { state.<a href="#num_elts_226">num_elts</a> = (old state).<a href="#num_elts_226">num_elts</a> <a href="int.html#infix.20.2B_86">+</a> <a href="list.html#length_19">length</a> input }
+    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> (old state).<a href="#num_elts_226">num_elts</a> -&gt;
+                 state.<a href="#values_228">values</a>[i] = (old state).<a href="#values_228">values</a>[i] }
+    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> i. (old state).<a href="#num_elts_226">num_elts</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_226">num_elts</a> -&gt;
+                 state.<a href="#values_228">values</a>[i] = <a href="list.html#nth_80">nth</a> (i <a href="int.html#infix.20-_100">-</a> (old state).<a href="#num_elts_226">num_elts</a>) input }
+    <span class="keyword2">ensures</span>  { <a href="#glue_553">glue</a> state result }
   =
     <span class="keyword1">match</span> input <span class="keyword1">with</span>
     | <a href="list.html#Nil_8">Nil</a> -&gt; stacks
     | <a href="list.html#Cons_8">Cons</a> c rem -&gt;
-        <span class="keyword1">let</span> stacks' = <a href="#play_card_538">play_card</a> c stacks state <span class="keyword1">in</span>
+        <span class="keyword1">let</span> stacks' = <a href="#play_card_569">play_card</a> c stacks state <span class="keyword1">in</span>
         play_cards rem stacks' state
     <span class="keyword1">end</span>
 
 </pre>
 <h3>playing a whole game</h3><pre>
-  <span class="keyword1">type</span> <a name="seq_712">seq</a> 'a = { <a name="seqlen_712">seqlen</a>: int; <a name="seqval_712">seqval</a>: <a href="map.html#map_8">map</a> int 'a }
+  <span class="keyword1">type</span> <a name="seq_743">seq</a> 'a = { <a name="seqlen_743">seqlen</a>: int; <a name="seqval_743">seqval</a>: <a href="map.html#map_8">map</a> int 'a }
 </pre>
 <div class="info"><p>a sequence is defined by a length and a mapping</p>
 </div><pre>
 </pre>
 <p>definition of an increasing sub-sequence of a list of card</p>
 <pre>
-  <span class="keyword1">predicate</span> <a name="increasing_subsequence_716">increasing_subsequence</a> (sigma:<a href="#seq_712">seq</a> int) (l:<a href="list.html#list_8">list</a> <a href="#card_188">card</a>) =
-       0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> sigma.<a href="#seqlen_712">seqlen</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="list.html#length_19">length</a> l
+  <span class="keyword1">predicate</span> <a name="increasing_subsequence_747">increasing_subsequence</a> (sigma:<a href="#seq_743">seq</a> int) (l:<a href="list.html#list_8">list</a> <a href="#card_219">card</a>) =
+       0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> sigma.<a href="#seqlen_743">seqlen</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="list.html#length_19">length</a> l
 </pre>
 <div class="info"><p>the length of <code>sigma</code> is at most the number of cards</p>
 </div><pre>
-    &amp;&amp; (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_712">seqlen</a> -&gt; 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> sigma.<a href="#seqval_712">seqval</a>[i] <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> l)
+    &amp;&amp; (<span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_743">seqlen</a> -&gt; 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> sigma.<a href="#seqval_743">seqval</a>[i] <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> l)
 </pre>
 <div class="info"><p><code>sigma</code> maps indexes to valid indexes in the card list</p>
 </div><pre>
-    &amp;&amp; (<span class="keyword1">forall</span> i,j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_712">seqlen</a> -&gt; sigma.<a href="#seqval_712">seqval</a>[i] <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqval_712">seqval</a>[j])
+    &amp;&amp; (<span class="keyword1">forall</span> i,j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_743">seqlen</a> -&gt; sigma.<a href="#seqval_743">seqval</a>[i] <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqval_743">seqval</a>[j])
 </pre>
 <div class="info"><p><code>sigma</code> is an increasing sequence of indexes</p>
 </div><pre>
-    &amp;&amp; (<span class="keyword1">forall</span> i,j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_712">seqlen</a> -&gt;
-          <a href="list.html#nth_80">nth</a> sigma.<a href="#seqval_712">seqval</a>[i] l <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#nth_80">nth</a> sigma.<a href="#seqval_712">seqval</a>[j] l)
+    &amp;&amp; (<span class="keyword1">forall</span> i,j. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_743">seqlen</a> -&gt;
+          <a href="list.html#nth_80">nth</a> sigma.<a href="#seqval_743">seqval</a>[i] l <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#nth_80">nth</a> sigma.<a href="#seqval_743">seqval</a>[j] l)
 </pre>
 <div class="info"><p>the card values denoted by <code>sigma</code> are increasing</p>
 </div><pre>
   <span class="keyword1">use</span> <span class="keyword1">import</span> <a href="#PigeonHole_40">PigeonHole</a>
 
-  <span class="keyword1">let</span> <a name="play_game_729">play_game</a> (input: <a href="list.html#list_8">list</a> <a href="#card_188">card</a>) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_188">card</a>)
+  <span class="keyword1">let</span> <a name="play_game_760">play_game</a> (input: <a href="list.html#list_8">list</a> <a href="#card_219">card</a>) : <a href="list.html#list_8">list</a> (<a href="list.html#list_8">list</a> <a href="#card_219">card</a>)
     <span class="keyword2">requires</span> { <a href="list.html#length_19">length</a> input <a href="int.html#infix.20.3E_17">&gt;</a> 0 }
-    <span class="keyword2">ensures</span>  { <span class="keyword1">exists</span> sigma: <a href="#seq_712">seq</a> int.
-                 sigma.<a href="#seqlen_712">seqlen</a> = <a href="list.html#length_19">length</a> result /\
-                 <a href="#increasing_subsequence_716">increasing_subsequence</a> sigma input
+    <span class="keyword2">ensures</span>  { <span class="keyword1">exists</span> sigma: <a href="#seq_743">seq</a> int.
+                 sigma.<a href="#seqlen_743">seqlen</a> = <a href="list.html#length_19">length</a> result /\
+                 <a href="#increasing_subsequence_747">increasing_subsequence</a> sigma input
              }
-    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> sigma: <a href="#seq_712">seq</a> int.
-                <a href="#increasing_subsequence_716">increasing_subsequence</a> sigma input -&gt;
-                  sigma.<a href="#seqlen_712">seqlen</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="list.html#length_19">length</a> result
+    <span class="keyword2">ensures</span>  { <span class="keyword1">forall</span> sigma: <a href="#seq_743">seq</a> int.
+                <a href="#increasing_subsequence_747">increasing_subsequence</a> sigma input -&gt;
+                  sigma.<a href="#seqlen_743">seqlen</a> <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="list.html#length_19">length</a> result
              }
   = <span class="keyword1">let</span> <span class="keyword1">ghost</span> state = {
-      <a href="#num_elts_195">num_elts</a> = 0;
-      <a href="#values_197">values</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1) ;
-      <a href="#num_stacks_200">num_stacks</a> = 0;
-      <a href="#stack_sizes_202">stack_sizes</a> = Map.<a href="map.html#const_30">const</a> 0;
-      <a href="#stacks_204">stacks</a> = Map.<a href="map.html#const_30">const</a> (Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1));
-      <a href="#positions_206">positions</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1,<a href="int.html#prefix.20-_87">-</a>1);
-      <a href="#preds_209">preds</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1);
+      <a href="#num_elts_226">num_elts</a> = 0;
+      <a href="#values_228">values</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1) ;
+      <a href="#num_stacks_231">num_stacks</a> = 0;
+      <a href="#stack_sizes_233">stack_sizes</a> = Map.<a href="map.html#const_30">const</a> 0;
+      <a href="#stacks_235">stacks</a> = Map.<a href="map.html#const_30">const</a> (Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1));
+      <a href="#positions_237">positions</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1,<a href="int.html#prefix.20-_87">-</a>1);
+      <a href="#preds_240">preds</a> = Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1);
     }
     <span class="keyword1">in</span>
-    <span class="keyword1">let</span> final_stacks = <a href="#play_cards_683">play_cards</a> input <a href="list.html#Nil_8">Nil</a> state <span class="keyword1">in</span>
-    <span class="keyword2">assert</span> { <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> input -&gt; <a href="list.html#nth_80">nth</a> i input = state.<a href="#values_197">values</a>[i] };
+    <span class="keyword1">let</span> final_stacks = <a href="#play_cards_714">play_cards</a> input <a href="list.html#Nil_8">Nil</a> state <span class="keyword1">in</span>
+    <span class="keyword2">assert</span> { <span class="keyword1">forall</span> i. 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> <a href="list.html#length_19">length</a> input -&gt; <a href="list.html#nth_80">nth</a> i input = state.<a href="#values_228">values</a>[i] };
 </pre>
 <div class="info">
 <p>This is ghost code to build an increasing subsequence of maximal length</p>
 </div><pre>
-    <span class="keyword1">let</span> <span class="keyword1">ghost</span> ns = state.<a href="#num_stacks_200">num_stacks</a> <span class="keyword1">in</span>
+    <span class="keyword1">let</span> <span class="keyword1">ghost</span> ns = state.<a href="#num_stacks_231">num_stacks</a> <span class="keyword1">in</span>
     <span class="keyword1">let</span> <span class="keyword1">ghost</span> _sigma =
       <span class="keyword1">if</span> ns = 0 <span class="keyword1">then</span>
       <span class="keyword1">begin</span>
@@ -774,63 +805,63 @@ input sequence.</p>
 *)</span>
       <span class="keyword1">end</span>
     <span class="keyword1">else</span>
-    <span class="keyword1">let</span> <span class="keyword1">ghost</span> last_stack = state.<a href="#stacks_204">stacks</a>[ns<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
-    <span class="keyword1">let</span> <span class="keyword1">ghost</span> idx = <a href="ref.html#ref_20">ref</a> (last_stack[state.<a href="#stack_sizes_202">stack_sizes</a>[ns<a href="int.html#infix.20-_100">-</a>1]<a href="int.html#infix.20-_100">-</a>1]) <span class="keyword1">in</span>
+    <span class="keyword1">let</span> <span class="keyword1">ghost</span> last_stack = state.<a href="#stacks_235">stacks</a>[ns<a href="int.html#infix.20-_100">-</a>1] <span class="keyword1">in</span>
+    <span class="keyword1">let</span> <span class="keyword1">ghost</span> idx = <a href="ref.html#ref_20">ref</a> (last_stack[state.<a href="#stack_sizes_233">stack_sizes</a>[ns<a href="int.html#infix.20-_100">-</a>1]<a href="int.html#infix.20-_100">-</a>1]) <span class="keyword1">in</span>
     <span class="keyword1">let</span> <span class="keyword1">ghost</span> seq = <a href="ref.html#ref_20">ref</a> (Map.<a href="map.html#const_30">const</a> (<a href="int.html#prefix.20-_87">-</a>1)) <span class="keyword1">in</span>
     <span class="keyword1">for</span> i = ns<a href="int.html#infix.20-_100">-</a>1 <span class="keyword1">downto</span> 0 <span class="keyword1">do</span>
-       <span class="keyword2">invariant</span> { <a href="int.html#prefix.20-_87">-</a>1 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>idx <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_195">num_elts</a> }
+       <span class="keyword2">invariant</span> { <a href="int.html#prefix.20-_87">-</a>1 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>idx <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_226">num_elts</a> }
        <span class="keyword2">invariant</span> { i <a href="int.html#infix.20.3E.3D_131">&gt;=</a> 0 -&gt; <a href="ref.html#prefix.20.21_18">!</a>idx <a href="int.html#infix.20.3E.3D_131">&gt;=</a> 0 &amp;&amp;
-         <span class="keyword1">let</span> (is,_) = state.<a href="#positions_206">positions</a>[<a href="ref.html#prefix.20.21_18">!</a>idx] <span class="keyword1">in</span> is = i }
+         <span class="keyword1">let</span> (is,_) = state.<a href="#positions_237">positions</a>[<a href="ref.html#prefix.20.21_18">!</a>idx] <span class="keyword1">in</span> is = i }
        <span class="keyword2">invariant</span> { i<a href="int.html#infix.20.2B_86">+</a>1 <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt; <a href="ref.html#prefix.20.21_18">!</a>idx <a href="int.html#infix.20.3C_16">&lt;</a> <a href="ref.html#prefix.20.21_18">!</a>seq[i<a href="int.html#infix.20.2B_86">+</a>1] }
-       <span class="keyword2">invariant</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> ns<a href="int.html#infix.20-_100">-</a>1 -&gt; state.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>idx] <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[i<a href="int.html#infix.20.2B_86">+</a>1]] }
-       <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> j. i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt; 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>seq[j] <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_195">num_elts</a> }
+       <span class="keyword2">invariant</span> { 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> ns<a href="int.html#infix.20-_100">-</a>1 -&gt; state.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>idx] <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[i<a href="int.html#infix.20.2B_86">+</a>1]] }
+       <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> j. i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt; 0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> <a href="ref.html#prefix.20.21_18">!</a>seq[j] <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#num_elts_226">num_elts</a> }
        <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> j,k. i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> k <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt; <a href="ref.html#prefix.20.21_18">!</a>seq[j] <a href="int.html#infix.20.3C_16">&lt;</a> <a href="ref.html#prefix.20.21_18">!</a>seq[k] }
        <span class="keyword2">invariant</span> { <span class="keyword1">forall</span> j,k. i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> k <a href="int.html#infix.20.3C_16">&lt;</a> ns -&gt;
-         state.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[j]] <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#values_197">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[k]]
+         state.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[j]] <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#values_228">values</a>[<a href="ref.html#prefix.20.21_18">!</a>seq[k]]
        }
        'L:
        seq <a href="ref.html#infix.20:.3D_24">:=</a> <a href="ref.html#prefix.20.21_22">!</a>seq[i &lt;- <a href="ref.html#prefix.20.21_22">!</a>idx];
-       idx <a href="ref.html#infix.20:.3D_24">:=</a> state.<a href="#preds_209">preds</a>[<a href="ref.html#prefix.20.21_22">!</a>idx];
+       idx <a href="ref.html#infix.20:.3D_24">:=</a> state.<a href="#preds_240">preds</a>[<a href="ref.html#prefix.20.21_22">!</a>idx];
     <span class="keyword1">done</span>;
-    <span class="keyword1">let</span> <span class="keyword1">ghost</span> sigma = { <a href="#seqlen_712">seqlen</a> = ns ; <a href="#seqval_712">seqval</a> = <a href="ref.html#prefix.20.21_22">!</a>seq } <span class="keyword1">in</span>
-    <span class="keyword2">assert</span> { <a href="#increasing_subsequence_716">increasing_subsequence</a> sigma input };
+    <span class="keyword1">let</span> <span class="keyword1">ghost</span> sigma = { <a href="#seqlen_743">seqlen</a> = ns ; <a href="#seqval_743">seqval</a> = <a href="ref.html#prefix.20.21_22">!</a>seq } <span class="keyword1">in</span>
+    <span class="keyword2">assert</span> { <a href="#increasing_subsequence_747">increasing_subsequence</a> sigma input };
 </pre>
 <div class="info">
 <p>These are assertions to prove that no increasing subsequence of
       length larger than the number of stacks may exists</p>
 </div><pre>
     <span class="keyword2">assert</span> {  <span class="comment">(* non-injectivity *)</span>
-      <span class="keyword1">forall</span> sigma: <a href="#seq_712">seq</a> int.
-        <a href="#increasing_subsequence_716">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_712">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> state.<a href="#num_stacks_200">num_stacks</a> -&gt;
+      <span class="keyword1">forall</span> sigma: <a href="#seq_743">seq</a> int.
+        <a href="#increasing_subsequence_747">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_743">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> state.<a href="#num_stacks_231">num_stacks</a> -&gt;
         <span class="keyword1">let</span> f = \i:int.
-          <span class="keyword1">let</span> si = sigma.<a href="#seqval_712">seqval</a>[i] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_i,_) = state.<a href="#positions_206">positions</a>[si] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> si = sigma.<a href="#seqval_743">seqval</a>[i] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_i,_) = state.<a href="#positions_237">positions</a>[si] <span class="keyword1">in</span>
           stack_i
-        <span class="keyword1">in</span> <a href="#range_56">range</a> f sigma.<a href="#seqlen_712">seqlen</a> state.<a href="#num_stacks_200">num_stacks</a> &amp;&amp;
-           <span class="keyword1">not</span> (<a href="#injective_61">injective</a> f sigma.<a href="#seqlen_712">seqlen</a> state.<a href="#num_stacks_200">num_stacks</a>)
+        <span class="keyword1">in</span> <a href="#range_56">range</a> f sigma.<a href="#seqlen_743">seqlen</a> state.<a href="#num_stacks_231">num_stacks</a> &amp;&amp;
+           <span class="keyword1">not</span> (<a href="#injective_61">injective</a> f sigma.<a href="#seqlen_743">seqlen</a> state.<a href="#num_stacks_231">num_stacks</a>)
     };
     <span class="keyword2">assert</span> {  <span class="comment">(* non-injectivity *)</span>
-      <span class="keyword1">forall</span> sigma: <a href="#seq_712">seq</a> int.
-        <a href="#increasing_subsequence_716">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_712">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> state.<a href="#num_stacks_200">num_stacks</a> -&gt;
+      <span class="keyword1">forall</span> sigma: <a href="#seq_743">seq</a> int.
+        <a href="#increasing_subsequence_747">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_743">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> state.<a href="#num_stacks_231">num_stacks</a> -&gt;
         <span class="keyword1">exists</span> i,j.
-          0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_712">seqlen</a> &amp;&amp;
-          <span class="keyword1">let</span> si = sigma.<a href="#seqval_712">seqval</a>[i] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> sj = sigma.<a href="#seqval_712">seqval</a>[j] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_i,_pi) = state.<a href="#positions_206">positions</a>[si] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_j,_pj) = state.<a href="#positions_206">positions</a>[sj] <span class="keyword1">in</span>
+          0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_743">seqlen</a> &amp;&amp;
+          <span class="keyword1">let</span> si = sigma.<a href="#seqval_743">seqval</a>[i] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> sj = sigma.<a href="#seqval_743">seqval</a>[j] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_i,_pi) = state.<a href="#positions_237">positions</a>[si] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_j,_pj) = state.<a href="#positions_237">positions</a>[sj] <span class="keyword1">in</span>
           stack_i = stack_j
     };
     <span class="keyword2">assert</span> { <span class="comment">(* contradiction from non-injectivity *)</span>
-      <span class="keyword1">forall</span> sigma: <a href="#seq_712">seq</a> int.
-        <a href="#increasing_subsequence_716">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_712">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> state.<a href="#num_stacks_200">num_stacks</a> -&gt;
+      <span class="keyword1">forall</span> sigma: <a href="#seq_743">seq</a> int.
+        <a href="#increasing_subsequence_747">increasing_subsequence</a> sigma input /\ sigma.<a href="#seqlen_743">seqlen</a> <a href="int.html#infix.20.3E_17">&gt;</a> state.<a href="#num_stacks_231">num_stacks</a> -&gt;
         <span class="keyword1">forall</span> i,j.
-          0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_712">seqlen</a> -&gt;
-          <span class="keyword1">let</span> si = sigma.<a href="#seqval_712">seqval</a>[i] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> sj = sigma.<a href="#seqval_712">seqval</a>[j] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_i,pi) = state.<a href="#positions_206">positions</a>[si] <span class="keyword1">in</span>
-          <span class="keyword1">let</span> (stack_j,pj) = state.<a href="#positions_206">positions</a>[sj] <span class="keyword1">in</span>
+          0 <a href="int.html#infix.20.3C.3D_18">&lt;=</a> i <a href="int.html#infix.20.3C_16">&lt;</a> j <a href="int.html#infix.20.3C_16">&lt;</a> sigma.<a href="#seqlen_743">seqlen</a> -&gt;
+          <span class="keyword1">let</span> si = sigma.<a href="#seqval_743">seqval</a>[i] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> sj = sigma.<a href="#seqval_743">seqval</a>[j] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_i,pi) = state.<a href="#positions_237">positions</a>[si] <span class="keyword1">in</span>
+          <span class="keyword1">let</span> (stack_j,pj) = state.<a href="#positions_237">positions</a>[sj] <span class="keyword1">in</span>
           stack_i = stack_j -&gt;
-          si <a href="int.html#infix.20.3C_16">&lt;</a> sj &amp;&amp; pi <a href="int.html#infix.20.3C_16">&lt;</a> pj &amp;&amp; state.<a href="#values_197">values</a>[si] <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#values_197">values</a>[sj]
+          si <a href="int.html#infix.20.3C_16">&lt;</a> sj &amp;&amp; pi <a href="int.html#infix.20.3C_16">&lt;</a> pj &amp;&amp; state.<a href="#values_228">values</a>[si] <a href="int.html#infix.20.3C_16">&lt;</a> state.<a href="#values_228">values</a>[sj]
     };
     sigma
   <span class="keyword1">in</span>
