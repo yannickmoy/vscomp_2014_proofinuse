@@ -19,13 +19,15 @@ For more information see: http://why3.lri.fr/
 * dump: dumps the proof sessions in ./patience/why3session.html
 
 
-= current status of development =
+## current status of development 
 
-All developments are in file patience.mlw. The current proof status is stored
-in the why3 session file patience/why3session.mlw, can be edited using 'make prove',
-replayed using 'make replay' and dumped into HTML using 'make dump'
+All developments are in file patience.mlw. The current proof status is
+stored in the why3 session file patience/why3session.mlw, can be
+edited using 'make prove', replayed using 'make replay' and dumped
+into HTML using 'make dump'
 
-It is recommended to read the pretty-printed documented code obtained using 'make doc'
+It is recommended to read the pretty-printed documented code obtained
+using 'make doc'
 
 The file is made of 4 modules
 
@@ -62,8 +64,8 @@ and Z3.
 
 this is a code that glues the idiomatic code and the abstract code,
 the latter as ghost code. the main procedure play_game and the second
-auxiliairy procedure play_cards are proved, but wecould achieive a
-proof of the first auxiliairy procedure on the given time.
+auxiliairy procedure play_cards are proved, but we could not achieve a
+proof of the first auxiliairy procedure in the given time.
 
 
 
