@@ -11,7 +11,8 @@ The team consists in:
 - Yannick Moy (AdaCore)
 
 We're using Why3 (https://why3.lri.fr/) and SPARK 2014
-(http://www.spark-2014.org/) programming languages as well as SPIN (http://spinroot.com/spin/whatispin.html) model checker.
+(http://www.spark-2014.org/) programming languages as well as SPIN
+(http://spinroot.com/spin/whatispin.html) model checker.
 
 
 
@@ -26,10 +27,13 @@ We're using Why3 (https://why3.lri.fr/) and SPARK 2014
 * color highlighting of goals: color of premises and conclusion are
   wrong in presence of match..with
 
-* missing lemmas on nth and append on lists (i.e. propagate lemmas in list.NthAppendLength to list.NthNoOpt)
+* missing lemmas on nth and append on lists (i.e. propagate lemmas in
+  list.NthAppendLength to list.NthNoOpt)
 
-* need for an abstract version of pigeon-hole lemma in Why3 stdlib,
-  on functions instead of map like in map.MapInjection
+* need for an abstract version of pigeon-hole lemma in Why3 stdlib, on
+  functions instead of map like in map.MapInjection. The module
+  PigeonHole we developed for this competition coudl be moved to Why3
+  stdlib.
 
 * need for facilities to provide abstract specifications to Why3
   programs, and then provide raffinements (there is an on-going PhD

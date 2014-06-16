@@ -63,9 +63,40 @@ module PigeonHole
   (** [injective f n m] is true when [f] is an injection
       from [(0..n-1)] to [(0..m-1)] *)
 
-  lemma pigeon_hole :
-    forall n,m:int, f: int -> int.
-    range f n m /\ n > m -> not injective f n m
+  exception Found
+
+  function shift (f: int -> int) (i:int) : int -> int =
+    \k:int. if k < i then f k else f (k+1)
+
+  let rec lemma pigeon_hole (n m:int) (f: int -> int)
+    requires { range f n m }
+    requires { n > m >= 0 }
+    variant  { m }
+    ensures  { not (injective f n m) }
+  = try
+      for i = 0 to n-1 do
+        invariant { forall k. 0 <= k < i -> f k <> m-1 }
+        if f i = m-1 then
+          begin
+          (* we have found index i such that f i = m-1 *)
+          for j = i+1 to n-1 do
+            invariant { forall k. i < k < j -> f k <> m-1 }
+            if f j = m-1 then raise Found
+          done;
+          (* we know that for all k <> i, f k <> m-1 *)
+          let g = shift f i in
+          assert { range g (n-1) (m-1) };
+          pigeon_hole (n-1) (m-1) g;
+          raise Found;
+          end
+      done;
+      (* we know that for all k, f k <> m-1 *)
+      assert { range f n (m-1) };
+      pigeon_hole n (m-1) f
+   with Found ->
+     (* we know that f i = f j = m-1 hence we are done *)
+     ()
+   end
 
 end
 
@@ -98,7 +129,7 @@ module PatienceCode
     end
 
   (** concatenation of well-formed stacks is well-formed *)
-  let rec lemma wf_rev_append_stacks (s1 s2: list (list int)) 
+  let rec lemma wf_rev_append_stacks (s1 s2: list (list int))
     requires { wf_stacks s1 }
     requires { wf_stacks s2 }
     variant { s1 }
@@ -345,7 +376,7 @@ module PatienceAbstract
 
   use import list.Length
   use import list.NthNoOpt
-  
+
 
 
   let rec play_cards (input: list int) (s: state) : unit
@@ -413,9 +444,9 @@ module PatienceAbstract
     }
     in
     play_cards input s;
-    (** 
+    (**
 
-      This is ghost code to build an increasing subsequence of maximal length 
+      This is ghost code to build an increasing subsequence of maximal length
 
     *)
     let ns = s.num_stacks in
@@ -448,7 +479,7 @@ module PatienceAbstract
     let sigma = { seqlen = ns ; seqval = !seq } in
     assert { forall i. 0 <= i < length input -> nth i input = s.values[i] };
     assert { increasing_subsequence sigma input };
-    (** 
+    (**
 
       These are assertions to prove that no increasing subsequence of
       length larger than the number of stacks may exists
@@ -457,13 +488,13 @@ module PatienceAbstract
     assert {  (* non-injectivity *)
       forall sigma: seq int.
         increasing_subsequence sigma input /\ sigma.seqlen > s.num_stacks ->
-        let f = \i:int. 
+        let f = \i:int.
           let si = sigma.seqval[i] in
           let (stack_i,_) = s.positions[si] in
           stack_i
         in range f sigma.seqlen s.num_stacks &&
            not (injective f sigma.seqlen s.num_stacks)
-           
+
     };
     assert {  (* non-injectivity *)
       forall sigma: seq int.
@@ -474,12 +505,12 @@ module PatienceAbstract
           let sj = sigma.seqval[j] in
           let (stack_i,_pi) = s.positions[si] in
           let (stack_j,_pj) = s.positions[sj] in
-          stack_i = stack_j 
+          stack_i = stack_j
     };
     assert { (* contradiction from non-injectivity *)
       forall sigma: seq int.
         increasing_subsequence sigma input /\ sigma.seqlen > s.num_stacks ->
-        forall i,j. 
+        forall i,j.
           0 <= i < j < sigma.seqlen ->
           let si = sigma.seqval[i] in
           let sj = sigma.seqval[j] in
@@ -568,11 +599,11 @@ module PatienceFull
       | Cons stack remaining_stacks ->
           rem_stacks := remaining_stacks;
           match stack with
-          | Nil -> 
+          | Nil ->
             assert { glue_stack state !i stack };
-            absurd 
+            absurd
           | Cons c' _ ->
-             if c <= c' then 
+             if c <= c' then
                begin
                  acc := Cons (Cons c stack) !acc;
                  raise Return;
@@ -634,7 +665,7 @@ module PatienceFull
   let play_card (c:card) (old_stacks : list (list card)) (ghost state:state) : list (list card)
     requires { inv state }
     requires { glue state old_stacks }
-    writes   { state } 
+    writes   { state }
     ensures  { inv state }
     ensures  { state.num_elts = (old state).num_elts + 1 }
     ensures  { state.values = (old state).values[(old state).num_elts <- c] }
@@ -645,16 +676,16 @@ module PatienceFull
                       (acc : list (list card)) : list (list card)
       requires { old_stacks = rev_append acc st }
       variant { st }
-    = 
+    =
     match st with
     | Nil ->
         (* we put card [c] in a new stack *)
         rev_append (Cons (Cons c Nil) acc) Nil
     | Cons stack remaining_stacks ->
         match stack with
-        | Nil -> 
+        | Nil ->
           assert { glue_stack state !i stack };
-          absurd 
+          absurd
         | Cons c' _ ->
            if c <= c' then
              (* card is placed on the leftmost stack where its card

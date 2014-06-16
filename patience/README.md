@@ -35,10 +35,9 @@ The file is made of 4 modules
 
 includes the pigeon-hole lemma. why3 stdlib already contains a similar
 lemma map.MapInjection.injective_surjective, but cannot be used
-directly because it talks about mappings instead of functions.
-
-The proof is not done here, but could be performed the same guidelines
-as the proof of map.MapInjection.injective_surjective (made in Coq)
+directly because it talks about mappings instead of functions.  The
+proof is done here using a lemma function and the recent improvements
+of Why3 regarding higher-order logic.
 
 *  module PatienceCode
 
