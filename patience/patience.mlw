@@ -41,7 +41,7 @@ module PigeonHole
 
 (** The Why standard library provides a lemma
     [map.MapInjection.injective_surjective] stating that a map from
-    [(0..n-1)] to to [(0..n-1)] that is an injection is also a
+    [(0..n-1)] to [(0..n-1)] that is an injection is also a
     surjection.
 
     This is more or less equivalent to the pigeon-hole lemma. However, we need such a lemma more generally on functions instead of maps.
@@ -54,7 +54,7 @@ module PigeonHole
   use HighOrd
 
   predicate range (f: int -> int) (n: int) (m:int) =
-    forall i: int. 0 <= i < n -> 0 <= f(i) < m
+    forall i: int. 0 <= i < n -> 0 <= f i < m
   (** [range f n m] is true when [f] maps the domain
       [(0..n-1)] into [(0..m-1)] *)
 
@@ -62,6 +62,19 @@ module PigeonHole
     forall i j: int. 0 <= i < j < n -> f i <> f j
   (** [injective f n m] is true when [f] is an injection
       from [(0..n-1)] to [(0..m-1)] *)
+
+
+
+
+(*
+  lemma pigeon_hole2: 
+    forall n m:int, f: int -> int.
+      range f n m /\ n > m >= 0 ->
+        not (injective f n m)
+*)
+
+
+
 
   exception Found
 
