@@ -13,6 +13,10 @@ is
          StackISize := S.StackSizes(I);
          TopStackI := S.Stacks(I)(StackISize - 1);
          exit when C <= S.Values(TopStackI);
+         pragma Loop_Invariant (I in 0 .. S.NumStacks - 1);
+         pragma Loop_Invariant
+           (for all K in 0 .. I =>
+              C > S.Values(S.Stacks(K)(S.StackSizes(K) - 1)));
          Pred := TopStackI;
          I := I + 1;
       end loop;
