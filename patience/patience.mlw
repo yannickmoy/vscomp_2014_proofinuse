@@ -67,7 +67,7 @@ module PigeonHole
 
 
 (*
-  lemma pigeon_hole2: 
+  lemma pigeon_hole2:
     forall n m:int, f: int -> int.
       range f n m /\ n > m >= 0 ->
         not (injective f n m)
@@ -606,6 +606,13 @@ module PatienceFull
         ps = !i - 1
       }
       invariant { old_stacks = rev_append !acc !rem_stacks }
+      invariant {
+        forall j. 0 <= j < !i -> glue_stack state j (nth (!i - j) !acc)
+      }
+      invariant {
+        forall j. !i <= j < state.num_stacks -> 
+          glue_stack state j (nth (j - !i) !rem_stacks)
+      }
       variant { !rem_stacks }
       match !rem_stacks with
       | Nil -> absurd
