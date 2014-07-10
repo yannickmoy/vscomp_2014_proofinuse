@@ -15,6 +15,13 @@ style.css
 # Patience
 # patience/patience.html
 # patience/patience/why3session.html
+patience/spark/obj
+patience/spark/bin
+
+
+# Problem 2
+problem2/spark/bin/
+problem2/spark/obj/
 
 # Spin
 problem3/spin/*.tmp
