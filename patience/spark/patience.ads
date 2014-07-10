@@ -22,6 +22,12 @@ is
          Stacks     : IndexMatrix; -- indexes of the cards in respective stacks
       end record;
 
+   Null_State : constant State :=
+     State'(NumElts    => 0,
+            Values     => CardArray'(others => 1),
+            NumStacks  => 0,
+            StackSizes => IndexArray'(others => -1),
+            Stacks     => IndexMatrix'(others => (others => -1)));
 
    function Inv(S : State) return Boolean is
       (0 <= S.NumStacks and S.NumStacks <= S.NumElts

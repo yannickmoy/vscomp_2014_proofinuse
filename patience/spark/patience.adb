@@ -41,10 +41,8 @@ is
 
    function PlayGame (Cards: CardStack) return State
    is
-      S : State;
+      S : State := Null_State;
    begin
-      S.NumElts := 0;
-      S.NumStacks := 0;
       for I in Cards'Range loop
          PlayCard(Cards(I),S);
       end loop;
