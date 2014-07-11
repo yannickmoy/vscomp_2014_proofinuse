@@ -6,15 +6,18 @@ procedure Test_Patience is
 
    procedure PrintCardStack (S : CardStack) is
    begin
-      Put("CardStack (first=" & Integer'Image(S'First) & " = ");
+      Put_Line("--------");
+      Put("CardStack (first=" & Integer'Image(S'First) & ") = ");
       for I in S'Range loop
          Put(" " & Card'Image(S(I)));
       end loop;
       Put_Line("");
+      Put_Line("--------");
    end PrintCardStack;
 
    procedure PrintState (S : State) is
    begin
+      Put_Line("--------");
       Put_Line("Number of elts = " & CardIndex'Image(S.NumElts));
       Put("Card values =");
       for I in 0 .. S.NumElts - 1 loop
@@ -35,6 +38,7 @@ procedure Test_Patience is
             Put_Line("");
          end;
       end loop;
+      Put_Line("--------");
    end PrintState;
 
 

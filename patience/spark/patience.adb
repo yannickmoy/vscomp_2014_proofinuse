@@ -23,6 +23,7 @@ is
       Idx := S.NumElts;
       S.Values(Idx) := C;
       S.NumElts := Idx + 1;
+      S.Preds(Idx) := Pred;
       if I = S.NumStacks then
          -- we add a new stack
          begin
@@ -30,6 +31,8 @@ is
             S.NumStacks := S.NumStacks + 1;
             S.StackSizes(I) := 1;
             S.Stacks(I)(0) := Idx;
+            S.PosStack(Idx) := I;
+            S.PosHeight(Idx) := 0;
          end;
       else
          -- we put c on top of stack i
@@ -37,6 +40,8 @@ is
             StackISize := S.StackSizes(I);
             S.StackSizes(I) := StackISize + 1;
             S.Stacks(I)(StackISize) := Idx;
+            S.PosStack(Idx) := I;
+            S.PosHeight(Idx) := StackISize;
          end;
       end if;
    end;
@@ -48,7 +53,6 @@ is
       S : State := Null_State;
    begin
       for I in Cards'Range loop
-         pragma Loop_Invariant (I in 1 .. Cards'Length);
          pragma Loop_Invariant (S.NumElts = I-1);
          pragma Loop_Invariant (Inv(S));
          PlayCard(Cards(I),S);
