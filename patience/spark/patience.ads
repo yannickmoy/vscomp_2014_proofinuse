@@ -39,13 +39,15 @@ is
             PosHeight  => IndexArray'(others => -1));
 
    function Inv(S : State) return Boolean is
-      (0 <= S.NumStacks and S.NumStacks <= S.NumElts
+      (0 <= S.NumStacks and then
+         S.NumStacks <= S.NumElts
          -- the number of stacks is less or equal the number of cards
-         and
+         and then S.NumElts <= MaxNumCards
+         and then
          (S.NumElts = 0 or else S.NumStacks > 0)
          -- when there is at least one card, there is at least one stack
          -- FIXME: is there an "imply" connective ?
-         and
+         and then
          (for all I in 0 .. S.NumStacks - 1 =>
             S.StackSizes(I) >= 1
             -- stacks are non-empty
@@ -57,7 +59,7 @@ is
                0 <= S.Stacks(I)(J) and S.Stacks(I)(J) < S.NumElts)
             -- contents of stacks are valid card indexes
          )
-         and
+         and then
          (for all I in 0 .. S.NumElts - 1 =>
             -- FIXME: let pred = s.preds[i] in
             S.Preds(I) in -1 .. S.NumElts -1
@@ -70,12 +72,12 @@ is
             (if S.Preds(I) < 0 then S.PosStack(I) = 0
         -- if predecessor is -1 then I is in leftmost stack
             else
-        S.Values(S.Preds(I)) < S.Values(I)
+            (S.Values(S.Preds(I)) < S.Values(I)
           -- if predecessor is not -1, it denotes a card with smaller value...
           and then S.PosStack(I) > 0
           -- ...the card is not on the leftmost stack...
           -- FIXME: let (ps,_pp) = s.positions[pred] in
-          and then S.PosStack(S.Preds(I)) = S.Posstack(I) - 1
+          and then S.PosStack(S.Preds(I)) = S.PosStack(I) - 1)
           -- ...and predecessor is in the stack on the immediate left
             )
           )
