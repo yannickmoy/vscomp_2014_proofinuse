@@ -1,6 +1,6 @@
-project Patience is
+project Simple is
 
-   for Main use ("test_patience");
+   for Main use ("simple");
    for Object_Dir use "obj";
    for Exec_Dir use "bin";
 
@@ -12,4 +12,4 @@ project Patience is
       for Switches use ("-j0");
    end Prove;
 
-end Patience;
+end Simple;

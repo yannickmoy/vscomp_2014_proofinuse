@@ -75,9 +75,12 @@ is
       S : State := Null_State;
    begin
       for I in Cards'Range loop
+         pragma Assert (I > 1 or else S.NumElts = 0);
+         pragma Assert (I /= 2 or else S.NumElts = 1);
          pragma Loop_Invariant (S.NumElts = I-1);
          pragma Loop_Invariant (Inv(S));
          PlayCard(Cards(I),S);
+         pragma Assert (I /= 2 or else S.NumElts = 1);         
       end loop;
       return S;
    end PlayGame;

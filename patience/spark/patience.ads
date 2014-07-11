@@ -1,6 +1,6 @@
 
 package Patience with
-  SPARK_Mode
+  SPARK_Mode 
 is
 
    type Card is range 1..52;
@@ -62,12 +62,12 @@ is
          and then
          (for all I in 0 .. S.NumElts - 1 =>
             -- FIXME: let pred = s.preds[i] in
-            S.Preds(I) in -1 .. S.NumElts -1
+            S.Preds(I) in -1 .. S.NumElts - 1
             -- the predecessor is a valid index or -1
-            and
+            and then
             S.Preds(I) < I
             -- predecessor is always a smaller index
-            and
+            and then
             -- FIXME: let (is,_ip) = s.positions[i] in
             (if S.Preds(I) < 0 then S.PosStack(I) = 0
         -- if predecessor is -1 then I is in leftmost stack
@@ -87,7 +87,7 @@ is
    procedure PlayCard (C : in Card; S : in out State)
    with
      Pre => Inv(S) and S.NumElts < MaxNumCards,
-     Post => Inv(S) and S.Values(S'Old.NumElts) = C and S.NumElts = S'Old.NumElts + 1;
+     Post => Inv(S) and S.Values(S.NumElts'Old) = C and S.NumElts = S.NumElts'Old + 1;
 
    function PlayGame (Cards: CardStack) return State
    with
