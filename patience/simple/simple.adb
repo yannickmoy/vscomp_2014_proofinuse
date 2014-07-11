@@ -8,7 +8,7 @@ procedure Simple is
 begin
    Put_Line ("Test of a record update");
    Put_Line ("X= " & Integer'Image(S.X));
-   Incr(S);
+   IterIncr(S,10);
    Put_Line ("X= " & Integer'Image(S.X));
 end Simple;
 

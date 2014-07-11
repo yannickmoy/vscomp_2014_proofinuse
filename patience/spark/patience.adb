@@ -11,7 +11,7 @@ is
       I := 0;
       while I < S.NumStacks loop
          pragma Loop_Invariant (I in 0 .. S.NumStacks);
-         pragma Loop_Invariant 
+         pragma Loop_Invariant
            (
             (if I = 0 then Pred = -1 else
            -- let stack_im1 = s.stacks[i-1] in
@@ -75,12 +75,9 @@ is
       S : State := Null_State;
    begin
       for I in Cards'Range loop
-         pragma Assert (I > 1 or else S.NumElts = 0);
-         pragma Assert (I /= 2 or else S.NumElts = 1);
-         pragma Loop_Invariant (S.NumElts = I-1);
+         pragma Loop_Invariant (S.NumElts = I - Cards'First);
          pragma Loop_Invariant (Inv(S));
          PlayCard(Cards(I),S);
-         pragma Assert (I /= 2 or else S.NumElts = 1);         
       end loop;
       return S;
    end PlayGame;

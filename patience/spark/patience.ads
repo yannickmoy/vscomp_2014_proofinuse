@@ -4,7 +4,7 @@ package Patience with
 is
 
    type Card is range 1..52;
-   MaxNumCards : constant := 1000;
+   MaxNumCards : constant := 100;
    type CardStack is array (Positive range <>) of Card;
 
    subtype CardIndex is Integer range -1..MaxNumCards;
@@ -59,6 +59,36 @@ is
                0 <= S.Stacks(I)(J) and S.Stacks(I)(J) < S.NumElts)
             -- contents of stacks are valid card indexes
          )
+         and then  
+         (for all I in 0 .. S.NumElts -1 =>
+            -- let (is,ip) = s.positions[i] in
+            S.PosStack(I) in 0 .. S.NumStacks - 1
+            and then
+            -- let st = s.stacks[is] in
+            S.PosHeight(I) in 0 .. S.StackSizes(S.PosStack(I)) - 1 
+            and then S.Stacks(S.PosStack(I))(S.PosHeight(I)) = I)
+         -- the position table of cards is correct, i.e. card I indeed
+         -- occurs in stack S.PosStack(I) at height S.PosHeight(I)
+         and then 
+         (for all IST in 0 .. S.NumStacks - 1 =>
+          (for all IP in 0 .. S.StackSizes(IST) - 1 =>
+             IST = S.PosStack(S.Stacks(IST)(IP))
+             and
+             IP = S.PosHeight(S.Stacks(IST)(IP))))
+         -- positions is the proper inverse of stacks
+         and then 
+         (for all I in 0 .. S.NumStacks -1 =>
+            -- let stack_i = s.stacks[i] in
+            (for all J in 0 .. S.StackSizes(I) - 2 =>
+               (for all K in J+1 .. S.StackSizes(I) - 1 =>
+                  S.Stacks(I)(J) < S.Stacks(I)(K))))
+         -- in a given stack, indexes are increasing from bottom to top
+         and then
+         (for all I in 0 .. S.NumStacks - 1 =>
+            (for all J in 0 .. S.StackSizes(I) - 2 =>
+               (for all K in J+1 .. S.StackSizes(I) - 1 =>
+                  S.Values(S.Stacks(I)(J)) >= S.Values(S.Stacks(I)(K)))))
+         -- in a given stack, card values are decreasing from bottom to top 
          and then
          (for all I in 0 .. S.NumElts - 1 =>
             -- FIXME: let pred = s.preds[i] in

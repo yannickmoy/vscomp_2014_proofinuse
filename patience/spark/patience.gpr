@@ -9,7 +9,7 @@ project Patience is
    end Compiler;
 
    package Prove is
-      for Switches use ("-j0");
+      for Switches use ("-j4");
    end Prove;
 
 end Patience;

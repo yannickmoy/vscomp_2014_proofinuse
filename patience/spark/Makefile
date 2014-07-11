@@ -4,7 +4,7 @@ test:
 	bin/test_patience
 
 proof:
-	gnatprove -P patience --timeout=5 --report=all --proof=progressive --warnings=continue
+	gnatprove -P patience --timeout=10 --report=all --proof=progressive --warnings=continue
 
 
 clean:
