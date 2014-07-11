@@ -5,7 +5,7 @@ is
 
    type Card is range 1..52;
    MaxNumCards : constant := 1000;
-   type CardStack is array (Integer range <>) of Card;
+   type CardStack is array (Positive range <>) of Card;
 
    subtype CardIndex is Integer range -1..MaxNumCards;
    type CardArray is  array (0..MaxNumCards-1) of Card;
@@ -41,6 +41,9 @@ is
             S.StackSizes(I) >= 1
             -- stacks are non-empty
             and
+            S.StackSizes(I) <= S.NumElts
+            -- stack sizes are at most the number of cards
+            and
             (for all J in 0 .. S.StackSizes(I) - 1 =>
                0 <= S.Stacks(I)(J) and S.Stacks(I)(J) < S.NumElts)
             -- contents of stacks are valid card indexes
@@ -53,7 +56,10 @@ is
      Pre => Inv(S) and S.NumElts < MaxNumCards,
      Post => Inv(S) and S.Values(S'Old.NumElts) = C and S.NumElts = S'Old.NumElts + 1;
 
-   function PlayGame (Cards: CardStack) return State;
+   function PlayGame (Cards: CardStack) return State
+   with
+     Pre => Cards'First = 1 and Cards'Length <= MaxNumCards,
+     Post => Inv(PlayGame'Result);
 
 end Patience;
 

@@ -4,9 +4,9 @@ with Patience; use Patience;
 
 procedure Test_Patience is
 
-   procedure PrintCardStack (S : CardStack; N:Integer) is
+   procedure PrintCardStack (S : CardStack) is
    begin
-      Put("CardStack =");
+      Put("CardStack (first=" & Integer'Image(S'First) & " = ");
       for I in S'Range loop
          Put(" " & Card'Image(S(I)));
       end loop;
@@ -44,7 +44,7 @@ procedure Test_Patience is
 
 begin
    Put_Line ("Test of a patience game");
-   PrintCardStack(Input,7);
+   PrintCardStack(Input);
    S := PlayGame(Input);
    PrintState(S);
 end Test_Patience;

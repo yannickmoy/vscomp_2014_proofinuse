@@ -48,6 +48,9 @@ is
       S : State := Null_State;
    begin
       for I in Cards'Range loop
+         pragma Loop_Invariant (I in 1 .. Cards'Length);
+         pragma Loop_Invariant (S.NumElts = I-1);
+         pragma Loop_Invariant (Inv(S));
          PlayCard(Cards(I),S);
       end loop;
       return S;
