@@ -46,7 +46,8 @@ module PigeonHole
 
     This is more or less equivalent to the pigeon-hole lemma. However, we need such a lemma more generally on functions instead of maps.
 
-    Thus we restate the pigeon-hole lemma here. Proof is left as an exercise.
+    Thus we restate the pigeon-hole lemma here. Proof is done via a
+    lemma function.
 
 *)
 
@@ -62,19 +63,6 @@ module PigeonHole
     forall i j: int. 0 <= i < j < n -> f i <> f j
   (** [injective f n m] is true when [f] is an injection
       from [(0..n-1)] to [(0..m-1)] *)
-
-
-
-
-(*
-  lemma pigeon_hole2:
-    forall n m:int, f: int -> int.
-      range f n m /\ n > m >= 0 ->
-        not (injective f n m)
-*)
-
-
-
 
   exception Found
 

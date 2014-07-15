@@ -46,7 +46,6 @@ is
          and then
          (S.NumElts = 0 or else S.NumStacks > 0)
          -- when there is at least one card, there is at least one stack
-         -- FIXME: is there an "imply" connective ?
          and then
          (for all I in 0 .. S.NumStacks - 1 =>
             S.StackSizes(I) >= 1
@@ -61,10 +60,8 @@ is
          )
          and then  
          (for all I in 0 .. S.NumElts -1 =>
-            -- let (is,ip) = s.positions[i] in
             S.PosStack(I) in 0 .. S.NumStacks - 1
             and then
-            -- let st = s.stacks[is] in
             S.PosHeight(I) in 0 .. S.StackSizes(S.PosStack(I)) - 1 
             and then S.Stacks(S.PosStack(I))(S.PosHeight(I)) = I)
          -- the position table of cards is correct, i.e. card I indeed
@@ -78,7 +75,6 @@ is
          -- positions is the proper inverse of stacks
          and then 
          (for all I in 0 .. S.NumStacks -1 =>
-            -- let stack_i = s.stacks[i] in
             (for all J in 0 .. S.StackSizes(I) - 2 =>
                (for all K in J+1 .. S.StackSizes(I) - 1 =>
                   S.Stacks(I)(J) < S.Stacks(I)(K))))
@@ -91,14 +87,12 @@ is
          -- in a given stack, card values are decreasing from bottom to top 
          and then
          (for all I in 0 .. S.NumElts - 1 =>
-            -- FIXME: let pred = s.preds[i] in
             S.Preds(I) in -1 .. S.NumElts - 1
             -- the predecessor is a valid index or -1
             and then
             S.Preds(I) < I
             -- predecessor is always a smaller index
             and then
-            -- FIXME: let (is,_ip) = s.positions[i] in
             (if S.Preds(I) < 0 then S.PosStack(I) = 0
         -- if predecessor is -1 then I is in leftmost stack
             else
@@ -106,7 +100,6 @@ is
           -- if predecessor is not -1, it denotes a card with smaller value...
           and then S.PosStack(I) > 0
           -- ...the card is not on the leftmost stack...
-          -- FIXME: let (ps,_pp) = s.positions[pred] in
           and then S.PosStack(S.Preds(I)) = S.PosStack(I) - 1)
           -- ...and predecessor is in the stack on the immediate left
             )

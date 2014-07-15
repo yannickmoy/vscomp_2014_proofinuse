@@ -10,7 +10,7 @@ replay:
 	why3replayer patience.mlw
 
 doc:
-	why3doc patience.mlw
+	why3 doc patience.mlw
 	echo "HTML doc generated in file patience.html"
 
 dump:
